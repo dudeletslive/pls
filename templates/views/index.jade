@@ -1,23 +1,40 @@
 extends ../layouts/default
 
 block content
-	.container: .jumbotron
-		img(src='/images/logo.svg', width='160')
-		h1 Welcome
-		p This is your new <a href='http://keystonejs.com', target='_blank'>KeystoneJS</a> website.
-		p It includes the latest versions of
-			| <a href='http://getbootstrap.com/' target='_blank'>Bootstrap</a>
-			| and <a href='http://www.jquery.com/' target='_blank'>jQuery</a>.
-		p Visit the <a href='http://keystonejs.com/guide' target='_blank'>Getting Started</a> guide to learn how to customise it.
-		hr
-		if user && user.canAccessKeystone
-			p
-				a(href='/keystone/signin').btn.btn-lg.btn-primary Open the Admin UI
-		else
-			p You can sign in here - 
-			p
-				a(href='/keystone/signin', style='margin-right: 10px').btn.btn-lg.btn-primary Sign in
-				|  to use the Admin UI.
-		hr
-		p Remember to <a href='https://github.com/JedWatson/keystone' target='_blank'>Star KeystoneJS on GitHub</a> and
-			| <a href='https://twitter.com/keystonejs' target='_blank'>follow @keystonejs</a> on twitter for updates.
+	.carousel.slide(data-ride='carousel')
+		.carousel-inner
+			.item.active
+				img(src='images/main.png', alt='Third slide')
+				.container
+					.carousel-caption
+						h1 The Best Way To Communicate With Your Ministry Partners.
+						p.hidden-xs Communicate regularly with your ministry partners, and save you hours and hours from printing, folding, sealing and stamping your letter each month!						 
+						p
+							a.btn.btn-lg.btn-primary(href='#', role='button') START ORDER NOW!
+	.row.clearfix.gray
+		.container
+			.row
+				.col-lg-4.text-center
+					p.check xx% Customer Satisfaction Rating
+				.col-lg-4.text-center
+					p.check Trusted by 0,000+ delighted customers
+				.col-lg-4.text-center
+					p.check Most experienced provier in the business
+	.container
+		.row.text-center
+			h1.h
+		.row
+			.col-lg-4.c
+				.jumbotron
+					span.badge 1					
+					img(src='images/a1.png',class='img-responsive')
+				.arrow
+			.col-lg-4.c
+				.jumbotron
+					span.badge 2
+					img(src='images/a2.png',class='img-responsive')					
+				.arrow
+			.col-lg-4.c
+				.jumbotron
+					span.badge 3
+					img(src='images/a3.png',class='img-responsive imgc')							
