@@ -62,9 +62,7 @@
   text-align: left;
 }
 .c{
-  background-color: @dark-gray;
   height: 300px;
-  border-left: 1px solid red;
   .jumbotron{
     border-radius: inherit;
     width: 258px;
@@ -73,6 +71,11 @@
     margin: 0;
     background-color: @light-gray;
     display: block;
+    position: absolute;
+    img{
+      margin: 10px auto;
+      position: relative;
+    }
   }
   .arrow{
     width: 47px;
@@ -83,7 +86,7 @@
     margin: 14px 0;
     position: relative;
     left: 302px;
-    top: -100px;
+    top: 45px;
   }
 
 }
@@ -94,7 +97,7 @@ h1.h {
     border-top: 2px solid #333;
     color: #333;
     text-align: center;
-    margin: 80px 0;
+    margin: 60px 0;
 }
 h1.h:after {
     content: "How It Works";
