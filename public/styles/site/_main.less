@@ -1,0 +1,109 @@
+.carousel {
+  height: 500px;
+  margin-bottom: 0px;
+
+  .carousel-caption {
+        z-index: 10;
+        bottom:16%;
+        left:15%;
+        h1{
+          font-family: Sans,Arial;
+          font-size: 44px;
+          font-weight: 700;
+          color:@blue;
+          @media (max-width:480px) {
+            font-size: 40px;
+          }
+        }
+        p{
+          color: @blue;
+          font-family: Sans,Arial;
+          font-size: 19px;
+          a{
+            border: 0;
+            border-radius: inherit;
+            background-color: @orange;
+          }
+        }
+  }
+  .item {
+        height: 500px;
+  }
+
+  .carousel-inner {    
+    & > .item {
+        & > img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            height: 500px;
+            
+            @media (max-width:480px) {
+                max-width:none;
+                left: -320px;
+            }
+
+        }
+    }
+  }
+}
+.gray{
+  background-color: @light-gray;
+ }
+
+.check{
+  font-size:14px;
+  padding-left: 5px;
+  margin: 20px;
+  background-image: url('../images/check.png');
+  background-repeat: no-repeat;
+  padding-left: 41px;
+  text-align: left;
+}
+.c{
+  background-color: @dark-gray;
+  height: 300px;
+  border-left: 1px solid red;
+  .jumbotron{
+    border-radius: inherit;
+    width: 258px;
+    height: 158px;
+    padding: 0;
+    margin: 0;
+    background-color: @light-gray;
+    display: block;
+  }
+  .arrow{
+    width: 47px;
+    height:  27px;
+    background-image: url('../images/arrow.png');
+    background-repeat: no-repeat;
+    display: block;
+    margin: 14px 0;
+    position: relative;
+    left: 302px;
+    top: -100px;
+  }
+
+}
+
+h1.h {
+    padding: 0;
+    border: none;
+    border-top: 2px solid #333;
+    color: #333;
+    text-align: center;
+    margin: 80px 0;
+}
+h1.h:after {
+    content: "How It Works";
+    display: inline-block;
+    position: relative; 
+    top: -0.7em;  
+    font-size: 25px;
+    padding: 0 0.25em;
+    background: white;
+    font-weight: 700;
+    color: @other-blue;
+}
