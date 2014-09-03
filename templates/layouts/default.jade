@@ -33,37 +33,60 @@ html
 
 		//- Add any other template-specific HEAD tags by extending the head block
 		block head
+			<script type="text/javascript" src="//use.typekit.net/qaw6kic.js"></script>
+			<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
 	//- HTML BODY
 	body
 
 		//- HEADER
-		#header: .container
+		#header
 
 			//- Customise your site's navigation by changing the navLinks Array in ./routes/middleware.js
 			//- ... or completely change this header to suit your design.
 
-			div(role="navigation").navbar.navbar-default
-				.container-fluid
+			div(role="navigation").navbar
+				.container
 					.navbar-header
 						button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
 							span.sr-only Toggle navigation
 							span.icon-bar
 							span.icon-bar
 							span.icon-bar
-						a.navbar-brand(href='/') Prayer Letter Service
+						a.navbar-brand(href='/'): img(src='/images/logo.png')
 					.collapse.navbar-collapse
-						ul.nav.navbar-nav.navbar-left
-							each link in navLinks
-								li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
-						ul.nav.navbar-nav.navbar-right
+						//- ul.nav.navbar-nav.navbar-right#registerModule
 							if user
 								if user.canAccessKeystone
 									li: a(href='/keystone') Open Keystone
 								li: a(href='/keystone/signout') Sign Out
 							else
-								li: a(href='/keystone/signin') Sign In
-
+								a(href='/keystone/signin')#register Register |
+								a(href='/keystone/signin')#signIn Sign In
+								a.btn.btn-primary(href="/") Start Order Now!
+						ul.nav.navbar-nav.navbar-right
+							li.hide-lg: a.btn.btn-primary(href="/") Start Order Now!
+							each link in navLinks
+								li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
+							if user
+								if user.canAccessKeystone
+									li.hide-lg: a(href='/keystone') Admin
+								li.hide-lg: a(href='/keystone/signout') Sign Out
+							else
+								li.hide-lg: a(href='/keystone/signin') Sign In
+								li.hide-lg: a(href='/keystone/signin') Register
+							li#startOrder
+								table
+									tr
+										if user
+											if user.canAccessKeystone
+												th: li: a(href='/keystone') Admin
+											th: li: a(href='/keystone/signout') Sign Out
+										else
+											th: a(href='/keystone/signin') Sign In
+											th: a(href='/keystone/signin') Register
+									tr: td(colspan="2")
+											a.btn.btn-primary(href="/") Start Order Now!
 		//- BODY
 		#body
 
