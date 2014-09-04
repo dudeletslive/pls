@@ -1,0 +1,89 @@
+/*
+ * About Page
+ */
+
+// Variables
+@text-color: #737C85;
+
+// Utilities
+section.spacer {
+	display: inline-block;
+	height: 100px;
+}
+
+// Banner
+.jumbotron#about {
+	background: url("../images/about-banner.png") transparent no-repeat center;
+	padding-top: 300px;
+	text-align: center;
+	& > h2 {
+		color: @blue;
+		font-size: 55px;
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+	& > span.small {
+		color: @dark-gray;
+		font-size: 22px;
+		text-transform: initial;
+	}
+}
+h3.section-title {
+	border-bottom: 1px solid @dark-gray;
+	color: @text-color;
+	display: table;
+	padding: 0 10px 15px;
+	font-size: 24px;
+	font-weight: 100;
+	margin: 10px auto 35px;
+	text-transform: uppercase;	
+}
+.col-md-6 > p {
+	color: @text-color;
+	font-size: 16px;
+}
+// Team Members Section
+ul.teamMembers {
+	color: @text-color;
+	list-style-type: none;
+	padding: 0;
+	li.col-sm-3 {
+		height: 400px;
+		& > #portrait {
+			border-radius: 3px;
+			margin-bottom: 20px;
+			height: 180px;
+			overflow: hidden;
+			& > img {
+				width: 100%;
+			}
+		}
+		& > h4 {
+			font-size: 18px;
+			font-weight: 600;
+		}
+		& > p {
+			font-size: 14px;
+		}
+	}
+}
+// Contact Information
+.contact-us {
+	font-size: 16px;
+	color: @text-color;
+	text-align: center;
+	.rockford {
+		margin: 100px auto 0;
+		h3 {
+			color: @orange;
+			font-weight: 600;
+		}
+	}
+}
+.jumbotron.image {
+	background: url('../images/about-footer-image.png') transparent no-repeat center;
+	margin-bottom: -30px;
+	& > section.spacer {
+		height: 300px;
+	}
+}

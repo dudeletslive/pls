@@ -131,9 +131,14 @@ html
 						p Phone: (815) 962-7010 <br> Fax: (815) 962-6992
 				div.col-md-2: span.row
 					a.btn.btn-info Start Order Now!
-					a.btn.btn-info
-						i.fa.fa-sign-in 
-						| &nbsp; Sign In
+					if user
+						a(href='/keystone/signout').btn.btn-info
+							i.fa.fa-sign-out
+							| &nbsp; Sign Out
+					else
+						a(href='/keystone/signin').btn.btn-info
+							i.fa.fa-sign-in
+							| &nbsp; Sign In
 				div.col-md-3: span.row#brand
 					img(src='/images/logo.png' alt='Prayer Letter Service')
 			hr

@@ -1,7 +1,56 @@
 extends ../layouts/default
 
 block content
-	br
+	div.jumbotron#about
+		h2 Small Team, Amazing Results
+		span.small Meet the Prayer Letter Service team, a close-knit family of exceptional individuals <br> with a shared passion for making ministry communication easier.
 	div.container
-		h4 About Page
+		//- About Us
+		h3.section-title About Us
+		section.about.clearfix
+			div.col-md-6
+				p Chuck and Michele Schwaninger began the Prayer Letter Service in 1988 while Chuck was the Area Director for the Campus Ministry in Wisconsin. 
 
+				p We are serving about 850 staff.
+
+				p The Prayer Letter Service is located in Rockford, IL. Your main contact at PLS will be Janine Gillette. 
+			div.col-md-6
+				p The Prayer Letter Service employs three full-time employees and five part-time employees.
+
+				p We consider it our ministry to you in helping you to efficiently and effectively reach your ministry partners each month.  We love getting to know you through your letters and pray for you often.
+
+		section.spacer
+
+		//- Team Section
+		h3.section-title Our Team
+		if teamMembers.length
+			ul.teamMembers.clearfix
+				each teamMember in teamMembers
+					li.col-sm-3
+						#portrait
+							img(src=teamMember._.photo.limit()).img-responsive
+						h4= teamMember.name.full
+						p= teamMember.description
+		else
+			p(style="clear: both;") No team members.
+
+		section.spacer
+
+		//- Contact Information
+		.contact-us
+			h3.section-title Contact Us
+			p You may contact us by email or by phone at (815) 962-7010. 
+				<br> You’ll most likely contact Janine.
+			br
+			p Our mailing address is:<br>
+			address
+				| Prayer Letter Service <br>
+				| 524 Seventh Street <br>
+				| Rockford, IL  61104 <br>
+				br
+				| Our fax number is (815) 962-6992. <br>
+			.rockford
+				img(src="images/location-icon.png")
+				h3 Proudly Operating from Rockford Springs, IL
+	.jumbotron.image
+		section.spacer
