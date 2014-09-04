@@ -27,10 +27,10 @@ exports.initLocals = function(req, res, next) {
 	
 	locals.navLinks = [
 		{ label: 'Home',				key: 'home',		href: '/' },
-		{ label: 'About Us',			key: 'about',		href: '/' },
-		{ label: 'Printing Services',	key: 'printing',	href: '/' },
-		{ label: 'Options',				key: 'options',		href: '/' },
-		{ label: 'Pricing',				key: 'pricing',		href: '/' },
+		{ label: 'About Us',			key: 'about',		href: '/about' },
+		{ label: 'Printing Services',	key: 'printing',	href: '/printing-services' },
+		{ label: 'Options',				key: 'options',		href: '/options' },
+		{ label: 'Pricing',				key: 'pricing',		href: '/pricing' },
 		{ label: 'Contact Us',			key: 'contact',		href: '/contact' }
 	];
 	

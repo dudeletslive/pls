@@ -12,3 +12,14 @@
 @grid-float-breakpoint: 1200px;
 
 @font-size-base: 12px;
+
+/*
+/ Background Size Mixin
+/ Supports Safari 3+, Chrome, IE 9+, Opera 10+, FireFox 3.6+
+*/
+.background-size(@size) {
+	-webkit-background-size: @size;
+	-moz-background-size: @size;
+	-o-background-size: @size;
+	background-size: @size;
+}
