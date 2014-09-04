@@ -1,7 +1,14 @@
 extends ../layouts/default
 
 block content
-	br
-	div.container
-		h4 Printing Sevices Page
-
+	.jumbotron#printing: .container
+		h1 Serving All Your Ministry <br> Communication Needs
+		p.small Involve your supporters in your ministry in a powerful way.
+	div.tab-container
+		.container
+			ul.tabs
+				li.tab: a(href="#") Prayer Letters
+				li.tab: a(href="#") Post Cards
+				li.tab.active: a(href="#") Brochures
+				li.tab: a(href="#") Fund Appeals
+				li.tab: a(href="#") Christmas / Holiday

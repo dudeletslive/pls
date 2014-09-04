@@ -1,0 +1,60 @@
+/*
+ * Printing Services Page
+ */
+
+.jumbotron#printing, .jumbotron#pricing {
+	color: white;
+	margin-bottom: 0;
+	padding: 160px 0 100px;
+	.background-size(cover);
+	h1 {
+		font-size: 55px;
+		font-weight: 700;
+		margin-bottom: 20px;
+	}
+	p.small {
+		font-size: 22px;
+	}
+}
+.jumbotron#printing {
+	background: url('../images/printing-services-banner.png') no-repeat center;
+	.background-size(cover);
+}
+// Tab Section
+div.tab-container {
+	background: @light-gray;
+	text-align: center;
+	ul.tabs {
+		border-bottom: 1px solid #E7E7E7;
+		display: table;
+		list-style-type: none;
+		margin: 0 auto;
+		padding: 0;
+		& > li.tab {
+			background: white;
+			border-right: 1px solid #E7E7E7;
+			cursor: pointer;
+			display: inline;
+			float: left;
+			font-weight: 600;
+			margin: 0;
+			padding: 20px 40px;
+			text-transform: uppercase;
+			&:last-child {
+				border-right: 0;
+			}
+			&.active, &:hover, &:focus {
+				background: @orange;
+				& > a {
+					color: #FFF;
+				}
+			}
+			& > a {
+				color: #373C42;
+				&:hover {
+					text-decoration: none;
+				}
+			}
+		}
+	}
+}
