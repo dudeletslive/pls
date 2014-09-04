@@ -7,8 +7,24 @@ block content
 	div.tab-container
 		.container
 			ul.tabs
-				li.tab: a(href="#") Prayer Letters
-				li.tab: a(href="#") Post Cards
-				li.tab.active: a(href="#") Brochures
-				li.tab: a(href="#") Fund Appeals
-				li.tab: a(href="#") Christmas / Holiday
+				li.tab: a(href="#prayerLetters") Prayer Letters
+				li.tab: a(href="#postCards") Post Cards
+				li.tab.active: a(href="#brochures") Brochures
+				li.tab: a(href="#fundAppeals") Fund Appeals
+				li.tab: a(href="#christmas") Christmas / Holiday
+			div.tab-content
+				div.tab-pane#prayerLetters
+				div.tab-pane#postCards
+				div.tab-pane.active#brochures
+					.container
+						.jumbotron
+							.container
+								.col-lg-6
+									img(src="images/brochure.png" class="img-responsive")
+								.col-lg-6
+									h2 Brochures are a great way to <br> and overview of the work y	you're going
+									p Brochures can be printed on any of our papers, including glossy paper.
+									<br>
+									p Brochures printed in color on glossy paper and folder will cost about $46 for a two-sided brochure.
+				div.tab-pane#fundAppeals
+				div.tab-pane#christmas

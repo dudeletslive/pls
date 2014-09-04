@@ -20,9 +20,10 @@
 	background: url('../images/printing-services-banner.png') no-repeat center;
 	.background-size(cover);
 }
+
 // Tab Section
 div.tab-container {
-	background: @light-gray;
+	background: white;
 	text-align: center;
 	ul.tabs {
 		border-bottom: 1px solid #E7E7E7;
@@ -53,6 +54,35 @@ div.tab-container {
 				color: #373C42;
 				&:hover {
 					text-decoration: none;
+				}
+			}
+		}
+	}
+}
+
+.tab-content{
+	.tab-pane{
+		.container{
+			.jumbotron{
+				background: white;
+				margin-bottom: 0px;
+				padding-bottom: 0px;
+				.container{
+					.col-lg-6{
+						img{
+							margin:10px auto;
+						}
+						h2 {
+							text-align: left;
+							font-weight: 600;
+							line-height: 1.5;
+						}
+						p{
+							margin-top: 30px;
+							line-height: 1.5;
+							text-align: left;
+						}
+					}
 				}
 			}
 		}
