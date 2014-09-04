@@ -3,7 +3,13 @@ extends ../layouts/default
 block content
 	.container#contact
 		if enquirySubmitted
-			h3 Thanks for getting in touch.
+			h1 Thanks for getting in touch.
+			.icon-row
+				a(href="#"): i.fa.fa-phone
+				a(href="#"): i.fa.fa-linkedin
+				a(href="#"): i.fa.fa-facebook
+				a(href="#"): i.fa.fa-twitter
+			section.spacer
 		else
 			.row: .col-sm-8.col-md-10.col-sm-offset-2.col-md-offset-1
 				h1 Contact Us
