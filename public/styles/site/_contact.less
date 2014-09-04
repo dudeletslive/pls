@@ -1,0 +1,68 @@
+/*
+ * Contact Page
+ */
+
+// Variables
+@text-color: #737C85;
+
+// Utilities
+.container#contact {
+	margin-top: 60px;
+	h1 {
+		color: @blue;
+		font-size: 55px;
+		font-weight: 700;
+		text-transform: uppercase;
+		text-align: center;
+	}
+	p.small {
+		color: text-color;
+		font-size: 20px;
+		text-align: center;
+	}
+	.icon-row {
+		text-align: center;
+		margin: 0 0 20px;
+		a {
+			color: @blue;
+			&:hover, &:active, &:focus {
+				& i {
+					background: @blue;
+					color: #FFF;
+				}
+			}
+		}
+		i.fa {
+			border: 1px solid;
+			border-radius: 50%;
+			font-size: 36px;
+			line-height: 80px;
+			margin: 20px;
+			text-align: center;
+			height: 80px;
+			width: 80px;
+		}
+	}
+	// Form Styles
+	label {
+		font-size: 14px;
+		font-weight: 500;
+		margin: 10px 0 5px;
+		text-transform: uppercase;
+	}
+	input {
+		height: 40px;
+		box-shadow: none;
+	}
+	textarea {
+		box-shadow: none;
+	}
+	button.btn.btn-primary.form-control {
+		background-color: @blue;
+		font-size: 14px;
+		font-weight: 600;
+		line-height: 0;
+		padding: 25px;
+		text-transform: uppercase;
+	}
+}
