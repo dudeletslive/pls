@@ -41,11 +41,13 @@ div.tab-container {
 			margin: 0;
 			padding: 20px 40px;
 			text-transform: uppercase;
+			background-repeat: no-repeat;
+			background-position: 9px 18px;
 			&:last-child {
 				border-right: 0;
 			}
 			&.active, &:hover, &:focus {
-				background: @orange;
+				background-color: @orange;
 				& > a {
 					color: #FFF;
 				}
@@ -56,31 +58,46 @@ div.tab-container {
 					text-decoration: none;
 				}
 			}
+
+		}
+		.prayer{
+			background-image: url('../images/prayer-tab-icon.png') !important;
+		}
+		.postcards{
+			background-image: url('../images/postcards-tab-icon.png') !important;
+		}
+		.brochure{
+			background-image: url('../images/brochure-tab-icon.png') !important;						
+		}
+		.fund{
+			background-image: url('../images/fund-tab-icon.png') !important;						
+		}
+		.christmas{
+			background-image: url('../images/christmas-tab-icon.png') !important;						
 		}
 	}
-}
-
-.tab-content{
-	.tab-pane{
-		.container{
-			.jumbotron{
-				background: white;
-				margin-bottom: 0px;
-				padding-bottom: 0px;
-				.container{
-					.col-lg-6{
-						img{
-							margin:10px auto;
-						}
-						h2 {
-							text-align: left;
-							font-weight: 600;
-							line-height: 1.5;
-						}
-						p{
-							margin-top: 30px;
-							line-height: 1.5;
-							text-align: left;
+	.tab-content{
+		.tab-pane{
+			.container{
+				.jumbotron{
+					background: white;
+					margin-bottom: 0px;
+					padding-bottom: 0px;
+					.container{
+						.col-lg-6{
+							img{
+								margin:10px auto;
+							}
+							h2 {
+								text-align: left;
+								font-weight: 600;
+								line-height: 1.5;
+							}
+							p{
+								margin-top: 30px;
+								line-height: 1.5;
+								text-align: left;
+							}
 						}
 					}
 				}
@@ -88,6 +105,8 @@ div.tab-container {
 		}
 	}
 }
+
+ 
 
 .start-orden{
 	padding: 0 150px;
