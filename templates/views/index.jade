@@ -1,19 +1,14 @@
 extends ../layouts/default
 
 block content
-	.carousel.slide(data-ride='carousel')
-		.carousel-inner
-			.item.active
-				.container
-					.carousel-caption
-						h1 The Best Way To Communicate With Your Ministry Partners.
-						p.hidden-xs Communicate regularly with your ministry partners, and save you hours and hours from printing, folding, sealing and stamping your letter each month!						 
-						p
-							a.btn.btn-lg.btn-primary(href='#', role='button') START ORDER NOW!
+	div.jumbotron#homepage
+		h2 The Best Way To Communicate With Your Ministry Partners.
+		p.hidden-xs Communicate regularly with your ministry partners, and save you hours and hours from printing, folding, sealing and stamping your letter each month!						 
+		a.btn.btn-lg.btn-primary.btn-pls-w(href='#', role='button') START ORDER NOW!
 	.row.clearfix.gray
 		.container
 			.row
-				.col-lg-4.text-center					
+				.col-lg-4.text-center				
 					p.check xx% Customer Satisfaction Rating
 				.col-lg-4.text-center
 					p.check Trusted by 0,000+ delighted customers
@@ -59,7 +54,7 @@ block content
 							p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad 
 	.carousel.testimonials(data-ride='carousel')
 		.carousel-inner
-			.item.active				
+			.item.active			
 				.container.testimonial
 					h1 Kind Words From Our Awesome Customers					
 					.col-lg-4
@@ -87,7 +82,7 @@ block content
 								h3 Jhon Deed
 								span Co-Fundation media
 								p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
-	.container			
+	.container
 		.container.our-service
 			h1.service
 			.col-lg-4
