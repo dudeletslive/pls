@@ -41,6 +41,12 @@
 			text-transform: uppercase;
 			background-repeat: no-repeat;
 			background-position: 5px center;
+			border-left: 1px solid @light-gray;
+			border-right: 1px solid @light-gray;
+			border-bottom: 1px solid @light-gray;
+			&:first-child {
+				border-top: 1px solid @light-gray;				
+			}
 			&.active, &:hover, &:focus {
 				background-color: @orange;
 				& > a {
