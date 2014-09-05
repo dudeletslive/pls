@@ -1,0 +1,125 @@
+
+/*
+ * Options Page
+ */
+
+.jumbotron#options{
+	color: white;
+	margin-bottom: 0;
+	padding: 64px 100px;
+	background: url('../images/options-banner.png') no-repeat;
+	background-position: center bottom;	
+	.background-size(cover);
+	.container{
+		margin-top: 80px;
+	}	
+	h1 {
+		font-size: 55px;
+		font-weight: 700;
+		margin-bottom: 0;		
+	}
+	
+	p.small {
+		font-size: 22px;
+	}
+}
+.tabs-left{
+	ul.tabs {
+		display: table;
+		list-style-type: none;
+		padding: 0;
+		min-width: 100%;
+		& > li.tab {
+			background: white;
+			cursor: pointer;
+			display: block;
+			min-width:100%;
+			float: left;
+			clear: left;
+			font-weight: 600;			
+			padding: 20px 40px;
+			text-transform: uppercase;
+			background-repeat: no-repeat;
+			background-position: 5px center;
+			border-left: 1px solid @light-gray;
+			border-right: 1px solid @light-gray;
+			border-bottom: 1px solid @light-gray;
+			&:first-child {
+				border-top: 1px solid @light-gray;				
+			}
+			&.active, &:hover, &:focus {
+				background-color: @orange;
+				& > a {
+					color: #FFF;
+				}
+			}
+			& > a {
+				color: #373C42;
+				&:hover {
+					text-decoration: none;
+				}
+			}
+
+		}
+		
+		
+		.printer{
+			background-image: url('../images/printer-tab-icon.png') !important;						
+		}
+		.postcards{
+			background-image: url('../images/postcards-tab-icon.png') !important;
+		}
+		.discounts{
+			background-image: url('../images/discounts-tab-icon.png') !important;						
+		}
+		.fund{
+			background-image: url('../images/fund-tab-icon.png') !important;						
+		}
+		.paper{
+			background-image: url('../images/paper-tab-icon.png') !important;						
+		}
+		.christmas{
+			background-image: url('../images/christmas-tab-icon.png') !important;						
+		}
+		.insert{
+			background-image: url('../images/prayer-tab-icon.png') !important;
+		}
+
+
+		
+ 
+	}
+}
+.tabs-content{
+	padding: 0;
+	background-color: transparent;
+		div.tab-pane{
+			h1{
+				font-weight: 700;
+                font-family: @font-family-sans-serif;
+                margin: 0px auto;
+			}
+			span.sub{
+				font-size: 20px;
+				font-weight: 300;				
+				display: block;
+				padding-bottom: 10px;
+				width: 100%;
+				border-bottom: 1px solid @dark-gray;
+			}
+			h3{
+				margin-top: 50px;
+				font-size: 18px;
+				font-weight: 600;
+			}
+			p{
+				color: @dark-gray;
+				text-align: justify;
+				line-height: 1.6;
+				font-weight: 300;
+			}
+		}	
+}
+.mbottom140{
+	margin-bottom: 140px;
+}
