@@ -4,29 +4,28 @@ block content
 	.jumbotron#printing: .container
 		h1 Serving All Your Ministry <br> Communication Needs
 		p.small Involve your supporters in your ministry in a powerful way.
-	div.tab-container
-		.container
-			ul.tabs
-				li.tab: a(href="#prayerLetters") Prayer Letters
-				li.tab: a(href="#postCards") Post Cards
-				li.tab.active: a(href="#brochures") Brochures
-				li.tab: a(href="#fundAppeals") Fund Appeals
-				li.tab: a(href="#christmas") Christmas / Holiday
-			div.tab-content
-				div.tab-pane#prayerLetters
-				div.tab-pane#postCards
-				div.tab-pane.active#brochures
+	div.tab-container: .container
+		ul.tabs
+			li.tab: a(href="#prayerLetters") Prayer Letters
+			li.tab: a(href="#postCards") Post Cards
+			li.tab.active: a(href="#brochures") Brochures
+			li.tab: a(href="#fundAppeals") Fund Appeals
+			li.tab: a(href="#christmas") Christmas / Holiday
+	div.tab-content
+		div.tab-pane#prayerLetters
+		div.tab-pane#postCards
+		div.tab-pane.active#brochures
+			.container
+				.jumbotron
 					.container
-						.jumbotron
-							.container
-								.col-lg-6
-									img(src="images/brochure.png" class="img-responsive")
-								.col-lg-6
-									h2 Brochures are a great way to <br> and overview of the work y	you're going
-									p Brochures can be printed on any of our papers, including glossy paper.								
-									p Brochures printed in color on glossy paper and folder will cost about $46 for a two-sided brochure.
-				div.tab-pane#fundAppeals
-				div.tab-pane#christmas						
+						.col-lg-6
+							img(src="images/brochure.png" class="img-responsive")
+						.col-lg-6
+							h2 Brochures are a great way to <br> and overview of the work y	you're going
+							p Brochures can be printed on any of our papers, including glossy paper.								
+							p Brochures printed in color on glossy paper and folder will cost about $46 for a two-sided brochure.
+		div.tab-pane#fundAppeals
+		div.tab-pane#christmas						
 		.jumbotron.start-orden
 			.container
 				.row
