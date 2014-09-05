@@ -63,24 +63,97 @@ div.tab-container {
 			}
 
 		}
-		.prayer{
-			background-image: url('../images/prayer-tab-icon.png') !important;
+		li.tab {
+			position: relative;
+			&.icon-brochure {
+				padding-left: 55px;
+			}
+			&.icon-prayer {
+				padding-left: 60px;
+			}
+			&.active {
+				&:before {
+					color: white;
+				}
+			}
 		}
-		.postcards{
-			background-image: url('../images/postcards-tab-icon.png') !important;
+		.icon-prayer{
+			&:before {
+				content: "\e601";
+				position: absolute;
+				left: 30px;
+				top: 15px;
+				font-size: 24px;
+			}
+			&:hover {
+				&:before {
+					color: white;
+				}
+			}
 		}
-		.brochure{
-			background-image: url('../images/brochure-tab-icon.png') !important;						
+		.icon-postcards{
+			&:before {
+				content: "\e606";
+				margin-right: 10px;
+				position: relative;
+				top: 1px;
+			}
+			&:hover {
+				&:before {
+					color: white;
+				}
+			}
 		}
-		.fund{
-			background-image: url('../images/fund-tab-icon.png') !important;						
+		.icon-brochure{
+			&:before {
+				content: "\e603";
+				font-size: 16px;
+				position: absolute;
+				left: 30px;
+			}
+			&:hover {
+				&:before {
+					color: white;
+				}
+			}
 		}
-		.christmas{
-			background-image: url('../images/christmas-tab-icon.png') !important;						
+		.icon-fund{
+			&:before {
+				content: "\e600";
+				font-size: 4px;
+				position: relative;
+				left: -25px;
+				top: -10px;
+				padding-left: 20px;
+			}
+			&:hover {
+				&:before {
+					color: white;
+				}
+			}
+		}
+		li.tab.icon-christmas {
+			padding-left: 55px;
+		}
+		.icon-christmas{
+			padding-left: 60px;
+			position: relative;
+			&:before {
+				content: "\e605";
+				position: absolute;
+				left: 30px;
+				top: 50%;
+				margin-top: -7px;
+				font-size: 16px;
+			}
+			&:hover {
+				&:before {
+					color: white;
+				}
+			}
 		}
 	}
 }
-
 .tab-content{
 	.tab-pane{
 		.container{
@@ -120,9 +193,12 @@ div.tab-container {
 		@media (max-width:480px) {
             padding: 10px;
        	}
-		
+		p {
+			margin-bottom: 0;
+		}
 		.container{
 			background-color: @light-gray;
+			border: 1px solid darken(@light-gray, 5%);
 			padding: 20px;
 			.row{
 				.col-lg-6{
@@ -130,10 +206,18 @@ div.tab-container {
 						.col-lg-6{							
 							p{
 								font-size: 10px;
-								margin-top: 20px;
+								margin-top: 15px;
+								float: right;
 								span{
 									font-size: 18px;
 									font-weight: 600;
+									&.from {
+										position: relative;
+										top: -2px;
+										font-weight: initial;
+										font-size: 11px;
+										margin-right: 5px;
+									}
 								}
 							}
 						}
@@ -143,10 +227,11 @@ div.tab-container {
 		}
 }
 .btn-green{
-	border-radius: inherit;
+	border-radius: 3px;
 	background-color: @green;
 	border:none;
-	padding: 10px 40px;
+	padding: 15px 40px;
 	font-weight: 600;
-	margin-top:12px;
+	margin-top: 0;
+	float: right;
 }
