@@ -10,6 +10,7 @@
         color: @blue;
         font-size: 80px;
         font-weight: 700;
+        font-family: @font-family-sans-serif;
             @media (max-width:480px) {
                     font-size: 40px;
             } 
@@ -19,16 +20,18 @@
         color: @blue;
         font-size: 22px;
         text-transform: initial;
+        font-family: @font-family-sans-serif;
     }
     & > .btn-pls-w{
         border: 0;
-        border-radius: inherit;
+        border-radius: 3px;
         background-color: @orange;
-        font-weight: 800;
+        font-weight: 700;
         color: white;
-        padding: 20px;
+        padding: 15px 40px;
         text-align: center;
-        font-size: 23px;
+        font-size: 20px;
+        font-family: @font-family-sans-serif;
     }
 
 
@@ -248,15 +251,15 @@ h1.service:after {
     }
 }
 .btn-pls-blue,{
-    border: 0;
-    border-radius: inherit;
-    background-color: @blue;
-    font-weight: 800;
+    border: 3px solid @blue;
+    border-radius: 2px;
+    background-color: white;
+    font-weight: 600;
     color: @blue;
     padding: 10px;
     text-align:center;
     font-size: 23px;
-    color: white;
+    font-family: @font-family-sans-serif;
         @media (max-width:480px) {
             float: none;                    
             width: 100%;
@@ -265,14 +268,15 @@ h1.service:after {
         
 }
 .btn-pls-white,{
-    border: 0;
-    border-radius: inherit;
+    border: 3px solid @orange;
+    border-radius: 2px;
     background-color: @orange;
-    font-weight: 800;
+    font-weight: 600;
     color: white;
     padding: 10px;
     text-align: center;
     font-size: 23px;
+    font-family: @font-family-sans-serif;
         @media (max-width:480px) {
             float: none;                    
             width: 100%;
