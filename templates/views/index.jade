@@ -1,9 +1,9 @@
 extends ../layouts/default
 
 block content
-	div.jumbotron#homepage
-		h2 The Best Way To Communicate With Your Ministry Partners.
-		p.hidden-xs Communicate regularly with your ministry partners, and save you hours and hours from printing, folding, sealing and stamping your letter each month!						 
+	div.jumbotron#homepage: .container
+		h2 The Best Way To Communicate <br> With Your Ministry Partners.
+		p Communicate regularly with your ministry partners, and save yourself hours and hours from <br> printing, folding, sealing and stamping your letter each month!						 
 		a.btn.btn-lg.btn-primary.btn-pls-w(href='#', role='button') START ORDER NOW!
 	.row.clearfix.gray
 		.container
@@ -51,37 +51,32 @@ block content
 					.row
 						.col-lg-12
 							h4.imgc Step3
-							p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad 
-	.carousel.testimonials(data-ride='carousel')
-		.carousel-inner
-			.item.active			
-				.container.testimonial
-					h1 Kind Words From Our Awesome Customers					
-					.col-lg-4
-						.row
-							.col-lg-3
-								img(src='images/pic-user.png')
-							.col-lg-9
-								h3 Jhon Deed
-								span Co-Fundation media
-								p Lorem ipsum dolor sit amet, cididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam  laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit essecillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 							
-
-					.col-lg-4.col-xs-12.hidden-sm.hidden-xs
-						.row
-							.col-lg-3
-								img(src='images/pic-user.png')
-							.col-lg-9
-								h3 Jhon Deed
-								span Co-Fundation media
-								p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam								
-					.col-lg-4.hidden-sm.hidden-xs
-						.row
-							.col-lg-3
-								img(src='images/pic-user.png')
-							.col-lg-9
-								h3 Jhon Deed
-								span Co-Fundation media
-								p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+							p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+	section.spacer
+	.jumbotron#testimonials: .container.testimonial
+		h1 Kind Words From Our Awesome Customers
+		div.row
+			.col-lg-4
+				div.info.row
+					.col-md-3: .portrait: img(src='https://s3.amazonaws.com/uifaces/faces/twitter/teclaro/128.jpg')
+					.col-md-9
+						h3 John Doe
+						small CEO, Theory+Practice
+				div.quote “Donec euismod turpis id ullamcorper lobortis. Maecenas faucibus ipsum sem, sed consequat ante consectetur non. Nam at neque dui. Integer id risus sit amet justo varius semper quis ut enim.”
+			.col-lg-4
+				div.info.row
+					.col-md-3: .portrait: img(src='https://s3.amazonaws.com/uifaces/faces/twitter/brad_frost/128.jpg')
+					.col-md-9
+						h3 John Doe
+						small CEO, Theory+Practice
+				div.quote “Donec euismod turpis id ullamcorper lobortis. Maecenas faucibus ipsum sem, sed consequat ante consectetur non. Nam at neque dui. Integer id risus sit amet justo varius semper quis ut enim.”
+			.col-lg-4
+				div.info.row
+					.col-md-3: .portrait: img(src='https://s3.amazonaws.com/uifaces/faces/twitter/suprb/128.jpg')
+					.col-md-9
+						h3 John Doe
+						small CEO, Theory+Practice
+				div.quote “Donec euismod turpis id ullamcorper lobortis. Maecenas faucibus ipsum sem, sed consequat ante consectetur non. Nam at neque dui. Integer id risus sit amet justo varius semper quis ut enim.”
 	.container
 		.container.our-service
 			h1.service
