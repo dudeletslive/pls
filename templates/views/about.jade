@@ -8,16 +8,20 @@ block content
 		//- About Us
 		h3.section-title About Us
 		section.about.clearfix
+			if about.length
+				each abouts in about
+					-var leftColumn = abouts.leftColumn
+					-var rightColumn = abouts.rightColumn
+			else
+				//- Do Nothing.
 			div.col-md-6
-				p Chuck and Michele Schwaninger began the Prayer Letter Service in 1988 while Chuck was the Area Director for the Campus Ministry in Wisconsin. 
-
-				p We are serving about 850 staff.
-
-				p The Prayer Letter Service is located in Rockford, IL. Your main contact at PLS will be Janine Gillette. 
+				if about.length
+					each abouts in about
+						p!= abouts.leftColumn
 			div.col-md-6
-				p The Prayer Letter Service employs three full-time employees and five part-time employees.
-
-				p We consider it our ministry to you in helping you to efficiently and effectively reach your ministry partners each month.  We love getting to know you through your letters and pray for you often.
+				if about.length
+					each abouts in about
+						p!= abouts.rightColumn
 
 		section.spacer
 
