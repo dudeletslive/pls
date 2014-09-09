@@ -226,12 +226,49 @@ div.tab-container {
 			}
 		}
 }
-.btn-green{
-	border-radius: 3px;
-	background-color: @green;
-	border:none;
-	padding: 15px 40px;
-	font-weight: 600;
-	margin-top: 0;
-	float: right;
+.btn-success{
+			border-radius: 3px;
+			border: none;
+			padding: 15px 40px;
+			font-weight: 600;
+			background-color: @green;
+}
+@media (max-width:480px) {
+	div.tab-container {
+		ul.tabs {
+			width: 100%;
+			padding-left: 0px !important;			
+			& > li.tab {
+				float: left;
+				display: inline-block;
+				width: 100%;
+			}
+			.icon-prayer{
+				&:before {
+					left: 120px;
+				}
+			}
+			.icon-brochure{
+				&:before {
+					left: 140px;
+				}
+			}
+			.icon-christmas{
+				&:before {
+					left: 110px;
+				}
+			}
+		}
+	}
+}
+@media (max-width:991px) {
+	div.tab-container {
+		ul.tabs {
+			padding-left: 12%;			
+			& > li.tab {
+				float: none;
+				display: inline-block;
+			}
+		}
+	}
 }

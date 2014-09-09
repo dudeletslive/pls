@@ -5,16 +5,32 @@ block content
 		h1 Serving All Your Ministry <br> Communication Needs
 		p.small Involve your supporters in your ministry in a powerful way.
 	div.tab-container: .container
-		ul.tabs
-			li.tab.icon-prayer: a(href="#prayerLetters") Prayer Letters
-			li.tab.icon-postcards: a(href="#postCards") Post Cards
-			li.tab.icon-brochure.active: a(href="#brochures") Brochures
-			li.tab.icon-fund: a(href="#fundAppeals") Fund Appeals
-			li.tab.icon-christmas: a(href="#christmas") Christmas / Holiday
+		ul.tabs#tabs
+			li.tab.icon-prayer(href="#prayerLetters",data-toggle="tab"): a(href="#") Prayer Letters
+			li.tab.icon-postcards(href="#postCards",data-toggle="tab"): a(href="#") Post Cards
+			li.tab.icon-brochure.active(href="#brochures",data-toggle="tab"): a(href="#") Brochures
+			li.tab.icon-fund(href="#fundAppeals",data-toggle="tab"): a(href="#") Fund Appeals
+			li.tab.icon-christmas(href="#christmas",data-toggle="tab"): a(href="#") Christmas / Holiday
 	div.tab-content
-		div.tab-pane#prayerLetters
-		div.tab-pane#postCards
-		div.tab-pane.active#brochures
+		div.tab-pane.fade#prayerLetters
+			.container
+				.jumbotron
+					.container
+						.col-lg-6
+						.col-lg-6
+							h2  Prayer Letters
+							p a commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
+							p occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		div.tab-pane.fade#postCards
+			.container
+				.jumbotron
+					.container
+						.col-lg-6
+						.col-lg-6
+							h2  Post Cards
+							p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							p Empor incididunt ut abore  et dolore magna aliqua. Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris  isi ut aliquip ex e
+		div.tab-pane.fade.in.active#brochures
 			.container
 				.jumbotron
 					.container
@@ -24,18 +40,78 @@ block content
 							h2 Brochures are a great way to present <br> an overview of the work you’re doing.
 							p Brochures can be printed on any of our papers, including glossy paper.
 							p Brochures printed in color on glossy paper and folder will cost about $46 for a two-sided brochure.
-		div.tab-pane#fundAppeals
-		div.tab-pane#christmas						
-		.jumbotron.start-orden
+		div.tab-pane.fade#fundAppeals
 			.container
-				.row
-					.col-lg-6
+				.jumbotron
+					.container
+						.col-lg-6
+						.col-lg-6
+							h2  Fund Appeals
+							p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							p Empor incididunt ut abore  et dolore magna aliqua. Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris  isi ut aliquip ex e
+		div.tab-pane.fade#christmas
+			.container
+				.jumbotron
+					.container
+						.col-lg-6
+						.col-lg-6
+							h2  Christmas / Holiday
+							p a commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
+							p occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		.jumbotron.start-orden
+			.container#data
+				.row.data.hide(data-status='hide',data-action="#prayerLetters")
+					.col-md-6
+						p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+					.col-md-6
+						.col-md-6
+							p 
+								span.from FROM
+								span $4.32 /
+						.col-md-6
+							a.btn.btn-lg.btn-success(href='#', role='button') START ORDER
+				.row.data.hide(data-status='hide',data-action="#postCards")
+					.row.data.hide(data-status='hide',data-action="#prayerLetters")
+					.col-md-6
+						p Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+					.col-md-6
+						.col-md-6
+							p 
+								span.from FROM
+								span $21.32 / 
+						.col-md-6
+							a.btn.btn-lg.btn-success(href='#', role='button') START ORDER
+				.row.data.show(data-status='show',data-action="#brochures")
+					.col-md-6
 						p Get an accurate cost estimate by using our innovative order form. <br> Order today or just get a quote for later. It’s completely up to you!
-					.col-lg-6
+					.col-md-6
 						.row
-							.col-lg-6
+							.col-md-6
 								p
 									span.from FROM 
 									span $.46 / Brochure
-							.col-lg-6
-								a.btn.btn-lg.btn-primary.btn-pls-w.btn-green(href='#', role='button') START ORDER
+							.col-md-6
+								a.btn.btn-lg.btn-success(href='#', role='button') START ORDER				
+				.row.data.hide(data-status='hide',data-action="#fundAppeals")
+					.col-md-6
+						p Veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+					.col-md-6
+						.col-md-6
+							p 
+								span.from FROM
+								span $10.32 /
+						.col-md-6
+							a.btn.btn-lg.btn-success(href='#', role='button') START ORDER
+				.row.data.hide(data-status='hide',data-action="#christmas")
+					.col-md-6
+						p Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					.col-md-6
+						.col-md-6
+							p 
+								span.from FROM
+								span $5.32 /
+						.col-md-6
+							a.btn.btn-lg.btn-success(href='#', role='button') START ORDER
+block js
+	script(type='text/javascript')
+		$(function(){ $('#tabs li').click(function (e) { e.preventDefault(); var href= $(this).attr('href'); $(this).tab('show'); $('#data .data').each(function(){ $el = $(this);var action = $el.attr('data-action'); $el.attr('data-status','hide').removeClass().addClass('data fade hide'); if(action==href){$el.attr('data-status','show').removeClass().addClass('data show');}}); });});
