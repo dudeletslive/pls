@@ -4,35 +4,68 @@ block content
 	.jumbotron#options: .container
 		h1 You’ve Got Options!
 		p.small Your communications should be as unique as you are!
-	.container.mtop50.mbottom140
+	.container.mtop50
 		.row
 			.col-md-3
 				.tabs-left
-					ul.tabs
-						li.tab.printer: a(href="#printing") PRINTING
-						li.tab.postcards: a(href="#postCards") POSTCARDS &amp; BORCHURES
-						li.tab.discounts.active: a(href="#discounts") DISCOUNTS
-						li.tab.fund: a(href="#fundAppeals") FUND APPEALS
-						li.tab.paper: a(href="#paperEnvelopes") PAPER &amp; ENVELOPES
-						li.tab.christmas: a(href="#christmas") CHRISTMAS &amp; SPECIALTY PAPER
-						li.tab.insert: a(href="#insert") INSERTS
+					ul.tabs#tabs
+						li.tab.icon-printing(href="#printing",data-toggle="tab"): a(href="#") PRINTING
+						li.tab.icon-postcards(href="#postCards",data-toggle="tab"): a(href="#") POSTCARDS &amp; BORCHURES
+						li.tab.icon-discounts.active(href="#discounts",data-toggle="tab"): a(href="#") DISCOUNTS
+						li.tab.icon-fund(href="#fundAppeals",data-toggle="tab"): a(href="#") FUND APPEALS
+						li.tab.icon-envelope(href="#paperEnvelopes",data-toggle="tab"): a(href="#") PAPER &amp; ENVELOPES
+						li.tab.icon-christmas(href="#christmas",data-toggle="tab"): a(href="#") CHRISTMAS &amp; SPECIALTY PAPER
+						li.tab.icon-insert(href="#insert",data-toggle="tab"): a(href="#") INSERTS
 			.col-md-9
 				.row
-					.jumbotron.tabs-content.p1
-						div.tab-pane#printing
-						div.tab-pane#postCards
-						div.tab-pane.active#discounts
+					.jumbotron.tab-content.p1
+						div.tab-pane.fade#printing
+							h1 Printing
+							span.sub Sed do eiusmod tempor incididunt ut labore et dolore
+							h3 Consectetur adipisicing elit, sed do
+							p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							h3 Consectetur adipisicing elit, sed do
+							p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							h3 Consectetur adipisicing elit, sed do
+							p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							h3 Consectetur adipisicing elit, sed do
+							p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						div.tab-pane.fade#postCards
+							h1 Postcards &amp; Borchures
+							span.sub Sed do eiusmod tempor incididunt ut labore et dolore
+							h3 Consectetur adipisicing elit, sed do 
+							p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						div.tab-pane.fade.in.active#discounts
 							h1 Discounts
 							span.sub Discounts...And Other Ways To Save A Little Bit Of Money
 							h3 SENDING LETTERS FOR YOUR CAMPUS OR MINISTRY
-							p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							p If you have the need to send a monthly, quarterly, or occasional letter for your campus or ministry we will happily give you 33% discount off the basic cost. You’ll follow the same process as with your personal letter. But be sure you keep your name on your personal monthly order form and the campus/ministry name on the campus/ministry order form so we dont’t send the wrong letter to the wrong database! If you have questions or ideas about this please contac us.
 							h3  THE DANDY DOZEN CHALLENGE
-							p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							p We now offer you a way to consistently communicate with your ministry partners and earn a free meal in the process! During the 12 month period from June through May send 11 letters through the Prayer Letter Service and we’ll reward you! During the 2012-2013 year 164 of you met the challenge! That’s up from 40 of you last year!
 							h3  SENDING YOUR OWN PAPER OR PRE-PRINTED LETTERS
-							p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-							a.btn.btn-lg.btn-primary.btn-pls-w.btn-green(href='#', role='button') START YOUR ORDER NOW!
-						div.tab-pane#fundAppeals
-						div.tab-pane#paperEnvelopes
-						div.tab-pane#christmas
-						div.tab-pane#insert
+							p If you come up with a special paper we do not offer, you may send it to us.
+							p  We’re also happy to mail pre-printed letters (summer project letters, etc.) for oyu. Just mail the letters to us and we’ll do the rest! We’ll be sure to decuct the cost of the paper and printing form your total cost.
+							a.btn.btn-lg.btn-success(href='#', role='button') START YOUR ORDER NOW!
+						div.tab-pane.fade#fundAppeals
+							h1 Fund Appeals
+							span.sub Discounts...And Other Ways To Save A Little Bit Of Money
+							h3 PRE-PRINTED LETTERS
+							p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit essecillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							h3 PRE-PRINTED LETTERS
+							p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit essecillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						div.tab-pane.fade#paperEnvelopes
+							h1 Paper &amp; Envelopes
+							h3 Deserunt mollit anim id est laborum.
+							p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit essecillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						div.tab-pane.fade#christmas
+							h1 Christmas &amp; Specialty Paper
+							h3 Deserunt mollit anim id est laborum.
+							p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit essecillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						div.tab-pane.fade#insert
+							h1 Insert
+							h3 Deserunt mollit anim id est laborum.
+							p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit essecillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 	section.spacer
+block js
+	script(type='text/javascript')
+		$(function() { $('#tabs li a').click(function (e) { e.preventDefault(); $(this).tab('show');});});
