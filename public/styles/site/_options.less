@@ -266,6 +266,7 @@
 .mbottom140{
 	margin-bottom: 140px;
 }
+.mtop50{margin-top:50px;}
 @media (max-width:480px) {
 	.tab-content{
 		padding: 25px;
@@ -345,4 +346,35 @@
 		padding: 25px;
 	}
 }  
- 
+@media (max-width:320px) {
+	.tabs-left{
+		ul.tabs {
+			.icon-postcards{
+				&:before {
+					margin-right: 10px;
+					position: relative;
+					font-size: 17px;
+					left: -30px;
+					top: 15px;			
+				}	
+				& > a {
+					position: relative;
+					top: -5px;
+					left: 5px;
+				}							
+			}
+			.icon-envelope{
+				position: relative;			
+				&:before {
+					left: 1;
+					top: 12px;
+				}				
+				& > a{
+					left: 1px;
+					top: -14px;
+				}
+			}
+		}
+	}
+}  
+
