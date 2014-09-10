@@ -156,32 +156,27 @@ div.tab-container {
 }
 .tab-content{
 	.tab-pane{
-		.container{
-			.jumbotron{
-				background: white;
-				margin-bottom: 0px;
-				padding-bottom: 0px;
-				.container{
-					.col-lg-6{
-						img{
-							margin:10px auto;
-						}
-						h2 {
-							text-align: left;
-							font-weight: 600;
-							line-height: 1.5;
-							margin-top: 0px;
-						
-						}
-						p{
-							margin-top: 30px;
-							line-height: 1.5;
-							text-align: left;
-						}
+		.jumbotron{
+			background: white;
+			margin-bottom: 0px;
+			padding-bottom: 0px;							
+			.col-md-6,.col-sm-6{
+				img{
+					margin:10px auto;
 					}
+				h2 {
+					text-align: left;
+					font-weight: 600;
+					line-height: 1.5;
+					margin-top: 0px;			
+				}
+				p{
+					margin-top: 30px;
+					line-height: 1.5;
+					text-align: left;
 				}
 			}
-		}
+		}		
 	}
 }
 
@@ -190,24 +185,26 @@ div.tab-container {
 	background-color: white;
 	margin-bottom: 75px;
 	margin-top: 50px;
-		@media (max-width:480px) {
+		@media (min-width:320px) and (max-width:992px) {
             padding: 10px;
        	}
 		p {
 			margin-bottom: 0;
-		}
+			@media (min-width:320px) and (max-width:992px) {
+		       text-align: center;
+			}
+		}		
 		.container{
 			background-color: @light-gray;
 			border: 1px solid darken(@light-gray, 5%);
 			padding: 20px;
 			.row{
-				.col-lg-6{
+				.col-md-6{
 					.row{
-						.col-lg-6{							
+						.col-md-6{							
 							p{
 								font-size: 10px;
-								margin-top: 15px;
-								float: right;
+								margin-top: 10px;								
 								span{
 									font-size: 18px;
 									font-weight: 600;
@@ -219,6 +216,9 @@ div.tab-container {
 										margin-right: 5px;
 									}
 								}
+								@media (min-width:320px) and (max-width:992px) {
+						          text-align: center;
+						       	}
 							}
 						}
 					}
@@ -260,15 +260,118 @@ div.tab-container {
 			}
 		}
 	}
+	
+	.jumbotron#printing{
+		background-position: -840px;
+		margin-top: -9px;
+	}
+	#header{
+		a.navbar-brand{
+			padding: 0 12px;
+		}
+	} 
 }
-@media (max-width:991px) {
+@media (max-width:390px) {
 	div.tab-container {
 		ul.tabs {
-			padding-left: 12%;			
+			width: 100%;
+			padding-left: 0px !important;			
 			& > li.tab {
-				float: none;
+				float: left;
 				display: inline-block;
+				width: 100%;
 			}
+			.icon-prayer{
+				&:before {
+					left: 70px;
+				}
+			}
+			.icon-brochure{
+				&:before {
+					left: 90px;
+				}
+			}
+			.icon-christmas{
+				&:before {
+					left: 60px;
+				}
+			}
+		}
+	}
+	.jumbotron#printing{
+		background-position: -840px 9px;
+		h1 {
+			text-align: center;
+			font-size: 36px;
+		}
+	}
+	.btn-success{
+		margin-top: 15px;
+	}
+}
+@media (min-width:320px) and (max-width:766px){
+	div.tab-content{
+		padding-bottom: 0px;
+		div.tab-pane{
+			div.jumbotron{
+				padding: 0;
+				.col-md-6,.col-sm-6{
+					h2 {
+						text-align: center;
+					}				
+				}				
+			}
+		}
+	}
+	.start-orden{
+		padding-bottom: 0;
+		margin-bottom: 35px;
+	}
+}
+@media (min-width:768px) and (max-width:1199px){
+	div.tab-container{
+		.container{
+			padding: 0;
+			margin: 0 auto;
+			width: 100%;
+			ul.tabs{
+				padding-left: 0px;
+				li.tab{
+					padding: 20px 22px;
+				}
+				.icon-prayer{
+					&:before {
+						content: "\e601";
+						position: absolute;
+						left: 9px;
+						top: 14px;
+						font-size: 24px;
+					}
+					a{
+						position: relative;
+						left: 15px;
+					}
+				}
+				.icon-brochure{
+					&:before {
+						left: 10px;
+					}
+					a{
+						position: relative;
+						left: 10px;
+					}
+				}
+				.icon-christmas{
+					&:before {
+						left: 10px;
+					}
+					a{				
+						position: relative;
+						left: 10px;
+					}
+				}
+			}
+			
 		}
 	}
 }
