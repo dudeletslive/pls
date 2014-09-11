@@ -122,20 +122,6 @@ div.panel {
 				}
 			}
 			input {
-				&.form-control {
-					padding: 10px;
-					height: auto;
-				}
-				// Styles for adjacent inputs because nth-child formulas weren't working.
-				&.left {
-					border-bottom-right-radius: 0;
-					border-top-right-radius: 0;
-				}
-				&.right {
-					border-bottom-left-radius: 0;
-					border-top-left-radius: 0;
-					border-left: 0;
-				}
 				&[type="password"] {
 					max-height: 39px;
 					font-size: 20px;
@@ -147,7 +133,19 @@ div.panel {
 }
 // iPhone
 @media only screen and (max-width : 320px) {
-/* Styles */
+	div.panel {
+		width: 100%;
+		margin: 15px;
+		form#account {
+			.col-md-6 {
+				input {
+					&.left {
+						border-top-right-radius: 4px;
+					}
+				}
+			}
+		}
+	}
 }
 
 // iPad
@@ -158,8 +156,32 @@ and (orientation : portrait) {
 /* Styles */
 }
 
+// Desktop-
+@media only screen 
+and (max-width : 1224px) {
+	div.account {
+		.jumbotron {
+			padding: 30px 0;
+		}
+	}
+}
 // Desktop+
 @media only screen 
-and (min-width : 1224px) {
-/* Styles */
+and (min-width : 990px) {
+	input {
+		&.form-control {
+			padding: 10px;
+			height: auto;
+		}
+		// Styles for adjacent inputs because nth-child formulas weren't working.
+		&.left {
+			border-bottom-right-radius: 0;
+			border-top-right-radius: 0;
+		}
+		&.right {
+			border-bottom-left-radius: 0;
+			border-top-left-radius: 0;
+			border-left: 0;
+		}
+	}
 }
