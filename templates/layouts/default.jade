@@ -74,8 +74,8 @@ html
 									li.hide-lg: a(href='/keystone') Admin
 								li.hide-lg: a(href='/keystone/signout') Sign Out
 							else
-								li.hide-lg: a(href='/keystone/signin') Sign In
-								li.hide-lg: a(href='/keystone/signin') Register
+								li.hide-lg: a(href='/sign-in') Sign In
+								li.hide-lg: a(href='/sign-in') Register
 							li#startOrder
 								table
 									tr
@@ -84,8 +84,8 @@ html
 												th: li: a(href='/keystone') Admin
 											th: li: a(href='/keystone/signout') Sign Out
 										else
-											th: a(href='/keystone/signin') Sign In
-											th: a(href='/keystone/signin') Register
+											th: a(href='/sign-in') Sign In
+											th: a(href='/sign-in') Register
 									tr: td(colspan="2")
 											a.btn.btn-primary(href="/") Start Order Now!
 		//- BODY
@@ -136,7 +136,7 @@ html
 							i.fa.fa-sign-out
 							| &nbsp; Sign Out
 					else
-						a(href='/keystone/signin').btn.btn-info
+						a(href='/sign-in').btn.btn-info
 							i.fa.fa-sign-in
 							| &nbsp; Sign In
 				div.col-md-3: span.row#brand

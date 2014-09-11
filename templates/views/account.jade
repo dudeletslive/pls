@@ -95,7 +95,8 @@ block content
 			div.panel
 				h1 Already A Client?
 					.small Sign in to your account.
-				form#account
+				form(method="post" action="/")#account
+					input(type='hidden', name=csrf_token_key, value=csrf_token_value)
 					.form-group.clearfix
 						.col-md-12
 							label(for="email") Email Address
@@ -113,7 +114,7 @@ block content
 							//- input(name="rememberMe", type="checkbox")
 							label(for="rememberMe") Remember Me
 						.col-md-6
-							a.btn.btn-primary.pull-right Register
+							a(href="#" onclick="$(this).closest('form').submit();").btn.btn-primary.pull-right Sign In
 					#socialConnect
 						div.facebook
 							span Connect With Facebook
