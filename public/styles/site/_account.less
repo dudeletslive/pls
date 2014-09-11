@@ -7,6 +7,9 @@ div.account {
 		background: transparent;
 		margin-bottom: -30px;
 	}
+	section.spacer {
+		height: 40px;
+	}
 }
 // Basic Panel
 div.panel {
@@ -116,9 +119,16 @@ div.panel {
 				}
 				.pull-right {
 					font-style: italic;
+					font-weight: 300;
 					text-decoration: underline;
 					text-transform: capitalize;
 					color: darken(@light-gray, 15%);
+					a {
+						color: darken(@light-gray, 15%);
+						&:hover, &:focus {
+							color: darken(@light-gray, 25%);
+						}
+					}
 				}
 			}
 			input {
@@ -181,6 +191,22 @@ and (min-width : 990px) {
 			border-bottom-left-radius: 0;
 			border-top-left-radius: 0;
 			border-left: 0;
+		}
+	}
+}
+
+// FOR DEMO PURPOSES
+ul#demo {
+	position: absolute;
+	color: white;
+	left: 50px;
+	top: 350px;
+	li {
+		font-size: 16px;
+		font-weight: 600;
+		list-style-type: none;
+		a {
+			color: white;
 		}
 	}
 }

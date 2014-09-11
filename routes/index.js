@@ -28,8 +28,8 @@ keystone.pre('routes', middleware.initLocals);
 keystone.pre('render', middleware.flashMessages);
 
 // Import Route Controllers
-var routes = {
-	views: importRoutes('./views')
+var routes = { 
+	views: importRoutes('./views') 
 };
 
 // Setup Route Bindings
@@ -41,8 +41,15 @@ exports = module.exports = function(app) {
 	app.get('/printing-services', routes.views.printing);
 	app.get('/options', routes.views.options);
 	app.get('/pricing', routes.views.pricing);
-	app.get('/account-management', routes.views.account);
 	app.all('/contact', routes.views.contact);
+
+	// Super fancy way of handling account management page-
+	// Based on the link, set locals, then display appropriate panel
+	// On Account Management page based on which local variable is set.
+	app.get('/forgot-password', routes.views.account);
+	app.get('/reset', routes.views.account);
+	app.get('/sign-in', routes.views.account);
+	app.get('/register', routes.views.account);
 	
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);

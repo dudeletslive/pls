@@ -2,112 +2,123 @@ extends ../layouts/default
 
 block content
 	div.account: div.jumbotron: .container
-		//- Register
-		div.panel
-			h1 Create An Account
-				.small Register to begin recieving service.
-			form#account
-				.form-group.clearfix
-					.col-md-6
-						label(for="f_name") First Name
-						input(name="f_name", class="left form-control", placeholder="Jane")
-					.col-md-6
-						label(for="l_name") Last Name
-						input(name="l_name", class="right form-control", placeholder="Doe")
-				.form-group.clearfix
-					.col-md-12
-						label(for="email") Email Address
-						input(name="email", class="form-control", placeholder="janedoe@cru.org")
-				.form-group.clearfix
-					.col-md-6
-						label(for="password") Password
-						input(name="password", class="left form-control", placeholder="••••••", type="password")
-					.col-md-6
-						label(for="confirm_pass") Confirm Password
-						input(name="confirm_pass", class="right form-control", placeholder="••••••", type="password")
-				.form-group.clearfix#formFooter
-					.col-md-6
-						span.fa-stack.fa-lg
-							i.fa.fa-square.fa-stack-2x
-							i.fa.fa-check.fa-stack-1x.fa-inverse
-						//- input(name="rememberMe", type="checkbox")
-						label(for="rememberMe") Remember Me
-					.col-md-6
-						a.btn.btn-primary.pull-right Register
-				#socialConnect
-					div.facebook
-						span Connect With Facebook
-						span: i.fa.fa-facebook
-					div.linkedIn
-						span Connect With LinkedIn
-						span: i.fa.fa-linkedin
-		//- Forgot Pass
-		section.spacer
-		div.panel
-			h1 Forgot Your Password?
-				.small No worries! We'll send you a link to reset it.
-			form#account
-				.form-group.clearfix
-					.col-md-12
-						label(for="email") Email Address
-						input(name="email", class="form-control", placeholder="janedoe@cru.org")
-				.form-group.clearfix#formFooter
-					.col-md-12
-						a.btn.btn-primary.pull-right Register
-		//- Create New Pass
-		section.spacer
-		div.panel
-			h1 Create An Account
-				.small Register to begin recieving service.
-			form#account
-				.form-group.clearfix
-					.col-md-12
-						label(for="password") Password
-						input(name="password", class="form-control", placeholder="••••••", type="password")
-				.form-group.clearfix
-					.col-md-12
-						label(for="confirm_pass") Confirm Password
-						input(name="confirm_pass", class="form-control", placeholder="••••••", type="password")
-				.form-group.clearfix#formFooter
-					.col-md-12
-						a.btn.btn-primary.pull-right Save
+		ul#demo
+			li: a(href="/forgot-password") Password Reset
+			li: a(href="/sign-in") Sign In
+			li: a(href="/register") Register
+		if locals.register
+			//- Register
+			div.panel
+				h1 Create An Account
+					.small Register to begin recieving service.
+				form#account
+					.form-group.clearfix
+						.col-md-6
+							label(for="f_name") First Name
+							input(name="f_name", class="left form-control", placeholder="Jane")
+						.col-md-6
+							label(for="l_name") Last Name
+							input(name="l_name", class="right form-control", placeholder="Doe")
+					.form-group.clearfix
+						.col-md-12
+							label(for="email") Email Address
+							input(name="email", class="form-control", placeholder="janedoe@cru.org")
+					.form-group.clearfix
+						.col-md-6
+							label(for="password") Password
+							input(name="password", class="left form-control", placeholder="••••••", type="password")
+						.col-md-6
+							label(for="confirm_pass") Confirm Password
+							input(name="confirm_pass", class="right form-control", placeholder="••••••", type="password")
+					.form-group.clearfix#formFooter
+						.col-md-6
+							span.fa-stack.fa-lg
+								i.fa.fa-square.fa-stack-2x
+								i.fa.fa-check.fa-stack-1x.fa-inverse
+							//- input(name="rememberMe", type="checkbox")
+							label(for="rememberMe") Remember Me
+						.col-md-6
+							a.btn.btn-primary.pull-right Register
+					#socialConnect
+						div.facebook
+							span Connect With Facebook
+							span: i.fa.fa-facebook
+						div.linkedIn
+							span Connect With LinkedIn
+							span: i.fa.fa-linkedin
+			section.spacer
+		if locals.forgot
+			//- Forgot Pass
+			section.spacer
+			div.panel
+				h1 Forgot Your Password?
+					.small No worries! We'll send you a link to reset it.
+				form#account
+					.form-group.clearfix
+						.col-md-12
+							label(for="email") Email Address
+							input(name="email", class="form-control", placeholder="janedoe@cru.org")
+					.form-group.clearfix#formFooter
+						.col-md-12
+							a.btn.btn-primary.pull-right Register
+			section.spacer
+		if locals.reset
+			//- Create New Pass
+			section.spacer
+			div.panel
+				h1 Create A New Password
+					.small Reset and confirm your password below.
+				form#account
+					.form-group.clearfix
+						.col-md-12
+							label(for="password") Password
+							input(name="password", class="form-control", placeholder="••••••", type="password")
+					.form-group.clearfix
+						.col-md-12
+							label(for="confirm_pass") Confirm Password
+							input(name="confirm_pass", class="form-control", placeholder="••••••", type="password")
+					.form-group.clearfix#formFooter
+						.col-md-12
+							a.btn.btn-primary.pull-right Save
+			section.spacer
 		//- Pass Reset Success
-		section.spacer
-		div.panel
-			img(src="/images/success.png")#success
-			h1 Password saved!
-				.small You can now sign in with your new password.
-			.form-group.clearfix: .col-md-12: #formFooter
-				a.btn.btn-primary.center Sign In
-		//- Sign In
-		section.spacer
-		div.panel
-			h1 Create An Account
-				.small Register to begin recieving service.
-			form#account
-				.form-group.clearfix
-					.col-md-12
-						label(for="email") Email Address
-						input(name="email", class="form-control", placeholder="janedoe@cru.org")
-				.form-group.clearfix
-					.col-md-12
-						label(for="password").block Password
-							.pull-right Forgot Password?
-						input(name="password", class="form-control", placeholder="••••••", type="password")
-				.form-group.clearfix#formFooter
-					.col-md-6
-						span.fa-stack.fa-lg
-							i.fa.fa-square.fa-stack-2x
-							i.fa.fa-check.fa-stack-1x.fa-inverse
-						//- input(name="rememberMe", type="checkbox")
-						label(for="rememberMe") Remember Me
-					.col-md-6
-						a.btn.btn-primary.pull-right Register
-				#socialConnect
-					div.facebook
-						span Connect With Facebook
-						span: i.fa.fa-facebook
-					div.linkedIn
-						span Connect With LinkedIn
-						span: i.fa.fa-linkedin
-		section.spacer
+		//- section.spacer
+		//- div.panel
+		//- 	img(src="/images/success.png")#success
+		//- 	h1 Password saved!
+		//- 		.small You can now sign in with your new password.
+		//- 	.form-group.clearfix: .col-md-12: #formFooter
+		//- 		a.btn.btn-primary.center Sign In
+		if locals.signin
+			//- Sign In
+			section.spacer
+			div.panel
+				h1 Already A Client?
+					.small Sign in to your account.
+				form#account
+					.form-group.clearfix
+						.col-md-12
+							label(for="email") Email Address
+							input(name="email", class="form-control", placeholder="janedoe@cru.org")
+					.form-group.clearfix
+						.col-md-12
+							label(for="password").block Password
+								.pull-right: a(href="/forgot-password") Forgot Password?
+							input(name="password", class="form-control", placeholder="••••••", type="password")
+					.form-group.clearfix#formFooter
+						.col-md-6
+							span.fa-stack.fa-lg
+								i.fa.fa-square.fa-stack-2x
+								i.fa.fa-check.fa-stack-1x.fa-inverse
+							//- input(name="rememberMe", type="checkbox")
+							label(for="rememberMe") Remember Me
+						.col-md-6
+							a.btn.btn-primary.pull-right Register
+					#socialConnect
+						div.facebook
+							span Connect With Facebook
+							span: i.fa.fa-facebook
+						div.linkedIn
+							span Connect With LinkedIn
+							span: i.fa.fa-linkedin
+			section.spacer
