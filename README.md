@@ -23,6 +23,10 @@ PLS About Us Page - http://cl.ly/0O46281f3n1Z
 
 PLS Home Page - http://cl.ly/193A2L2B2z0F
 
+PLS CRM PSD - http://cl.ly/1q3P0n2D2416
+
+PLS Order Process - http://cl.ly/290i2M2n0V2U
+
 ---
 
 ###### Built by Theory+Practice
