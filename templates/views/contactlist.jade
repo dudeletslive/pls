@@ -1,0 +1,45 @@
+extends ../layouts/default
+
+block content
+	div.contact-list: div.jumbotron: .container
+		div.title
+			.left
+				span.icon.home
+				h2 Contact Lists | 
+					span List Name Goes Here
+			div.right
+				p
+					span#count 1,835 
+					span Contacts
+				select.form-control
+					option(selected='selected') A
+					option B
+				a.btn.btn-md.btn-success ADD CONTACT
+			div.clearfix
+		div.col-md-12.line
+		div.col-md-12
+			table.table.table-bordered.table-striped#table-contact-list
+				thead
+					tr
+						th Edit
+						th LAST NAME
+						th ENV_LINE
+						th ADDRESS 1
+						th ADDRESS 2
+						th ADDRESS 3
+						th CITY
+						th STATE
+						th ZIP
+				tbody
+					for item, i in [1,2,3,4,5,6,7,8,9,10,11,12]						
+						tr
+							td 
+								img(src='images/edit-icon.png')
+							td Bell
+							td Jonathan Bell
+							td 5234 Ferrari Drive
+							td .
+							td .
+							td Colorado Springs
+							td CO
+							td 80922						
