@@ -41,6 +41,7 @@ exports = module.exports = function(app) {
 	app.get('/printing-services', routes.views.printing);
 	app.get('/options', routes.views.options);
 	app.get('/pricing', routes.views.pricing);
+	app.get('/account-management', routes.views.account);
 	app.all('/contact', routes.views.contact);
 	
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
