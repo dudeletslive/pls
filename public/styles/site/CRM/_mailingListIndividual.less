@@ -9,8 +9,7 @@ div.contact-list {
 		.title{
 			display: block;
 			margin: 25px 0;
-			.left{
-				float: left;
+			.navbar-left{				 
 				display: inline-block;		
 				h2{
 					display: inline-block;
@@ -21,12 +20,11 @@ div.contact-list {
 					}
 				}
 			}
-			.right{
-				float: right;
+			.navbar-right{				
 				display: inline-block;
 				margin-top: 12px;
-				p,select,a{
-					float: left;
+				p,select,a,.select-style{
+					float: right;
 				}
 				a{
 					width: 133px;
@@ -47,15 +45,34 @@ div.contact-list {
 					margin-top: 14px;
 					color: black;
 				}
-				select{
-					width: 57px;
-					height: 43px;
-					margin-right: 20px;
-					font-weight: 700;
-					font-size: 21px;
-					padding-top: 2px;
-					padding-left: 5px;					
+				div.select-style{
+					width:80px !important;
+					padding: 0;
+				    margin: 0 15px;
+				    border: 1px solid #ccc;
+				    width: 120px;
+				    border-radius: 3px;
+				    overflow: hidden;
+				    background-color: #fff;
+				    background: #fff url("../images/select-arrow.png") no-repeat 90% 50%;
+					select{
+						width: 80px;
+						height: 43px;
+						font-weight: 700;
+						font-size: 21px;
+						padding-top: 5px;
+						padding-left: 8px;
+						background-image:url('../images/select-arrow.png');
+						background-repeat:no-repeat;
+						background-position:40px;	
+						border: none;
+					    box-shadow: none;
+					    background-color: transparent;
+					    background-image: none;
+					    .appearance(none);					    
+					}
 				}
+				
 			}
 		}
 	}
@@ -67,6 +84,132 @@ div.contact-list {
 		margin: 15px 12px 0 15px;
 		background-image: url('../images/home-icon-gray.png');			
 	} 
+}
+.modal-ms{
+	width: 420px !important;
+}
+// Basic Panel
+div.panel {
+	background: white;
+	border: 0;
+	font-family: proxima-nova;
+	margin: 0 auto;
+	overflow: hidden;
+	padding: 25px;
+	width: 350px;
+	img#success {
+		display: table;
+		margin: 20px auto 30px;
+	}
+	h1 {
+		color: #000;
+		font-size: 28px;
+		font-weight: 400;
+		margin-top: 15px;
+		text-align: center;
+		div.small {
+			color: #000;
+			font-size: 15px;
+			font-weight: 200;
+		}
+	}
+	a.btn.btn-primary {
+		background: @blue;
+		border-radius: 2px;
+		font-size: 14px;
+		padding: 10px 15px;
+		text-transform: uppercase;
+		&.pull-right {
+			margin: 6px 0;
+		}
+		&.center {
+			display: table;
+			margin: 25px auto 15px;
+			padding: 10px 20px;
+		}
+	}
+	// Panel Form for Registry
+	form#account {
+		.form-group {
+			margin-bottom: 0;
+		}
+		#formFooter {
+			margin: 25px 0 20px;
+			label {
+				margin-left: 5px;
+				text-transform: capitalize;
+				font-weight: 300;
+			}
+			a.btn.btn-primary {
+				background: @blue;
+				border-radius: 2px;
+				font-size: 14px;
+				padding: 10px 15px;
+				text-transform: uppercase;
+				&.pull-right {
+					margin: 6px 0;
+				}
+			}
+			i {
+				&.fa-stack-2x {
+					color: @orange;
+					font-size: 24px;
+					top: 4px;
+				}
+				&.fa-stack-1x {
+					font-size: 14px;
+					top: -1px;
+				}
+			}
+		}
+		#socialConnect {
+			margin-bottom: -25px;
+			.facebook, .linkedIn {
+				color: white;
+				margin: 0 -25px;
+				padding: 15px 25px;
+			}
+			.facebook {
+				background: #5D9CEC;
+			}
+			.linkedIn {
+				background: #4675B2;
+			}
+			span {
+				font-size: 14px;
+				font-weight: 400;
+				text-transform: uppercase;
+				i {
+					float: right;
+				}
+			}
+		}
+		.col-md-6, .col-md-12 {
+			padding: 0;
+			label {
+				font-size: 13px;
+				font-weight: 600;
+				margin: 20px 0 5px;
+				text-transform: uppercase;
+				&.block {
+					display: block;
+				}
+				.pull-right {
+					font-style: italic;
+					text-decoration: underline;
+					text-transform: capitalize;
+					color: darken(@light-gray, 15%);
+				}
+			}
+			input {
+				&[type="password"] {
+					max-height: 39px;
+					font-size: 20px;
+					letter-spacing: 8px;
+				}
+			}
+		}
+	}
 }
 table#table-contact-list{
 	thead{
