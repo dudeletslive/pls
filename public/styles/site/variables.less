@@ -25,7 +25,6 @@
 	-o-background-size: @size;
 	background-size: @size;
 }
-
 div#flash-messages {
 	border-radius: 0;
 	left: 0;
@@ -35,4 +34,9 @@ div#flash-messages {
 	right: 0;
 	text-align: center;
 	width: 100%;
+}
+.appearance(@value){
+    -webkit-appearance: @value;
+    -moz-appearance:    @value;
+	appearance:         @value;
 }
