@@ -1,0 +1,58 @@
+extends ../layouts/default
+
+block content
+	div.account
+		div.jumbotron: .container
+			//- Register
+			section.spacer
+			div.panel
+				if user
+					div(style="text-align: center;")
+						h1 Hey #{user.name.first}!
+							.small You're already logged in.
+						p Not #{user.name.first}? &nbsp;
+							a(href="/sign-out") Sign out.
+				else
+					h1 Create An Account
+						.small Register to begin recieving service.
+					form(method="post")#account
+						input(type='hidden', name='action', value='register')
+						.form-group.clearfix
+							.col-md-6
+								label(for="f_name") First Name
+								input(name="f_name", class="left form-control", placeholder="Jane", value=form.f_name)
+							.col-md-6
+								label(for="l_name") Last Name
+								input(name="l_name", class="right form-control", placeholder="Doe", value=form.l_name)
+						.form-group.clearfix
+							.col-md-12
+								label(for="email") Email Address
+								input(name="email", class="form-control", placeholder="janedoe@cru.org", value=form.email)
+						.form-group.clearfix
+							.col-md-6
+								label(for="password") Password
+								input(name="password", class="left form-control", placeholder="••••••", type="password")
+							.col-md-6
+								label(for="confirm_pass") Confirm Password
+								input(name="confirm_pass", class="right form-control", placeholder="••••••", type="password")
+						.form-group.clearfix#formFooter
+							.col-md-6
+								span.fa-stack.fa-lg
+									i.fa.fa-square.fa-stack-2x
+									i.fa.fa-check.fa-stack-1x.fa-inverse
+								input(name="rememberMe", type="checkbox")
+								label(for="rememberMe") Remember Me
+							.col-md-6
+								button(type="submit").btn.btn-primary.pull-right Register
+						#socialConnect
+							div.facebook
+								span Connect With Facebook
+								span: i.fa.fa-facebook
+							div.linkedIn
+								span Connect With LinkedIn
+								span: i.fa.fa-linkedin
+			section.spacer
+		if !user
+			div.banner
+				p Already have a PLS account? &nbsp;
+					a(href="/sign-in") Sign in.

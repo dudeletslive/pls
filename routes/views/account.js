@@ -31,8 +31,6 @@ exports = module.exports = function(req, res) {
 			};
 			session.signin(req.body, req, res, onSuccess, onFail);
 		}
-	} else if (url === '/register') {
-		locals.register = true;
 	} else if (url === '/reset') {
 		locals.reset = true;
 	}

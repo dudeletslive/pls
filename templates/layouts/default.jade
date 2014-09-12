@@ -56,15 +56,6 @@ html
 							span.icon-bar
 						a.navbar-brand(href='/'): img(src='/images/logo.png' alt='Prayer Letter Service')
 					.collapse.navbar-collapse
-						//- ul.nav.navbar-nav.navbar-right#registerModule
-							if user
-								if user.canAccessKeystone
-									li: a(href='/keystone') Open Keystone
-								li: a(href='/keystone/signout') Sign Out
-							else
-								a(href='/keystone/signin')#register Register |
-								a(href='/keystone/signin')#signIn Sign In
-								a.btn.btn-primary(href="/") Start Order Now!
 						ul.nav.navbar-nav.navbar-right
 							li.hide-lg: a.btn.btn-primary(href="/") Start Order Now!
 							each link in navLinks
@@ -72,20 +63,24 @@ html
 							if user
 								if user.canAccessKeystone
 									li.hide-lg: a(href='/keystone') Admin
-								li.hide-lg: a(href='/keystone/signout') Sign Out
+								else
+									li.hide-lg: a(href='/') #{user.name.first}
+								li.hide-lg: a(href='/sign-out') Sign Out
 							else
 								li.hide-lg: a(href='/sign-in') Sign In
-								li.hide-lg: a(href='/sign-in') Register
+								li.hide-lg: a(href='/register') Register
 							li#startOrder
 								table
 									tr
 										if user
 											if user.canAccessKeystone
 												th: li: a(href='/keystone') Admin
-											th: li: a(href='/keystone/signout') Sign Out
+											else
+												th: li: a(href='/') #{user.name.first}
+											th: li: a(href='/sign-out') Sign Out
 										else
 											th: a(href='/sign-in') Sign In
-											th: a(href='/sign-in') Register
+											th: a(href='/register') Register
 									tr: td(colspan="2")
 											a.btn.btn-primary(href="/") Start Order Now!
 		//- BODY
@@ -132,7 +127,7 @@ html
 				div.col-md-2: span.row
 					a.btn.btn-info Start Order Now!
 					if user
-						a(href='/keystone/signout').btn.btn-info
+						a(href='/sign-out').btn.btn-info
 							i.fa.fa-sign-out
 							| &nbsp; Sign Out
 					else

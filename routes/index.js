@@ -48,11 +48,13 @@ exports = module.exports = function(app) {
 	// On Account Management page based on which local variable is set.
 	app.get('/forgot-password', routes.views.account);
 	app.get('/reset', routes.views.account);
-	app.get('/register', routes.views.account);
 
 	// Sign In + Out
 	app.all('/sign-in', routes.views.signIn);
-	// app.all('/sign-out', routes.views.signOut);
+	app.get('/sign-out', routes.views.signOut);
+
+	// Register
+	app.all('/register', routes.views.register);
 	
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);

@@ -2,13 +2,29 @@
 div.account {
 	background: url('../images/register_bg.png');
 	background-position: center;
+	margin-bottom: -30px;
 	.background-size(cover);
 	.jumbotron {
 		background: transparent;
-		margin-bottom: -30px;
 	}
 	section.spacer {
 		height: 40px;
+	}
+	div.banner {
+		background: white;
+		padding: 20px 15px;
+		text-align: center;
+		p {
+			font-size: 16px;
+			font-weight: 600;
+			margin: 0;
+		}
+		a {
+			color: @orange;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
 	}
 }
 // Basic Panel
@@ -34,6 +50,7 @@ div.panel {
 			color: #000;
 			font-size: 15px;
 			font-weight: 200;
+			margin-top: 10px;
 		}
 	}
 	a.btn.btn-primary, button.btn.btn-primary {
