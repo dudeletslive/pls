@@ -56,8 +56,10 @@ exports = module.exports = function(app) {
 	// Register
 	app.all('/register', routes.views.register);
 	
-	app.get('/contact-list-home',routes.views.contactlisthome);
-	app.get('/contact-list',routes.views.contactlist);
+	// Contact List Pages
+	app.get('/mailing-lists', routes.views.CRM.mailingListIndex);
+	app.get('/mailing-lists/title-of-mailing-list', routes.views.CRM.mailingList);
+
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);
 	
