@@ -9,12 +9,13 @@ block content
 			li.tab.icon-prayer(href="#prayerLetters",data-toggle="tab"): a(href="#") Prayer Letters
 			li.tab.icon-postcards(href="#postCards",data-toggle="tab"): a(href="#") Post Cards
 			li.tab.icon-brochure.active(href="#brochures",data-toggle="tab"): a(href="#") Brochures
-			li.tab.icon-fund(href="#fundAppeals",data-toggle="tab"): a(href="#") Fund Appeals
+			li.tab.icon-funds(href="#fundAppeals",data-toggle="tab"): a(href="#") Fund Appeals
 			li.tab.icon-christmas(href="#christmas",data-toggle="tab"): a(href="#") Christmas / Holiday
 	div.tab-content
 		div.tab-pane.fade#prayerLetters
 			.jumbotron
 				.col-md-6.col-sm-6
+					div.icon-letter.icon-big
 				.col-md-6.col-sm-6
 					h2  Prayer Letters
 					p a commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
@@ -22,6 +23,7 @@ block content
 		div.tab-pane.fade#postCards
 			.jumbotron
 				.col-md-6.col-sm-6
+					div.icon-postcards.icon-medium
 				.col-md-6.col-sm-6
 					h2  Post Cards
 					p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -30,7 +32,7 @@ block content
 		div.tab-pane.fade.in.active#brochures
 			.jumbotron
 				.col-md-6.col-sm-6
-					img(src="images/brochure.png" class="img-responsive")
+					div.icon-brochure.icon-big
 				.col-md-6.col-sm-6
 					h2 Brochures are a great way to present <br> an overview of the work you’re doing.
 					p Brochures can be printed on any of our papers, including glossy paper.
@@ -39,6 +41,7 @@ block content
 		div.tab-pane.fade#fundAppeals
 			.jumbotron
 				.col-md-6.col-sm-6
+					div.icon-funds.icon-small
 				.col-md-6.col-sm-6
 					h2  Fund Appeals
 					p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -47,6 +50,7 @@ block content
 		div.tab-pane.fade#christmas
 			.jumbotron
 				.col-md-6.col-sm-6
+					div.icon-christmas.icon-big
 				.col-md-6.col-sm-6
 					h2  Christmas / Holiday
 					p a commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 

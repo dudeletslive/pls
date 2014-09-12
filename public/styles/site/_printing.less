@@ -24,6 +24,126 @@
 	background: url('../images/pricing-banner.png') no-repeat center;
 	.background-size(cover);
 }
+//Icon Tabs
+.icon-prayer{
+	&:before {
+		content: "\e601";
+		position: absolute;
+		left: 30px;
+		top: 15px;
+		font-size: 24px;
+	}
+	&:hover {
+		&:before {
+			color: white;
+		}
+	}
+}
+.icon-postcards{
+	&:before {
+		content: "\e606";
+		margin-right: 10px;
+		position: relative;
+		top: 1px;
+	}
+	&:hover {
+		&:before {
+			color: white;
+		}
+	}
+}
+.icon-brochure{
+	&:before {
+		content: "\e603";
+		font-size: 16px;
+		position: absolute;
+		left: 30px;
+	}
+	&:hover {
+		&:before {
+			color: white;
+		}
+	}
+}
+.icon-funds{
+	&:before {
+		content: "\e600";
+		font-size: 4px;
+		position: relative;
+		left: -25px;
+		top: -10px;
+		padding-left: 20px;
+	}
+	&:hover {
+		&:before {
+			color: white;
+		}
+	}
+}
+.icon-christmas{
+	padding-left: 60px;
+	position: relative;
+	&:before {
+		content: "\e605";
+		position: absolute;
+		left: 30px;
+		top: 50%;
+		margin-top: -7px;
+		font-size: 16px;
+	}
+	&:hover {
+		&:before {
+			color: white;
+		}
+	}
+}
+.icon-big{	
+	&:before {
+		color: @orange;
+		padding: 0;
+		display: block;
+		font-size: 250px !important;
+		margin-top: -20px;
+		text-align: center;
+		position: inherit;
+		top:inherit;
+		left: inherit;
+		right: inherit;
+	}
+	&:hover {
+		&:before {
+			color: @orange;
+		}
+	}
+}
+.icon-medium{
+	position: inherit;
+	text-align: center;
+	&:before{
+		font-size: 180px;
+		color:@orange;
+		position: inherit;
+		text-align: center;
+
+	}
+	&:hover{
+		color:@orange;
+	}
+}
+.icon-small{
+	position: inherit;
+	text-align: center;
+	&:before{
+		font-size: 43px;
+		color:@orange;
+		position: inherit;
+		text-align: center;
+
+	}
+	&:hover{
+		color:@orange;
+	}
+}
 // Tab Section
 div.tab-container {
 	background: @light-gray;
@@ -76,82 +196,11 @@ div.tab-container {
 					color: white;
 				}
 			}
-		}
-		.icon-prayer{
-			&:before {
-				content: "\e601";
-				position: absolute;
-				left: 30px;
-				top: 15px;
-				font-size: 24px;
-			}
-			&:hover {
-				&:before {
-					color: white;
-				}
-			}
-		}
-		.icon-postcards{
-			&:before {
-				content: "\e606";
-				margin-right: 10px;
-				position: relative;
-				top: 1px;
-			}
-			&:hover {
-				&:before {
-					color: white;
-				}
-			}
-		}
-		.icon-brochure{
-			&:before {
-				content: "\e603";
-				font-size: 16px;
-				position: absolute;
-				left: 30px;
-			}
-			&:hover {
-				&:before {
-					color: white;
-				}
-			}
-		}
-		.icon-fund{
-			&:before {
-				content: "\e600";
-				font-size: 4px;
-				position: relative;
-				left: -25px;
-				top: -10px;
-				padding-left: 20px;
-			}
-			&:hover {
-				&:before {
-					color: white;
-				}
-			}
-		}
+		}	
 		li.tab.icon-christmas {
 			padding-left: 55px;
 		}
-		.icon-christmas{
-			padding-left: 60px;
-			position: relative;
-			&:before {
-				content: "\e605";
-				position: absolute;
-				left: 30px;
-				top: 50%;
-				margin-top: -7px;
-				font-size: 16px;
-			}
-			&:hover {
-				&:before {
-					color: white;
-				}
-			}
-		}
+		
 	}
 }
 .tab-content{
@@ -174,6 +223,9 @@ div.tab-container {
 					margin-top: 30px;
 					line-height: 1.5;
 					text-align: left;
+				}
+				.iconLetters{
+					 
 				}
 			}
 		}		
@@ -201,7 +253,7 @@ div.tab-container {
 			.row{
 				.col-md-6{
 					padding: 5px;
-					.col-md-6{							
+					.col-md-6{					
 						p{
 							font-size: 10px;
 							margin-top: 10px;								
@@ -219,7 +271,7 @@ div.tab-container {
 							@media (min-width:320px) and (max-width:992px) {
 					          text-align: center;
 					       	}
-						}
+						}						
 					}
 				}
 			}
