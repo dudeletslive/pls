@@ -1,0 +1,23 @@
+extends ../layouts/default
+
+block content
+	div.contact-list-home: div.jumbotron: .container
+		div.title
+			span.icon.home
+			h2 Mailing Lists
+		div.col-md-12.line
+		div.col-md-12
+			ul
+				li.box
+					.col-md-12
+						img(src='images/list-name.png')
+						h2 List Name Goes Here
+						h5
+							span#Count 1,835 
+							span Contacts in this list
+						a.btn.btn-sm.btn-gray(href='/contact-list') VIEW LIST
+						a.btn.btn-sm.btn-green(href='#') ADD CONTACT
+				li.box
+					.col-md-12
+						img(src='images/circle-plus-big.png')
+						h2.title ADD NEW LIST

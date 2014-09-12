@@ -1,0 +1,139 @@
+@gray-ligh-2 :#dbdee7;
+// Contact List
+div.contact-list {
+	background: white;
+	min-height: 900px;
+	.jumbotron {
+		background: white;
+		padding-top: 10px;
+		.title{
+			display: block;
+			margin: 25px 0;
+			.left{
+				float: left;
+				display: inline-block;		
+				h2{
+					display: inline-block;
+					float: left;
+					width: auto;
+					span{
+						color: black;
+					}
+				}
+			}
+			.right{
+				float: right;
+				display: inline-block;
+				margin-top: 12px;
+				p,select,a{
+					float: left;
+				}
+				a{
+					width: 133px;
+					height: 43px;
+					padding: 8px;
+					font-weight: 700;					
+					color: white;
+					background-image: url('../images/circle-plus-small.png');
+					background-repeat: no-repeat;
+					background-position: 8px 11px;
+					padding-top: 14px;
+					padding-left: 28px;
+				}
+				p{
+					width: auto;
+					margin-right: 10px;
+					font-size: 14px;
+					margin-top: 14px;
+					color: black;
+				}
+				select{
+					width: 57px;
+					height: 43px;
+					margin-right: 20px;
+					font-weight: 700;
+					font-size: 21px;
+					padding-top: 2px;
+					padding-left: 5px;					
+				}
+			}
+		}
+	}
+	.home{
+		width: 24px;
+		height: 25px;
+		display: block;
+		float: left;
+		margin: 15px 12px 0 15px;
+		background-image: url('../images/home-icon-gray.png');			
+	} 
+}
+table#table-contact-list{
+	thead{
+		tr{
+			th{
+				padding: 20px;
+			}
+			th:first-child{
+				border-left: 1px solid white;				
+			}
+			th:last-child{
+				border-right: 1px solid white;				
+			}
+		}
+	}
+	tbody{
+		tr{
+			td{
+				padding: 20px;				
+			}
+			td:first-child{
+				border-left: 1px solid white;
+			}
+			td:last-child{
+				border-right: 1px solid white;				
+			}
+		}
+	}
+}
+// Contact Main
+
+// iPhone
+@media only screen and (max-width : 320px) {
+	 
+}
+
+// iPad
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait) {
+/* Styles */
+ 
+}
+
+// Desktop-
+@media only screen 
+and (max-width : 1224px) {	
+}
+// Desktop+
+@media only screen 
+and (min-width : 990px) {
+	input {
+		&.form-control {
+			padding: 10px;
+			height: auto;
+		}
+		// Styles for adjacent inputs because nth-child formulas weren't working.
+		&.left {
+			border-bottom-right-radius: 0;
+			border-top-right-radius: 0;
+		}
+		&.right {
+			border-bottom-left-radius: 0;
+			border-top-left-radius: 0;
+			border-left: 0;
+		}
+	}
+
+}
