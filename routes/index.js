@@ -49,9 +49,9 @@ exports = module.exports = function(app) {
 	app.get('/forgot-password', routes.views.account);
 	app.get('/reset', routes.views.account);
 
-	// Sign In + Out
-	app.all('/sign-in', routes.views.signIn);
-	app.get('/sign-out', routes.views.signOut);
+	// User Session
+	app.all('/sign-in', routes.views.session.signIn);
+	app.get('/sign-out', routes.views.session.signOut);
 
 	// Register
 	app.all('/register', routes.views.register);

@@ -1,0 +1,135 @@
+@gray-ligh-2 :#dbdee7;
+// Contact List Home
+div.contact-list-home {
+	background: white;
+	min-height: 900px;
+	.jumbotron {
+		background: white;
+		margin-bottom: -30px;
+		padding-top: 10px;
+		ul{
+			width: 100%;
+			list-style-type: none;
+			li.box{
+				width: 292px;
+				height: 266px;
+				border:1px solid @gray-ligh-2;
+				border-radius: 5px;				
+				display: block;
+				float: left; 
+				margin-right: 50px;
+				& > div{
+					padding:50px 0;
+					text-align: center;
+					color: black;
+						& > .btn-gray,
+						& > .btn-green{
+							border: 1px solid @dark-gray;
+							border-radius: 0;
+							color: @dark-gray;
+							margin-right: 20px;
+							margin-top:20px;
+							font-weight: 600;
+							padding: 6px 14px;						
+						}
+						& > .btn-gray{
+							margin-left: 20px;
+						}
+						& > .btn-green{							
+							color: @green;
+							border-color: @green;
+						}
+						& >  .title{
+							font-weight: 700;
+							color: @gray-ligh-2;
+						}						
+				}
+				
+			}			
+		}
+		.line{
+			height: 2px;
+			background-color: @light-gray;
+			margin-bottom: 50px;
+		}
+		.home{
+			width: 24px;
+			height: 25px;
+			display: block;
+			float: left;
+			margin: -1px 12px 0 0;
+			background-image: url('../images/home-icon.png');			
+
+		}
+	}
+}
+// Contact Main
+ 
+
+// iPhone
+@media only screen and (max-width : 320px) {
+	div.contact-list-home {
+		.jumbotron {
+			padding:0;
+			ul{
+				padding: 0;
+				li{
+					width:100% !important;
+					margin: 0 0 20px 0;				
+				}
+			}
+			.line{
+				margin-bottom: 25px;
+			}
+		}
+	}
+}
+
+// iPad
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait) {
+/* Styles */
+ 
+}
+
+// Desktop-
+@media only screen 
+and (max-width : 1224px) {
+	div.contact-list-home {
+		.jumbotron {
+			padding:0;
+			ul{
+				padding: 0;
+				li{
+					width:260px !important;
+					margin: 0 0 10px 0;				
+				}
+			}
+			.line{
+				margin-bottom: 25px;
+			}
+		}
+	}
+}
+// Desktop+
+@media only screen 
+and (min-width : 990px) {
+	input {
+		&.form-control {
+			padding: 10px;
+			height: auto;
+		}
+		// Styles for adjacent inputs because nth-child formulas weren't working.
+		&.left {
+			border-bottom-right-radius: 0;
+			border-top-right-radius: 0;
+		}
+		&.right {
+			border-bottom-left-radius: 0;
+			border-top-left-radius: 0;
+			border-left: 0;
+		}
+	}	
+}

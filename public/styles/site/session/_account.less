@@ -1,0 +1,229 @@
+// Account Management Modules
+div.account {
+	background: url('../images/register_bg.png');
+	background-position: center;
+	margin-bottom: -30px;
+	.background-size(cover);
+	.jumbotron {
+		background: transparent;
+	}
+	section.spacer {
+		height: 40px;
+	}
+	div.banner {
+		background: white;
+		padding: 20px 15px;
+		text-align: center;
+		p {
+			font-size: 16px;
+			font-weight: 600;
+			margin: 0;
+		}
+		a {
+			color: @orange;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+}
+// Basic Panel
+div.panel {
+	background: white;
+	border: 0;
+	font-family: proxima-nova;
+	margin: 0 auto;
+	overflow: hidden;
+	padding: 25px;
+	width: 350px;
+	img#success {
+		display: table;
+		margin: 20px auto 30px;
+	}
+	h1 {
+		color: #000;
+		font-size: 28px;
+		font-weight: 400;
+		margin-top: 15px;
+		text-align: center;
+		div.small {
+			color: #000;
+			font-size: 15px;
+			font-weight: 200;
+			margin-top: 10px;
+		}
+	}
+	a.btn.btn-primary, button.btn.btn-primary {
+		background: @blue;
+		border-radius: 2px;
+		font-size: 14px;
+		padding: 10px 15px;
+		text-transform: uppercase;
+		&.pull-right {
+			margin: 6px 0;
+		}
+		&.center {
+			display: table;
+			margin: 25px auto 15px;
+			padding: 10px 20px;
+		}
+	}
+	// Panel Form for Registry
+	form#account {
+		.form-group {
+			margin-bottom: 0;
+		}
+		#formFooter {
+			margin: 25px 0 20px;
+			label {
+				margin-left: 5px;
+				text-transform: capitalize;
+				font-weight: 300;
+			}
+			a.btn.btn-primary, button.btn.btn-primary {
+				background: @blue;
+				border-radius: 2px;
+				font-size: 14px;
+				padding: 10px 15px;
+				text-transform: uppercase;
+				&.pull-right {
+					margin: 6px 0;
+				}
+			}
+			i {
+				&.fa-stack-2x {
+					color: @orange;
+					font-size: 24px;
+					top: 4px;
+				}
+				&.fa-stack-1x {
+					font-size: 14px;
+					top: -1px;
+				}
+			}
+		}
+		#socialConnect {
+			margin-bottom: -25px;
+			.facebook, .linkedIn {
+				color: white;
+				margin: 0 -25px;
+				padding: 15px 25px;
+			}
+			.facebook {
+				background: #5D9CEC;
+			}
+			.linkedIn {
+				background: #4675B2;
+			}
+			span {
+				font-size: 14px;
+				font-weight: 400;
+				text-transform: uppercase;
+				i {
+					float: right;
+				}
+			}
+		}
+		.col-md-6, .col-md-12 {
+			padding: 0;
+			label {
+				font-size: 13px;
+				font-weight: 600;
+				margin: 20px 0 5px;
+				text-transform: uppercase;
+				&.block {
+					display: block;
+				}
+				.pull-right {
+					font-style: italic;
+					font-weight: 300;
+					text-decoration: underline;
+					text-transform: capitalize;
+					color: darken(@light-gray, 15%);
+					a {
+						color: darken(@light-gray, 15%);
+						&:hover, &:focus {
+							color: darken(@light-gray, 25%);
+						}
+					}
+				}
+			}
+			input {
+				&[type="password"] {
+					max-height: 39px;
+					font-size: 20px;
+					letter-spacing: 8px;
+				}
+			}
+		}
+	}
+}
+// iPhone
+@media only screen and (max-width : 320px) {
+	div.panel {
+		width: 100%;
+		form#account {
+			.col-md-6 {
+				input {
+					&.left {
+						border-top-right-radius: 4px;
+					}
+				}
+			}
+		}
+	}
+}
+
+// iPad
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait) {
+/* Styles */
+}
+
+// Desktop-
+@media only screen 
+and (max-width : 1224px) {
+	div.account {
+		.jumbotron {
+			padding: 30px 0;
+		}
+	}
+}
+// Desktop+
+@media only screen 
+and (min-width : 990px) {
+	input {
+		&.form-control {
+			padding: 10px;
+			height: auto;
+		}
+		// Styles for adjacent inputs because nth-child formulas weren't working.
+		&.left {
+			border-bottom-right-radius: 0;
+			border-top-right-radius: 0;
+		}
+		&.right {
+			border-bottom-left-radius: 0;
+			border-top-left-radius: 0;
+			border-left: 0;
+		}
+	}
+}
+
+// FOR DEMO PURPOSES
+ul#demo {
+	position: absolute;
+	color: white;
+	left: 50px;
+	top: 350px;
+	li {
+		font-size: 16px;
+		font-weight: 600;
+		list-style-type: none;
+		a {
+			color: white;
+		}
+	}
+}

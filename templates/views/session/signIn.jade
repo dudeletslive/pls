@@ -1,0 +1,51 @@
+extends ../../layouts/default
+
+block content
+	div.account
+		div.jumbotron: .container
+			//- Sign In
+			section.spacer
+			div.panel
+				if !user
+					h1 Already A Client?
+						.small Sign in to your account.
+					if locals.formError
+						div.alert.alert-danger Sorry, that email and password combination was invalid.
+					form(method="post")#account
+						input(type='hidden', name=csrf_token_key, value=csrf_token_value)
+						.form-group.clearfix
+							.col-md-12
+								label(for="email") Email Address
+								input(name="email", class="form-control", placeholder="janedoe@cru.org")
+						.form-group.clearfix
+							.col-md-12
+								label(for="password").block Password
+									.pull-right: a(href="/forgot-password") Forgot Password?
+								input(name="password", class="form-control", placeholder="••••••", type="password")
+						.form-group.clearfix#formFooter
+							.col-md-6
+								span.fa-stack.fa-lg
+									i.fa.fa-square.fa-stack-2x
+									i.fa.fa-check.fa-stack-1x.fa-inverse
+								//- input(name="rememberMe", type="checkbox")
+								label(for="rememberMe") Remember Me
+							.col-md-6
+								button(type="submit").btn.btn-primary.pull-right Sign In
+						#socialConnect
+							div.facebook
+								span Connect With Facebook
+								span: i.fa.fa-facebook
+							div.linkedIn
+								span Connect With LinkedIn
+								span: i.fa.fa-linkedin
+				else
+					div(style="text-align: center;")
+						h1 Hey #{user.name.first}!
+							.small You're already logged in.
+						p Not #{user.name.first}? &nbsp;
+							a(href="/sign-out") Sign out.
+			section.spacer
+		if !user
+			div.banner
+				p Don't have a PLS account? &nbsp;
+					a(href="/register") Sign up.
