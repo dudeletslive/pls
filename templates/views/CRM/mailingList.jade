@@ -5,8 +5,9 @@ block content
 		div.title
 			div.nav.navbar-nav.navbar-left.col-md-6
 				span.icon.home
-				h2 Contact Lists | 
-					span List Name Goes Here
+				h2
+					a(href='../mailing-lists/') Contact Lists |
+					span  List Name Goes Here
 			div.nav.navbar-nav.navbar-right.col-md-6
 				a(data-toggle="modal",data-target="#myModal").btn.btn-md.btn-success ADD CONTACT
 				div.select-style
@@ -83,7 +84,7 @@ block content
 										input(name="zip", class="right form-control", placeholder="")
 								.form-group.clearfix#formFooter
 									.col-md-12
-										a.btn.btn-primary.center SAVE								
+										a.btn.btn-success.center SAVE								
 		div.modal.fade(id='myModalEdit',tabindex='-1',role='dialog',arial-labelledby="myModalLabel",aria-hidden="true")
 			div.modal-dialog.modal-ms
 				div.modal-content
@@ -129,4 +130,4 @@ block content
 										//- input(name="rememberMe", type="checkbox")
 										label(for="rememberMe") Delete Contact
 									.col-md-6
-										a(href="#").btn.btn-primary.pull-right Save
+										a(href="#").btn.btn-success.pull-right Save
