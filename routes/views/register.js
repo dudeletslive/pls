@@ -77,7 +77,9 @@ exports = module.exports = function(req, res) {
 			if (err) return next();
 			
 			var onSuccess = function() {
-				if (req.body.target && !/join|signin/.test(req.body.target)) {
+				if (req.body.target === 'order') {
+					res.redirect(req.body.target);
+				} else if (req.body.target && !/join|signin/.test(req.body.target)) {
 					res.redirect(req.body.target);
 				} else {
 					res.redirect('/');

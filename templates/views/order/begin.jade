@@ -1,0 +1,151 @@
+extends ../../layouts/default
+
+block content
+	.jumbotron#order: .container
+		h1 Let's Get Your Order <br> To The Presses!
+		p.small Use the form below to submit your order and we'll get to work.
+	div.tab-container: .container
+		ul.tabs.order#tabs
+			li.tab(href="#letterDetails", data-toggle="tab")#success: a(href="#")
+				span.fa-stack
+					i.fa.fa-stack-2x.fa-circle-o
+					i.fa.fa-stack-1x.fa-check
+				| &nbsp;
+				span Letter Details
+			li.tab(href="#mailingList", data-toggle="tab"): a(href="#")
+				span.fa-stack
+					i.fa.fa-stack-2x.fa-circle-o
+					//- i.fa.fa-stack-1x.fa-check
+				| &nbsp;
+				span Mailing List
+			li.tab(href="#returnAddress", data-toggle="tab"): a(href="#")
+				span.fa-stack
+					i.fa.fa-stack-2x.fa-circle-o
+					//- i.fa.fa-stack-1x.fa-check
+				| &nbsp;
+				span Return Address
+			li.tab(href="#summary", data-toggle="tab"): a(href="#")
+				span.fa-stack
+					i.fa.fa-stack-2x.fa-circle-o
+					//- i.fa.fa-stack-1x.fa-check
+				| &nbsp;
+				span Summary
+			li.tab(href="#confirmation", data-toggle="tab"): a(href="#")
+				span.fa-stack
+					i.fa.fa-stack-2x.fa-circle-o
+					//- i.fa.fa-stack-1x.fa-check
+				| &nbsp;
+				span Confirmation
+	div.tab-content.order-process
+		//- Home Tab, select mailer type.
+		div.tab-pane.fade.in.active
+			.container: .jumbotron: .row
+				if user
+					.col-md-8
+						h1 What would you like to order?
+						ul.mailers
+							li
+								span
+								| Prayer Letter
+							li Postcards
+							li Brochures
+							li Fund Appeal
+							li Thank You Cards
+					.col-md-4
+						h2 You are logged in as #{user.name.first}.
+							.small Not #{user.name.first}? &nbsp;
+								a(href="/sign-out") Sign Out.
+						section.spacer
+				else
+					.col-md-8
+						.noUser.clearfix
+							p You must be logged in to continue.
+						h1 What would you like to order?
+						ul.mailers
+							li
+								span
+								| Prayer Letter
+							li Postcards
+							li Brochures
+							li Fund Appeal
+							li Thank You Cards
+					.col-md-4
+						ul.nav.nav-tabs(role="tablist", id="orderSignInTabs")
+							li.active: a(href="#signIn", role="tab", data-toggle="tab") Sign In
+							li: a |
+							li: a(href="#register", role="tab", data-toggle="tab") Register
+						div.tab-content.panel
+							div.tab-pane.fade.in.active#signIn
+								if locals.formError
+									div.alert.alert-danger Sorry, that email and password combination was invalid.
+								form(method="post", action="/sign-in")#account
+									input(type='hidden', name='target', value='order')
+									input(type='hidden', name=csrf_token_key, value=csrf_token_value)
+									.form-group.clearfix
+										.col-md-12
+											label(for="email") Email Address
+											input(name="email", class="form-control", placeholder="janedoe@cru.org")
+									.form-group.clearfix
+										.col-md-12
+											label(for="password").block Password
+												.pull-right: a(href="/forgot-password") Forgot Password?
+											input(name="password", class="form-control", placeholder="••••••", type="password")
+									.form-group.clearfix#formFooter
+										.col-md-12
+											button(type="submit").btn.btn-primary.center Start Order Now
+											hr
+										#socialConnect
+											div.facebook
+												span Facebook Login
+											div.linkedIn
+												span LinkedIn Login
+							div.tab-pane.fade#register
+								form(method="post", action="/register")#account
+									input(type='hidden', name='target', value='order')
+									input(type='hidden', name='action', value='register')
+									.form-group.clearfix
+										.col-md-6
+											label(for="f_name") First Name
+											input(name="f_name", class="left form-control", placeholder="Jane")
+										.col-md-6
+											label(for="l_name") Last Name
+											input(name="l_name", class="right form-control", placeholder="Doe")
+									.form-group.clearfix
+										.col-md-12
+											label(for="email") Email Address
+											input(name="email", class="form-control", placeholder="janedoe@cru.org")
+									.form-group.clearfix
+										.col-md-6
+											label(for="password") Password
+											input(name="password", class="left form-control", placeholder="••••••", type="password")
+										.col-md-6
+											label(for="confirm_pass") Confirm Password
+											input(name="confirm_pass", class="right form-control", placeholder="••••••", type="password")
+									.form-group.clearfix#formFooter
+										.col-md-12
+											button(type="submit").btn.btn-primary.center Start Order Now
+											hr
+										#socialConnect
+											div.facebook
+												span Facebook Login
+											div.linkedIn
+												span LinkedIn Login
+		//- Letter Details type, select mailer options.
+		div.tab-pane.fade#letterDetails
+			.container: .jumbotron
+				h1 Letter Details.
+		div.tab-pane.fade#mailingList
+			.container: .jumbotron
+				h1 Mailing List.
+		div.tab-pane.fade#returnAddress
+			.container: .jumbotron
+				h1 Return Address.
+		div.tab-pane.fade#summary
+			.container: .jumbotron
+				h1 Summary.
+		div.tab-pane.fade#confirmation
+			.container: .jumbotron
+				h1 Confirmation.
+block js
+	script(type='text/javascript')
+		$(function(){ $('#tabs li').click(function (e) { e.preventDefault(); var href= $(this).attr('href'); $(this).tab('show'); $('#data .data').each(function(){ $el = $(this);var action = $el.attr('data-action'); $el.attr('data-status','hide').removeClass().addClass('data fade hide'); if(action==href){$el.attr('data-status','show').removeClass().addClass('data show');}}); });});

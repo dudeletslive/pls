@@ -1,0 +1,75 @@
+/*
+ * Order Process
+ */
+.order-process .container .jumbotron {
+	padding: 30px;
+}
+div.tab-container ul.tabs.order > li.tab {
+	padding: 15px 50px;
+	&.active#success, &:hover#success {
+		& > a > span.fa-stack {
+			color: #FFF;
+		}	
+	}
+	&#success {
+		& > a > span.fa-stack {
+			color: @green;
+		}	
+	}
+	> a > span.fa-stack {
+		margin-right: 5px;
+	}
+}
+.container > .jumbotron > .row {
+	.col-md-4 {
+		text-align: center;
+		.col-md-12, .col-md-6 {
+			text-align: left;
+		}
+		h2 {
+			margin-top: 0;
+		}
+	}
+	.col-md-8 {
+		margin-bottom: 50px;
+		position: relative;
+		h1 {
+			color: #737C85;
+			font-size: 26px;
+			font-weight: 400;
+		}
+		ul.mailers {
+			padding: 0;
+			li {
+				border: 2px solid @green;
+				border-radius: 4px;
+				color: @green;
+				display: inline-block;
+				font-size: 16px;
+				font-weight: 600;
+				padding: 5px 10px;
+				margin: 15px 10px 0 0;
+				text-transform: uppercase;
+				&:hover, &:active {
+					background: @green;
+					color: #FFF;
+					cursor: pointer;
+				}
+			}
+		}
+	}
+	.noUser {
+		background: white;
+		opacity: 0.95;
+		min-height: 100px;
+		min-width: 100px;
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		p {
+			font-weight: 700;
+			padding: 50px 0;
+			text-align: center;
+		}
+	}
+}

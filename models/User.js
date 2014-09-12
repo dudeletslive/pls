@@ -14,7 +14,7 @@ User.add({
 	password: { type: Types.Password, initial: true, required: true },
 	resetPasswordKey: { type: String, hidden: true }
 }, 'Permissions', {
-	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true }
+	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true}
 });
 
 // Provide access to Keystone
