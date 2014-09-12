@@ -60,6 +60,9 @@ exports = module.exports = function(app) {
 	app.get('/mailing-lists', routes.views.CRM.mailingListIndex);
 	app.get('/mailing-lists/title-of-mailing-list', routes.views.CRM.mailingList);
 
+	// Order Process
+	app.all('/order', routes.views.order.begin);
+	
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);
 	

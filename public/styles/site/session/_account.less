@@ -211,7 +211,52 @@ and (min-width : 990px) {
 		}
 	}
 }
+ul.nav.nav-tabs#orderSignInTabs {
+	border: 0;
+	& > li > a {
+		color: darken(@light-gray, 15%);
+		border: 0;
+		font-size: 14px;
+		font-weight: 600;
+		padding: 15px 15px 15px 0;
+		text-transform: uppercase;
 
+	}
+	& > li > a:hover {
+		border: 0;
+		background: transparent;
+	}
+	& > li.active > a {
+		border: 0;
+		color: @gray;
+	}
+}
+div.tab-content.panel {
+	overflow: visible;
+	padding: 0;
+	#socialConnect {
+		margin-bottom: 0;
+		.facebook, .linkedIn {
+			margin: 0 !important;
+			text-align: center;
+			width: 50%;
+		}
+		.facebook {
+			float: left;
+			margin: 0;
+		}
+		.linkedIn {
+			float: right;
+			margin: 0;
+		}
+	}
+	form#account {
+		button.btn.btn-primary.center {
+			margin: 10px 0 15px;
+			width: 100%;
+		}
+	}
+}
 // FOR DEMO PURPOSES
 ul#demo {
 	position: absolute;

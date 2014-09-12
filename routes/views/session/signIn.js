@@ -15,7 +15,11 @@ exports = module.exports = function(req, res) {
 		}
 		
 		var onSuccess = function(user) {
-			res.redirect('/mailing-lists/');
+			if (req.body.target === 'order') {
+				res.redirect(req.body.target);
+			} else {
+				res.redirect('/mailing-lists/');
+			}
 		}
 		
 		var onFail = function() {
