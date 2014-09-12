@@ -57,14 +57,14 @@ html
 						a.navbar-brand(href='/'): img(src='/images/logo.png' alt='Prayer Letter Service')
 					.collapse.navbar-collapse
 						ul.nav.navbar-nav.navbar-right
-							li.hide-lg: a.btn.btn-primary(href="/") Start Order Now!
+							li.hide-lg: a.btn.btn-primary(href="/order") Start Order Now!
 							each link in navLinks
 								li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
 							if user
 								if user.canAccessKeystone
 									li.hide-lg: a(href='/keystone') Admin
 								else
-									li.hide-lg: a(href='/') #{user.name.first}
+									li.hide-lg: a(href='/mailing-lists/') #{user.name.first}
 								li.hide-lg: a(href='/sign-out') Sign Out
 							else
 								li.hide-lg: a(href='/sign-in') Sign In
@@ -76,13 +76,13 @@ html
 											if user.canAccessKeystone
 												th: li: a(href='/keystone') Admin
 											else
-												th: li: a(href='/') #{user.name.first}
+												th: li: a(href='/mailing-lists/') #{user.name.first}
 											th: li: a(href='/sign-out') Sign Out
 										else
 											th: a(href='/sign-in') Sign In
 											th: a(href='/register') Register
 									tr: td(colspan="2")
-											a.btn.btn-primary(href="/") Start Order Now!
+											a.btn.btn-primary(href="/order") Start Order Now!
 		//- BODY
 		#body
 
@@ -125,7 +125,7 @@ html
 						h4 Phone &amp; Fax
 						p Phone: (815) 962-7010 <br> Fax: (815) 962-6992
 				div.col-md-2: span.row
-					a.btn.btn-info Start Order Now!
+					a(href="/order").btn.btn-info Start Order Now!
 					if user
 						a(href='/sign-out').btn.btn-info
 							i.fa.fa-sign-out
