@@ -3,22 +3,23 @@ extends ../../layouts/default
 block content
 	div.contact-list: div.jumbotron: .container
 		div.title
-			.left
+			div.nav.navbar-nav.navbar-left.col-md-6
 				span.icon.home
 				h2 Contact Lists | 
 					span List Name Goes Here
-			div.right
+			div.nav.navbar-nav.navbar-right.col-md-6
+				a(data-toggle="modal",data-target="#myModal").btn.btn-md.btn-success ADD CONTACT
+				div.select-style
+					select.form-control
+						option A
+						option(selected='selected') B
 				p
 					span#count 1,835 
 					span Contacts
-				select.form-control
-					option(selected='selected') A
-					option B
-				a.btn.btn-md.btn-success ADD CONTACT
 			div.clearfix
 		div.col-md-12.line
 		div.col-md-12
-			table.table.table-bordered.table-striped#table-contact-list
+			table.table.table-bordered.table-striped.table-responsive#table-contact-list
 				thead
 					tr
 						th Edit
@@ -33,8 +34,8 @@ block content
 				tbody
 					for item, i in [1,2,3,4,5,6,7,8,9,10,11,12]						
 						tr
-							td 
-								img(src='../images/edit-icon.png')
+							td: a(data-toggle="modal",data-target="#myModalEdit")
+									img(src='../images/edit-icon.png')
 							td Bell
 							td Jonathan Bell
 							td 5234 Ferrari Drive
@@ -42,4 +43,90 @@ block content
 							td .
 							td Colorado Springs
 							td CO
-							td 80922						
+							td 80922					
+		div.modal.fade(id='myModal',tabindex='-1',role='dialog',arial-labelledby="myModalLabel",aria-hidden="true")
+			div.modal-dialog.modal-ms
+				div.modal-content
+					div.modal-body
+						div.panel
+							h1 Add New Contact
+							form#account
+								.form-group.clearfix
+									.col-md-6
+										label(for="f_name") FIRST NAME
+										input(name="f_name", class="left form-control", placeholder="Jonathan")
+									.col-md-6
+										label(for="l_name") LAST NAME
+										input(name="l_name", class="right form-control", placeholder="Bell")
+								.form-group.clearfix
+									.col-md-6
+										label(for="spouse") SPOUSE
+										input(name="spouse", class="left form-control", placeholder="Rachel")
+									.col-md-6
+										label(for="salutation") SALUTATION
+										input(name="salutation", class="right form-control", placeholder="Mrs.")
+								.form-group.clearfix
+									.col-md-12
+										label(for="env_line") ENV_LINE 
+										input(name="env_line", class="form-control", placeholder="Jonathan Bell")
+								.form-group.clearfix
+									.col-md-12
+										label(for="address_1") ADDRESS 1
+										label.pull-right ADDRESS 1
+										input(name="address_1", class="form-control", placeholder="5234 Ferrari Drive")
+								.form-group.clearfix
+									.col-md-6
+										label(for="city") CITY
+										input(name="city", class="left form-control", placeholder="")
+									.col-md-6
+										label(for="zip") ZIP
+										input(name="zip", class="right form-control", placeholder="")
+								.form-group.clearfix#formFooter
+									.col-md-12
+										a.btn.btn-primary.center SAVE								
+		div.modal.fade(id='myModalEdit',tabindex='-1',role='dialog',arial-labelledby="myModalLabel",aria-hidden="true")
+			div.modal-dialog.modal-ms
+				div.modal-content
+					div.modal-body
+						div.panel
+							h1 Edit Existing Contact
+							form#account
+								.form-group.clearfix
+									.col-md-6
+										label(for="f_name") FIRST NAME
+										input(name="f_name", class="left form-control", placeholder="Jonathan")
+									.col-md-6
+										label(for="l_name") LAST NAME
+										input(name="l_name", class="right form-control", placeholder="Bell")
+								.form-group.clearfix
+									.col-md-6
+										label(for="spouse") SPOUSE
+										input(name="spouse", class="left form-control", placeholder="Rachel")
+									.col-md-6
+										label(for="salutation") SALUTATION
+										input(name="salutation", class="right form-control", placeholder="Mrs.")
+								.form-group.clearfix
+									.col-md-12
+										label(for="env_line") ENV_LINE 
+										input(name="env_line", class="form-control", placeholder="Jonathan Bell")
+								.form-group.clearfix
+									.col-md-12
+										label(for="address_1") ADDRESS 1
+										label.pull-right ADDRESS 1
+										input(name="address_1", class="form-control", placeholder="5234 Ferrari Drive")
+								.form-group.clearfix
+									.col-md-6
+										label(for="city") CITY
+										input(name="city", class="left form-control", placeholder="")
+									.col-md-6
+										label(for="zip") ZIP
+										input(name="zip", class="right form-control", placeholder="")
+								.form-group.clearfix#formFooter
+									.col-md-6
+										span.fa-stack.fa-lg
+											i.fa.fa-square.fa-stack-2x
+											i.fa.fa-check.fa-stack-1x.fa-inverse
+										//- input(name="rememberMe", type="checkbox")
+										label(for="rememberMe") Delete Contact
+									.col-md-6
+										a(href="#").btn.btn-primary.pull-right Save
