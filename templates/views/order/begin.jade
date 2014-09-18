@@ -38,7 +38,7 @@ block content
 				span Confirmation
 	div.tab-content.order-process
 		//- Home Tab, select mailer type.
-		div.tab-pane.fade
+		div.tab-pane.fade.in.active
 			.container: .jumbotron: .row
 				if user
 					.col-md-8
@@ -144,6 +144,7 @@ block content
 						div.line-a.visible-lg-block
 					.col-md-4.col-sm-4
 						h3 Number of Pages
+							span *
 						div.select-style
 							select
 								option Plain Black
@@ -151,11 +152,12 @@ block content
 						div.line-a.visible-lg-block
 					.col-md-4.col-sm-4
 						h3 Size of Paper
+							span *
 						div.select-style
 							select
 								option 5.5 x 10
 								option(selected='selected') 8.5 x 11
-					.line-b.visible-lg-block					
+					.line-b.visible-lg-block
 				.row
 					.col-md-4.col-sm-4
 						h3 Printer Option
@@ -180,7 +182,7 @@ block content
 							select
 								option Firts Class Black
 								option(selected='selected') First Class Stamp
-					div.line-b.visible-lg-block				
+					div.line-b.visible-lg-block
 				.row
 					.col-md-4.col-sm-4
 						h3 Inserts
@@ -273,21 +275,21 @@ block content
 						p You may attach up to 4 files
 						div.file-wrapper
 							span.button Choose a File
-							input(type='file')							
+							input(type='file')
 						div.file-wrapper
 							span.button Choose a File
-							input(type='file')							
+							input(type='file')
 						div.file-wrapper
 							span.button Choose a File
-							input(type='file')							
+							input(type='file')
 						div.file-wrapper
 							span.button Choose a File
-							input(type='file')							
+							input(type='file')
 						div.line-e.visible-lg-block
 					.col-md-7.col-sm-7
 						.row
 							.col-md-12
-								h3 Especial Instructions
+								h3 Special Instructions
 								textarea
 					div.line-f.visible-lg-block
 				.row
@@ -328,7 +330,7 @@ block content
 									h5
 										span#Count 1,835 
 										span Contacts in this list
-									a.btn.btn-sm.btn-green.center-block(href='#') SELEC THIS LIST
+									a.btn.btn-sm.btn-green.center-block(href='#') SELECT THIS LIST
 							li.box
 								.col-md-12.col-sm-12
 									img(src='../images/list-name.png')
@@ -336,7 +338,7 @@ block content
 									h5
 										span#Count 1,835 
 										span Contacts in this list
-									a.btn.btn-sm.btn-green.center-block(href='#') SELEC THIS LIST
+									a.btn.btn-sm.btn-green.center-block(href='#') SELECT THIS LIST
 					.col-md-12
 						.line-0.visible-lg-block
 				.row
@@ -354,7 +356,7 @@ block content
 		div.tab-pane.fade#returnAddress
 			.container: .jumbotron
 				.row
-					.col-md-12			
+					.col-md-12
 						h3 
 							|	Confirm Return Address
 							span *
@@ -377,7 +379,7 @@ block content
 								input(value='United States of America').form-control.input-lg
 				.row
 					.col-md-12.col-sm-12
-						span.fa-stack.fa-lg.checkbox
+						span.fa-stack.fa-lg.checkbox2
 							i.fa.fa-square.fa-stack-2x
 							i.fa.fa-check.fa-stack-1x.fa-inverse
 						//- input(name="rememberMe", type="checkbox")
@@ -411,7 +413,7 @@ block content
 									td jon@theoryandpractice.co
 								tr
 									th DATE SUBMITTED
-									td August 4th, 2014						
+									td August 4th, 2014
 							table.table.borderless
 								tr
 									th PAPER CHOICE
@@ -459,7 +461,7 @@ block content
 					.col-md-12
 						a.btn.btn-success.btn-boder-green.pull-left Start Over
 						a.btn.btn-success.pull-right Continue
-		div.tab-pane.fade.in.active#confirmation
+		div.tab-pane.fade#confirmation
 			.container: .jumbotron
 				.col-md-12
 					div.box-finish
@@ -476,7 +478,7 @@ block content
 							a.btn.btn-success.btn-boder-green BACK TO HOME
 				.row
 					.col-md-12
-						.line-0.visible-lg-block				
+						.line-0.visible-lg-block
 block js
 	script(type='text/javascript')
-		$(function(){$('#tabs li').click(function (e) { e.preventDefault(); var href= $(this).attr('href'); $(this).tab('show'); $('#data .data').each(function(){ $el = $(this);var action = $el.attr('data-action'); $el.attr('data-status','hide').removeClass().addClass('data fade hide'); if(action==href){$el.attr('data-status','show').removeClass().addClass('data show');}}); });}); var SITE = SITE || {};SITE.fileInputs = function() {  var $this = $(this), $val = $this.val(),valArray = $val.split('\\'),newVal = valArray[valArray.length-1],$button = $this.siblings('.button'),$fakeFile = $this.siblings('.file-holder');if(newVal !== '') {$button.text('File Chosen');    if($fakeFile.length === 0) {$button.after('<span class="file-holder">' + newVal + '</span>');} else { $fakeFile.text(newVal); }}};$(document).ready(function() {  $('.file-wrapper input[type=file]').bind('change focus click', SITE.fileInputs);});
+		$(function(){$('#tabs li').click(function (e){e.preventDefault();var href=$(this).attr('href');$(this).tab('show');$('#data .data').each(function(){$el=$(this);var action=$el.attr('data-action');$el.attr('data-status','hide').removeClass().addClass('data fade hide');if(action==href){$el.attr('data-status','show').removeClass().addClass('data show');}});});});var SITE=SITE||{};SITE.fileInputs=function(){var $this=$(this),$val=$this.val(),valArray=$val.split('\\'),newVal=valArray[valArray.length-1],$button=$this.siblings('.button'),$fakeFile=$this.siblings('.file-holder');if(newVal!==''){$button.text('File Chosen');if($fakeFile.length===0){$button.after('<span class="file-holder">'+newVal+'</span>');}else{$fakeFile.text(newVal);}}};$(document).ready(function(){$('.file-wrapper input[type=file]').bind('change focus click',SITE.fileInputs);});
