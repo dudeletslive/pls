@@ -63,6 +63,8 @@ exports = module.exports = function(app) {
 	// Order Process
 	app.all('/order', routes.views.order.begin);
 	
+	//My Account
+	app.get('/my-account',routes.views.myAccount);
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);
 	

@@ -1,0 +1,50 @@
+extends ../layouts/default
+
+block content
+	div.myAccount
+		div.jumbotron: .container
+			//- Register
+			section.spacer
+			div.panel
+				h1 My Account
+					.small Edit your account information below.
+				form.formMyAccount.col-md-8(method="post")#myAccount
+					.col-md-5
+						.form-group.clearfix
+							.col-md-6
+								label(for="f_name") First Name
+								input(name="f_name", class="left form-control", placeholder="Jane")
+							.col-md-6
+								label(for="l_name") Last Name
+								input(name="l_name", class="right form-control", placeholder="Doe")
+						.form-group.clearfix
+							.col-md-12
+								label(for="email") Email Address
+								input(name="email", class="form-control", placeholder="janedoe@cru.org")
+						.form-group.clearfix
+							.col-md-6
+								label(for="password") New Password
+								input(name="password", class="left form-control", placeholder="••••••", type="password")
+							.col-md-6
+								label(for="confirm_pass") Confirm Password
+								input(name="confirm_pass", class="right form-control", placeholder="••••••", type="password")
+					.col-md-5
+						.form-group.clearfx
+							.col-md-12
+								label(for="f_name2") Firts Name
+								input(name="f_name2", class="form-control", placeholder="Jane")
+						.form-group.clearfix
+							.col-md-12
+								label(for="address") Address 1
+								label.pull-right(for="address2") Address 2
+								input(name="address", class="form-control", placeholder="5234 Ferrari Drive")
+						.form-group.clearfix
+							.col-md-6
+								label(for="city") City
+								input(name="city", class="left form-control", placeholder="")
+							.col-md-6
+								label(for="zip") Zip
+								input(name="zip", class="right form-control", placeholder="")
+					div.clearfix
+					.col-md-2.col-md-push-4
+							a.btn.btn-lg.btn-success(href='#') SAVE
