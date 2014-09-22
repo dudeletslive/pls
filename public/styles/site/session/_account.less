@@ -1,5 +1,5 @@
 // Account Management Modules
-div.account {
+div.account,div.myAccount {
 	background: url('../images/register_bg.png');
 	background-position: center;
 	margin-bottom: -30px;
@@ -69,7 +69,8 @@ div.panel {
 		}
 	}
 	// Panel Form for Registry
-	form#account {
+	form#account,form#myAccount {
+	
 		.form-group {
 			margin-bottom: 0;
 		}
@@ -162,7 +163,7 @@ div.panel {
 @media only screen and (max-width : 320px) {
 	div.panel {
 		width: 100%;
-		form#account {
+		form#account,form#myAccount {
 			.col-md-6 {
 				input {
 					&.left {
@@ -170,6 +171,9 @@ div.panel {
 					}
 				}
 			}
+		}
+		form#myAccount{
+		    width: 300px;
 		}
 	}
 }
@@ -185,7 +189,7 @@ and (orientation : portrait) {
 // Desktop-
 @media only screen 
 and (max-width : 1224px) {
-	div.account {
+	div.account,div.myAccount {
 		.jumbotron {
 			padding: 30px 0;
 		}
