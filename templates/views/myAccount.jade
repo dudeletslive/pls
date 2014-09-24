@@ -13,38 +13,58 @@ block content
 						.form-group.clearfix
 							.col-md-6
 								label(for="f_name") First Name
-								input(name="f_name", class="left form-control", placeholder="Jane")
+								input(name="f_name", class="left form-control", placeholder="Jane", value=user.name.first)
 							.col-md-6
 								label(for="l_name") Last Name
-								input(name="l_name", class="right form-control", placeholder="Doe")
+								input(name="l_name", class="right form-control", placeholder="Doe", value=user.name.last)
 						.form-group.clearfix
 							.col-md-12
 								label(for="email") Email Address
-								input(name="email", class="form-control", placeholder="janedoe@cru.org")
+								input(name="email", class="form-control", placeholder="janedoe@cru.org", value=user.email)
 						.form-group.clearfix
 							.col-md-6
 								label(for="password") New Password
-								input(name="password", class="left form-control", placeholder="••••••", type="password")
+								input(name="password", class="left form-control", placeholder="••••••", type="password", value=user.password)
 							.col-md-6
 								label(for="confirm_pass") Confirm Password
 								input(name="confirm_pass", class="right form-control", placeholder="••••••", type="password")
 					.col-md-5
 						.form-group.clearfx
 							.col-md-12
-								label(for="f_name2") Firts Name
+								label(for="f_name2") First Name
 								input(name="f_name2", class="form-control", placeholder="Jane")
-						.form-group.clearfix
-							.col-md-12
-								label(for="address") Address 1
-								span.pull-right(for="address2") Add Address 2
-								input(name="address", class="form-control", placeholder="5234 Ferrari Drive")
+						.form-group.clearfix#address
+							.col-md-12#addressLineOne
+									label(for="address")#addressLineOneToggle Address
+									label.pull-right.faded(for="address2")#addressLineTwoToggle Address Line Two
+								.addressOne
+									input(name="address", class="form-control", placeholder="5234 Ferrari Drive")
+								.addressTwo.hide
+									input(name="address2", class="form-control", placeholder="Apt. 123")
 						.form-group.clearfix
 							.col-md-6
 								label(for="city") City
-								input(name="city", class="left form-control", placeholder="")
+								input(name="city", class="left form-control", placeholder="Colorado Springs")
 							.col-md-6
 								label(for="zip") Zip
-								input(name="zip", class="right form-control", placeholder="")
+								input(name="zip", class="right form-control", placeholder="80918")
 					div.clearfix
 					.col-md-2.col-md-push-4
-							a.btn.btn-lg.btn-success(href='#') SAVE
+						a.btn.btn-lg.btn-success(href='#') SAVE
+			section.spacer
+block js
+	script.
+		$('document').ready(function() {
+			var address		= document.getElementById('address'),
+				addOneTogg 	= document.getElementById('addressLineOneToggle'),
+				addTwoTogg 	= document.getElementById('addressLineTwoToggle');
+			function toggle(label) {
+				$(label).siblings('label').addClass('faded');
+				$(label).toggleClass('faded');
+			}
+			$([addOneTogg,addTwoTogg]).click(function() {
+				$this = $(this);
+				toggle($this);
+				$('.addressOne, .addressTwo').toggleClass('hide');
+			});
+		});

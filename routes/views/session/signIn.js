@@ -1,11 +1,10 @@
 var keystone = require('keystone'),
-	session = require('keystone/lib/session'),
-	Answer = keystone.list('Answer');
+	session = require('keystone/lib/session');
 
 exports = module.exports = function(req, res) {
 	var view = new keystone.View(req, res),
-		locals = res.locals;
-
+		locals = res.locals,
+		redirect = req.query.redirect;
 
 	if (req.method == "POST") {
 		
@@ -17,6 +16,8 @@ exports = module.exports = function(req, res) {
 		var onSuccess = function(user) {
 			if (req.body.target === 'order') {
 				res.redirect(req.body.target);
+			} else if (redirect) {
+				res.redirect(redirect);
 			} else {
 				res.redirect('/mailing-lists/');
 			}

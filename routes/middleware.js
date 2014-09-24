@@ -68,8 +68,10 @@ exports.flashMessages = function(req, res, next) {
 exports.requireUser = function(req, res, next) {
 	
 	if (!req.user) {
+		var redirect = req.originalUrl,
+			redirect = redirect.replace('/','');
 		req.flash('error', 'Please sign in to access this page.');
-		res.redirect('/keystone/signin');
+		res.redirect('/sign-in?redirect=' + redirect);
 	} else {
 		next();
 	}

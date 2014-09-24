@@ -1,12 +1,9 @@
-var keystone = require('keystone'),
-	session = require('keystone/lib/session'),
-	Answer = keystone.list('Answer');
-
+var keystone 	= require('keystone'),
+	session 	= require('keystone/lib/session');
 exports = module.exports = function(req, res) {
 	var view = new keystone.View(req, res),
 		locals = res.locals;
-
-
+	console.log(req.query.redirect);
 	if (req.method == "POST") {
 		
 		if (!req.body.email || !req.body.password) {

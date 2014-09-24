@@ -57,14 +57,15 @@ exports = module.exports = function(app) {
 	app.all('/register', routes.views.register);
 	
 	// Contact List Pages
-	app.get('/mailing-lists', routes.views.CRM.mailingListIndex);
-	app.get('/mailing-lists/title-of-mailing-list', routes.views.CRM.mailingList);
+	app.get('/mailing-lists', middleware.requireUser, routes.views.CRM.mailingListIndex);
+	app.get('/mailing-lists/title-of-mailing-list', middleware.requireUser, routes.views.CRM.mailingList);
 
 	// Order Process
 	app.all('/order', routes.views.order.begin);
 	
 	//My Account
-	app.get('/my-account',routes.views.myAccount);
+	app.get('/my-account', middleware.requireUser, routes.views.myAccount);
+
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);
 	
