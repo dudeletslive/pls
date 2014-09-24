@@ -31,16 +31,12 @@ block content
 					.col-md-5
 						.form-group.clearfx
 							.col-md-12
-								label(for="f_name2") First Name
-								input(name="f_name2", class="form-control", placeholder="Jane")
+								label(for="addressLineOne") Address
+								input(name="addressLineOne", class="form-control", placeholder="5234 Ferrari Drive")
 						.form-group.clearfix#address
-							.col-md-12#addressLineOne
-									label(for="address")#addressLineOneToggle Address
-									label.pull-right.faded(for="address2")#addressLineTwoToggle Address Line Two
-								.addressOne
-									input(name="address", class="form-control", placeholder="5234 Ferrari Drive")
-								.addressTwo.hide
-									input(name="address2", class="form-control", placeholder="Apt. 123")
+							.col-md-12
+								label(for="addressLineTwo") Address Line Two
+								input(name="addressLineTwo", class="form-control", placeholder="Apt. 123")
 						.form-group.clearfix
 							.col-md-6
 								label(for="city") City
