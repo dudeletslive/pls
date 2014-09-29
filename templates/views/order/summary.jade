@@ -1,0 +1,71 @@
+extends ../../layouts/default
+
+block content
+	+orderTabs
+	div.tab-content.order-process
+		div.tab-pane.fade.in.active#summary
+			.container: .jumbotron
+				.row
+					.col-md-7
+						h3 Confirm Your Order Summary
+							span *
+						section.table-responsive
+							table.table.borderless
+								tr
+									th FULL NAME
+									td Jonathan Bell
+								tr
+									th EMAIL ADDRESS
+									td jon@theoryandpractice.co
+								tr
+									th DATE SUBMITTED
+									td August 4th, 2014
+							table.table.borderless
+								tr
+									th PAPER CHOICE
+									td CARDSTOCK OPTION
+								tr
+									th ENVELOPE CHOICE
+									td None
+								tr
+									th NUMBER OF PAGES
+									td One printer side
+								tr
+									th SIZE OF PAPER
+									td 8.5 x 11
+								tr
+									th POSTAGE OPTION
+									td Firts class stamps
+								tr
+									th SPECIAL INSTRUCTION
+									td Instructions Here...
+							table.table.borderless
+								tr
+									th FILE #1
+									td File Name Here
+								tr
+									th FILE #2
+									td File Name Here
+								tr
+									th FILE #3
+									td File Name Here
+								tr
+									th FILE #4
+									td File Name Here
+							table.table.borderless
+								tr
+									th MAILING LIST
+									td Jonathan's Friends & Family (1,800 Contacts)
+							table.table.borderless
+								tr
+									th RETURN ADDRESS
+									td 5234 Ferreri Drive Colorado Springs, CO 80922 United States Of America
+				.row
+					.col-md-12
+						.line-0.visible-lg-block
+				.row
+					.col-md-12
+						a.btn.btn-success.btn-boder-green.pull-left Start Over
+						a.btn.btn-success.pull-right Continue
+block js
+	+fileUploads

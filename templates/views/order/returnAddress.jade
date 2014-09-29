@@ -1,0 +1,51 @@
+extends ../../layouts/default
+
+block content
+	+orderTabs
+	div.tab-content.order-process
+		div.tab-pane.fade.in.active#returnAddress
+			.container: .jumbotron
+				.row
+					.col-md-12
+						h3 
+							|	Confirm Return Address
+							span *
+				.row
+					.col-md-12
+						span.checkbox
+						//- input(name="rememberMe", type="checkbox")
+						label(for="rememberMe") Please use the complete mailing list you keep on file
+					.col-md-12
+						.col-md-5
+							.col-md-12
+								input(value='5234 Ferrari Drive').form-control.input-lg 
+							.col-md-5
+								input(value='Colorado Springs').form-control.input-lg 
+							.col-md-3
+								input(value='CO').form-control.input-lg 
+							.col-md-4
+								input(value='80922').form-control.input-lg 
+							.col-md-12
+								input(value='United States of America').form-control.input-lg
+				.row
+					.col-md-12.col-sm-12
+						span.fa-stack.fa-lg.checkbox2
+							i.fa.fa-square.fa-stack-2x
+							i.fa.fa-check.fa-stack-1x.fa-inverse
+						//- input(name="rememberMe", type="checkbox")
+						label(for="rememberMe") Use the Prayer Letter Service Address as my return address
+				.row
+					.col-md-12
+						div.col-md-6
+							.col-md-4
+								span.phrase "Your Ministry Update from 
+							.col-md-6
+								input.form-control
+					.col-md-12
+						.line-0.visible-lg-block
+				.row
+					.col-md-12
+						a.btn.btn-success.btn-boder-green.pull-left Start Over
+						a.btn.btn-success.pull-right Continue
+block js
+	+fileUploads

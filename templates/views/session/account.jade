@@ -1,0 +1,80 @@
+extends ../../layouts/default
+
+block content
+	div.account: div.jumbotron: .container
+		if locals.forgot
+			//- Forgot Pass
+			section.spacer
+			div.panel
+				h1 Forgot Your Password?
+					.small No worries! We'll send you a link to reset it.
+				form#account
+					.form-group.clearfix
+						.col-md-12
+							label(for="email") Email Address
+							input(name="email", class="form-control", placeholder="janedoe@cru.org")
+					.form-group.clearfix#formFooter
+						.col-md-12
+							a.btn.btn-primary.pull-right Reset
+			section.spacer
+		if locals.reset
+			//- Create New Pass
+			section.spacer
+			div.panel
+				h1 Create A New Password
+					.small Reset and confirm your password below.
+				form#account
+					.form-group.clearfix
+						.col-md-12
+							label(for="password") Password
+							input(name="password", class="form-control", placeholder="••••••", type="password")
+					.form-group.clearfix
+						.col-md-12
+							label(for="confirm_pass") Confirm Password
+							input(name="confirm_pass", class="form-control", placeholder="••••••", type="password")
+					.form-group.clearfix#formFooter
+						.col-md-12
+							a.btn.btn-primary.pull-right Save
+			section.spacer
+		//- Pass Reset Success
+		//- section.spacer
+		//- div.panel
+		//- 	img(src="/images/success.png")#success
+		//- 	h1 Password saved!
+		//- 		.small You can now sign in with your new password.
+		//- 	.form-group.clearfix: .col-md-12: #formFooter
+		//- 		a.btn.btn-primary.center Sign In
+		if locals.signin
+			//- Sign In
+			section.spacer
+			div.panel
+				h1 Already A Client?
+					.small Sign in to your account.
+				form(method="post" action="/")#account
+					input(type='hidden', name=csrf_token_key, value=csrf_token_value)
+					.form-group.clearfix
+						.col-md-12
+							label(for="email") Email Address
+							input(name="email", class="form-control", placeholder="janedoe@cru.org")
+					.form-group.clearfix
+						.col-md-12
+							label(for="password").block Password
+								.pull-right: a(href="/forgot-password") Forgot Password?
+							input(name="password", class="form-control", placeholder="••••••", type="password")
+					.form-group.clearfix#formFooter
+						.col-md-6
+							span.fa-stack.fa-lg
+								i.fa.fa-square.fa-stack-2x
+								i.fa.fa-check.fa-stack-1x.fa-inverse
+							//- input(name="rememberMe", type="checkbox")
+							label(for="rememberMe") Remember Me
+						.col-md-6
+							a(href="#" onclick="$(this).closest('form').submit();").btn.btn-primary.pull-right Sign In
+					#socialConnect
+						div.facebook
+							span Connect With Facebook
+							span: i.fa.fa-facebook
+						div.linkedIn
+							span Connect With LinkedIn
+							span: i.fa.fa-linkedin
+			section.spacer
