@@ -3,12 +3,12 @@ extends ../../layouts/default
 block content
 	div.contact-list: div.jumbotron: .container
 		div.title
-			div.nav.navbar-nav.navbar-left.col-md-6
+			div.nav.navbar-nav.navbar-left.col-md-8
 				span.icon.home
 				h2
 					a(href='../mailing-lists/') Contact Lists | &nbsp;
 					span= list.listName
-			div.nav.navbar-nav.navbar-right.col-md-6
+			div.nav.navbar-nav.navbar-right.col-md-4
 				a(data-toggle="modal",data-target="#myModal").btn.btn-md.btn-success ADD CONTACT
 				p
 					span#count= Object.keys(obj).length

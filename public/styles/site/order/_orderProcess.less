@@ -84,13 +84,13 @@ div.tab-container ul.tabs.order > li.tab {
 	}
 }
 
-#letterDetails > .container > .jumbotron {
+#letterDetails > .container > .jumbotron > form{
 	> .row{
 		margin-bottom: 70px;
 		.col-md-4{
 			h3{
 				text-align: left;
-				margin-bottom: 20px;
+				margin-bottom: 20px;				
 				span{
 					font-size: 18px;
 					color: @orange;
@@ -122,21 +122,21 @@ div.tab-container ul.tabs.order > li.tab {
 				margin: 0;
 			}
 		}
-		.col-md-7{
-			textarea{
-				width: 440px;
-				height: 168px;
-				border: 1px solid @light-gray;
-				border-radius: 5px;
-				margin-top: 25px;
-				resize: none;
-				@media (min-width:320px) and (max-width:679px) {
-					width: 100%;
-				}
-			}
+		.col-md-7{			
 			h3{
 				margin: 0;
 			}
+		}
+	}
+	input.textarea{
+		width: 440px;
+		height: 168px;
+		border: 1px solid @light-gray;
+		border-radius: 5px;
+		margin-top: 25px;
+		resize: none;
+		@media (min-width:320px) and (max-width:679px) {
+			width: 100%;
 		}
 	}
 }
