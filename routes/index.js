@@ -57,8 +57,8 @@ exports = module.exports = function(app) {
 	app.all('/register', routes.views.register);
 	
 	// Contact List Pages
-	app.get('/mailing-lists', middleware.requireUser, routes.views.CRM.mailingListIndex);
-	app.get('/mailing-lists/title-of-mailing-list', middleware.requireUser, routes.views.CRM.mailingList);
+	app.all('/mailing-lists', middleware.requireUser, routes.views.CRM.mailingListIndex);
+	app.get('/mailing-lists/:list', middleware.requireUser, routes.views.CRM.mailingList);
 
 	// Order Process
 	app.all('/order', routes.views.order.begin);

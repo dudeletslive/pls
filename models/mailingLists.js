@@ -8,11 +8,15 @@ var keystone = require('underscore'),
  */
 
 var mailingList = new keystone.List('Mailing Lists', {
+	autokey: { path: 'slug', from: 'title', unique: true },
 	noedit: true,
 	nocreate: true
 });
 
 mailingList.add({
+	userID: {type: String},
+	listName: {type: String},
+	csvJSON: {type: String}
 });
 
 
