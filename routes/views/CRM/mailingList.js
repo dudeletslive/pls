@@ -23,12 +23,16 @@ exports = module.exports = function(req, res) {
 
 				// Convert CSV String to JSON Object
 				locals.obj = JSON.parse(list.csvJSON);
+				var JSONString = locals.obj;
 
-				console.log(locals.obj);
+				sortBy = req.query.sortBy != null ? req.query.sortBy : 'firstName';
+				sortString = String(sortBy);
 
-				for (key in locals.obj) { 
-					console.log('Last Name' + key);
-				}
+				locals.obj.sort(function (a, b) {
+					if(a[sortString] < b[sortString]) return -1;
+					if(a[sortString] > b[sortString]) return 1;
+					return 0;
+				});
 
 				res.render('CRM/mailingList');
 			});
