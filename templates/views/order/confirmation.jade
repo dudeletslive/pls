@@ -1,0 +1,25 @@
+extends ../../layouts/default
+
+block content
+	+orderTabs
+	div.tab-content.order-process
+		div.tab-pane.fade.in.active#confirmation
+			.container: .jumbotron
+				.col-md-12
+					div.box-finish
+						div
+							span.fa-stack
+								i.fa.fa-stack-2x.fa-circle-o
+								i.fa.fa-stack-1x.fa-check
+							div.clearfix
+						div
+							h2 Your Submission Was Sucessful!
+						div
+							a.btn.btn-success START ANOTHER ORDER
+							div.clearfix
+							a.btn.btn-success.btn-boder-green BACK TO HOME
+				.row
+					.col-md-12
+						.line-0.visible-lg-block
+block js
+	+fileUploads

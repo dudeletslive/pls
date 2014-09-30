@@ -10,7 +10,7 @@ exports = module.exports = function(req, res) {
 		
 		if (!req.body.email || !req.body.password) {
 			locals.formError = 'form-error';
-			return view.render('signIn');
+			return view.render('session/signIn');
 		}
 		
 		var onSuccess = function(user) {
@@ -25,7 +25,7 @@ exports = module.exports = function(req, res) {
 		
 		var onFail = function() {
 			locals.formError = 'form-error';
-			view.render('signIn');
+			view.render('session/signIn');
 		}
 		
 		session.signin(req.body, req, res, onSuccess, onFail);

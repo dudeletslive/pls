@@ -1,0 +1,64 @@
+extends ../../layouts/default
+
+block content
+	+orderTabs
+	div.tab-content.order-process
+		div.tab-pane.fade.in.active#mailingList
+			.container: .jumbotron
+				.row
+					.col-md-12.col-sm-12
+						h2 
+							| Select A List To Mail To
+							span *
+					.col-md-12.col-sm-12
+						span.fa-stack.fa-lg.checkbox
+							i.fa.fa-square.fa-stack-2x
+							i.fa.fa-check.fa-stack-1x.fa-inverse
+						//- input(name="rememberMe", type="checkbox")
+						label(for="rememberMe") Please use the complete mailing list you keep on file
+					.col-md-12.col-sm-12
+						ul.boxes
+							li.box.selected
+								.col-md-12.col-sm-12
+									img(src='../images/list-name.png')
+									h2 List Name Goes Here
+									h5
+										span#Count 1,835 
+										span Contacts in this list
+									a.btn.btn-sm.btn-green.center-block(href='#')
+										| SELECTED
+										span.fa-stack
+											span.fa.fa-stack-2x.fa-circle-o
+											span.fa.fa-stack-1x.fa-check
+							li.box
+								.col-md-12.col-sm-12
+									img(src='../images/list-name.png')
+									h2 List Name Goes Here
+									h5
+										span#Count 1,835 
+										span Contacts in this list
+									a.btn.btn-sm.btn-green.center-block(href='#') SELECT THIS LIST
+							li.box
+								.col-md-12.col-sm-12
+									img(src='../images/list-name.png')
+									h2 List Name Goes Here
+									h5
+										span#Count 1,835 
+										span Contacts in this list
+									a.btn.btn-sm.btn-green.center-block(href='#') SELECT THIS LIST
+					.col-md-12
+						.line-0.visible-lg-block
+				.row
+					.col-md-12
+						p I will attach my current mailing list
+						div.file-wrapper
+							span.button Choose a File
+							input(type='file')
+					.col-md-12
+						.line-0.visible-lg-block
+				.row
+					.col-md-12
+						a.btn.btn-success.btn-boder-green.pull-left Start Over
+						a.btn.btn-success.pull-right Continue
+block js
+	+fileUploads

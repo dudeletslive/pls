@@ -46,8 +46,8 @@ exports = module.exports = function(app) {
 	// Super fancy way of handling account management page-
 	// Based on the link, set locals, then display appropriate panel
 	// On Account Management page based on which local variable is set.
-	app.get('/forgot-password', routes.views.account);
-	app.get('/reset', routes.views.account);
+	app.get('/forgot-password', routes.views.session.account);
+	app.get('/reset', routes.views.session.account);
 
 	// User Session
 	app.all('/sign-in', routes.views.session.signIn);
@@ -62,9 +62,14 @@ exports = module.exports = function(app) {
 
 	// Order Process
 	app.all('/order', routes.views.order.begin);
+	app.all('/letter-details', routes.views.order.letterDetails);
+	app.all('/mailing-list', routes.views.order.mailingList);
+	app.all('/return-address', routes.views.order.returnAddress);
+	app.all('/summary', routes.views.order.summary);
+	app.all('/confirmation', routes.views.order.confirmation);
 	
 	//My Account
-	app.get('/my-account', middleware.requireUser, routes.views.myAccount);
+	app.get('/my-account', middleware.requireUser, routes.views.session.myAccount);
 
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);

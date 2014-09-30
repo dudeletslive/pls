@@ -1,0 +1,174 @@
+extends ../../layouts/default
+
+block content
+	+orderTabs
+	div.tab-content.order-process
+		//- Letter Details type, select mailer options.
+		div.tab-pane.fade.in.active#letterDetails
+			.container: .jumbotron
+				.row
+					.col-md-4.col-sm-4
+						h3 Paper Choise
+							span *
+						div.select-style
+							select
+								option Black
+								option(selected='selected') Black And White
+						div.line-a.visible-lg-block
+					.col-md-4.col-sm-4
+						h3 Number of Pages
+							span *
+						div.select-style
+							select
+								option Plain Black
+								option(selected='selected') Plain White
+						div.line-a.visible-lg-block
+					.col-md-4.col-sm-4
+						h3 Size of Paper
+							span *
+						div.select-style
+							select
+								option 5.5 x 10
+								option(selected='selected') 8.5 x 11
+					.line-b.visible-lg-block
+				.row
+					.col-md-4.col-sm-4
+						h3 Printer Option
+							span *
+						div.select-style
+							select
+								option G&R
+								option(selected='selected') B&W Printer
+						div.line-a.visible-lg-block
+					.col-md-4.col-sm-4
+						h3 Envelope Choice
+							span *
+						div.select-style
+							select
+								option Plain Black
+								option(selected='selected') Plain White
+						div.line-a.visible-lg-block
+					.col-md-4.col-sm-4
+						h3 Postage Option
+							span *
+						div.select-style
+							select
+								option Firts Class Black
+								option(selected='selected') First Class Stamp
+					div.line-b.visible-lg-block
+				.row
+					.col-md-4.col-sm-4
+						h3 Inserts
+							span *
+						p You can add multiple Inserts
+						div.select-style
+							select
+								option 5.5 x 10
+								option(selected='selected') 8.5 x 11
+						br
+						div#multi-inserts
+							p Insert #1:
+							p Insert #2:
+							p Insert #3:
+						div.line-c.visible-lg-block
+					.col-md-8.col-sm-8
+						.row
+							.col-md-4.col-sm-4
+								h3 Insert Details
+								p Insert #1:
+								h4 Paper Choice
+									span *
+								div.select-style.small
+									select
+										option Paper Choice
+										option(selected='selected') Black and White
+								div.clearfix
+								h4 Paper Size
+									span *
+								div.select-style.small
+									select
+										option 5.5 x 10
+										option(selected='selected') 8.5 x 11
+								div.clearfix
+								h4 Printer Option
+									span *
+								div.select-style.small
+									select
+										option G&B Printer
+										option(selected='selected') B%W Printer
+							.col-md-4.col-sm-4
+								h3 Insert Details
+								p Insert #1:
+								h4 Paper Choice
+									span *
+								div.select-style.small
+									select
+										option Paper Choice
+										option(selected='selected') Black and White
+								div.clearfix
+								h4 Paper Size
+									span *
+								div.select-style.small
+									select
+										option 5.5 x 10
+										option(selected='selected') 8.5 x 11
+								div.clearfix
+								h4 Printer Option
+									span *
+								div.select-style.small
+									select
+										option G&B Printer
+										option(selected='selected') B%W Printer
+							.col-md-4.col-sm-4
+								h3 Insert Details
+								p Insert #1:
+								h4 Paper Choice
+									span *
+								div.select-style.small
+									select
+										option Paper Choice
+										option(selected='selected') Black and White
+								div.clearfix
+								h4 Paper Size
+									span *
+								div.select-style.small
+									select
+										option 5.5 x 10
+										option(selected='selected') 8.5 x 11
+								div.clearfix
+								h4 Printer Option
+									span *
+								div.select-style.small
+									select
+										option G&B Printer
+										option(selected='selected') B%W Printer
+					div.line-d.visible-lg-block
+				.row
+					.col-md-5.col-sm-5
+						h3 Upload The Letter File
+						p You may attach up to 4 files
+						div.file-wrapper
+							span.button Choose a File
+							input(type='file')
+						div.file-wrapper
+							span.button Choose a File
+							input(type='file')
+						div.file-wrapper
+							span.button Choose a File
+							input(type='file')
+						div.file-wrapper
+							span.button Choose a File
+							input(type='file')
+						div.line-e.visible-lg-block
+					.col-md-7.col-sm-7
+						.row
+							.col-md-12
+								h3 Special Instructions
+								textarea
+					div.line-f.visible-lg-block
+				.row
+					.col-md-12
+						a.btn.btn-success.btn-boder-green.pull-left Start Over
+						a.btn.btn-success.pull-right Continue
+block js
+	+fileUploads
