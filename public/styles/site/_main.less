@@ -30,7 +30,7 @@
         font-weight: 600;
         color: white;
         margin-top: 30px;
-        padding: 15px 40px;
+        padding: 21px 68px;
         text-align: center;
         font-size: 25px;
     }
@@ -52,7 +52,7 @@
 .check{
     font-size:14px;
     padding-left: 5px;
-    margin: 20px;
+    margin: 30px 20px;
     background-image: url('../images/check.png');
     background-repeat: no-repeat;
     padding-left: 41px;
@@ -60,25 +60,36 @@
 }
 
 .c{
-    height: 300px;
+    height: auto;
+    margin-right: 25px;
+    &:first-child{
+                    
+    }
+    &:last-child{
+        width: 300px;
+    }
         @media (max-width:480px) {
             height: auto;            
         }
         .box{
-            width: 258px;
-            height: 158px;
+            border:2px solid #ededed;
+            width: 298px;
+            height: 175px;
             background-color: @light-gray;
             background-position: center center;
-            background-repeat: no-repeat;
-                span{
-                    border-radius: 3px;
-                    margin: 10px;
-                    position: inherit;
-                    background-color: white;
-                    color:@blue;
-                    font-weight: 700;
-                    font-size: 14px;
-                }
+            background-repeat: no-repeat;            
+            span{
+                border-radius: 3px;
+                margin: 10px;
+                position: inherit;
+                background-color: white;
+                color:@blue;
+                font-weight: 700;
+                font-size: 14px;
+                width: 31px;
+                height: 29px;
+                padding-top: 7px;
+            }
         }
         .b1{
             background-image: url('../images/a1.png');
@@ -91,14 +102,14 @@
         }
 
         .arrow{
-            width: 47px;
-            height:  27px;
+            width: 44px;
+            height:  23px;
             background-image: url('../images/arrow.png');
             background-repeat: no-repeat;
             display: block;
-            margin: 14px 0 135px 0;
+            margin: 14px 0 135px 45px;
             position: relative;           
-            top: 45px;
+            top: 65px;
                 @media (max-width:480px) {
                     display: none;
                 }   
@@ -108,19 +119,22 @@
             font-weight: 700;
             color: @other-blue;
             font-family: @font-family-sans-serif;
+            margin-top: 20px;
         }
 
         p{
             width: 258px;
             color: @other-blue;   
-            font-family:@font-family-sans-serif;  
+            font-family:@font-family-sans-serif;
+            font-size: 14px;
+            line-height: 1.9;
         }  
 }
 
 h1.h {
     padding: 0;
     border: none;
-    border-top: 2px solid @other-blue;
+    border-top: 1px solid @other-blue;
     color: @other-blue;
     text-align: center;
     margin: 60px 0;
@@ -141,10 +155,10 @@ h1.h:after {
 h1.service {
     padding: 0;
     border: none;
-    border-top: 2px solid @other-blue;
+    border-top: 1px solid @other-blue;
     color: @other-blue;
     text-align: center;
-    margin: 60px 25px;
+    margin: 60px 125px 30px 125px;
 }
 h1.service:after {
     content: "Our Services";
@@ -165,7 +179,7 @@ h1.service:after {
                 h3{
                     font-weight: 700;
                     font-family: @font-family-sans-serif;
-                    font-size: 16px;
+                    font-size: 18px;
                     margin-top: 26px;
                     color: #484848;
                 }
@@ -189,10 +203,12 @@ h1.service:after {
     background-color: transparent;
     font-weight: 500;
     color: @blue;
-    border: 3px solid;
-    padding: 10px;
+    border: 3px solid;    
     text-align:center;
-    font-size: 20px;
+    padding: 18px !important;
+    font-size: 24px !important;
+    height: 77px;
+    width: 374px;
     @media (max-width:480px) {
         float: none;                    
         width: 100%;
@@ -205,9 +221,11 @@ h1.service:after {
     background-color: @orange;
     font-weight: 500;
     color: white;
-    padding: 10px;
+    padding: 10px; padding: 18px !important;
+    font-size: 24px !important;
     text-align: center;
-    font-size: 20px;
+    height: 77px;
+    width: 374px;    
     &:hover, &:active {
         border-color: darken(@orange, 10%);
         background: darken(@orange, 10%);
@@ -221,7 +239,7 @@ h1.service:after {
 
 .f-right{
     float: right;
-    margin-right: 10px;
+    margin-right: 25px;
         @media (max-width:480px) {
             margin-right: 0px;
 
@@ -230,7 +248,7 @@ h1.service:after {
 
 .f-left{
     float: left;
-    margin-left: 10px;
+    margin-left: 25px;
 }
 
  
@@ -247,10 +265,11 @@ h1.service:after {
 .jumbotron#testimonials {
     background-image: url(../images/background-testimonials.png);
     .background-size(cover);
+    height: 481px;
 }
 .jumbotron > .container.testimonial {
     color: @blue;
-    padding: 60px 0;
+    padding: 44px 0;
     h1 {
         color: @blue;
         font-size: 40px;
@@ -354,6 +373,9 @@ h1.service:after {
 }
 @media (min-width:768px) and (max-width:991px){
     .c{
+        &:last-child{
+            width: 164px;
+        }
         .arrow{
             display: none;
         }
