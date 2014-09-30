@@ -46,14 +46,18 @@ div.tab-container ul.tabs.order > li.tab {
 			ul.mailers {
 				padding: 0;
 				li {
+					list-style-type: none;
+					display: inline-block;
+					margin: 15px 10px 5px 0;
+				}
+				li > a {
 					border: 2px solid @green;
 					border-radius: 4px;
 					color: @green;
-					display: inline-block;
 					font-size: 16px;
 					font-weight: 600;
 					padding: 5px 10px;
-					margin: 15px 10px 0 0;
+					text-decoration: none;
 					text-transform: uppercase;
 					&:hover, &:active {
 						background: @green;

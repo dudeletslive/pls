@@ -8,6 +8,10 @@ exports = module.exports = function(req, res) {
 	// locals.section is used to set the currently selected
 	// item in the header navigation.
 	locals.tabID = 'letterDetails';
+	locals.letterDetails = req.session.letterDetails;
+	// Part One of formData
+	req.session.letterDetails = locals.formData;
+	console.log(locals.letterDetails);
 	
 	// Render the view
 	view.render('order/letterDetails');

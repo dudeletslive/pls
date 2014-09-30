@@ -17,6 +17,8 @@ block content
 						.small Register to begin recieving service.
 					form(method="post")#account
 						input(type='hidden', name='action', value='register')
+						-var ranString = Math.random().toString(36).substring(36);
+						input(type='hidden', name='userID', value=Math.random().toString(36).substring(7))
 						.form-group.clearfix
 							.col-md-6
 								label(for="f_name") First Name

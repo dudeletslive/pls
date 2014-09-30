@@ -71,6 +71,9 @@ exports = module.exports = function(app) {
 	//My Account
 	app.get('/my-account', middleware.requireUser, routes.views.session.myAccount);
 
+	// Test CSV
+	app.all('/test', routes.views.test);
+
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);
 	

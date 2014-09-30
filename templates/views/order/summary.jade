@@ -13,32 +13,34 @@ block content
 							table.table.borderless
 								tr
 									th FULL NAME
-									td Jonathan Bell
+									td= user.name.full
 								tr
 									th EMAIL ADDRESS
-									td jon@theoryandpractice.co
+									td= user.email
 								tr
+									-var d = new Date();
+									-var n = d.getMonth() + '/' + d.getDate() + '/' + d.getFullYear();
 									th DATE SUBMITTED
-									td August 4th, 2014
+									td= n
 							table.table.borderless
 								tr
 									th PAPER CHOICE
-									td CARDSTOCK OPTION
+									td= letterDetails.paperChoice
 								tr
 									th ENVELOPE CHOICE
-									td None
+									td= letterDetails.envelopeChoice != null ? letterDetails.envelopeChoice : 'None'
 								tr
 									th NUMBER OF PAGES
-									td One printer side
+									td= letterDetails.noOfPages
 								tr
 									th SIZE OF PAPER
-									td 8.5 x 11
+									td= letterDetails.paperSize
 								tr
 									th POSTAGE OPTION
-									td Firts class stamps
+									td= letterDetails.postageOption
 								tr
 									th SPECIAL INSTRUCTION
-									td Instructions Here...
+									td= letterDetails.specialInstructions
 							table.table.borderless
 								tr
 									th FILE #1
@@ -59,13 +61,13 @@ block content
 							table.table.borderless
 								tr
 									th RETURN ADDRESS
-									td 5234 Ferreri Drive Colorado Springs, CO 80922 United States Of America
+									td #{returnAddress.streetAddress} #{returnAddress.city}, #{returnAddress.state} #{returnAddress.zip} #{returnAddress.country}
 				.row
 					.col-md-12
 						.line-0.visible-lg-block
 				.row
 					.col-md-12
-						a.btn.btn-success.btn-boder-green.pull-left Start Over
+						a(href="/order").btn.btn-success.btn-boder-green.pull-left Start Over
 						a.btn.btn-success.pull-right Continue
 block js
 	+fileUploads

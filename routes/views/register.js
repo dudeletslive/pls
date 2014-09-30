@@ -51,7 +51,7 @@ exports = module.exports = function(req, res) {
 			},
 			
 			function(cb) {
-			
+
 				var userData = {
 					name: {
 						first: req.body.f_name,
@@ -59,7 +59,7 @@ exports = module.exports = function(req, res) {
 					},
 					email: req.body.email,
 					password: req.body.password,
-					
+					userID: req.body.userID,
 					website: req.body.website
 				};
 				

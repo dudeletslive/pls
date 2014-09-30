@@ -4,7 +4,8 @@ block content
 	+orderTabs
 	div.tab-content.order-process
 		div.tab-pane.fade.in.active#mailingList
-			.container: .jumbotron
+			.container: .jumbotron: form(action="/return-address", method="post")
+				input(type='text', name='mailingList', class='form-control', value='Mailing List')
 				.row
 					.col-md-12.col-sm-12
 						h2 
@@ -58,7 +59,7 @@ block content
 						.line-0.visible-lg-block
 				.row
 					.col-md-12
-						a.btn.btn-success.btn-boder-green.pull-left Start Over
-						a.btn.btn-success.pull-right Continue
+						a(href="/order").btn.btn-success.btn-boder-green.pull-left Start Over
+						button(type="submit").btn.btn-success.pull-right Continue
 block js
 	+fileUploads

@@ -21,3 +21,20 @@ block content
 					.col-md-12
 						img(src='../images/circle-plus-big.png')
 						h2.title ADD NEW LIST
+block js
+	script.
+		$('#convert').click(function() {
+				// Parse local CSV files
+				$('input#csv').parse({
+					config: {
+						header: true,
+						complete: function(results) {
+							$.each(results.data, function(key, value) {
+								var keys = Object.keys(value);
+								$('pre#json').append(value["TITLE"] + '<br>');
+							    console.log(value["TITLE"], keys);
+							});
+						}
+					}
+				});
+			});
