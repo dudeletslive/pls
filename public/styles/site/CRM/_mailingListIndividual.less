@@ -75,9 +75,13 @@ div.contact-list {
 					    background-color: transparent;
 					    background-image: none;
 					    .appearance(none);					    
-					}
+					}				
 				}
-				
+				@-moz-document url-prefix() {
+					div.select-style{
+						background-image: none !important;
+					}
+				}		
 			}
 		}
 	}
