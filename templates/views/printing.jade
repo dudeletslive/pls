@@ -75,7 +75,7 @@ block content
 		div.clearfix
 		.jumbotron.start-orden
 			.container#data
-				.row.data.hide(data-status='hide',data-action="#prayerLetters")
+				.data.hide(data-status='hide',data-action="#prayerLetters")
 					.col-md-6
 						p The basic cost for a 1-sided, color letter includes: your choice of any of the Opaque, Astrobright, Astroparche or Royal Fiber colors of paper; a white mailing envelope; folding and inserting your letter, sealing the envelope and affixing a first class stamp.
 					.col-md-6
@@ -84,9 +84,8 @@ block content
 								span.from FROM
 								span $.97 /letter
 						.col-md-6
-							a.btn.col-lg-12.col-md-12.col-sm-12.col-xs-12.btn-success(href='/order', role='button') START ORDER
-				.row.data.hide(data-status='hide',data-action="#postCards")
-					.row.data.hide(data-status='hide',data-action="#prayerLetters")
+							a.btn.btn-success(href='/order', role='button') START ORDER
+				.data.hide(data-status='hide',data-action="#postCards")
 					.col-md-6
 						p Most commonly, you’ll choose a color photo on one-side and black & white text on the other
 					.col-md-6
@@ -95,18 +94,19 @@ block content
 								span.from FROM
 								span $.64/card
 						.col-md-6
-							a.btn.col-lg-12.col-md-12.col-sm-12.col-xs-12.btn-success(href='/order', role='button') START ORDER
-				.row.data.show(data-status='show',data-action="#brochures")
+							a.btn.btn-success(href='/order', role='button') START ORDER
+				.data.show(data-status='show',data-action="#brochures")
 					.col-md-6.col-sm-6.col-xs-12
 						p Most commonly, you’ll choose a two-sided, color brochure on glossy paper.
 					.col-md-6.col-sm-6.col-xs-12						
 							.col-md-6
 								p
 									span.from FROM 
-									span $.46/brochure, plus the cost of shipping
+									span $.46/brochure 
+									| plus the cost of shipping
 							.col-md-6
-								a.btn.col-lg-12.col-md-12.col-sm-12.col-xs-12.btn-success(href='/order', role='button') START ORDER				
-				.row.data.hide(data-status='hide',data-action="#fundAppeals")
+								a.btn.btn-success(href='/order', role='button') START ORDER				
+				.data.hide(data-status='hide',data-action="#fundAppeals")
 					.col-md-6.col-sm-6.col-xs-12
 						p If we mail the order for you the average cost for a fund appeal letter is based a one-sided, color, mail-merged letter printed on Opaque paper, mailed in a matching envelope, including a response envelope and response slip.
 					.col-md-6.col-sm-6.col-xs-12
@@ -115,8 +115,8 @@ block content
 								span.from FROM
 								span $1.28/letter
 						.col-md-6
-							a.btn.col-lg-12.col-md-12.col-sm-12.col-xs-12.btn-success(href='/order', role='button') START ORDER
-				.row.data.hide(data-status='hide',data-action="#christmas")
+							a.btn.btn-success(href='/order', role='button') START ORDER
+				.data.hide(data-status='hide',data-action="#christmas")
 					.col-md-6.col-sm-6.col-xs-12
 						p Printing a one-side, color Christmas letter
 						p Printing your signature in a card
@@ -129,7 +129,7 @@ block content
 								span.from FROM
 								span $.88/card
 						.col-md-6
-							a.btn.col-lg-12.col-md-12.col-sm-12.col-xs-12.btn-success(href='/order', role='button') START ORDER
+							a.btn.btn-success(href='/order', role='button') START ORDER
 block js
 	script(type='text/javascript')
-		$(function(){ $('#tabs li').click(function (e) { e.preventDefault(); var href= $(this).attr('href'); $(this).tab('show'); $('#data .data').each(function(){ $el = $(this);var action = $el.attr('data-action'); $el.attr('data-status','hide').removeClass().addClass('data fade hide'); if(action==href){$el.attr('data-status','show').removeClass().addClass('row data show');}}); });});
+		$(function(){ $('#tabs li').click(function (e) { e.preventDefault(); var href= $(this).attr('href'); $(this).tab('show'); $('#data .data').each(function(){ $el = $(this);var action = $el.attr('data-action'); $el.attr('data-status','hide').removeClass().addClass('data fade hide'); if(action==href){$el.attr('data-status','show').removeClass().addClass('data show');}}); });});

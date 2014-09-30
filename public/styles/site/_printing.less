@@ -25,85 +25,40 @@
 	.background-size(cover);
 }
 //Icon Tabs
+
 .icon-prayer{
 	&:before {
-		content: "\e601";
-		position: absolute;
-		left: 30px;
-		top: 15px;
-		font-size: 24px;
-	}
-	&:hover {
-		&:before {
-			color: white;
-		}
-	}
+		content: "\e601";		
+	}	
 }
 .icon-postcards{
 	&:before {
 		content: "\e606";
-		margin-right: 10px;
-		position: relative;
-		top: 1px;
-	}
-	&:hover {
-		&:before {
-			color: white;
-		}
-	}
+	}	
 }
 .icon-brochure{
 	&:before {
 		content: "\e603";
-		font-size: 16px;
-		position: absolute;
-		left: 30px;
-	}
-	&:hover {
-		&:before {
-			color: white;
-		}
 	}
 }
 .icon-funds{
 	&:before {
 		content: "\e600";
-		font-size: 4px;
-		position: relative;
-		left: -25px;
-		top: -10px;
-		padding-left: 20px;
-	}
-	&:hover {
-		&:before {
-			color: white;
-		}
 	}
 }
 .icon-christmas{
-	padding-left: 60px;
-	position: relative;
 	&:before {
 		content: "\e605";
-		position: absolute;
-		left: 30px;
-		top: 50%;
-		margin-top: -7px;
-		font-size: 16px;
-	}
-	&:hover {
-		&:before {
-			color: white;
-		}
-	}
+	}	
 }
-.icon-big{	
+.icon-big{
+	width: 142px;
+	display: block;
+	margin: 0 auto;	
 	&:before {
 		color: @orange;
 		padding: 0;
-		display: block;
 		font-size: 250px !important;
-		margin-top: -20px;
 		text-align: center;
 		position: inherit;
 		top:inherit;
@@ -119,6 +74,9 @@
 .icon-medium{
 	position: inherit;
 	text-align: center;
+	width: 142px;
+	display: block;
+	margin: 0 auto;	
 	&:before{
 		font-size: 180px;
 		color:@orange;
@@ -166,7 +124,7 @@ div.tab-container {
 			float: left;
 			font-weight: 600;
 			margin: 0;
-			padding: 20px 40px;
+			padding:25px 40px 24px 40px;
 			text-transform: uppercase;
 			background-repeat: no-repeat;
 			background-position: 9px 18px;
@@ -185,26 +143,63 @@ div.tab-container {
 					text-decoration: none;
 				}
 			}
-
-		}
-		li.tab {
-			position: relative;
-			&.icon-brochure {
-				padding-left: 55px;
-			}
-			&.icon-prayer {
-				padding-left: 60px;
-			}
-			&.active {
-				&:before {
-					color: white;
+			&.icon-prayer,&.icon-postcards,&.icon-brochure,&.icon-funds,&.icon-christmas{
+				color:#373C42;
+				&:hover {
+					&:before {
+						color: white;
+					}
 				}
 			}
-		}	
-		li.tab.icon-christmas {
-			padding-left: 55px;
+			&.icon-prayer{
+				padding-left: 60px;
+				padding-top: 13px;
+				&:before {
+					position: relative;
+					left: -6px;
+					top: 6px;
+					font-size: 24px
+				}	
+			}
+			&.icon-postcards{
+				&:before {
+					margin-right: 10px;
+					position: relative;
+					top: 1px;
+				}	
+			}
+			&.icon-brochure{
+				padding-top: 21px;
+				padding-left: 55px;
+				&:before {
+					font-size: 16px;
+					position: relative;
+					left: -10px;
+					top: 3px;
+				}
+			}
+			&.icon-funds{
+				&:before {
+					font-size: 4px;
+					position: relative;
+					left: -25px;
+					top: -10px;
+					padding-left: 20px;
+				}
+				
+			}
+			&.icon-christmas{
+				padding-left: 55px;
+				position: relative;
+				&:before {
+					position: absolute;
+					left: 30px;
+					top: 50%;
+					margin-top: -7px;
+					font-size: 16px;
+				}
+			}
 		}
-		
 	}
 }
 .tab-content{
@@ -227,7 +222,10 @@ div.tab-container {
 					margin-top: 30px;
 					line-height: 1.5;
 					text-align: left;
-				}				 
+				}
+				.icon-prayer,.icon-postcards,.icon-brochure,.icon-funds,.icon-christmas{
+					color:#373c42;
+				}			 
 			}
 		}		
 	}
@@ -250,41 +248,43 @@ div.tab-container {
 		.container{
 			background-color: @light-gray;
 			border: 1px solid darken(@light-gray, 5%);
-			padding: 20px;
-			.row{
+			padding: 34px;
+			.col-md-6{
+				padding: 5px;
 				.col-md-6{
-					padding: 5px;
-					.col-md-6{					
-						p{
-							font-size: 10px;
-							margin-top: 10px;								
-							span{
-								font-size: 18px;
-								font-weight: 600;
-								&.from {
-									position: relative;
-									top: -2px;
-									font-weight: initial;
-									font-size: 11px;
-									margin-right: 5px;
-								}
+					a.btn-success{
+						border-radius: 3px;
+						border: none;
+						padding: 15px 40px;
+						font-weight: 600;
+						background-color: @green;
+						width: 234px;
+						height: 57px;
+						padding-top: 20px;
+					}					
+					p{
+						font-size: 13px;
+						margin-top: 10px;								
+						span{
+							font-size: 18px;
+							font-weight: 600;
+							&.from {
+								position: relative;
+								top: -2px;
+								font-weight: initial;
+								font-size: 11px;
+								margin-right: 5px;
 							}
-							@media (min-width:320px) and (max-width:992px) {
-					          text-align: center;
-					       	}
-						}						
-					}
+						}
+						@media (min-width:320px) and (max-width:992px) {
+				          text-align: center;
+				       	}
+					}						
 				}
 			}
 		}
 }
-.btn-success{
-			border-radius: 3px;
-			border: none;
-			padding: 15px 40px;
-			font-weight: 600;
-			background-color: @green;
-}
+
 @media (max-width:480px) {
 	div.tab-container {
 		ul.tabs {
