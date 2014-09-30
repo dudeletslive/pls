@@ -8,16 +8,77 @@ block content
 		div.col-md-12.line
 		div.col-md-12
 			ul
-				li.box
-					.col-md-12
-						img(src='../images/list-name.png')
-						h2 List Name Goes Here
-						h5
-							span#Count 1,835 
-							span Contacts in this list
-						a.btn.btn-sm.btn-gray(href='/mailing-lists/title-of-mailing-list') VIEW LIST
-						a.btn.btn-sm.btn-green(href='#') ADD CONTACT
-				li.box
+				for list in lists
+					li.box
+						.col-md-12
+							img(src='../images/list-name.png')
+							h2= list.listName
+							h5
+								span#Count= Object.keys(JSON.parse(list.csvJSON)).length
+								span &nbsp;Contacts in this list
+							a.btn.btn-sm.btn-gray(href='/mailing-lists/' + list.slug) VIEW LIST
+							a.btn.btn-sm.btn-green(href='/mailing-lists/' + list.slug + '?contact=add') ADD CONTACT
+				li.box(data-toggle='modal', data-target='#newList')
 					.col-md-12
 						img(src='../images/circle-plus-big.png')
 						h2.title ADD NEW LIST
+		.modal.fade(tab-index='-1', role='dialog', aria-labelledby='newList', aria-hidden='true', id='newList')
+			.modal-dialog.modal-sm: .modal-content: form(method="post", action='/mailing-lists', id='listForm')
+				.modal-body
+					button.close(type="button", data-dismiss="modal")
+						span(aria-hidden="true") &#215;
+						span.sr-only Close
+					h3 Create New Mailing List
+					if errors
+						.form-group
+							.alert.alert-danger
+								| Please complete all fields before continuing.
+					.form-group(class=(errors != null ? 'has-error' : null)).clearfix
+						input(type='hidden', name='userID', value=user.userID)
+						input(type='hidden', name='csvJSON')
+					.form-group(class=(errors != null ? 'has-error' : null)).clearfix
+						label(for='listName') Name Your Mailing List
+						input(name='listName', type='text', class='form-control')
+					.form-group.clearfix
+						input(name='mailingList', type='file', class='form-control', id='csv')
+				.modal-footer
+					button.btn.btn-default(type="button", data-dismiss="modal") Cancel
+					button.btn.btn-primary(type="submit") Create List
+
+block js
+	if errors
+		script.
+			$('#newList').modal();
+	script.
+		$('button[type="submit"]').click(function() {
+			var $this = $(this);
+			event.preventDefault();
+			// Parse local CSV files
+			$('input#csv').parse({
+				config: {
+					header: true,
+					complete: function(results) {
+						var str = JSON.stringify(results.data),
+							str = str.replace(/first ?name/ig, "firstName"),
+							str = str.replace(/last ?name/ig, "lastName"),
+							str = str.replace(/(street|address) ?(1|one)/ig, "address1"),
+							str = str.replace(/street|address ?2|two/ig, "address2"),
+							str = str.replace(/street|address ?3|three/ig, "address3"),
+							str = str.replace(/city|town|county/ig, "city"),
+							str = str.replace(/state|province/ig, "state"),
+							str = str.replace(/zip|postal ?code/ig, "zip");
+							//- str = str.replace(/"/g, "'");
+						$this.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i>');
+						$('input[name="csvJSON"').val(str).trigger('change');
+						//- $.each(results.data, function(key, value) {
+						//- 	var keys = Object.keys(value);
+						//- 	$('pre#json').append(value["TITLE"] + '<br>');
+						//-     console.log(value["TITLE"], keys);
+						//- });
+					}
+				}
+			});
+			$('input[name="csvJSON"').change(function() {
+				document.getElementById('listForm').submit();
+			});
+		});

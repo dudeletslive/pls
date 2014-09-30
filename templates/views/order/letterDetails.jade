@@ -5,13 +5,13 @@ block content
 	div.tab-content.order-process
 		//- Letter Details type, select mailer options.
 		div.tab-pane.fade.in.active#letterDetails
-			.container: .jumbotron
+			.container: .jumbotron: form(action="/mailing-list", method="post")
 				.row
 					.col-md-4.col-sm-4
-						h3 Paper Choise
+						h3 Paper Choice
 							span *
 						div.select-style
-							select
+							select(name="paperChoice", value=letterDetails ? letterDetails.paperChoice : null)
 								option Black
 								option(selected='selected') Black And White
 						div.line-a.visible-lg-block
@@ -19,7 +19,7 @@ block content
 						h3 Number of Pages
 							span *
 						div.select-style
-							select
+							select(name="noOfPages", value=letterDetails ? letterDetails.noOfPages : null)
 								option Plain Black
 								option(selected='selected') Plain White
 						div.line-a.visible-lg-block
@@ -27,7 +27,7 @@ block content
 						h3 Size of Paper
 							span *
 						div.select-style
-							select
+							select(name="paperSize", value=letterDetails ? letterDetails.paperSize : null)
 								option 5.5 x 10
 								option(selected='selected') 8.5 x 11
 					.line-b.visible-lg-block
@@ -36,15 +36,15 @@ block content
 						h3 Printer Option
 							span *
 						div.select-style
-							select
-								option G&R
-								option(selected='selected') B&W Printer
+							select(name="printerOption", value=letterDetails ? letterDetails.printerOption : null)
+								option G&amp;R
+								option(selected='selected') B&amp;W Printer
 						div.line-a.visible-lg-block
 					.col-md-4.col-sm-4
 						h3 Envelope Choice
 							span *
 						div.select-style
-							select
+							select(name="envelopeChoice", value=letterDetails ? letterDetails.envelopeChoice : null)
 								option Plain Black
 								option(selected='selected') Plain White
 						div.line-a.visible-lg-block
@@ -52,7 +52,7 @@ block content
 						h3 Postage Option
 							span *
 						div.select-style
-							select
+							select(name="postageOption", value=letterDetails ? letterDetails.postageOption : null)
 								option Firts Class Black
 								option(selected='selected') First Class Stamp
 					div.line-b.visible-lg-block
@@ -62,7 +62,7 @@ block content
 							span *
 						p You can add multiple Inserts
 						div.select-style
-							select
+							select(name="inserts")
 								option 5.5 x 10
 								option(selected='selected') 8.5 x 11
 						br
@@ -139,9 +139,9 @@ block content
 								h4 Printer Option
 									span *
 								div.select-style.small
-									select
-										option G&B Printer
-										option(selected='selected') B%W Printer
+									select()
+										option G&amp;B Printer
+										option(selected='selected') B&amp;W Printer
 					div.line-d.visible-lg-block
 				.row
 					.col-md-5.col-sm-5
@@ -164,11 +164,11 @@ block content
 						.row
 							.col-md-12
 								h3 Special Instructions
-								textarea
+								input(type='textarea', name='specialInstructions', value=letterDetails ? letterDetails.specialInstructions : null)
 					div.line-f.visible-lg-block
 				.row
 					.col-md-12
-						a.btn.btn-success.btn-boder-green.pull-left Start Over
-						a.btn.btn-success.pull-right Continue
+						a(href="/order").btn.btn-success.btn-boder-green.pull-left Start Over
+						button(type="submit").btn.btn-success.pull-right Continue
 block js
 	+fileUploads

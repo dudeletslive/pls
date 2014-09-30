@@ -1,0 +1,35 @@
+extends ../layouts/default
+
+block content
+	section.spacer
+	.container
+		input(type='file', name='csv', id='csv', class='form-control')
+		br
+		.form-group.row(style="text-align: center;")
+			.col-md-6
+				button(class='btn btn-danger btn-lg')#convert Convert to JSON
+			.col-md-6
+				button(class='btn btn-primary btn-lg')#download Download JSON
+		pre#json.text
+	section.spacer
+
+block js
+	script.
+		$('#convert').click(function() {
+			// Parse local CSV files
+			$('input#csv').parse({
+				config: {
+					header: true,
+					complete: function(results) {
+						console.log("Parse results:", results.data);
+						var keys = Object.keys(results.data);
+						console.log(keys);
+						$.each(results.data, function(key, value) {
+							var keyz = Object.keys(value);
+							$('pre#json').append(value["TITLE"] + '<br>');
+						    console.log(value["TITLE"], keyz);
+						});
+					}
+				}
+			});
+		});

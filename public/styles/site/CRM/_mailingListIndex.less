@@ -1,6 +1,12 @@
 @gray-ligh-2 :#dbdee7;
 // Contact List Home
 div.contact-list-home {
+	li.box[data-toggle='modal'] {
+		cursor: pointer;
+		&:hover, &:focus {
+			border: 1px solid @green;
+		}
+	}
 	background: white;
 	min-height: 900px;
 	.jumbotron {
@@ -18,6 +24,7 @@ div.contact-list-home {
 				display: block;
 				float: left; 
 				margin-right: 50px;
+				margin-bottom: 50px;
 				& > div{
 					padding:50px 0;
 					text-align: center;

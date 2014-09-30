@@ -4,36 +4,34 @@ block content
 	+orderTabs
 	div.tab-content.order-process
 		div.tab-pane.fade.in.active#returnAddress
-			.container: .jumbotron
+			.container: form(action="/summary", method="post", class='clearfix')
 				.row
 					.col-md-12
 						h3 
 							|	Confirm Return Address
 							span *
 				.row
-					.col-md-12
-						span.checkbox
-						//- input(name="rememberMe", type="checkbox")
-						label(for="rememberMe") Please use the complete mailing list you keep on file
-					.col-md-12
-						.col-md-5
-							.col-md-12
-								input(value='5234 Ferrari Drive').form-control.input-lg 
-							.col-md-5
-								input(value='Colorado Springs').form-control.input-lg 
-							.col-md-3
-								input(value='CO').form-control.input-lg 
-							.col-md-4
-								input(value='80922').form-control.input-lg 
-							.col-md-12
-								input(value='United States of America').form-control.input-lg
-				.row
-					.col-md-12.col-sm-12
-						span.fa-stack.fa-lg.checkbox2
-							i.fa.fa-square.fa-stack-2x
-							i.fa.fa-check.fa-stack-1x.fa-inverse
-						//- input(name="rememberMe", type="checkbox")
-						label(for="rememberMe") Use the Prayer Letter Service Address as my return address
+					.col-md-5
+						br
+						.form-group
+							span.fa-stack.fa-lg.checkbox2
+								i.fa.fa-square.fa-stack-2x
+								i.fa.fa-check.fa-stack-1x.fa-inverse
+							label(for="rememberMe") Use the Return Address Below
+						-var Class = 'form-control input-lg';
+						div.form-group: input(name='streetAddress', value=returnAddress ? returnAddress.streetAddress : null, placeholder='5234 Ferrari Drive', class=Class)
+						div.form-group.row
+							.col-md-5: input(name='city', value=returnAddress ? returnAddress.city : null, placeholder='Colorado Springs', class=Class)
+							.col-md-2: input(name='state', value=returnAddress ? returnAddress.state : null, placeholder='CO', class=Class)
+							.col-md-5: input(name='zip', value=returnAddress ? returnAddress.zipCode : null, placeholder='80918', class=Class)
+						div.form-group: input(name='country', value=returnAddress ? returnAddress.country : 'United States of America', class=Class)
+						br
+						.form-group
+							span.fa-stack.fa-lg.checkbox2.checked
+								i.fa.fa-square.fa-stack-2x
+								i.fa.fa-check.fa-stack-1x.fa-inverse
+							//- input(name="rememberMe", type="checkbox")
+							label(for="rememberMe") Use the Prayer Letter Service Address as my return address
 				.row
 					.col-md-12
 						div.col-md-6
@@ -43,9 +41,12 @@ block content
 								input.form-control
 					.col-md-12
 						.line-0.visible-lg-block
+				br
+				br
+				br
 				.row
 					.col-md-12
-						a.btn.btn-success.btn-boder-green.pull-left Start Over
-						a.btn.btn-success.pull-right Continue
+						a(href="/order").btn.btn-success.btn-boder-green.pull-left Start Over
+						button(type="submit").btn.btn-success.pull-right Continue
 block js
 	+fileUploads
