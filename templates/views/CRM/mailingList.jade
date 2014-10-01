@@ -21,14 +21,14 @@ block content
 				thead
 					tr
 						th Edit
-						th(id='lastName'): a(href='/mailing-lists/' + list.slug + '?sortBy=firstName', data-ajax="true") LAST NAME
-						th(id='firstName'): a(href='/mailing-lists/' + list.slug + '?sortBy=lastName', data-ajax="true") ENV_LINE
-						th(id='address1'): a(href='/mailing-lists/' + list.slug + '?sortBy=address1', data-ajax="true") ADDRESS 1
-						th(id='address2'): a(href='/mailing-lists/' + list.slug + '?sortBy=address2', data-ajax="true") ADDRESS 2
-						th(id='address3'): a(href='/mailing-lists/' + list.slug + '?sortBy=address3', data-ajax="true") ADDRESS 3
-						th(id='city'): a(href='/mailing-lists/' + list.slug + '?sortBy=city', data-ajax="true") CITY
-						th(id='state'): a(href='/mailing-lists/' + list.slug + '?sortBy=state', data-ajax="true") STATE
-						th(id='zip'): a(href='/mailing-lists/' + list.slug + '?sortBy=zip', data-ajax="true") ZIP
+						th(id='lastName'): a(href='/mailing-lists/' + list.slug + '?sortBy=firstName', class=sortBy == 'firstName' ? 'active' : null, data-ajax="true") LAST NAME
+						th(id='firstName'): a(href='/mailing-lists/' + list.slug + '?sortBy=lastName', class=sortBy == 'lastName' ? 'active' : null, data-ajax="true") ENV_LINE
+						th(id='address1'): a(href='/mailing-lists/' + list.slug + '?sortBy=address1', class=sortBy == 'address1' ? 'active' : null, data-ajax="true") ADDRESS 1
+						th(id='address2'): a(href='/mailing-lists/' + list.slug + '?sortBy=address2', class=sortBy == 'address2' ? 'active' : null, data-ajax="true") ADDRESS 2
+						th(id='address3'): a(href='/mailing-lists/' + list.slug + '?sortBy=address3', class=sortBy == 'address3' ? 'active' : null, data-ajax="true") ADDRESS 3
+						th(id='city'): a(href='/mailing-lists/' + list.slug + '?sortBy=city', class=sortBy == 'city' ? 'active' : null, data-ajax="true") CITY
+						th(id='state'): a(href='/mailing-lists/' + list.slug + '?sortBy=state', class=sortBy == 'state' ? 'active' : null, data-ajax="true") STATE
+						th(id='zip'): a(href='/mailing-lists/' + list.slug + '?sortBy=zip', class=sortBy == 'zip' ? 'active' : null, data-ajax="true") ZIP
 				tbody
 					for key, value in obj
 						tr
