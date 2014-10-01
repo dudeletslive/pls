@@ -24,8 +24,6 @@ exports = module.exports = function(req, res) {
 
 	});
 
-	console.log(req.user.userID);
-
 	view.query('lists', keystone.list('Mailing Lists').model.find().where('userID', req.user.userID).sort('sortOrder'));
 
 	view.on('post', function(next) {

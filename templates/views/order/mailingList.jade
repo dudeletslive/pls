@@ -19,36 +19,16 @@ block content
 						label(for="rememberMe") Please use the complete mailing list you keep on file
 					.col-md-12.col-sm-12
 						ul.boxes
-							li.box.selected
-								.col-md-12.col-sm-12
-									img(src='../images/list-name.png')
-									h2 List Name Goes Here
-									h5
-										span#Count 1,835 
-										span Contacts in this list
-									a.btn.btn-sm.btn-green.center-block(href='#')
-										| SELECTED
-										span.fa-stack
-											span.fa.fa-stack-2x.fa-circle-o
-											span.fa.fa-stack-1x.fa-check
-							li.box
-								.col-md-12.col-sm-12
-									img(src='../images/list-name.png')
-									h2 List Name Goes Here
-									h5
-										span#Count 1,835 
-										span Contacts in this list
-									a.btn.btn-sm.btn-green.center-block(href='#') SELECT THIS LIST
-							li.box
-								.col-md-12.col-sm-12
-									img(src='../images/list-name.png')
-									h2 List Name Goes Here
-									h5
-										span#Count 1,835 
-										span Contacts in this list
-									a.btn.btn-sm.btn-green.center-block(href='#') SELECT THIS LIST
-					.col-md-12
-						.line-0.visible-lg-block
+							for list in lists
+								li.box
+									.col-md-12
+										img(src='../images/list-name.png')
+										h2= list.listName
+										h5
+											span#Count= Object.keys(JSON.parse(list.csvJSON)).length
+											span &nbsp;Contacts in this list
+										a.btn.btn-sm.btn-gray(href='/mailing-lists/' + list.slug) VIEW LIST
+										a.btn.btn-sm.btn-green(href='/mailing-lists/' + list.slug + '?contact=add') ADD CONTACT
 				.row
 					.col-md-12
 						p I will attach my current mailing list
