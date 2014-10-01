@@ -5,7 +5,6 @@ block content
 	div.tab-content.order-process
 		div.tab-pane.fade.in.active#mailingList
 			.container: .jumbotron: form(action="/return-address", method="post")
-				input(type='text', name='mailingList', class='form-control', value='Mailing List')
 				.row
 					.col-md-12.col-sm-12
 						h2 
@@ -27,8 +26,10 @@ block content
 										h5
 											span#Count= Object.keys(JSON.parse(list.csvJSON)).length
 											span &nbsp;Contacts in this list
-										a.btn.btn-sm.btn-gray(href='/mailing-lists/' + list.slug) VIEW LIST
-										a.btn.btn-sm.btn-green(href='/mailing-lists/' + list.slug + '?contact=add') ADD CONTACT
+										a.btn.btn-sm.btn-green(name='listOption', data-value=list.listName) Select This List
+						select(name='list', class='form-control', class='hide')
+							for list in lists
+								option(value=list.listName)= list.listName
 				.row
 					.col-md-12
 						p I will attach my current mailing list
@@ -43,3 +44,11 @@ block content
 						button(type="submit").btn.btn-success.pull-right Continue
 block js
 	+fileUploads
+	script.
+		$('a[name="listOption"]').each(function() {
+			$(this).click(function() {
+				$this = $(this);
+				var selected = $this.attr('data-value');
+				$('select[name="list"]').val()
+			});
+		});

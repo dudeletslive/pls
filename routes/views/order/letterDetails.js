@@ -12,6 +12,9 @@ exports = module.exports = function(req, res) {
 	// Part One of formData
 	req.session.letterDetails = locals.formData;
 	console.log(locals.letterDetails);
+
+
+	console.log('Letter Details: ' + req.session);
 	
 	// Render the view
 	view.render('order/letterDetails');

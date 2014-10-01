@@ -15,6 +15,8 @@ exports = module.exports = function(req, res) {
 	locals.returnAddress = req.session.returnAddress;
 	// Part Three of formData
 	req.session.returnAddress = locals.formData;
+
+	console.log('Summary: ' + req.session);
 	
 	// Render the view
 	view.render('order/summary');

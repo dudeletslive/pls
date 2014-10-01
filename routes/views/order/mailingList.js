@@ -14,6 +14,8 @@ exports = module.exports = function(req, res) {
 	// Part One of formData
 	req.session.letterDetails = locals.formData;
 
+	console.log('Mailing List: ' + req.session);
+
 	// Find Current User to Base lists loaded on
 	User.model.findById(req.session.userId).exec(function(err, user) {
 
