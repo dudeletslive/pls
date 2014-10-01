@@ -220,11 +220,21 @@ div.panel {
 		}
 	}
 }
+
 table#table-contact-list{
 	thead{
 		tr{
 			th{
 				padding: 20px;
+				a{
+					color:@dark-gray;
+					&.active:after {
+						content: "\f0d7";
+						margin-left: 5px;
+						position: relative;
+						font: normal normal normal 14px/1 FontAwesome;
+					}					
+				}
 			}
 			th:first-child{
 				border-left: 1px solid white;				
