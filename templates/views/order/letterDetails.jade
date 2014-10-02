@@ -12,16 +12,16 @@ block content
 							span *
 						div.select-style
 							select(name="paperChoice", value=letterDetails ? letterDetails.paperChoice : null)
-								option Black
-								option(selected='selected') Black And White
+								option(selected='selected') Opaque White
+								option Black And White
 						div.line-a.visible-lg-block
 					.col-md-4.col-sm-4
 						h3 Number of Pages
 							span *
 						div.select-style
 							select(name="noOfPages", value=letterDetails ? letterDetails.noOfPages : null)
-								option Plain Black
-								option(selected='selected') Plain White
+								option(selected='selected') One Printed Side
+								option Need Options
 						div.line-a.visible-lg-block
 					.col-md-4.col-sm-4
 						h3 Size of Paper
@@ -29,7 +29,7 @@ block content
 						div.select-style
 							select(name="paperSize", value=letterDetails ? letterDetails.paperSize : null)
 								option 5.5 x 10
-								option(selected='selected') 8.5 x 11
+								option(selected='selected') 8 1/2 x 11
 					.line-b.visible-lg-block
 				.row
 					.col-md-4.col-sm-4
@@ -37,8 +37,8 @@ block content
 							span *
 						div.select-style
 							select(name="printerOption", value=letterDetails ? letterDetails.printerOption : null)
-								option G&amp;R
-								option(selected='selected') B&amp;W Printer
+								option(selected='selected') Color Printer
+								option B&amp;W Printer
 						div.line-a.visible-lg-block
 					.col-md-4.col-sm-4
 						h3 Envelope Choice
@@ -46,7 +46,7 @@ block content
 						div.select-style
 							select(name="envelopeChoice", value=letterDetails ? letterDetails.envelopeChoice : null)
 								option Plain Black
-								option(selected='selected') Plain White
+								option(selected='selected') Standard White
 						div.line-a.visible-lg-block
 					.col-md-4.col-sm-4
 						h3 Postage Option
@@ -61,17 +61,55 @@ block content
 						h3 Inserts
 							span *
 						p You can add multiple Inserts
-						div.select-style
-							select(name="inserts")
-								option 5.5 x 10
-								option(selected='selected') 8.5 x 11
 						br
-						div#multi-inserts
-							p Insert #1:
-							p Insert #2:
-							p Insert #3:
+						div.clearfix.insert
+							h4 Insert #1
+							div.select-style#insertOne
+								select(name="insertOne")
+									option(selected='selected') None
+									option 2 per page response slip
+									option 3 per page response slip
+									option 4 per page response slip
+									option White response envelopes-not stamped
+									option White response envelopes-stamped
+									option Cru giving envelopes-not stamped
+									option Cru giving envelopes-stamped
+									option Please insert the items I mailed to you
+									option See special instructions
+						div.clearfix.insert.hide#insertTwo
+							br
+							h4 Insert #2
+							div.select-style
+								select(name="insertTwo")
+									option(selected='selected') None
+									option 2 per page response slip
+									option 3 per page response slip
+									option 4 per page response slip
+									option White response envelopes-not stamped
+									option White response envelopes-stamped
+									option Cru giving envelopes-not stamped
+									option Cru giving envelopes-stamped
+									option Please insert the items I mailed to you
+									option See special instructions
+						div.clearfix.insert.hide#insertThree
+							br
+							h4 Insert #3
+							div.select-style
+								select(name="insertThree")
+									option(selected='selected') None
+									option 2 per page response slip
+									option 3 per page response slip
+									option 4 per page response slip
+									option White response envelopes-not stamped
+									option White response envelopes-stamped
+									option Cru giving envelopes-not stamped
+									option Cru giving envelopes-stamped
+									option Please insert the items I mailed to you
+									option See special instructions
+						br
 						div.line-c.visible-lg-block
-					.col-md-8.col-sm-8
+					.col-md-8.col-sm-8(id='fade')
+						.overlay#insertDetailsOverlay(style='width: 100%; height: 100%; position: absolute; top: 0; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.85); z-index: 999;')
 						.row
 							.col-md-4.col-sm-4
 								h3 Insert Details
@@ -94,54 +132,31 @@ block content
 									span *
 								div.select-style.small
 									select
-										option G&B Printer
-										option(selected='selected') B%W Printer
-							.col-md-4.col-sm-4
-								h3 Insert Details
-								p Insert #1:
-								h4 Paper Choice
-									span *
-								div.select-style.small
-									select
-										option Paper Choice
-										option(selected='selected') Black and White
-								div.clearfix
-								h4 Paper Size
-									span *
-								div.select-style.small
-									select
-										option 5.5 x 10
-										option(selected='selected') 8.5 x 11
-								div.clearfix
-								h4 Printer Option
-									span *
-								div.select-style.small
-									select
-										option G&B Printer
-										option(selected='selected') B%W Printer
-							.col-md-4.col-sm-4
-								h3 Insert Details
-								p Insert #1:
-								h4 Paper Choice
-									span *
-								div.select-style.small
-									select
-										option Paper Choice
-										option(selected='selected') Black and White
-								div.clearfix
-								h4 Paper Size
-									span *
-								div.select-style.small
-									select
-										option 5.5 x 10
-										option(selected='selected') 8.5 x 11
-								div.clearfix
-								h4 Printer Option
-									span *
-								div.select-style.small
-									select()
 										option G&amp;B Printer
-										option(selected='selected') B&amp;W Printer
+										option(selected='selected') B%W Printer
+							.col-md-4.col-sm-4
+								h3 Insert Details
+								p Insert #2:
+								h4 Paper Choice
+									span *
+								div.select-style.small
+									select
+										option Paper Choice
+										option(selected='selected') Black and White
+								div.clearfix
+								h4 Paper Size
+									span *
+								div.select-style.small
+									select
+										option 5.5 x 10
+										option(selected='selected') 8.5 x 11
+								div.clearfix
+								h4 Printer Option
+									span *
+								div.select-style.small
+									select
+										option G&B Printer
+										option(selected='selected') B%W Printer
 					div.line-d.visible-lg-block
 				.row
 					.col-md-5.col-sm-5
@@ -172,3 +187,11 @@ block content
 						button(type="submit").btn.btn-success.pull-right Continue
 block js
 	+fileUploads
+	script.
+		$('select[name="insertOne"]').change(function() {
+			$('.hide#insertTwo').removeClass('hide')
+			$('#insertDetailsOverlay').fadeOut();
+		});
+		$('select[name="insertTwo"]').change(function() {
+			$('.hide#insertThree').removeClass('hide')
+		});
