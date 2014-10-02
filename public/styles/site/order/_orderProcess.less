@@ -128,7 +128,7 @@ div.tab-container ul.tabs.order > li.tab {
 			}
 		}
 	}
-	input.textarea{
+	textarea{
 		width: 440px;
 		height: 168px;
 		border: 1px solid @light-gray;
@@ -260,6 +260,7 @@ div.select-style{
 		font-weight: 300;
 		font-size: 14px;
 		padding: 0px 10px;
+		padding-right: 42px;
 		border: none;
 	    box-shadow: none;
 	    background-color: transparent;
@@ -327,7 +328,7 @@ div.select-style{
 }
 .file-wrapper input {
 	position: absolute;
-	top: 0;
+    top: 0;
 	right: 0;
 	filter: alpha(opacity=1);
 	opacity: 0.01;
@@ -418,6 +419,18 @@ ul.boxes{
 			}
 		}
 	}		
+}
+
+.insertOverlayDetails{
+	width: 100%;
+	height: 100%; 
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(255,255,255,0.85);
+	z-index: 999;
 }
 
 @media only screen and (max-width : 320px) {
