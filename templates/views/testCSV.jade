@@ -6,7 +6,7 @@ block content
 	#preview(style="border:1px solid gray;width:300px;")
 		img(src="/images/about-banner.png", style="width:300px;")
 	form(method="POST", action="/submit_form/")
-		input#avatar_url(type="hidden", name="avatar_url", value="/public/images/pic-user.png")
+		input#avatar_url(type="hidden", name="avatar_url")
 		input(type="text", name="username", placeholder="Username")
 		br
 		input(type="text", name="full_name", placeholder="Full name")
@@ -18,10 +18,23 @@ block content
 block js
 	script.
 		function s3_upload(){
+			//- Create Random 5 Character string to diff files
+			var text = "";
+		    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		    for( var i=0; i < 5; i++ )
+		        text += possible.charAt(Math.floor(Math.random() * possible.length));
+		    //- Get Filename of File
+			var filename = this.value;
+			var lastIndex = filename.lastIndexOf("\\");
+			if (lastIndex >= 0) {
+			    filename = filename.substring(lastIndex + 1);
+			}
+			//- Get Elements for Upload
 		    var status_elem = document.getElementById("status");
 		    var url_elem = document.getElementById("avatar_url");
 		    var preview_elem = document.getElementById("preview");
 		    var s3upload = new S3Upload({
+		    	s3_object_name: text + '_' + filename,
 		        file_dom_selector: 'files',
 		        s3_sign_put_url: '/sign_s3',
 		        onProgress: function(percent, message) {

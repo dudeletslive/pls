@@ -25,7 +25,8 @@ var _ = require('underscore'),
 	aws = require('aws-sdk'),
 	AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY,
 	AWS_SECRET_KEY = process.env.AWS_SECRET_KEY,
-	S3_BUCKET = process.env.S3_BUCKET;
+	S3_BUCKET = process.env.S3_BUCKET,
+	User = keystone.list('User');
 
 // Common Middleware
 keystone.pre('routes', middleware.initLocals);
@@ -38,7 +39,7 @@ var routes = {
 
 // Setup Route Bindings
 exports = module.exports = function(app) {
-	
+
 	// Views
 	app.get('/', routes.views.index);
 	app.get('/about', routes.views.about);
@@ -83,7 +84,6 @@ exports = module.exports = function(app) {
 	    var s3_params = {
 	        Bucket: S3_BUCKET,
 	        Key: req.query.s3_object_name,
-	        Expires: 60,
 	        ContentType: req.query.s3_object_type,
 	        ACL: 'public-read'
 	    };
