@@ -35,6 +35,7 @@ exports = module.exports = function(req, res) {
 				if (!req.body.listName || !req.body.csvJSON || !req.body.mailingList || !req.body.userID) {
 					locals.errors = true;
 					return cb(true);
+					console.log(req.body.redirect);
 				}
 				
 				return cb();

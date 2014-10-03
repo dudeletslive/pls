@@ -49,7 +49,7 @@ block content
 						div.line-a.visible-lg-block
 					//- No. of Pages
 					.col-md-4.col-sm-4
-						if mailerType === 'postcards'
+						if mailerType === 'postcards' || mailerType === 'thankYou'
 							.insertOverlayDetails
 							h3 Number of Pages
 								span *
@@ -90,6 +90,8 @@ block content
 									.col-md-5: input(name='zip', value=returnAddress ? returnAddress.zipCode : null, placeholder='80918', class=Class)
 								div.form-group: input(name='country', value=returnAddress ? returnAddress.country : 'United States of America', class=Class)
 							else
+								if mailerType === 'thankYou'
+									.insertOverlayDetails
 								h3 Size of Paper
 									span *
 								div.select-style
@@ -100,6 +102,8 @@ block content
 				.row
 					//- Printer
 					.col-md-4.col-sm-4
+						if mailerType === 'thankYou'
+							.insertOverlayDetails
 						h3 Printer Option
 							span *
 						div.select-style
@@ -109,7 +113,7 @@ block content
 						div.line-a.visible-lg-block
 					//- Type of Envelope
 					.col-md-4.col-sm-4
-						if mailerType === 'postcards' || mailerType === 'brochures'
+						if mailerType === 'postcards' || mailerType === 'brochures' || mailerType === 'thankYou'
 							.insertOverlayDetails
 						h3 Envelope Choice
 							span *
@@ -135,7 +139,7 @@ block content
 									option Hand stamp religious Christmas stamps
 									option Hand stamp non-religious Christmas stamps
 					div.line-b.visible-lg-block
-				.row(class=(mailerType === 'postcards' ? 'hide' : null || mailerType === 'brochures' ? 'hide' : null))
+				.row(class=(mailerType === 'postcards' ? 'hide' : null || mailerType === 'brochures' ? 'hide' : null || mailerType === 'thankYou' ? 'hide' : null))
 					.col-md-4.col-sm-4
 						if mailerType === 'postcards'
 							.insertOverlayDetails
@@ -263,6 +267,20 @@ block content
 							br
 							input(type='radio', name='mergeGreeting', value='These letters do not need to be personalized.')
 							label(for='doNotPersonalize') These letters do not need to be personalized.
+						else if mailerType === 'thankYou'
+							h3 Upload The File...
+							br
+							div.file-wrapper
+								span.button Choose a File
+								input(type='file')
+							br
+							br
+							h3 Additional Information
+							span.fa-stack.fa-lg.checkbox(data-input='sendTo', data-type='checkbox')
+								i.fa.fa-square.fa-stack-2x
+								i.fa.fa-check.fa-stack-1x.fa-inverse
+							input(type='checkbox', name='sendTo', value='Please ship the cards to me.', class='hide')
+							label(for='sendTo') Please ship the cards to me. 
 						else
 							h3 Upload The Letter File
 							p You may attach up to 4 files

@@ -13,6 +13,9 @@ exports = module.exports = function(req, res) {
 	locals.letterDetails = req.session.letterDetails;
 	locals.mailingList = req.session.mailingList;
 	locals.returnAddress = req.session.returnAddress;
+
+	locals.sessionType = req.session.mailerType;
+
 	// Part Three of formData
 	req.session.returnAddress = locals.formData;
 

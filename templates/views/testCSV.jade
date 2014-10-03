@@ -1,35 +1,46 @@
 extends ../layouts/default
 
 block content
-	section.spacer
-	.container
-		input(type='file', name='csv', id='csv', class='form-control')
+	input#files(type="file")
+	p#status Please select a file
+	#preview(style="border:1px solid gray;width:300px;")
+		img(src="/images/about-banner.png", style="width:300px;")
+	form(method="POST", action="/submit_form/")
+		input#avatar_url(type="hidden", name="avatar_url", value="/public/images/pic-user.png")
+		input(type="text", name="username", placeholder="Username")
 		br
-		.form-group.row(style="text-align: center;")
-			.col-md-6
-				button(class='btn btn-danger btn-lg')#convert Convert to JSON
-			.col-md-6
-				button(class='btn btn-primary btn-lg')#download Download JSON
-		pre#json.text
-	section.spacer
+		input(type="text", name="full_name", placeholder="Full name")
+		br
+		br
+		input(type="submit", value="Update profile")
+
 
 block js
 	script.
-		$('#convert').click(function() {
-			// Parse local CSV files
-			$('input#csv').parse({
-				config: {
-					header: true,
-					complete: function(results) {
-						console.log("Parse results:", results.data);
-						var keys = Object.keys(results.data);
-						console.log(keys);
-						$.each(results.data, function(key, value) {
-							var keyz = Object.keys(value);
-							$('pre#json').append(value["TITLE"] + '<br>');
-						    console.log(value["TITLE"], keyz);
-						});
-					}
-				}
-			});
-		});
+		function s3_upload(){
+		    var status_elem = document.getElementById("status");
+		    var url_elem = document.getElementById("avatar_url");
+		    var preview_elem = document.getElementById("preview");
+		    var s3upload = new S3Upload({
+		        file_dom_selector: 'files',
+		        s3_sign_put_url: '/sign_s3',
+		        onProgress: function(percent, message) {
+		            status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
+		        },
+		        onFinishS3Put: function(public_url) {
+		            status_elem.innerHTML = 'Upload completed. Uploaded to: '+ public_url;
+		            url_elem.value = public_url;
+		            preview_elem.innerHTML = '<img src="'+public_url+'" style="width:300px;" />';
+		        },
+		        onError: function(status) {
+		            status_elem.innerHTML = 'Upload error: ' + status;
+		        }
+		    });
+		}
+		/*
+		* Listen for file selection:
+		*/
+		(function() {
+		    var input_element = document.getElementById("files");
+		    input_element.onchange = s3_upload;
+		})();

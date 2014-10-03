@@ -10,6 +10,17 @@ block content
 						h3 Confirm Your Order Summary
 							span *
 						section.table-responsive
+							-var letterDetailz = JSON.stringify(letterDetails)
+							-var mailingLizt = JSON.stringify(mailingList)
+							-var returnAddresz = JSON.stringify(returnAddress)
+							h1 Letter Details
+							=letterDetailz
+							h1 Mailing List
+							=mailingLizt
+							h1 Return Address
+							=returnAddresz
+							h1 Session Type
+							=sessionType
 							table.table.borderless
 								tr
 									th FULL NAME
@@ -23,24 +34,24 @@ block content
 									th DATE SUBMITTED
 									td= n
 							table.table.borderless
-								tr
-									th PAPER CHOICE
-									td= letterDetails.paperChoice
-								tr
-									th ENVELOPE CHOICE
-									td= letterDetails.envelopeChoice != null ? letterDetails.envelopeChoice : 'None'
-								tr
-									th NUMBER OF PAGES
-									td= letterDetails.noOfPages
-								tr
-									th SIZE OF PAPER
-									td= letterDetails.paperSize
-								tr
-									th POSTAGE OPTION
-									td= letterDetails.postageOption
-								tr
-									th SPECIAL INSTRUCTION
-									td= letterDetails.specialInstructions
+								//- tr
+								//- 	th PAPER CHOICE
+								//- 	td= letterDetails.paperChoice
+								//- tr
+								//- 	th ENVELOPE CHOICE
+								//- 	td= letterDetails.envelopeChoice != null ? letterDetails.envelopeChoice : 'None'
+								//- tr
+								//- 	th NUMBER OF PAGES
+								//- 	td= letterDetails.noOfPages
+								//- tr
+								//- 	th SIZE OF PAPER
+								//- 	td= letterDetails.paperSize
+								//- tr
+								//- 	th POSTAGE OPTION
+								//- 	td= letterDetails.postageOption
+								//- tr
+								//- 	th SPECIAL INSTRUCTION
+								//- 	td= letterDetails.specialInstructions
 							table.table.borderless
 								tr
 									th FILE #1
@@ -57,11 +68,11 @@ block content
 							table.table.borderless
 								tr
 									th MAILING LIST
-									td= mailingList.list
+									//- td= mailingList.list
 							table.table.borderless
 								tr
 									th RETURN ADDRESS
-									td #{returnAddress.streetAddress} #{returnAddress.city}, #{returnAddress.state} #{returnAddress.zip} #{returnAddress.country}
+									//- td #{returnAddress.streetAddress} #{returnAddress.city}, #{returnAddress.state} #{returnAddress.zip} #{returnAddress.country}
 				.row
 					.col-md-12
 						.line-0.visible-lg-block

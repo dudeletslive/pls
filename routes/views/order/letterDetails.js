@@ -11,6 +11,7 @@ exports = module.exports = function(req, res) {
 	// Part One of formData
 	locals.letterDetails = req.session.letterDetails;
 	locals.mailerType = req.query.mailer;
+	req.session.mailerType = locals.mailerType;
 	req.session.letterDetails = locals.formData;
 
 	console.log(locals.letterDetails);

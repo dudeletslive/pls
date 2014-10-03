@@ -4,17 +4,17 @@ block content
 	+orderTabs
 	div.tab-content.order-process
 		div.tab-pane.fade.in.active#mailingList
-			.container: .jumbotron(style='background-color: transparent;'): form(action="/return-address", method="post")
+			.container: .jumbotron: form(action="/return-address", method="post")
 				.row
 					.col-md-12.col-sm-12
 						h2 
 							| Select A List To Mail To
 							span *
 					.col-md-12.col-sm-12
-						span.fa-stack.fa-lg.checkbox(data-input='list')
+						span.fa-stack.fa-lg.checkbox(data-input='list', data-type='checkbox')
 							i.fa.fa-square.fa-stack-2x
 							i.fa.fa-check.fa-stack-1x.fa-inverse
-						input(name='list', type='checkbox', value='All Lists for ' + user.userID)
+						input(name='list', type='checkbox', value='All Lists for ' + user.userID, class='hide')
 						label(for="list") Please use the complete mailing list you keep on file
 					.col-md-12.col-sm-12
 						ul.boxes
@@ -36,9 +36,12 @@ block content
 						p I will attach my current mailing list
 						a(data-toggle='modal', data-target='#newList', type='button', class='btn btn-primary') Upload Mailing List
 						br
-						if mailerType === 'christmasLetter'
+						if mailerType === 'christmasLetter' || mailerType === 'thankYou'
 							br
-							input(type='checkbox', name='oneTime', value='This is a one time mailing list for this order only.')
+							span.fa-stack.fa-lg.checkbox(data-input='oneTime', data-type='checkbox')
+								i.fa.fa-square.fa-stack-2x
+								i.fa.fa-check.fa-stack-1x.fa-inverse
+							input(type='checkbox', name='oneTime', value='This is a one time mailing list for this order only.', class='hide')
 							label(for='oneTime') This is a one time mailing list for this order only.
 					.col-md-12
 						.line-0.visible-lg-block
@@ -76,6 +79,7 @@ block js
 			$(this).click(function() {
 				$this = $(this);
 				var selected = $this.attr('data-value');
+				$('.fa-stack.checkbox[data-input="list"]').removeClass('checked');
 				$this.text('Selected').parent().parent().addClass('selected').siblings('li').removeClass('selected').find('a[name="listOption"]').text('Select This List');
 				$('select[name="list"]').val(selected).trigger('change');
 			});

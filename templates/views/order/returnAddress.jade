@@ -14,10 +14,11 @@ block content
 					.col-md-5
 						br
 						.form-group
-							span.fa-stack.fa-lg.checkbox2
+							span.fa-stack.fa-lg.checkbox2(data-input='returnAddress', data-value='Custom Address', data-type='radio')
 								i.fa.fa-square.fa-stack-2x
 								i.fa.fa-check.fa-stack-1x.fa-inverse
-							label(for="rememberMe") Use the Return Address Below
+							label(for="returnAddress") Use the Return Address Below
+							input(type='radio', name='returnAddress', value='Custom Address', class='hide')
 						-var Class = 'form-control input-lg';
 						div.form-group: input(name='streetAddress', value=returnAddress ? returnAddress.streetAddress : null, placeholder='5234 Ferrari Drive', class=Class)
 						div.form-group.row
@@ -27,11 +28,12 @@ block content
 						div.form-group: input(name='country', value=returnAddress ? returnAddress.country : 'United States of America', class=Class)
 						br
 						.form-group
-							span.fa-stack.fa-lg.checkbox2.checked
+							span.fa-stack.fa-lg.checkbox2.checked(data-input='returnAddress', data-value='PLS Return Address', data-type='radio')
 								i.fa.fa-square.fa-stack-2x
 								i.fa.fa-check.fa-stack-1x.fa-inverse
 							//- input(name="rememberMe", type="checkbox")
-							label(for="rememberMe") Use the Prayer Letter Service Address as my return address
+							label(for="returnAddress") Use the Prayer Letter Service Address as my return address
+							input(type='radio', name='returnAddress', value='PLS Return Address', class='hide')
 				.row
 					.col-md-12
 						div.col-md-6
