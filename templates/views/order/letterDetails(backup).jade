@@ -7,26 +7,20 @@ block content
 		div.tab-pane.fade.in.active#letterDetails
 			.container: .jumbotron: form(action="/mailing-list", method="post")
 				.row
-					//- Paper Type & Cardstock Choice
 					.col-md-4.col-sm-4
 						if mailerType != 'postcards'
 							h3 Paper Choice
 								span *
 							div.select-style
 								select(name="paperChoice", value=letterDetails ? letterDetails.paperChoice : null)
-									if mailerType === 'brochures'
-										option(selected='selected') Glossy White
-										option Opaque White
-										option Black And White
-									else
-										option(selected='selected') Opaque White
-										option Black And White
+									option(selected='selected') Opaque White
+									option Black And White
 						else
 							h3 Cardstock
 								span *
 							div.select-style
 								select(name="cardstockChoice", value=letterDetails ? letterDetails.paperChoice : null)
-									option Opaque white
+									option Opaque white--this should be the default
 									option Opaque blue
 									option Opaque cream
 									option Opaque green
@@ -42,52 +36,25 @@ block content
 									option Astrobright solar yellow
 									option 2-sided glossy white
 						div.line-a.visible-lg-block
-					//- No. of Pages
 					.col-md-4.col-sm-4
 						if mailerType === 'postcards'
-							.insertOverlayDetails
-						else if mailerType === 'brochures'
-							h3 Number of Brochures Needed
-								span *
-							input(type='text', name='noOfBrochures', class='form-control')
-						else
-							h3 Number of Pages
-								span *
-							div.select-style
-								select(name="noOfPages", value=letterDetails ? letterDetails.noOfPages : null)
-									option(selected='selected') One Printed Side
-									option Need Options
-						div.line-a.visible-lg-block
-					//- Size of Paper
-					.col-md-4.col-sm-4
-						if mailerType === 'postcards'
-							h3 Size of Paper
+							.overlay#insertDetailsOverlay(style='width: 100%; height: 100%; position: absolute; top: 0; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.85); z-index: 999;')
+						h3 Number of Pages
 							span *
-							div.select-style
-								select(name="paperSize", value=letterDetails ? letterDetails.paperSize : null)
-									option(selected='selected') 4 Per Sheet (4.25 x 5.5)
-									option 2 Per Sheet (4 x 6) - Requires Price Upgrade
-									option 2 Per Sheet (5.5 x 8.5) - Requires Postage Upgrade
-						else
-							if mailerType === 'brochures'
-								h3 Please Ship The Order To: 
-								-var Class = 'form-control';
-								div.form-group: input(name='streetAddress', value=returnAddress ? returnAddress.streetAddress : null, placeholder='5234 Ferrari Drive', class=Class)
-								div.form-group.row
-									.col-md-5: input(name='city', value=returnAddress ? returnAddress.city : null, placeholder='Colorado Springs', class=Class)
-									.col-md-2: input(name='state', value=returnAddress ? returnAddress.state : null, placeholder='CO', class=Class)
-									.col-md-5: input(name='zip', value=returnAddress ? returnAddress.zipCode : null, placeholder='80918', class=Class)
-								div.form-group: input(name='country', value=returnAddress ? returnAddress.country : 'United States of America', class=Class)
-							else
-								h3 Size of Paper
-									span *
-								div.select-style
-									select(name="paperSize", value=letterDetails ? letterDetails.paperSize : null)
-										option 5.5 x 10
-										option(selected='selected') 8 1/2 x 11
+						div.select-style
+							select(name="noOfPages", value=letterDetails ? letterDetails.noOfPages : null)
+								option(selected='selected') One Printed Side
+								option Need Options
+						div.line-a.visible-lg-block
+					.col-md-4.col-sm-4
+						h3 Size of Paper
+							span *
+						div.select-style
+							select(name="paperSize", value=letterDetails ? letterDetails.paperSize : null)
+								option 5.5 x 10
+								option(selected='selected') 8 1/2 x 11
 					.line-b.visible-lg-block
 				.row
-					//- Printer
 					.col-md-4.col-sm-4
 						h3 Printer Option
 							span *
@@ -96,10 +63,9 @@ block content
 								option(selected='selected') Color Printer
 								option B&amp;W Printer
 						div.line-a.visible-lg-block
-					//- Type of Envelope
 					.col-md-4.col-sm-4
-						if mailerType === 'postcards' || mailerType === 'brochures'
-							.insertOverlayDetails
+						if mailerType === 'postcards'
+							.overlay#insertDetailsOverlay(style='width: 100%; height: 100%; position: absolute; top: 0; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.85); z-index: 999;')
 						h3 Envelope Choice
 							span *
 						div.select-style
@@ -107,21 +73,20 @@ block content
 								option Plain Black
 								option(selected='selected') Standard White
 						div.line-a.visible-lg-block
-					//- Type of Postage
 					.col-md-4.col-sm-4
-						if mailerType === 'postcards' || mailerType === 'brochures'
-							.insertOverlayDetails
+						if mailerType === 'postcards'
+							.overlay#insertDetailsOverlay(style='width: 100%; height: 100%; position: absolute; top: 0; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.85); z-index: 999;')
 						h3 Postage Option
 							span *
 						div.select-style
 							select(name="postageOption", value=letterDetails ? letterDetails.postageOption : null)
-								option First Class Black
+								option Firts Class Black
 								option(selected='selected') First Class Stamp
 					div.line-b.visible-lg-block
-				.row(class=(mailerType === 'postcards' ? 'hide' : null || mailerType === 'brochures' ? 'hide' : null))
+				.row(class=mailerType === 'postcards' ? 'hide' : null)
 					.col-md-4.col-sm-4
 						if mailerType === 'postcards'
-							.insertOverlayDetails
+							.overlay#insertDetailsOverlay(style='width: 100%; height: 100%; position: absolute; top: 0; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.85); z-index: 999;')
 						h3 Inserts
 							span *
 						p You can add multiple Inserts
@@ -223,33 +188,26 @@ block content
 					div.line-d.visible-lg-block
 				.row
 					.col-md-5.col-sm-5
-						if mailerType === 'postcards'
-							h3 Upload The Postcard File
-							br
-							div.file-wrapper
-								span.button Choose a File
-								input(type='file')
-						else
-							h3 Upload The Letter File
-							p You may attach up to 4 files
-							div.file-wrapper
-								span.button Choose a File
-								input(type='file')
-							div.file-wrapper
-								span.button Choose a File
-								input(type='file')
-							div.file-wrapper
-								span.button Choose a File
-								input(type='file')
-							div.file-wrapper
-								span.button Choose a File
-								input(type='file')
+						h3 Upload The Letter File
+						p You may attach up to 4 files
+						div.file-wrapper
+							span.button Choose a File
+							input(type='file')
+						div.file-wrapper
+							span.button Choose a File
+							input(type='file')
+						div.file-wrapper
+							span.button Choose a File
+							input(type='file')
+						div.file-wrapper
+							span.button Choose a File
+							input(type='file')
 						div.line-e.visible-lg-block
 					.col-md-7.col-sm-7
 						.row
 							.col-md-12
 								h3 Special Instructions
-								textarea(name='specialInstructions')=letterDetails ? letterDetails.specialInstructions : null
+								input.textarea(type='textarea', name='specialInstructions', value=letterDetails ? letterDetails.specialInstructions : null)
 					div.line-f.visible-lg-block
 				.row
 					.col-md-12

@@ -10,6 +10,7 @@ exports = module.exports = function(req, res) {
 	locals.tabID = 'letterDetails';
 	// Part One of formData
 	locals.letterDetails = req.session.letterDetails;
+	locals.mailerType = req.query.mailer;
 	req.session.letterDetails = locals.formData;
 
 	console.log(locals.letterDetails);

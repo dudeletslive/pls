@@ -16,7 +16,7 @@ var mailingList = new keystone.List('Mailing Lists', {
 mailingList.add({
 	userID: {type: String},
 	listName: {type: String},
-	csvJSON: {type: String}
+	csvJSON: {type: String,note: '<a href="#" onClick="alert(\'Hello World!\')">Hello?</a>'}
 });
 
 
