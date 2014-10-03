@@ -36,6 +36,10 @@ block content
 						div.file-wrapper
 							span.button Choose a File
 							input(type='file')
+						if mailerType === 'christmasLetter'
+							br
+							input(type='checkbox', name='oneTime')
+							label(for='oneTime') This is a one time mailing list for this order only.
 					.col-md-12
 						.line-0.visible-lg-block
 				.row
@@ -49,6 +53,7 @@ block js
 			$(this).click(function() {
 				$this = $(this);
 				var selected = $this.attr('data-value');
-				$('select[name="list"]').val()
+				$this.parent().parent().addClass('selected').siblings('li').removeClass('selected');
+				$('select[name="list"]').val(selected);
 			});
 		});

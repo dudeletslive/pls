@@ -5,7 +5,7 @@ block content
 	div.tab-content.order-process
 		//- Letter Details type, select mailer options.
 		div.tab-pane.fade.in.active#letterDetails
-			.container: .jumbotron: form(action="/mailing-list", method="post")
+			.container: .jumbotron: form(action="/mailing-list?mailer=" + mailerType, method="post")
 				.row
 					//- Paper Type & Cardstock Choice
 					.col-md-4.col-sm-4
@@ -18,6 +18,11 @@ block content
 										option(selected='selected') Glossy White
 										option Opaque White
 										option Black And White
+									else if mailerType === 'christmasLetter'
+										option(selected='selected') Opaque White
+										option Holiday letterhead I mailed to you
+										option Holiday letterhead you ordered for me
+										option Black and White
 									else
 										option(selected='selected') Opaque White
 										option Black And White
@@ -46,6 +51,12 @@ block content
 					.col-md-4.col-sm-4
 						if mailerType === 'postcards'
 							.insertOverlayDetails
+							h3 Number of Pages
+								span *
+							div.select-style
+								select(name="noOfPages", value=letterDetails ? letterDetails.noOfPages : null)
+									option(selected='selected') One Printed Side
+									option Need Options
 						else if mailerType === 'brochures'
 							h3 Number of Brochures Needed
 								span *
@@ -106,6 +117,9 @@ block content
 							select(name="envelopeChoice", value=letterDetails ? letterDetails.envelopeChoice : null)
 								option Plain Black
 								option(selected='selected') Standard White
+								if mailerType === 'christmasLetter'
+									option Holiday envelopes I mailed to you
+									option Holiday envelopes you ordered for me
 						div.line-a.visible-lg-block
 					//- Type of Postage
 					.col-md-4.col-sm-4
@@ -117,6 +131,9 @@ block content
 							select(name="postageOption", value=letterDetails ? letterDetails.postageOption : null)
 								option First Class Black
 								option(selected='selected') First Class Stamp
+								if mailerType === 'christmasLetter'
+									option Hand stamp religious Christmas stamps
+									option Hand stamp non-religious Christmas stamps
 					div.line-b.visible-lg-block
 				.row(class=(mailerType === 'postcards' ? 'hide' : null || mailerType === 'brochures' ? 'hide' : null))
 					.col-md-4.col-sm-4
@@ -160,21 +177,22 @@ block content
 							h4 Insert #3
 							div.select-style
 								select(name="insertThree")
-									option(selected='selected') None
-									option 2 per page response slip
-									option 3 per page response slip
-									option 4 per page response slip
-									option White response envelopes-not stamped
-									option White response envelopes-stamped
-									option Cru giving envelopes-not stamped
-									option Cru giving envelopes-stamped
-									option Please insert the items I mailed to you
-									option See special instructions
+									option(selected='selected', value=null) None
+									option(value='2 Per Page Response Slip') 2 per page response slip
+									option(value='3 Per Page Response Slip') 3 per page response slip
+									option(value='4 Per Page Response Slip') 4 per page response slip
+									option(value='White Response Envelopes - Not Stamped') White response envelopes-not stamped
+									option(value='White Response Envelopes - Stamped') White response envelopes - Stamped
+									option(value='Cru Giving Envelopes - Not Stamped') Cru giving envelopes-not stamped
+									option(value='Cru Giving Envelopes - Not Stamped') Cru giving envelopes-stamped
+									option(value='Please insert the items I mailed to you') Please insert the items I mailed to you
+									option(value='See Special Instructions') See special instructions
 						br
 						div.line-c.visible-lg-block
 					.col-md-8.col-sm-8(id='fade')
 						.row
 							.col-md-4.col-sm-4
+								.insertOverlayDetails#one
 								h3 Insert Details
 								p Insert #1:
 								h4 Paper Choice
@@ -198,6 +216,7 @@ block content
 										option G&amp;B Printer
 										option(selected='selected') B%W Printer
 							.col-md-4.col-sm-4
+								.insertOverlayDetails#two
 								h3 Insert Details
 								p Insert #2:
 								h4 Paper Choice
@@ -218,7 +237,7 @@ block content
 									span *
 								div.select-style.small
 									select
-										option G&B Printer
+										option G&amp;B Printer
 										option(selected='selected') B%W Printer
 					div.line-d.visible-lg-block
 				.row
@@ -229,6 +248,21 @@ block content
 							div.file-wrapper
 								span.button Choose a File
 								input(type='file')
+						else if mailerType === 'brochures'
+							h3 Upload The Brochure File
+							br
+							div.file-wrapper
+								span.button Choose a File
+								input(type='file')
+							br
+							section.spacer
+							h3 Additional Options
+							br
+							input(type='radio', name='mergeGreeting', value='Please merge the personal greeting (other) field for each letter.')
+							label(for='mergeGreeting') Please merge the personal greeting (other) field for each letter.
+							br
+							input(type='radio', name='mergeGreeting', value='These letters do not need to be personalized.')
+							label(for='doNotPersonalize') These letters do not need to be personalized.
 						else
 							h3 Upload The Letter File
 							p You may attach up to 4 files
@@ -259,9 +293,21 @@ block js
 	+fileUploads
 	script.
 		$('select[name="insertOne"]').change(function() {
-			$('.hide#insertTwo').removeClass('hide')
-			$('#insertDetailsOverlay').fadeOut();
+			$('.hide#insertTwo').removeClass('hide');
+			if($(this).val().indexOf('response slip') > -1) {
+				$('.insertOverlayDetails#one').fadeOut();	
+			} else {
+				$('.insertOverlayDetails#one').fadeIn();
+				$('.insertOverlayDetails#two').fadeIn();
+				$('#insertTwo').addClass('hide');
+			}
 		});
 		$('select[name="insertTwo"]').change(function() {
-			$('.hide#insertThree').removeClass('hide')
+			$('.hide#insertThree').removeClass('hide');
+			if($(this).val().indexOf('response slip') > -1) {
+				$('.insertOverlayDetails#two').fadeOut();	
+			} else {
+				$('.insertOverlayDetails#two').fadeIn();
+				$('#insertThree').addClass('hide');
+			}
 		});
