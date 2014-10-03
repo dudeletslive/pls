@@ -4,7 +4,7 @@ block content
 	+orderTabs
 	div.tab-content.order-process
 		div.tab-pane.fade.in.active#mailingList
-			.container: .jumbotron: form(action="/return-address", method="post")
+			.container: .jumbotron(style='background-color: transparent;'): form(action="/return-address", method="post")
 				.row
 					.col-md-12.col-sm-12
 						h2 
@@ -53,7 +53,7 @@ block js
 			$(this).click(function() {
 				$this = $(this);
 				var selected = $this.attr('data-value');
-				$this.parent().parent().addClass('selected').siblings('li').removeClass('selected');
+				$this.text('Selected').parent().parent().addClass('selected').siblings('li').removeClass('selected').find('a[name="listOption"]').text('Select This List');
 				$('select[name="list"]').val(selected);
 			});
 		});
