@@ -5,7 +5,6 @@ block content
 	div.tab-content.order-process
 		div.tab-pane.fade.in.active#mailingList
 			.container: .jumbotron: form(action="/return-address", method="post")
-				input(type='text', name='mailingList', class='form-control', value='Mailing List')
 				.row
 					.col-md-12.col-sm-12
 						h2 
@@ -19,36 +18,18 @@ block content
 						label(for="rememberMe") Please use the complete mailing list you keep on file
 					.col-md-12.col-sm-12
 						ul.boxes
-							li.box.selected
-								.col-md-12.col-sm-12
-									img(src='../images/list-name.png')
-									h2 List Name Goes Here
-									h5
-										span#Count 1,835 
-										span Contacts in this list
-									a.btn.btn-sm.btn-green.center-block(href='#')
-										| SELECTED
-										span.fa-stack
-											span.fa.fa-stack-2x.fa-circle-o
-											span.fa.fa-stack-1x.fa-check
-							li.box
-								.col-md-12.col-sm-12
-									img(src='../images/list-name.png')
-									h2 List Name Goes Here
-									h5
-										span#Count 1,835 
-										span Contacts in this list
-									a.btn.btn-sm.btn-green.center-block(href='#') SELECT THIS LIST
-							li.box
-								.col-md-12.col-sm-12
-									img(src='../images/list-name.png')
-									h2 List Name Goes Here
-									h5
-										span#Count 1,835 
-										span Contacts in this list
-									a.btn.btn-sm.btn-green.center-block(href='#') SELECT THIS LIST
-					.col-md-12
-						.line-0.visible-lg-block
+							for list in lists
+								li.box
+									.col-md-12
+										img(src='../images/list-name.png')
+										h2= list.listName
+										h5
+											span#Count= Object.keys(JSON.parse(list.csvJSON)).length
+											span &nbsp;Contacts in this list
+										a.btn.btn-sm.btn-green(name='listOption', data-value=list.listName) Select This List
+						select(name='list', class='form-control', class='hide')
+							for list in lists
+								option(value=list.listName)= list.listName
 				.row
 					.col-md-12
 						p I will attach my current mailing list
@@ -63,3 +44,11 @@ block content
 						button(type="submit").btn.btn-success.pull-right Continue
 block js
 	+fileUploads
+	script.
+		$('a[name="listOption"]').each(function() {
+			$(this).click(function() {
+				$this = $(this);
+				var selected = $this.attr('data-value');
+				$('select[name="list"]').val()
+			});
+		});

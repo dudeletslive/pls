@@ -15,6 +15,10 @@ exports = module.exports = function(req, res) {
 	locals.returnAddress = req.session.returnAddress;
 	// Part Two of formData
 	req.session.mailingList = locals.formData;
+
+	console.log('Return Address: ' + req.session);
+
+	console.log(locals.formData);
 	
 	// Render the view
 	view.render('order/returnAddress');
