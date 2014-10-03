@@ -29,6 +29,12 @@ exports = module.exports = function(req, res) {
 
 	view.query('lists', keystone.list('Mailing Lists').model.find().where('userID', req.user.userID).sort('sortOrder'));
 
+	if (!req.query.mailer) {
+		res.redirect('/order');
+		req.flash('error', 'Please select a type of mailer before proceeding.');
+	} else {
+		locals.mailerType = req.query.mailer;
+		view.render('order/mailingList');
+	}
 	// Render the view
-	view.render('order/mailingList');
 };
