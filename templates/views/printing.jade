@@ -6,13 +6,13 @@ block content
 		p.small Involve your supporters in your ministry in a powerful way.
 	div.tab-container: .container
 		ul.tabs#tabs
-			li.tab.icon-prayer(href="#prayerLetters",data-toggle="tab"): a(href="#") Prayer Letters
+			li.tab.icon-prayer.active(href="#prayerLetters",data-toggle="tab"): a(href="#") Prayer Letters
 			li.tab.icon-postcards(href="#postCards",data-toggle="tab"): a(href="#") Post Cards
-			li.tab.icon-brochure.active(href="#brochures",data-toggle="tab"): a(href="#") Brochures
+			li.tab.icon-brochure(href="#brochures",data-toggle="tab"): a(href="#") Brochures
 			li.tab.icon-funds(href="#fundAppeals",data-toggle="tab"): a(href="#") Fund Appeals
 			li.tab.icon-christmas(href="#christmas",data-toggle="tab"): a(href="#") Christmas / Holiday
 	div.tab-content
-		div.tab-pane.fade#prayerLetters
+		div.tab-pane.fade.in.active#prayerLetters
 			.jumbotron
 				.col-md-6.col-sm-6
 					div.icon-letter.icon-big
@@ -29,7 +29,7 @@ block content
 					p Postcards are a great way to share a quick photo and update and stay in touch with ministry partners.  Postcards can be printed on any color of cardstock, including glossy white cardstock.
 					p While the cost of cutting your postcards is built in, there is a $2 minimum cutting fee for less than 100 postcards.
 				div.clearfix
-		div.tab-pane.fade.in.active#brochures
+		div.tab-pane.fade#brochures
 			.jumbotron
 				.col-md-6.col-sm-6
 					div.icon-brochure.icon-big
