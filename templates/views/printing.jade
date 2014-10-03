@@ -6,14 +6,14 @@ block content
 		p.small Involve your supporters in your ministry in a powerful way.
 	div.tab-container: .container
 		ul.tabs#tabs
-			li.tab.icon-prayer(href="#prayerLetters",data-toggle="tab"): a(href="#") Prayer Letters
+			li.tab.icon-prayer.active(href="#prayerLetters",data-toggle="tab"): a(href="#") Prayer Letters
 			li.tab.icon-postcards(href="#postCards",data-toggle="tab"): a(href="#") Post Cards
-			li.tab.icon-brochure.active(href="#brochures",data-toggle="tab"): a(href="#") Brochures
+			li.tab.icon-brochure(href="#brochures",data-toggle="tab"): a(href="#") Brochures
 			li.tab.icon-funds(href="#fundAppeals",data-toggle="tab"): a(href="#") Fund Appeals
 			li.tab.icon-christmas(href="#christmas",data-toggle="tab"): a(href="#") Christmas / Holiday
-	div.tab-content
-		div.tab-pane.fade#prayerLetters
-			.jumbotron
+	div.tab-content.container
+		div.tab-pane.fade.in.active#prayerLetters
+			.container
 				.col-md-6.col-sm-6
 					div.icon-letter.icon-big
 				.col-md-6.col-sm-6
@@ -21,7 +21,7 @@ block content
 					p Communicate effectively with your ministry partners through a monthly prayer letter.  We offer many options of paper and envelopes.  You may choose color or black & white printing.  We can print a standard letter size, legal size and booklets on 11 x 17 paper.
 					p occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 		div.tab-pane.fade#postCards
-			.jumbotron
+			.container
 				.col-md-6.col-sm-6
 					div.icon-postcards.icon-medium
 				.col-md-6.col-sm-6
@@ -29,15 +29,15 @@ block content
 					p Postcards are a great way to share a quick photo and update and stay in touch with ministry partners.  Postcards can be printed on any color of cardstock, including glossy white cardstock.
 					p While the cost of cutting your postcards is built in, there is a $2 minimum cutting fee for less than 100 postcards.
 				div.clearfix
-		div.tab-pane.fade.in.active#brochures
-			.jumbotron
+		div.tab-pane.fade#brochures
+			.container
 				.col-md-6.col-sm-6
 					div.icon-brochure.icon-big
 				.col-md-6.col-sm-6
 					p We’re happy to print and fold as many or as few brochures as you need.  Brochures can be printed on any of our papers, including glossy paper.
 				div.clearfix
 		div.tab-pane.fade#fundAppeals
-			.jumbotron
+			.container
 				.col-md-6.col-sm-6
 					div.icon-funds.icon-small
 				.col-md-6.col-sm-6
@@ -57,7 +57,7 @@ block content
 					p Please contact us to let us know how we can help you.
 				div.clearfix
 		div.tab-pane.fade#christmas
-			.jumbotron
+			.container
 				.col-md-6.col-sm-6
 					div.icon-christmas.icon-big
 				.col-md-6.col-sm-6
