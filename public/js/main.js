@@ -1,3 +1,24 @@
 jQuery('document').ready(function() {
-	$('document').alert('Wooooot');
+	// Special Checkboxes
+	$('.fa-stack.checkbox, .fa-stack.checkbox2').each(function() {
+		// Checkbox Variables
+		var $this = $(this),
+			input = $this.attr('data-input');
+		$this.click(function() {
+			$this.toggleClass('checked');
+			$('input[name="'+ input +'"]').trigger('click');
+		})
+	});
+	$('input[name="list"]').change(function() {
+		var val = $(this).val();
+		$('select[name="list"]').val(val);
+		$('a[name="listOption"]').each(function() {
+			$this = $(this);
+			var selected = $this.attr('data-value');
+			$this.parent().parent().siblings('li').removeClass('selected').find('a[name="listOption"]').text('Select This List');
+		});
+	});
+	$('select[name="list"]').change(function() {
+		$('input[name="list"]').prop('checked', false);
+	});
 });

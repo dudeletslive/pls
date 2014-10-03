@@ -14,6 +14,8 @@ exports = module.exports = function(req, res) {
 	// Part One of formData
 	req.session.letterDetails = locals.formData;
 
+	locals.redirect = req.url;
+
 	console.log('Mailing List: ' + req.session);
 
 	// Find Current User to Base lists loaded on

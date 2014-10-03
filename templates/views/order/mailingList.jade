@@ -11,11 +11,11 @@ block content
 							| Select A List To Mail To
 							span *
 					.col-md-12.col-sm-12
-						span.fa-stack.fa-lg.checkbox
+						span.fa-stack.fa-lg.checkbox(data-input='list')
 							i.fa.fa-square.fa-stack-2x
 							i.fa.fa-check.fa-stack-1x.fa-inverse
-						//- input(name="rememberMe", type="checkbox")
-						label(for="rememberMe") Please use the complete mailing list you keep on file
+						input(name='list', type='checkbox', value='All Lists for ' + user.userID)
+						label(for="list") Please use the complete mailing list you keep on file
 					.col-md-12.col-sm-12
 						ul.boxes
 							for list in lists
@@ -30,15 +30,15 @@ block content
 						select(name='list', class='form-control', class='hide')
 							for list in lists
 								option(value=list.listName)= list.listName
+							option(value='All Lists for ' + user.userID) All
 				.row
 					.col-md-12
 						p I will attach my current mailing list
-						div.file-wrapper
-							span.button Choose a File
-							input(type='file')
+						a(data-toggle='modal', data-target='#newList', type='button', class='btn btn-primary') Upload Mailing List
+						br
 						if mailerType === 'christmasLetter'
 							br
-							input(type='checkbox', name='oneTime')
+							input(type='checkbox', name='oneTime', value='This is a one time mailing list for this order only.')
 							label(for='oneTime') This is a one time mailing list for this order only.
 					.col-md-12
 						.line-0.visible-lg-block
@@ -46,6 +46,29 @@ block content
 					.col-md-12
 						a(href="/order").btn.btn-success.btn-boder-green.pull-left Start Over
 						button(type="submit").btn.btn-success.pull-right Continue
+		.modal.fade(tab-index='-1', role='dialog', aria-labelledby='newList', aria-hidden='true', id='newList')
+			.modal-dialog.modal-sm: .modal-content: form(method="post", action='/mailing-lists', id='listForm')
+				.modal-body
+					button.close(type="button", data-dismiss="modal")
+						span(aria-hidden="true") &#215;
+						span.sr-only Close
+					h3 Create New Mailing List
+					if errors
+						.form-group
+							.alert.alert-danger
+								| Please complete all fields before continuing.
+					.form-group(class=(errors != null ? 'has-error' : null)).clearfix
+						input(type='hidden', name='redirect', value=redirect)
+						input(type='hidden', name='userID', value=user.userID)
+						input(type='hidden', name='csvJSON')
+					.form-group(class=(errors != null ? 'has-error' : null)).clearfix
+						label(for='listName') Name Your Mailing List
+						input(name='listName', type='text', class='form-control')
+					.form-group.clearfix
+						input(name='mailingList', type='file', class='form-control', id='csv')
+				.modal-footer
+					button.btn.btn-default(type="button", data-dismiss="modal") Cancel
+					button.btn.btn-primary(id="listNew", type="submit") Create List
 block js
 	+fileUploads
 	script.
@@ -54,6 +77,38 @@ block js
 				$this = $(this);
 				var selected = $this.attr('data-value');
 				$this.text('Selected').parent().parent().addClass('selected').siblings('li').removeClass('selected').find('a[name="listOption"]').text('Select This List');
-				$('select[name="list"]').val(selected);
+				$('select[name="list"]').val(selected).trigger('change');
+			});
+		});
+		$('button#listNew[type="submit"]').click(function() {
+			var $this = $(this);
+			event.preventDefault();
+			// Parse local CSV files
+			$('input#csv').parse({
+				config: {
+					header: true,
+					complete: function(results) {
+						var str = JSON.stringify(results.data),
+							str = str.replace(/first ?name/ig, "firstName"),
+							str = str.replace(/last ?name/ig, "lastName"),
+							str = str.replace(/(street|address) ?(1|one)/ig, "address1"),
+							str = str.replace(/street|address ?2|two/ig, "address2"),
+							str = str.replace(/street|address ?3|three/ig, "address3"),
+							str = str.replace(/city|town|county/ig, "city"),
+							str = str.replace(/state|province/ig, "state"),
+							str = str.replace(/zip|postal ?code/ig, "zip");
+							//- str = str.replace(/"/g, "'");
+						$this.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i>');
+						$('input[name="csvJSON"').val(str).trigger('change');
+						//- $.each(results.data, function(key, value) {
+						//- 	var keys = Object.keys(value);
+						//- 	$('pre#json').append(value["TITLE"] + '<br>');
+						//-     console.log(value["TITLE"], keys);
+						//- });
+					}
+				}
+			});
+			$('input[name="csvJSON"').change(function() {
+				document.getElementById('listForm').submit();
 			});
 		});

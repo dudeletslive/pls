@@ -53,8 +53,13 @@ exports = module.exports = function(req, res) {
 					newList = new List(mailingList);
 
 				newList.save(function(err) {
-					res.redirect('/mailing-lists');
-					req.flash('success', 'Your new mailing list was created successfully. You can edit it below.')
+					if(!req.body.redirect) {
+						req.flash('success', 'Your new mailing list was created successfully. You can edit it below.');
+						res.redirect('/mailing-lists');
+					} else {	
+						req.flash('success', 'Your new mailing list was created successfully. You may now select it below.')
+						res.redirect(req.body.redirect);
+					}
 					return cb(err);
 				});
 			
