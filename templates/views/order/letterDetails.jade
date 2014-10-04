@@ -206,13 +206,6 @@ block content
 										option Paper Choice
 										option(selected='selected') Black and White
 								div.clearfix
-								h4 Paper Size
-									span *
-								div.select-style.small
-									select
-										option 5.5 x 10
-										option(selected='selected') 8.5 x 11
-								div.clearfix
 								h4 Printer Option
 									span *
 								div.select-style.small
@@ -230,13 +223,6 @@ block content
 										option Paper Choice
 										option(selected='selected') Black and White
 								div.clearfix
-								h4 Paper Size
-									span *
-								div.select-style.small
-									select
-										option 5.5 x 10
-										option(selected='selected') 8.5 x 11
-								div.clearfix
 								h4 Printer Option
 									span *
 								div.select-style.small
@@ -249,15 +235,17 @@ block content
 						if mailerType === 'postcards'
 							h3 Upload The Postcard File
 							br
-							div.file-wrapper
+							div.file-wrapper#status
 								span.button Choose a File
-								input(type='file')
+								input(type='file', id='postcardFile', data-url='url', data-status='status')
+							input(type='hidden', name='postcardFile', id='url')
 						else if mailerType === 'brochures'
 							h3 Upload The Brochure File
 							br
-							div.file-wrapper
+							div.file-wrapper#status
 								span.button Choose a File
-								input(type='file')
+								input(type='file', id='brochureFile', data-url='url', data-status='status')
+							input(type='hidden', name='brochureFile', id='url')
 							br
 							section.spacer
 							h3 Additional Options
@@ -270,9 +258,10 @@ block content
 						else if mailerType === 'thankYou'
 							h3 Upload The File...
 							br
-							div.file-wrapper
+							div.file-wrapper#status
 								span.button Choose a File
-								input(type='file')
+								input(type='file', id='thankYouFile', data-url='url', data-status='status')
+							input(type='hidden', name='thankYouFile', id='url')
 							br
 							br
 							h3 Additional Information
@@ -284,18 +273,22 @@ block content
 						else
 							h3 Upload The Letter File
 							p You may attach up to 4 files
-							div.file-wrapper
+							div.file-wrapper#statusOne
 								span.button Choose a File
-								input(type='file')
-							div.file-wrapper
+								input(type='file', id='letterFileOne', data-url='urlOne', data-status='statusOne')
+							input(type='hidden', name='letterFileOne', id='urlOne')
+							div.file-wrapper#statustwo
 								span.button Choose a File
-								input(type='file')
-							div.file-wrapper
+								input(type='file', id='letterFiletwo', data-url='urltwo', data-status='statustwo')
+							input(type='hidden', name='letterFiletwo', id='urltwo')
+							div.file-wrapper#statusThree
 								span.button Choose a File
-								input(type='file')
-							div.file-wrapper
+								input(type='file', id='letterFileThree', data-url='urlThree', data-status='statusThree')
+							input(type='hidden', name='letterFileThree', id='urlThree')
+							div.file-wrapper#statusFour
 								span.button Choose a File
-								input(type='file')
+								input(type='file', id='letterFileFour', data-url='urlFour', data-status='statusFour')
+							input(type='hidden', name='letterFileFour', id='urlFour')
 						div.line-e.visible-lg-block
 					.col-md-7.col-sm-7
 						.row
@@ -329,3 +322,50 @@ block js
 				$('#insertThree').addClass('hide');
 			}
 		});
+	script.
+		function s3_upload(file){
+			input_element = file;
+			console.log(input_element)
+			//- Create Random 5 Character string to diff files
+			var text = "";
+		    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		    for( var i=0; i < 5; i++ )
+				text += possible.charAt(Math.floor(Math.random() * possible.length));
+			//- Get Filename of File
+			var filename = file.value;
+			var lastIndex = filename.lastIndexOf("\\");
+			if (lastIndex >= 0) {
+				filename = filename.substring(lastIndex + 1);
+			}
+			//- Get Elements for Upload
+			var dataStatus = $(file).data('status'),
+				dataUrl = $(file).data('url');
+			var status_elem = document.getElementById(dataStatus),
+				url_elem =  document.getElementById(dataUrl);
+			var s3upload = new S3Upload({
+				s3_object_name: text + '_' + filename,
+				file_dom_selector: file.id,
+				s3_sign_put_url: '/sign_s3',
+				onProgress: function(percent, message) {
+				    status_elem.innerHTML = ' Upload progress: ' + percent + '% ' + message;
+				},
+				onFinishS3Put: function(public_url) {
+				    status_elem.innerHTML = ' Uploaded '+ filename;
+				    url_elem.value = public_url;
+				},
+				onError: function(status) {
+				    status_elem.innerHTML = ' Upload error: ' + status;
+				}
+			});
+		}
+		/*
+		* Listen for file selection:
+		*/
+		(function() {
+			$('input[type="file"]').each(function() {
+				$(this).change(function() {
+					var $this = $(this);
+					s3_upload(this);
+				})
+			});
+		})();
