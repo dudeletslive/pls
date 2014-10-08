@@ -2,8 +2,8 @@ var keystone = require('keystone'),
 	async = require('async');
 
 var services = {
-	facebook: require('../../lib/auth/facebook'),
-	linkedin: require('../../lib/auth/linkedin')
+	facebook: require('../../lib/auth/facebook')
+	// linkedin: require('../../lib/auth/linkedin')
 }
 
 exports = module.exports = function(req, res, next) {
