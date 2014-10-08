@@ -1,0 +1,26 @@
+extends ../../layouts/default
+
+block content
+	div.myAccount
+		section.spacer
+		div.jumbotron: .container
+			div.panel
+				form(method="post")#myAccount
+					input(type='hidden', name='action', value='confirm.details')
+					h1.lead Thanks for joining! Please confirm your details.
+					+flash-messages(messages)
+					input(type='hidden', name='userID', value=authUser.profileId)
+					.form-group.row
+						.col-xs-6
+							label(for='name.first') First Name
+							input(type='text' name='name.first' placeholder='First Name (required)' value=authUser.name.first).form-control
+						.col-xs-6
+							label(for='name.last') Last Name
+							input(type='text' name='name.last' placeholder='Last Name (required)' value=authUser.name.last).form-control
+					.form-group.col-md-12
+						label(for='email') Email Address
+						input(type='email' name='email' placeholder='Email (required)' value=authUser.email).form-control.form-control-labelled
+					.form-group.col-md-12
+						section.spacer
+						button(type='submit').btn.btn-primary.btn-block That all checks out, let's go &rarr;
+		section.spacer

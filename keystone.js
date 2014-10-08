@@ -55,9 +55,7 @@ keystone.set('routes', require('./routes'));
 // default email templates, you may remove them if you're using your own.
 
 keystone.set('email locals', {
-	logo_src: '/images/logo-email.gif',
-	logo_width: 194,
-	logo_height: 76,
+	logo_src: '/images/logo.png',
 	theme: {
 		email_bg: '#f9f9f9',
 		link_color: '#2697de',
@@ -66,7 +64,11 @@ keystone.set('email locals', {
 			background_color: '#2697de',
 			border_color: '#1a7cb7'
 		}
-	}
+	},
+	host: (function() {
+		if (keystone.get('env') === 'staging') return 'http://pls.herokuapp.com';
+			return (keystone.get('host') || 'http://localhost:') + (keystone.get('port') || '3000');
+		})()
 });
 
 // Setup replacement rules for emails, to automate the handling of differences
@@ -91,7 +93,8 @@ keystone.set('email tests', require('./routes/emails'));
 
 keystone.set('nav', {
 	'enquiries': 'enquiries',
-	'users': 'users'
+	'users': 'users',
+	'mailers': ['Prayer Letters', 'Postcards', 'Brochures', 'Fund Appeals', 'Thank You Letters', 'Christmas Letters']
 });
 
 // Start Keystone to connect to your database and initialise the web server

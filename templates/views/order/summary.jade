@@ -13,14 +13,105 @@ block content
 							-var letterDetailz = JSON.stringify(letterDetails)
 							-var mailingLizt = JSON.stringify(mailingList)
 							-var returnAddresz = JSON.stringify(returnAddress)
-							h1 Letter Details
-							=letterDetailz
-							h1 Mailing List
-							=mailingLizt
-							h1 Return Address
-							=returnAddresz
-							h1 Session Type
-							=sessionType
+							form(name='summary', method='post')
+								.form-group
+									label Action
+									input(type='text', name='action', value=sessionType)
+								.form-group
+									label Name
+									input(type='text', name='name.first', value=user.name.first)
+									input(type='text', name='name.last', value=user.name.last)
+								.form-group
+									if sessionType == 'postcards'
+										label Postcard Choice
+										input(type='text', name='cardstock', value=letterDetails.cardstockChoice)
+									else 
+										label Paper Choice
+										input(type='text', name='paperChoice', value=letterDetails.paperChoice)
+								.form-group
+									if sessionType == 'brochures'
+										label Number of Brochures Needed
+										input(type='text', name='numberOfBrochuresNeeded', value=letterDetails.numberOfPages)
+									else
+										label Number Of Pages
+										input(type='text', name='numberOfPages', value=letterDetails.numberOfPages)
+								.form-group
+									label Paper Size
+									input(type='text', name='sizeOfPaper', value=letterDetails.paperSize)
+								.form-group
+									label Printer Option
+									input(type='text', name='printerOption', value=letterDetails.printerOption)
+								.form-group
+									label Envelope Choice
+									input(type='text', name='envelopeChoice', value=letterDetails.envelopeChoice)
+								.form-group
+									label Postage Option
+									input(type='text', name='postageOption', value=letterDetails.postageOption)
+								if sessionType == 'brochures'
+									.form-group
+										label Ship To the Order Of
+										input(type='text', name='shipTheOrderTo.street1', value=letterDetails.streetAddress)
+										input(type='text', name='shipTheOrderTo.suburb', value=letterDetails.city)
+										input(type='text', name='shipTheOrderTo.postcode', value=letterDetails.zipCode)
+										input(type='text', name='shipTheOrderTo.country', value=letterDetails.country)
+								.form-group
+									label Insert One
+									if letterDetails.insertOne != 'none'
+										input(type='checkbox', value='true', name='insertOne.isConfigured', checked)
+										input(type='text', name='insertOne.paperChoice', value=letterDetails.paperChoiceOne)
+										input(type='text', name='insertOne.printerOption', value=letterDetails.printerChoiceOne)
+								.form-group
+									label Insert Two
+									if letterDetails.insertTwo != 'none'
+										input(type='checkbox', value='true', name='insertTwo.isConfigured', checked)
+										input(type='text', name='insertTwo.paperChoice', value=letterDetails.paperChoiceTwo)
+										input(type='text', name='insertTwo.printerOption', value=letterDetails.printerChoiceTwo)
+								.form-group
+									label Insert Three
+									if letterDetails.insertThree != 'none'
+										input(type='checkbox', value='true', name='insertThree.isConfigured', checked)
+								.form-group
+									label File
+									input(type='text', name='file', value=letterDetails.file)
+								.form-group
+									label File One
+									input(type='text', name='fileOne', value=letterDetails.fileOne)
+								.form-group
+									label File Two
+									input(type='text', name='fileTwo', value=letterDetails.fileTwo)
+								.form-group
+									label File Three
+									input(type='text', name='fileThree', value=letterDetails.fileThree)
+								.form-group
+									label File Four
+									input(type='text', name='fileFour', value=letterDetails.fileFour)
+								.form-group
+									label Special Instructions
+									input(type='text', name='specialInstructions', value=letterDetails.specialInstructions)
+								.form-group
+									label Return Address
+									input(type='checkbox', name='customReturnAddress', value=returnAddress.customReturnAddress, checked)
+									label Your Ministry Update From
+									input(type='text', name='yourMinistryUpdateFrom', value=returnAddress.yourMinistryUpdateFrom)
+								.form-group
+									label Return Address Custom
+									input(type='text', name='returnAddress.street1', value=returnAddress.streetAddress)
+									input(type='text', name='returnAddress.suburb', value=returnAddress.city)
+									input(type='text', name='returnAddress.postcode', value=returnAddress.zipCode)
+									input(type='text', name='returnAddress.country', value=returnAddress.country)
+								.form-group
+									label Mailing List
+									input(type='text', name='mailingList', value=mailingList.list)
+
+
+
+								//- .form-group
+								//- 	label Printer Option
+								//- 	input(type='text', name='printerOption', value=letterDetails.paperChoice)
+								//- .form-group
+								//- 	label Printer Option
+								//- 	input(type='text', name='printerOption', value=letterDetails.paperChoice)
+								button(type='submit') Submit
 							table.table.borderless
 								tr
 									th FULL NAME
@@ -79,6 +170,7 @@ block content
 				.row
 					.col-md-12
 						a(href="/order").btn.btn-success.btn-boder-green.pull-left Start Over
-						a.btn.btn-success.pull-right Continue
+						form(action='/summary?action='+sessionType, method='post')
+							button(type="submit").btn.btn-success.pull-right Confirm
 block js
 	+fileUploads

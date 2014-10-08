@@ -3,12 +3,19 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "keystone": "~0.2.27",
     "async": "~0.9.0",
-    "underscore": "~1.7.0",
+    "aws-sdk": "*",
     "dotenv": "0.4.0",
     "ejs": "*",
-    "aws-sdk": "*"
+    "keystone": "~0.2.27",
+    "passport-facebook": "^1.0.2",
+    "passport-github": "^0.1.5",
+    "passport-google-oauth": "^0.1.5",
+    "passport-linkedin": "^0.1.3",
+    "passport-linkedin-oauth2": "^1.1.1",
+    "passport-twitter": "^1.0.2",
+    "request": "^2.34.0",
+    "underscore": "~1.7.0"
   },
   "devDependencies": {
     "grunt": "~0.4.4",

@@ -1,0 +1,30 @@
+extends ../../layouts/default
+
+block content
+	div.account: div.jumbotron: .container
+		//- Create New Pass
+		section.spacer
+		div.panel
+			h1 Create A New Password
+				.small Reset and confirm your password below.
+			form#account(method='post', action='/reset-password/' + key)
+				input(type='hidden', name='action', value='reset-password')
+				.form-group.col-md-12
+					label(for="password") Password
+					input.form-control(
+						type='password'
+						name='password'
+						placeholder='••••••'
+						id='signin-password'
+						value='')
+				.form-group.col-md-12
+					label(for="password_confirm") Confirm Password
+					input.form-control.form-control--last(
+						type='password'
+						name='password_confirm'
+						placeholder='••••••'
+						id='confirm-password'
+						value='')
+				.form-group.clearfix#formFooter().col-md-12
+						button(type='submit').btn.btn-primary Reset Password
+		section.spacer

@@ -9,7 +9,6 @@ exports = module.exports = function(req, res) {
 	// item in the header navigation.
 	locals.tabID = 'confirmation';
 
-
 	console.log('Confirmation Page: ' + req.session);
 	
 	// Render the view

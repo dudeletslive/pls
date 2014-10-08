@@ -2,9 +2,11 @@ extends ../../layouts/default
 
 block content
 	div.contact-list-home: div.jumbotron: .container
-		div.title
+		div.title(style='position: relative;')
 			span.icon.home
 			h2 Mailing Lists
+			h4(style='position: absolute; right: 0; top: 0;')
+				a(href='/my-account') Edit My Account
 		div.col-md-12.line
 		div.col-md-12
 			ul

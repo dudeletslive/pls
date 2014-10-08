@@ -7,16 +7,17 @@ block content
 			section.spacer
 			div.panel
 				h1 My Account
-					.small Edit your account information belows
-				form.formMyAccount.col-md-8(method="post")#myAccount
+					.small Edit your account information below
+				form.formMyAccount.col-md-8(method="post", autocomplete="off")#myAccount
+					input(type='hidden', name='action', value='save')
 					.col-md-5
 						.form-group.clearfix
 							.col-md-6
-								label(for="f_name") First Name
-								input(name="f_name", class="left form-control", placeholder="Jane", value=user.name.first)
+								label(for="name.first") First Name
+								input(name="name.first", class="left form-control", placeholder="Jane", value=user.name.first)
 							.col-md-6
-								label(for="l_name") Last Name
-								input(name="l_name", class="right form-control", placeholder="Doe", value=user.name.last)
+								label(for="name.last") Last Name
+								input(name="name.last", class="right form-control", placeholder="Doe", value=user.name.last)
 						.form-group.clearfix
 							.col-md-12
 								label(for="email") Email Address
@@ -24,29 +25,29 @@ block content
 						.form-group.clearfix
 							.col-md-6
 								label(for="password") New Password
-								input(name="password", class="left form-control", placeholder="••••••", type="password", value=user.password)
+								input(name="password", class="left form-control", placeholder="••••••", type="password", autocomplete='off')
 							.col-md-6
-								label(for="confirm_pass") Confirm Password
-								input(name="confirm_pass", class="right form-control", placeholder="••••••", type="password")
+								label(for="password_confirm") Confirm Password
+								input(name="password_confirm", class="right form-control", placeholder="••••••", type="password", autocomplete='off')
 					.col-md-5
-						.form-group.clearfx
+						.form-group.clearfix
 							.col-md-12
-								label(for="addressLineOne") Address
-								input(name="addressLineOne", class="form-control", placeholder="5234 Ferrari Drive")
+								label(for="address.street1") Address
+								input(name="address.street1", class="form-control", placeholder="5234 Ferrari Drive", value=user.address.street1)
 						.form-group.clearfix#address
 							.col-md-12
-								label(for="addressLineTwo") Address Line Two
-								input(name="addressLineTwo", class="form-control", placeholder="Apt. 123")
+								label(for="address.street2") Address Line Two
+								input(name="address.street2", class="form-control", placeholder="Apt. 123", value=user.address.street2)
 						.form-group.clearfix
 							.col-md-6
-								label(for="city") City
-								input(name="city", class="left form-control", placeholder="Colorado Springs")
+								label(for="address.suburb") City
+								input(name="address.suburb", class="left form-control", placeholder="Colorado Springs", value=user.address.suburb)
 							.col-md-6
-								label(for="zip") Zip
-								input(name="zip", class="right form-control", placeholder="80918")
+								label(for="address.postcode") Zip
+								input(name="address.postcode", class="right form-control", placeholder="80918", value=user.address.postcode)
 					div.clearfix
 					.col-md-2.col-md-push-4
-						a.btn.btn-lg.btn-success(href='#') SAVE
+						button(type="submit").btn.btn-lg.btn-success SAVE
 			section.spacer
 block js
 	script.

@@ -18,29 +18,29 @@ block content
 								i.fa.fa-square.fa-stack-2x
 								i.fa.fa-check.fa-stack-1x.fa-inverse
 							label(for="returnAddress") Use the Return Address Below
-							input(type='radio', name='returnAddress', value='Custom Address', class='hide')
+							input(type='radio', name='customReturnAddress', value='true', class='')
 						-var Class = 'form-control input-lg';
 						div.form-group: input(name='streetAddress', value=returnAddress ? returnAddress.streetAddress : null, placeholder='5234 Ferrari Drive', class=Class)
 						div.form-group.row
 							.col-md-5: input(name='city', value=returnAddress ? returnAddress.city : null, placeholder='Colorado Springs', class=Class)
 							.col-md-2: input(name='state', value=returnAddress ? returnAddress.state : null, placeholder='CO', class=Class)
-							.col-md-5: input(name='zip', value=returnAddress ? returnAddress.zipCode : null, placeholder='80918', class=Class)
+							.col-md-5: input(name='zipCode', value=returnAddress ? returnAddress.zipCode : null, placeholder='80918', class=Class)
 						div.form-group: input(name='country', value=returnAddress ? returnAddress.country : 'United States of America', class=Class)
 						br
 						.form-group
-							span.fa-stack.fa-lg.checkbox2.checked(data-input='returnAddress', data-value='PLS Return Address', data-type='radio')
+							span.fa-stack.fa-lg.checkbox2.checked(data-input='returnAddress', data-value='true', data-type='radio')
 								i.fa.fa-square.fa-stack-2x
 								i.fa.fa-check.fa-stack-1x.fa-inverse
 							//- input(name="rememberMe", type="checkbox")
 							label(for="returnAddress") Use the Prayer Letter Service Address as my return address
-							input(type='radio', name='returnAddress', value='PLS Return Address', class='hide')
+							input(type='radio', name='customReturnAddress', value='false', class='')
 				.row
 					.col-md-12
 						div.col-md-6
 							.col-md-4
-								span.phrase "Your Ministry Update from 
+								span.phrase "Your Ministry Update from "
 							.col-md-6
-								input.form-control.txtPhrase
+								input(name='yourMinistryUpdateFrom', value=letterDetails.yourMinistryUpdateFrom).form-control.txtPhrase
 					.col-md-12
 						.line-0.visible-lg-block
 				br

@@ -26,19 +26,79 @@ var _ = require('underscore'),
 	AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY,
 	AWS_SECRET_KEY = process.env.AWS_SECRET_KEY,
 	S3_BUCKET = process.env.S3_BUCKET,
-	User = keystone.list('User');
+	User = keystone.list('User'),
+	passport = require('passport'), 
+	LinkedInStrategy = require('passport-linkedin').Strategy;
 
 // Common Middleware
 keystone.pre('routes', middleware.initLocals);
 keystone.pre('render', middleware.flashMessages);
 
-// Import Route Controllers
-var routes = { 
-	views: importRoutes('./views') 
+var LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
+
+passport.use(new LinkedInStrategy({
+	clientID: process.env.LINKEDIN_API_KEY,
+	clientSecret: process.env.LINKEDIN_SECRET_KEY,
+	callbackURL: "http://localhost:3000/authz/linkedin/callback",
+	scope: ['r_emailaddress', 'r_basicprofile'],
+	}, function(accessToken, refreshToken, profile, done) {
+		// asynchronous verification, for effect...
+		process.nextTick(function () {
+			// console.log(profile);
+			return done(null, profile);
+		});
+    }
+));
+
+var routes = {
+	views: importRoutes('./views'),
+	auth: importRoutes('./auth')
 };
 
 // Setup Route Bindings
 exports = module.exports = function(app) {
+
+	passport.serializeUser(function(user, done) {
+		done(null, user);
+	});
+
+	passport.deserializeUser(function(user, done) {
+		done(null, user);
+	});
+
+
+	// LinkedIn oAuth2
+	app.get('/authz/linkedin', passport.authenticate('linkedin', { state: 'auth'  }));
+	app.get('/authz/linkedin/callback', 
+			passport.initialize(),
+			passport.authenticate('linkedin'),
+			function(req, res) {
+				var userJSON = req.user._json;
+				var auth = {
+
+					type: 'linkedIn',
+					
+					name: {
+						first: userJSON.firstName,
+						last: userJSON.lastName
+					},
+					
+					email: userJSON.emailAddress.length ? userJSON.emailAddress : null,
+					
+					profileId: userJSON.id,
+					
+					username: userJSON.formattedName,
+					avatar: userJSON.pictureUrl,
+					
+					// accessToken: data.accessToken,
+					// refreshToken: data.refreshToken
+
+				}
+			
+				req.session.auth = auth;
+				res.redirect('/confirm');
+			}
+		);
 
 	// Views
 	app.get('/', routes.views.index);
@@ -52,11 +112,17 @@ exports = module.exports = function(app) {
 	// Based on the link, set locals, then display appropriate panel
 	// On Account Management page based on which local variable is set.
 	app.get('/forgot-password', routes.views.session.account);
-	app.get('/reset', routes.views.session.account);
 
 	// User Session
 	app.all('/sign-in', routes.views.session.signIn);
 	app.get('/sign-out', routes.views.session.signOut);
+	app.all('/forgot-password', routes.views.session.forgotPass);
+	app.all('/reset-password/:key', routes.views.session.resetPass);
+
+	// User Auth
+	app.all('/auth/:service', routes.auth.service);
+	// app.all('/auth/facebook', routes.auth.service);
+	app.all('/confirm', routes.auth.confirm);
 
 	// Register
 	app.all('/register', routes.views.register);
@@ -74,7 +140,7 @@ exports = module.exports = function(app) {
 	app.all('/confirmation', routes.views.order.confirmation);
 	
 	//My Account
-	app.get('/my-account', middleware.requireUser, routes.views.session.myAccount);
+	app.all('/my-account', middleware.requireUser, routes.views.session.myAccount);
 
 	// Test CSV
 	app.get('/test', routes.views.test);

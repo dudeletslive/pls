@@ -8,14 +8,15 @@ block content
 			div.panel
 				h1 Forgot Your Password?
 					.small No worries! We'll send you a link to reset it.
-				form#account
+				form(method='post', action='/forgot-password')#account
+					input(type='hidden', name='action', value='forgot-password')
 					.form-group.clearfix
 						.col-md-12
 							label(for="email") Email Address
 							input(name="email", class="form-control", placeholder="janedoe@cru.org")
 					.form-group.clearfix#formFooter
 						.col-md-12
-							a.btn.btn-primary.pull-right Reset
+							button(type='submit').btn.btn-primary.pull-right Reset
 			section.spacer
 		if locals.reset
 			//- Create New Pass
@@ -23,18 +24,17 @@ block content
 			div.panel
 				h1 Create A New Password
 					.small Reset and confirm your password below.
-				form#account
-					.form-group.clearfix
-						.col-md-12
-							label(for="password") Password
-							input(name="password", class="form-control", placeholder="••••••", type="password")
-					.form-group.clearfix
-						.col-md-12
-							label(for="confirm_pass") Confirm Password
-							input(name="confirm_pass", class="form-control", placeholder="••••••", type="password")
-					.form-group.clearfix#formFooter
-						.col-md-12
-							a.btn.btn-primary.pull-right Save
+				form#account(method='post', action='/reset-password/' + key)
+					input(type='hidden', name='action', value='reset-password')
+				.form-control
+					label(for="password") Password
+					input.form-control(
+						type='password'
+						name='password'
+						placeholder='••••••'
+						id='signin-password'
+						value='')
+				button.btn.btn-block.btn-primary.btn-submit(type='submit') Reset password
 			section.spacer
 		//- Pass Reset Success
 		//- section.spacer
