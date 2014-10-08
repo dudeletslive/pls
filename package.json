@@ -8,6 +8,7 @@
     "dotenv": "0.4.0",
     "ejs": "*",
     "keystone": "~0.2.27",
+    "passport": "^0.2.1",
     "passport-facebook": "^1.0.2",
     "passport-github": "^0.1.5",
     "passport-google-oauth": "^0.1.5",
