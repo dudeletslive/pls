@@ -16,13 +16,13 @@ mixin flash-message(message, type)
 			if message.title
 				h4= message.title
 			if message.detail
-				p= message.detail
+				p!= message.detail
 			if message.list
 				ul
 					each item in message.list
 						li= item
 		else
-			= message
+			!= message
 
 mixin orderTabs
 	.jumbotron#order: .container

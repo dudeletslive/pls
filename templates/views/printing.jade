@@ -4,13 +4,14 @@ block content
 	.jumbotron#printing: .container
 		h1 Serving All Your Ministry <br> Communication Needs
 		p.small Involve your supporters in your ministry in a powerful way.
-	div.tab-container: .container
+	div.tab-container: .container-fluid
 		ul.tabs#tabs
 			li.tab.icon-prayer.active(href="#prayerLetters",data-toggle="tab"): a(href="#") Prayer Letters
 			li.tab.icon-postcards(href="#postCards",data-toggle="tab"): a(href="#") Post Cards
 			li.tab.icon-brochure(href="#brochures",data-toggle="tab"): a(href="#") Brochures
 			li.tab.icon-funds(href="#fundAppeals",data-toggle="tab"): a(href="#") Fund Appeals
 			li.tab.icon-christmas(href="#christmas",data-toggle="tab"): a(href="#") Christmas / Holiday
+			li.tab.iconHeart.iconHeart-heart(href="#thankYouCards",data-toggle="tab"): a(href="#") Thank You Cards
 	div.tab-content.container
 		div.tab-pane.fade.in.active#prayerLetters
 			.container
@@ -18,8 +19,7 @@ block content
 					div.icon-letter.icon-big
 				.col-md-6.col-sm-6
 					h2  Prayer Letters
-					p Communicate effectively with your ministry partners through a monthly prayer letter.  We offer many options of paper and envelopes.  You may choose color or black & white printing.  We can print a standard letter size, legal size and booklets on 11 x 17 paper.
-					p occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					p Communicate effectively with your ministry partners through a monthly prayer letter. We offer many options of paper and envelopes. You may choose color or black &amp; white printing. We can print a standard letter size, legal size and booklets on 11 x 17 paper.
 		div.tab-pane.fade#postCards
 			.container
 				.col-md-6.col-sm-6
@@ -64,18 +64,25 @@ block content
 					h2  Christmas / Holiday
 					p We are happy to mail Christmas letters or cards for you.  We can print a letter you create, print your text on a themed holiday paper or print your signature on a holiday card.
 					p You'll need to purchase the paper/envelopes or cards on your end and mail them to us. You may find it easiest to order on-line and have the product shipped directly to us.
-					p You will find a good selection at Desktop Papers. If you're mailing paper or cards to us we must have your letter and the cards/paper in our office the first week of December to guarantee we’ll be able to get these in the mail before Christmas.  Any letters we receive after this date may not reach ministry partners before Christmas.
+					p You will find a good selection at <a href="http://www.desktoppapers.com">Desktop Papers</a>. If you're mailing paper or cards to us we must have your letter and the cards/paper in our office the first week of December to guarantee we’ll be able to get these in the mail before Christmas.  Any letters we receive after this date may not reach ministry partners before Christmas.
 					p We often recommend the Astrobright Gamma green and Re-entry red envelopes at this time of the year as these colors match many of the themed holiday letterhead.
 					p During the months of November and December the turn-around time to get your order processed can be 3-4 days, rather than the typical 2 day turn-around time, especially if there are inserts or the letter is mail-merged.
 					h3 Holiday inserts:
 					p During the holidays you may want to include a family photo with your letter. We're happy to insert photos at any time. For the quickest turn-around time, we ask that you mail us the photos ready to be inserted. You can order these through a website, like Walmart, and have them mailed directly to our office. If this just isn't possible, we're happy to receive an emailed .jpg file from you and have the prints made locally.  Please allow 2-3 extra days to process your order.
 					p 
 					p We are happy to hand stamp religious or non-religious holiday stamps for these orders for an additional cost of $.02/letter.
-					p Add something about additional mailing list for these orders?
+		div.tab-pane.fade#thankYouCards
+			.container
+				.col-md-6.col-sm-6
+					div.iconHeart.iconHeart-heart.icon-big
+				.col-md-6.col-sm-6
+					h2 Thank You Cards
+					p We are happy to print and mail Thank you cards to a select group of your ministry partners. We can also print the cards and mail them to you.  
+					p You may prefer a larger card or a smaller card with your own photo and message.
 		div.clearfix
 		.jumbotron.start-orden
 			.container#data
-				.data.hide(data-status='hide',data-action="#prayerLetters")
+				.data.show(data-status='show',data-action="#prayerLetters")
 					.col-md-6
 						p The basic cost for a 1-sided, color letter includes: your choice of any of the Opaque, Astrobright, Astroparche or Royal Fiber colors of paper; a white mailing envelope; folding and inserting your letter, sealing the envelope and affixing a first class stamp.
 					.col-md-6
@@ -87,7 +94,7 @@ block content
 							a.btn.btn-success(href='/order', role='button') START ORDER
 				.data.hide(data-status='hide',data-action="#postCards")
 					.col-md-6
-						p Most commonly, you’ll choose a color photo on one-side and black & white text on the other
+						p Most commonly, you’ll choose a color photo on one-side and black &amp; white text on the other.
 					.col-md-6
 						.col-md-6
 							p 
@@ -95,7 +102,7 @@ block content
 								span $.64/card
 						.col-md-6
 							a.btn.btn-success(href='/order', role='button') START ORDER
-				.data.show(data-status='show',data-action="#brochures")
+				.data.hide(data-status='hide',data-action="#brochures")
 					.col-md-6.col-sm-6.col-xs-12
 						p Most commonly, you’ll choose a two-sided, color brochure on glossy paper.
 					.col-md-6.col-sm-6.col-xs-12						
@@ -118,8 +125,9 @@ block content
 							a.btn.btn-success(href='/order', role='button') START ORDER
 				.data.hide(data-status='hide',data-action="#christmas")
 					.col-md-6.col-sm-6.col-xs-12
-						p Printing a one-side, color Christmas letter
-						p Printing your signature in a card
+						.col-md-6
+							p: strong Printing a one-side, color Christmas letter
+							p: strong Printing your signature in a card
 					.col-md-6.col-sm-6.col-xs-12
 						.col-md-6
 							p 
@@ -128,6 +136,21 @@ block content
 							p 
 								span.from FROM
 								span $.88/card
+						.col-md-6
+							a.btn.btn-success(href='/order', role='button') START ORDER
+				.data.hide(data-status='hide',data-action="#thankYouCards")
+					.col-md-6.col-sm-6.col-xs-12
+						.col-md-6
+							p: strong The larger Thank You card
+							p: strong The smaller Thank You card
+					.col-md-6.col-sm-6.col-xs-12
+						.col-md-6
+							p 
+								span.from FROM
+								span $1.07/card
+							p 
+								span.from FROM
+								span $.98/card
 						.col-md-6
 							a.btn.btn-success(href='/order', role='button') START ORDER
 block js
