@@ -34,10 +34,10 @@ mixin orderTabs
 			each tab in orderTabs
 				//- #success if Complete
 				li(class=(tabID == tab.key ? 'active tab' : 'tab')): a(href=tab.href)
-					span.fa-stack
-						i.fa.fa-stack-2x.fa-circle-o
-						//- i.fa.fa-stack-1x.fa-check
-					| &nbsp;
+					//- span.fa-stack
+					//- 	i.fa.fa-stack-2x.fa-circle-o
+					//- 	//- i.fa.fa-stack-1x.fa-check
+					//- | &nbsp;
 					span= tab.label
 
 mixin fileUploads

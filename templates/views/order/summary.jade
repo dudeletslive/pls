@@ -6,14 +6,130 @@ block content
 		div.tab-pane.fade.in.active#summary
 			.container: .jumbotron
 				.row
-					.col-md-7
+					.col-md-10
 						h3 Confirm Your Order Summary
 							span *
-						section.table-responsive
-							-var letterDetailz = JSON.stringify(letterDetails)
-							-var mailingLizt = JSON.stringify(mailingList)
-							-var returnAddresz = JSON.stringify(returnAddress)
-							form(name='summary', method='post')
+						table.table.borderless
+							tr
+								th FULL NAME
+								td= user.name.full
+							tr
+								th EMAIL ADDRESS
+								td= user.email
+							tr
+								-var d = new Date();
+								-var n = d.getMonth() + '/' + d.getDate() + '/' + d.getFullYear();
+								th DATE SUBMITTED
+								td= n
+							tr: td(colspan="2"): hr
+							tr
+								if sessionType == 'postcards'
+									th CARDSTOCK CHOICE
+									td= letterDetails.cardstockChoice ? letterDetails.cardstockChoice : 'Not Specified'
+								else
+									th Paper Choice
+									td= letterDetails.paperChoice ? letterDetails.paperChoice : 'Not Specified'
+							tr
+								if sessionType == 'brochures'
+									th Number of Brochures
+									td= letterDetails.numberOfPages ? letterDetails.numberOfPages : 'Not Specified'
+								else
+									th Number of Pages
+									td= letterDetails.numberOfPages
+							if letterDetails.paperSize
+								tr 
+									th Paper Size
+									td= letterDetails.paperSize
+							if letterDetails.printerOption
+								tr
+									th Printer Option
+									td= letterDetails.printerOption
+							if letterDetails.envelopeChoice
+								tr
+									th Envelope Choice
+									td= letterDetails.envelopeChoice
+							if letterDetails.postageOption
+								tr
+									th Postage Option
+									td= letterDetails.postageOption
+							tr: td(colspan="2"): hr
+							if letterDetails.oneTime
+								tr
+									th One Time Mailing List
+									tr True
+							if letterDetails.sendTo
+								tr 
+									th Ship To
+									td= letterDetails.sendTo
+							if sessionType == 'brochures'
+								tr
+									th Ship To The Order Of
+									td #{letterDetails.streetAddress}, #{letterDetails.city}, #{letterDetails.state} #{letterDetails.zipCode}, #{letterDetails.country}
+								tr
+									th Merge Greetings
+									td= letterDetails.mergeGreeting ? letterDetails.mergeGreeting : 'Not Specified'
+							if letterDetails.insertOne != 'none'
+								tr
+									th Insert One Paper Choice
+									td= letterDetails.paperChoiceOne
+								tr
+									th Insert One Printer Option
+									td= letterDetails.printerChoiceOne
+							if letterDetails.insertTwo != 'none'
+								tr
+									th Insert Two Paper Choice
+									td= letterDetails.paperChoiceTwo
+								tr
+									th Insert Two Printer Option
+									td= letterDetails.printerChoiceTwo
+							if letterDetails.insertThree != 'none'
+								tr
+									th Third Insert
+									td= Yes
+							tr: td(colspan="2"): hr
+							if letterDetails.fileOne
+								tr
+									th File One
+									td= letterDetails.fileOne
+							if letterDetails.fileTwo
+								tr
+									th File Two
+									td= letterDetails.fileTwo
+							if letterDetails.fileThree
+								tr
+									th File Three
+									td= letterDetails.fileThree
+							if letterDetails.fileFour
+								tr
+									th File Four
+									td= letterDetails.fileFour
+							if letterDetails.file
+								tr
+									th File
+									td= letterDetails.file
+							tr: td(colspan="2"): hr
+							tr
+								th Special Instructions
+								td= letterDetails.specialInstructions ? letterDetails.specialInstructions : 'None specified.'
+							if returnAddress.yourMinistryUpdateFrom
+								tr
+									th Return Address
+									td Your Ministry Update From #{returnAddress.yourMinistryUpdateFrom}
+							else if returnAddress.customReturnAddress
+								tr
+									th Custom Return Address
+									td #{returnAddress.street1}, #{returnAddress.city}, #{returnAddress.state} #{returnAddress.zipCode}, #{returnAddress.country}
+							tr
+								th Mailing List
+								td= mailingList.list
+				.row
+					.col-md-12
+						.line-0.visible-lg-block
+				.row
+					.col-md-12
+						a(href="/order").btn.btn-success.btn-boder-green.pull-left Start Over
+						form(name='summary', method='post', action='/summary?action='+sessionType)
+							div.hide
 								.form-group
 									label Action
 									input(type='text', name='action', value=sessionType)
@@ -47,6 +163,12 @@ block content
 								.form-group
 									label Postage Option
 									input(type='text', name='postageOption', value=letterDetails.postageOption)
+								.form-group
+									label One Time
+									input(type='text', name='oneTime', value=mailingList.oneTime)
+								.form-group
+									label Send To
+									input(type='text', name='shipTo', value=letterDetails.sendTo)
 								if sessionType == 'brochures'
 									.form-group
 										label Ship To the Order Of
@@ -54,6 +176,9 @@ block content
 										input(type='text', name='shipTheOrderTo.suburb', value=letterDetails.city)
 										input(type='text', name='shipTheOrderTo.postcode', value=letterDetails.zipCode)
 										input(type='text', name='shipTheOrderTo.country', value=letterDetails.country)
+									.form-group
+										label Merge Greetings
+										input(type='text', name='personalization', value=letterDetails.mergeGreeting)
 								.form-group
 									label Insert One
 									if letterDetails.insertOne != 'none'
@@ -102,75 +227,6 @@ block content
 								.form-group
 									label Mailing List
 									input(type='text', name='mailingList', value=mailingList.list)
-
-
-
-								//- .form-group
-								//- 	label Printer Option
-								//- 	input(type='text', name='printerOption', value=letterDetails.paperChoice)
-								//- .form-group
-								//- 	label Printer Option
-								//- 	input(type='text', name='printerOption', value=letterDetails.paperChoice)
-								button(type='submit') Submit
-							table.table.borderless
-								tr
-									th FULL NAME
-									td= user.name.full
-								tr
-									th EMAIL ADDRESS
-									td= user.email
-								tr
-									-var d = new Date();
-									-var n = d.getMonth() + '/' + d.getDate() + '/' + d.getFullYear();
-									th DATE SUBMITTED
-									td= n
-							table.table.borderless
-								//- tr
-								//- 	th PAPER CHOICE
-								//- 	td= letterDetails.paperChoice
-								//- tr
-								//- 	th ENVELOPE CHOICE
-								//- 	td= letterDetails.envelopeChoice != null ? letterDetails.envelopeChoice : 'None'
-								//- tr
-								//- 	th NUMBER OF PAGES
-								//- 	td= letterDetails.noOfPages
-								//- tr
-								//- 	th SIZE OF PAPER
-								//- 	td= letterDetails.paperSize
-								//- tr
-								//- 	th POSTAGE OPTION
-								//- 	td= letterDetails.postageOption
-								//- tr
-								//- 	th SPECIAL INSTRUCTION
-								//- 	td= letterDetails.specialInstructions
-							table.table.borderless
-								tr
-									th FILE #1
-									td File Name Here
-								tr
-									th FILE #2
-									td File Name Here
-								tr
-									th FILE #3
-									td File Name Here
-								tr
-									th FILE #4
-									td File Name Here
-							table.table.borderless
-								tr
-									th MAILING LIST
-									//- td= mailingList.list
-							table.table.borderless
-								tr
-									th RETURN ADDRESS
-									//- td #{returnAddress.streetAddress} #{returnAddress.city}, #{returnAddress.state} #{returnAddress.zip} #{returnAddress.country}
-				.row
-					.col-md-12
-						.line-0.visible-lg-block
-				.row
-					.col-md-12
-						a(href="/order").btn.btn-success.btn-boder-green.pull-left Start Over
-						form(action='/summary?action='+sessionType, method='post')
 							button(type="submit").btn.btn-success.pull-right Confirm
 block js
 	+fileUploads

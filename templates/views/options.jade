@@ -9,10 +9,18 @@ block content
 			.col-md-3
 				.tabs-left
 					ul.tabs#tabs
-						li.tab.icon-printing(href="#yourMailingList",data-toggle="tab"): a(href="#") YOUR MAILING LIST
-						li.tab.icon-postcards(href="#gettingYourLetterToUs",data-toggle="tab"): a(href="#") GETTING YOUR LETTER TO US
-						li.tab.icon-discounts.active(href="#discounts",data-toggle="tab"): a(href="#") DISCOUNTS
-						li.tab.icon-envelope(href="#paperEnvelopes",data-toggle="tab"): a(href="#") PAPER &amp; ENVELOPES
+						li.tab(href="#yourMailingList",data-toggle="tab"): a(href="#")
+							i.glyph.glyph-postCards
+							|YOUR MAILING LIST
+						li.tab(href="#gettingYourLetterToUs",data-toggle="tab"): a(href="#") 
+							i.glyph.glyph-sendingLetter
+							|GETTING YOUR LETTER TO US
+						li.tab.active(href="#discounts",data-toggle="tab"): a(href="#") 
+							i.glyph.glyph-discounts
+							|DISCOUNTS
+						li.tab(href="#paperEnvelopes",data-toggle="tab"): a(href="#")
+							i.glyph.glyph-prayerLetters
+							|PAPER &amp; ENVELOPES
 						li.tab.icon-insert(href="#insert",data-toggle="tab"): a(href="#") INSERTS
 			.col-md-9
 				.row

@@ -37,6 +37,20 @@ block content
 							.col-md-6
 								label(for="confirm_pass") Confirm Password
 								input(name="confirm_pass", class="right form-control", placeholder="••••••", type="password")
+						.form-group.clearfix
+							.col-md-12
+								label(for='CRU-staffAccount') CRU Staff Account or Ministry Chartfield
+								input(type='text', class='form-control', name='CRU-staffAccount')
+						.form-group.clearfix
+							.col-md-12
+								label(for='communicateBy') Please Communicate with me by:
+									div.small.muted (You can choose one or both)
+								.form-group
+									input(type='checkbox', name='communicateBy', value='Emailing my invoice to me')
+									|&nbsp; Emailing my invoice to me.
+								.form-group
+									input(type='checkbox', name='communicateBy', value='Mailing my invoice to me')
+									|&nbsp; Mailing my invoice to me.
 						.form-group.clearfix#formFooter
 							.col-md-6
 								span.fa-stack.fa-lg

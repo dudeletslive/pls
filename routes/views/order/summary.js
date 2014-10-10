@@ -1,7 +1,10 @@
 var keystone = require('keystone'),
 	Enquiry = keystone.list('Prayer Letters'),
 	Two = keystone.list('Postcards'),
-	Three = keystone.list('Brochures');
+	Three = keystone.list('Brochures'),
+	Four = keystone.list('Fund Appeals'),
+	Five = keystone.list('Thank You Letters'),
+	Six = keystone.list('Christmas Letters');
 
 exports = module.exports = function(req, res) {
 	
@@ -35,10 +38,11 @@ exports = module.exports = function(req, res) {
 		}, function(err) {
 			if (err) {
 				locals.validationErrors = err.errors;
+				next();
 			} else {
 				locals.enquirySubmitted = true;
+				res.redirect('/confirmation');
 			}
-			next();
 		});
 		
 	});
@@ -57,10 +61,11 @@ exports = module.exports = function(req, res) {
 		}, function(err) {
 			if (err) {
 				locals.validationErrors = err.errors;
+				next();
 			} else {
 				locals.enquirySubmitted = true;
+				res.redirect('/confirmation');
 			}
-			next();
 		});
 		
 	});
@@ -79,14 +84,94 @@ exports = module.exports = function(req, res) {
 		}, function(err) {
 			if (err) {
 				locals.validationErrors = err.errors;
+				next();
 			} else {
 				locals.enquirySubmitted = true;
+				res.redirect('/confirmation');
 			}
-			next();
+		});
+		
+	});
+
+	view.on('post', {action: 'fundAppeal'}, function(next) {
+
+		console.log('This is fundAppeals');
+
+		var newEnquiry = new Four.model(),
+			updater = newEnquiry.getUpdateHandler(req);
+		
+		updater.process(req.body, {
+			flashErrors: true,
+			fields: 'name, paperChoice, numberOfPages, sizeOfPaper, printerOption, envelopeChoice, postageOption, fileOne, fileTwo, fileThree, fileFour, mailingList, specialInstructions, customReturnAddress, returnAddress, yourMinistryUpdateFrom',
+			errorMessage: 'There was a problem submitting your enquiry:'
+		}, function(err) {
+			if (err) {
+				locals.validationErrors = err.errors;
+				next();
+			} else {
+				locals.enquirySubmitted = true;
+				res.redirect('/confirmation');
+			}
 		});
 		
 	});
 	
+	view.on('post', {action: 'thankYou'}, function(next) {
+
+		console.log('This is thankYou');
+
+		var newEnquiry = new Five.model(),
+			updater = newEnquiry.getUpdateHandler(req);
+		
+		updater.process(req.body, {
+			flashErrors: true,
+			fields: 'name, paperChoice, postageOption, file, shipTo, oneTime, mailingList, specialInstructions, customReturnAddress, returnAddress, yourMinistryUpdateFrom',
+			errorMessage: 'There was a problem submitting your enquiry:'
+		}, function(err) {
+			if (err) {
+				locals.validationErrors = err.errors;
+				next();
+			} else {
+				locals.enquirySubmitted = true;
+				res.redirect('/confirmation');
+			}
+		});
+		
+	});
+
+	view.on('post', {action: 'christmasLetter'}, function(next) {
+
+		console.log('This is christmasLetter');
+
+		var newEnquiry = new Six.model(),
+			updater = newEnquiry.getUpdateHandler(req);
+		
+		updater.process(req.body, {
+			flashErrors: true,
+			fields: 'name, paperChoice, numberOfPages, sizeOfPaper, printerOption, envelopeChoice, postageOption, fileOne, fileTwo, fileThree, fileFour, mailingList, specialInstructions, oneTime, customReturnAddress, returnAddress, insertOne.isConfigured, insertTwo.isConfigured, insertThree.isConfigured, insertOne.paperChoice, insertOne.printerOption, insertTwo.paperChoice, insertTwo.printerOption, yourMinistryUpdateFrom',
+			errorMessage: 'There was a problem submitting your enquiry:'
+		}, function(err) {
+			if (err) {
+				locals.validationErrors = err.errors;
+				next();
+			} else {
+				locals.enquirySubmitted = true;
+				res.redirect('/confirmation');
+			}
+		});
+		
+	});
+
 	// Render the view
-	view.render('order/summary');
+	if (typeof req.session.letterDetails === 'undefined' || typeof req.session.mailingList === 'undefined' || typeof req.session.returnAddress === 'undefined') {
+		if (locals.sessionType) {
+			req.flash('error', 'Please fill out all parts of the order form before attempting to view your order summary.');
+			res.redirect('/letter-details?mailer=' + locals.sessionType);
+		} else {
+			req.flash('error', 'Please fill out all parts of the order form before attempting to view your order summary.');
+			res.redirect('/order');
+		}
+	} else {
+		view.render('order/summary');
+	}
 };
