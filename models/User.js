@@ -16,11 +16,20 @@ var User = new keystone.List('User');
 User.add({
 	name: { type: Types.Name, required: true, index: true },
 	email: { type: Types.Email, initial: true, required: true, index: true },
-	password: { type: Types.Password, initial: true, required: true },
-	resetPasswordKey: { type: String, noedit: true, hidden: false },
-	userID: { type: String, noedit: true },
+	password: { type: Types.Password },
+	resetPasswordKey: { type: String, hidden: true },
+	userID: { type: String, noedit: true, hidden: true },
+	referredBy: { type: String, noedit: true },
 }, 'Address', {
 	address: { type: Types.Location },
+	returnAddress: { type: Types.Location },
+}, 'Preferences', {
+	emailInvoice: { type: Boolean, label: 'Email my invoices to me.' },
+	mailInvoice: { type: Boolean, label: 'Mail my invoices to me.' },
+	emailReminders: { type: Boolean, label: 'Periodically email me reminders VIA MailChimp'},
+	cruStaffOrMinistryChartfield: { type: String },
+	ministryUpdateFrom: { type: String, label: 'Your Ministry Update From:' },
+	databaseMaintenance: { type: String, label: 'To maintain my database I would like to:' },
 }, 'Permissions', {
 	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true}
 }, 'Services', {

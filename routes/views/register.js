@@ -51,7 +51,6 @@ exports = module.exports = function(req, res) {
 			},
 			
 			function(cb) {
-
 				var userData = {
 					name: {
 						first: req.body.f_name,
@@ -60,7 +59,16 @@ exports = module.exports = function(req, res) {
 					email: req.body.email,
 					password: req.body.password,
 					userID: req.body.userID,
-					website: req.body.website
+					website: req.body.website,
+					address: req.body.address,
+					returnAddress: req.body.returnAddress,
+					emailInvoice: req.body.emailInvoice,
+					mailInvoice: req.body.mailInvoice,
+					emailReminders: req.body.emailReminders,
+					ministryUpdateFrom: req.body.ministryUpdateFrom,
+					databaseMaintance: req.body.databaseMaintance,
+					referredBy: req.body.referral,
+					cruStaffOrMinistryChartfield: req.body.CRUstaffAccount
 				};
 				
 				var User = keystone.list('User').model,
@@ -82,7 +90,7 @@ exports = module.exports = function(req, res) {
 				} else if (req.body.target && !/join|signin/.test(req.body.target)) {
 					res.redirect(req.body.target);
 				} else {
-					res.redirect('/');
+					res.redirect('/my-account');
 				}
 			}
 			

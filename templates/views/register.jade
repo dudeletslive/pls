@@ -39,27 +39,86 @@ block content
 								input(name="confirm_pass", class="right form-control", placeholder="••••••", type="password")
 						.form-group.clearfix
 							.col-md-12
-								label(for='CRU-staffAccount') CRU Staff Account or Ministry Chartfield
-								input(type='text', class='form-control', name='CRU-staffAccount')
+								label(for='CRUstaffAccount') CRU Staff Account or Ministry Chartfield
+								input(type='text', class='form-control', name='CRUstaffAccount', value=form.CRUstaffAccount ? form.CRUstaffAccount : null)
+						hr
+						h3 Mailing Address
+						.form-group.clearfix: .col-md-12
+							label Street Address
+							input(name='address[street1]', placeholder='5234 Ferrari Drive', class='form-control')
+						.form-group.clearfix
+							.col-md-5(style='padding-left: 0; padding-right: 15px;')
+								label City
+								input(name='address[suburb]', class='form-control')
+							.col-md-2(style='padding: 0;')
+								label State
+								input(name='address[state]', placeholder='CO', class='form-control')
+							.col-md-5(style='padding-right: 0;')
+								label Post Code
+								input(name='address[postcode]', placeholder='80918', class='form-control')
+						.form-group.clearfix: .col-md-12
+							label Country
+							input(name='address[country]', class='form-control')
+						hr
+						h3 Return Address
+							div.small (Leave blank if you wish to use the PLS Return Address)
+						.form-group.clearfix: .col-md-12
+							label Street Address
+							input(name='returnAddress[street1]', placeholder='5234 Ferrari Drive', class='form-control')
+						.form-group.clearfix
+							.col-md-5(style='padding-left: 0; padding-right: 15px;')
+								label City
+								input(name='returnAddress[suburb]', class='form-control')
+							.col-md-2(style='padding: 0;')
+								label State
+								input(name='returnAddress[state]', placeholder='CO', class='form-control')
+							.col-md-5(style='padding-right: 0;')
+								label Post Code
+								input(name='returnAddress[postcode]', placeholder='80918', class='form-control')
+						.form-group.clearfix: .col-md-12
+							label Country
+							input(name='returnAddress[country]', class='form-control')
 						.form-group.clearfix
 							.col-md-12
-								label(for='communicateBy') Please Communicate with me by:
-									div.small.muted (You can choose one or both)
-								.form-group
-									input(type='checkbox', name='communicateBy', value='Emailing my invoice to me')
-									|&nbsp; Emailing my invoice to me.
-								.form-group
-									input(type='checkbox', name='communicateBy', value='Mailing my invoice to me')
-									|&nbsp; Mailing my invoice to me.
+								label To use the PLS return address, include the following line on my envelopes:
+								p(style='margin-top: 7px;') Your ministry update from: 
+								input(type='text', name='ministryUpdateFrom', class='form-control')
+						.form-group.clearfix
+							.col-md-12
+								label.clearfix Invoice Preferences
+								div
+									input(type='checkbox' id='invoicePreference' name='emailInvoice' value='true' checked=form.emailInvoice ? 'checked' : false)
+									|&nbsp; Email my invoice to me.
+								div
+									input(type='checkbox' id='invoicePreference' name='mailInvoice' value='true' checked=form.mailInvoice ? 'checked' : false)
+									|&nbsp; Mail my invoice to me.
+						.form-group.clearfix
+							.col-md-12
+								label Mailing List
+								div
+									input(type='checkbox' id='mailingList', name='emailReminders' value='true', checked=form.emailReminders ? 'checked' : false)
+									|&nbsp; Periodically email me reminders.
+						.form-group.clearfix
+							.col-md-12
+								label To maintain my database I would like to:
+								select(type='text', name='databaseMaintenance', class='form-control')
+									option Send us an updated copy of my mailing list with each order.
+									option Maintain my mailing list online through the PLS website.
+									option Ask the Prayer Letter Service to maintain my mailing list for me in Access on their computer.
+						hr
+						.form-group.clearfix
+							.col-md-12
+								br
+								|If someone referred, you, please list them below to credit them $50 on their next letter.
+								input(type='text', name='referral', class='form-control')
+						.form-group.clearfix
+							.col-md-12
+								br
+								input(type='checkbox', value='confirmFee')
+								|&nbsp; I understand that I will be charged a one-time $15 set-up fee.
 						.form-group.clearfix#formFooter
-							.col-md-6
-								span.fa-stack.fa-lg
-									i.fa.fa-square.fa-stack-2x
-									i.fa.fa-check.fa-stack-1x.fa-inverse
-								//- input(name="rememberMe", type="checkbox")
-								label(for="rememberMe") Remember Me
-							.col-md-6
-								button(type="submit").btn.btn-primary.pull-right Register
+							.col-md-12
+								button(type="submit", style="width: 100%").btn.btn-primary Register
 						#socialConnect
 							a(href="/auth/facebook"): div.facebook
 								span Connect With Facebook

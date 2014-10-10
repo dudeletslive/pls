@@ -8,9 +8,9 @@ block content
 			div.panel
 				h1 My Account
 					.small Edit your account information below
-				form.formMyAccount.col-md-8(method="post", autocomplete="off")#myAccount
+				form.formMyAccount(method="post", autocomplete="off")#myAccount
 					input(type='hidden', name='action', value='save')
-					.col-md-5
+					.col-md-6
 						.form-group.clearfix
 							.col-md-6
 								label(for="name.first") First Name
@@ -29,7 +29,43 @@ block content
 							.col-md-6
 								label(for="password_confirm") Confirm Password
 								input(name="password_confirm", class="right form-control", placeholder="••••••", type="password", autocomplete='off')
-					.col-md-5
+						.form-group.clearfix
+							.col-md-12
+								label Cru Staff Or Ministry Chartfield
+								input(name="cruStaffOrMinistryChartfield", type="text", class="form-control", value=user.cruStaffOrMinistryChartfield)
+						.form-group.clearfix
+							.col-md-12
+								label Use this logo for my mailing envelopes:
+								select(name='mailingEnvelopeLogo', class='form-control')
+									option Agape France
+									option Athletes in action
+									option Bridges International
+									option Corporate
+									option CRU
+									option CRU City
+									option CRU High School
+									option CRU Inner City
+									option CRU Military
+									option Destino
+									option Enfoque Mexico
+									option Epic Movement
+									option Faculty Commons
+									option Family Life
+									option GAIN
+									option Global Service Network
+									option ILAM
+									option IMPACT
+									option Jesus Film
+									option Keynote
+									option Master Plan
+									option Navigators
+									option One Story
+									option Pioneers
+									option Priority Associates
+									option Probe
+									option Student Venture
+									option I will email my ministry's logo to you
+					.col-md-6
 						.form-group.clearfix
 							.col-md-12
 								label(for="address.street1") Address
@@ -45,8 +81,40 @@ block content
 							.col-md-6
 								label(for="address.postcode") Zip
 								input(name="address.postcode", class="right form-control", placeholder="80918", value=user.address.postcode)
+						.form-group.clearfix
+							.col-md-12
+								label.clearfix Invoice Preferences
+								div
+									input(type='checkbox' id='invoicePreference' name='emailInvoice' value='true' checked=user.emailInvoice ? 'checked' : false)
+									|&nbsp; Email my invoice to me.
+								div
+									input(type='checkbox' id='invoicePreference' name='mailInvoice' value='true' checked=user.mailInvoice ? 'checked' : false)
+									|&nbsp; Mail my invoice to me.
+						.form-group.clearfix
+							.col-md-12
+								label Mailing List
+								div
+									input(type='checkbox' id='mailingList', name='emailReminders' value='true', checked=user.emailReminders ? 'checked' : false)
+									|&nbsp; Periodically email me reminders.
+					.col-md-12
+						.form-group.clearfix
+							.col-md-12
+								label To use the PLS return address, include the following line on my envelopes:
+								.col-md-5
+									p(style='margin-top: 7px;') Your ministry update from: 
+								.col-md-7
+									input(type='text', name='ministryUpdateFrom', class='form-control', value=user.ministryUpdateFrom ? user.ministryUpdateFrom : null)
+					.col-md-12
+						.form-group.clearfix
+							.col-md-12
+								label To maintain my database I would like to:
+								select(type='text', name='databaseMaintance', class='form-control')
+									option Send us an updated copy of my mailing list with each order.
+									option Maintain my mailing list online through the PLS website.
+									option Ask the Prayer Letter Service to maintain my mailing list for me in Access on their computer.
+
 					div.clearfix
-					.col-md-2.col-md-push-4
+					.col-md-4.col-md-push-4
 						button(type="submit").btn.btn-lg.btn-success SAVE
 			section.spacer
 block js
