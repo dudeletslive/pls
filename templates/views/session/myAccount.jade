@@ -36,35 +36,10 @@ block content
 						.form-group.clearfix
 							.col-md-12
 								label Use this logo for my mailing envelopes:
+								-var options = [ "Agage France", "Atheles In Action", "Bridges International", "Corporate", "CRU", "CRU City", "CRU High School", "CRU Inner City", "CRU Military", "Destino", "Enfoque Mexico", "Epic Movement", "Faculty Commons", "Family Life", "GAIN", "Global Service Network", "ILAM", "IMPACT", "Jesus Film", "Keynote",  "Master Plan",  "Navigators",  "One Story",  "Pioneers", "Priority Associates", "Probe", "Student Venture", "I will email my ministry's logo to you" ]
 								select(name='mailingEnvelopeLogo', class='form-control')
-									option Agape France
-									option Athletes in action
-									option Bridges International
-									option Corporate
-									option CRU
-									option CRU City
-									option CRU High School
-									option CRU Inner City
-									option CRU Military
-									option Destino
-									option Enfoque Mexico
-									option Epic Movement
-									option Faculty Commons
-									option Family Life
-									option GAIN
-									option Global Service Network
-									option ILAM
-									option IMPACT
-									option Jesus Film
-									option Keynote
-									option Master Plan
-									option Navigators
-									option One Story
-									option Pioneers
-									option Priority Associates
-									option Probe
-									option Student Venture
-									option I will email my ministry's logo to you
+									for option in options
+										option(selected=option == user.mailingEnvelopeLogo ? 'selected' : false)= option
 					.col-md-6
 						.form-group.clearfix
 							.col-md-12
@@ -108,10 +83,10 @@ block content
 						.form-group.clearfix
 							.col-md-12
 								label To maintain my database I would like to:
-								select(type='text', name='databaseMaintance', class='form-control')
-									option Send us an updated copy of my mailing list with each order.
-									option Maintain my mailing list online through the PLS website.
-									option Ask the Prayer Letter Service to maintain my mailing list for me in Access on their computer.
+								-var dbMaintenance = [ "Send us an updated copy of my mailing list with each order.", "Maintain my mailing list online through the PLS website.", "Ask the Prayer Letter Service to maintain my mailing list for me in Access on their computer." ]
+								select(type='text', name='databaseMaintenance', class='form-control')
+									each option in dbMaintenance
+										option(selected=option == user.databaseMaintenance ? 'selected' : false)= option
 
 					div.clearfix
 					.col-md-4.col-md-push-4

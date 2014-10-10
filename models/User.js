@@ -30,6 +30,7 @@ User.add({
 	cruStaffOrMinistryChartfield: { type: String },
 	ministryUpdateFrom: { type: String, label: 'Your Ministry Update From:' },
 	databaseMaintenance: { type: String, label: 'To maintain my database I would like to:' },
+	mailingEnvelopeLogo: { type: String, label: 'Please include this logo on my mailing envelope:' },
 }, 'Permissions', {
 	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true}
 }, 'Services', {

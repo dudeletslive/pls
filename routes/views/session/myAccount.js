@@ -29,7 +29,7 @@ exports = module.exports = function(req, res) {
 
 		updater.process(req.body, {
 			flashErrors: true,
-			fields: 'name, email, password, address, cruStaffOrMinistryChartfield, emailInvoice, mailInvoice, emailReminders, ministryUpdateFrom, databaseMaintenance',
+			fields: 'name, email, password, address, cruStaffOrMinistryChartfield, emailInvoice, mailInvoice, emailReminders, ministryUpdateFrom, databaseMaintenance, mailingEnvelopeLogo',
 			errorMessage: 'We were unable to update your account:'
 		}, function(err) {
 			if (err) {
