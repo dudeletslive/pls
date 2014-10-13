@@ -6,12 +6,24 @@ block content
 		p.small Involve your supporters in your ministry in a powerful way.
 	div.tab-container: .container-fluid
 		ul.tabs#tabs
-			li.tab.active(href="#prayerLetters",data-toggle="tab"): a(href="#") Prayer Letters
-			li.tab(href="#postCards",data-toggle="tab"): a(href="#") Post Cards
-			li.tab(href="#brochures",data-toggle="tab"): a(href="#") Brochures
-			li.tab(href="#fundAppeals",data-toggle="tab"): a(href="#") Fund Appeals
-			li.tab(href="#christmas",data-toggle="tab"): a(href="#") Christmas / Holiday
-			li.tab(href="#thankYouCards",data-toggle="tab"): a(href="#") Thank You Cards
+			li.tab.active(href="#prayerLetters",data-toggle="tab"): a(href="#")
+				i.icon-letter
+				|&nbsp;Prayer Letters
+			li.tab(href="#postCards",data-toggle="tab"): a(href="#")
+				i.icon-postcard &nbsp;
+				|Post Cards
+			li.tab(href="#brochures",data-toggle="tab"): a(href="#")
+				i.icon-brochure
+				|Brochures
+			li.tab(href="#fundAppeals",data-toggle="tab"): a(href="#")
+				i.icon-money
+				|Fund Appeals
+			li.tab(href="#christmas",data-toggle="tab"): a(href="#") 
+				i.icon-gift
+				|Christmas / Holiday
+			li.tab(href="#thankYouCards",data-toggle="tab"): a(href="#")
+				i.icon-heart
+				|&nbsp;Thank You Cards
 	div.tab-content.container
 		div.tab-pane.fade.in.active#prayerLetters
 			.container
@@ -23,7 +35,7 @@ block content
 		div.tab-pane.fade#postCards
 			.container
 				.col-md-6.col-sm-6
-					div.icon-postcards.icon-medium
+					div.icon-postcard.icon-big
 				.col-md-6.col-sm-6
 					h2  Post Cards
 					p Postcards are a great way to share a quick photo and update and stay in touch with ministry partners.  Postcards can be printed on any color of cardstock, including glossy white cardstock.
@@ -34,12 +46,13 @@ block content
 				.col-md-6.col-sm-6
 					div.icon-brochure.icon-big
 				.col-md-6.col-sm-6
+					h2 Brochures
 					p We’re happy to print and fold as many or as few brochures as you need.  Brochures can be printed on any of our papers, including glossy paper.
 				div.clearfix
 		div.tab-pane.fade#fundAppeals
 			.container
 				.col-md-6.col-sm-6
-					div.icon-funds.icon-small
+					div.icon-money.icon-big
 				.col-md-6.col-sm-6
 					h2  Fund Appeals
 					p At any time during the year we're happy to help with a fund appeal letter.  You can choose to send a general fund appeal to all of your partners or several different letters to several groups.  We are happy to mail-merge a greeting or other information.  We can include #9 response envelopes (with or without stamps) along with a response slip or Cru giving envelopes.
@@ -59,7 +72,7 @@ block content
 		div.tab-pane.fade#christmas
 			.container
 				.col-md-6.col-sm-6
-					div.icon-christmas.icon-big
+					div.icon-gift.icon-big
 				.col-md-6.col-sm-6
 					h2  Christmas / Holiday
 					p We are happy to mail Christmas letters or cards for you.  We can print a letter you create, print your text on a themed holiday paper or print your signature on a holiday card.
@@ -74,7 +87,7 @@ block content
 		div.tab-pane.fade#thankYouCards
 			.container
 				.col-md-6.col-sm-6
-					div.iconHeart.iconHeart-heart.icon-big
+					div.icon-heart.icon-big
 				.col-md-6.col-sm-6
 					h2 Thank You Cards
 					p We are happy to print and mail Thank you cards to a select group of your ministry partners. We can also print the cards and mail them to you.  

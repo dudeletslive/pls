@@ -35,13 +35,28 @@
 			float: left;
 			clear: left;
 			font-weight: 600;			
-			padding: 20px 75px;
+			padding: 20px 50px;
 			text-transform: uppercase;
 			background-repeat: no-repeat;
 			border-left: 1px solid #e7e7e7;
 			border-right: 1px solid #e7e7e7;
 			border-bottom: 1px solid #e7e7e7;
 			color: black;
+			i {
+				font-size: 20px;
+				position:  absolute;
+				left: 20px;
+				top: 15px;
+				&.icon-envelope {
+					left: 18px;
+					top: 13px;
+					font-size: 24px;
+				}
+				&.icon-plane {
+					font-size: 18px;
+					top: 18px;
+				}
+			}
 			&:first-child {
 				border-top: 1px solid #e7e7e7;				
 			}
@@ -145,33 +160,6 @@
 	.tabs-left{
 		ul.tabs {
 			min-width: 100%;
-			.icon-postcards{
-				&:before {
-					content: "\e606";
-					margin-right: 10px;
-					position: relative;
-					font-size: 17px;
-					left: -30px;
-					top: 4px;			
-				}								
-			}
-			.icon-envelope{
-				position: relative;			
-				&:before {
-					content: "\e602";
-					font-size: 4px;
-					position: relative;								
-					font-size: 24px;
-					left: -34px;
-					top: 10px;
-				}				
-				& > a{
-					display: inline-block;
-					position: relative;
-					left: -19px;
-					top: -4px;
-				}
-			}
 		}
 	}
 }
@@ -184,38 +172,6 @@
 					top: 0;
 				}
 			}
-			.icon-postcards{
-				&:before {
-					content: "\e606";
-					margin-right: 10px;
-					position: relative;
-					font-size: 17px;
-					left: -30px;
-					top: 4px;			
-				}	
-				& > a {
-					position: relative;
-					left: -30px;
-					top: 1px;
-				}							
-			}
-			.icon-envelope{
-				position: relative;			
-				&:before {
-					content: "\e602";
-					font-size: 4px;
-					position: relative;								
-					font-size: 24px;
-					left: -34px;
-					top: 10px;
-				}				
-				& > a{
-					display: inline-block;
-					position: relative;
-					left: -19px;
-					top: -4px;
-				}
-			}
 		}
 	}
 	.tab-content{
@@ -225,31 +181,6 @@
 @media (max-width:320px) {
 	.tabs-left{
 		ul.tabs {
-			.icon-postcards{
-				&:before {
-					margin-right: 10px;
-					position: relative;
-					font-size: 17px;
-					left: -30px;
-					top: 15px;			
-				}	
-				& > a {
-					position: relative;
-					top: -5px;
-					left: 5px;
-				}							
-			}
-			.icon-envelope{
-				position: relative;			
-				&:before {
-					left: 1;
-					top: 12px;
-				}				
-				& > a{
-					left: 1px;
-					top: -14px;
-				}
-			}
 		}
 	}
 }  
