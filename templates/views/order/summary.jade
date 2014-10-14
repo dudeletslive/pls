@@ -61,7 +61,7 @@ block content
 								tr 
 									th Ship To
 									td= letterDetails.sendTo
-							if sessionType == 'brochures'
+							if sessionType == 'brochures' || sessionType == 'thankYou'
 								tr
 									th Ship To The Order Of
 									td #{letterDetails.streetAddress}, #{letterDetails.city}, #{letterDetails.state} #{letterDetails.zipCode}, #{letterDetails.country}
@@ -107,6 +107,19 @@ block content
 								tr
 									th File
 									td= letterDetails.file
+							tr: td(colspan="2"): hr
+							if letterDetails.multipleLists
+								tr
+									th Multiple Lists
+									td= letterDetails.multipleLists
+							if letterDetails.noLogo
+								tr
+									th Do not include logo
+									td= letterDetails.noLogo
+							if letterDetails.addressService
+								tr
+									th Include "Address Service Requested"
+									td= letterDetails.addressService
 							tr: td(colspan="2"): hr
 							tr
 								th Special Instructions
@@ -169,7 +182,7 @@ block content
 								.form-group
 									label Send To
 									input(type='text', name='shipTo', value=letterDetails.sendTo)
-								if sessionType == 'brochures'
+								if sessionType == 'brochures' || sessionType == 'thankYou'
 									.form-group
 										label Ship To the Order Of
 										input(type='text', name='shipTheOrderTo.street1', value=letterDetails.streetAddress)
@@ -218,6 +231,13 @@ block content
 									input(type='checkbox', name='customReturnAddress', value=returnAddress.customReturnAddress, checked)
 									label Your Ministry Update From
 									input(type='text', name='yourMinistryUpdateFrom', value=returnAddress.yourMinistryUpdateFrom)
+									label Multiple Mailing Lists
+									if letterDetails.multipleLists
+										input(type='checkbox', name='multipleLists', value=letterDetails.multipleLists, checked)
+									if letterDetails.noLogo
+										input(type='checkbox', name='noLogo', value=letterDetails.noLogo, checked)
+									if letterDetails.addressService
+										input(type='checkbox', name='addressService', value=letterDetails.addressService)
 								.form-group
 									label Return Address Custom
 									input(type='text', name='returnAddress.street1', value=returnAddress.streetAddress)

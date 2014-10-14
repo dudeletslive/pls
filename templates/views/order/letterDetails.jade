@@ -8,6 +8,10 @@ block content
 			.container: .jumbotron: form(action="/mailing-list?mailer=" + mailerType, method="post")
 				.row
 					//- Paper Type & Cardstock Choice
+					-var paperChoices = ["Opaque Ivory", "Opaque Orchid", "Opaque Cream", "Opaque Gold", "Opaque Yellow", "Opaque Green", "Opaque Blue", "Opaque White", "Opaque Gray", "Opaque Pink", "Opaque Tan", "Astrobright Venus Violet", "Astrobright Celestial Blue", "Astrobright Lunar Blue", "Astrobright Pulsar Pink", "Astrobright Cosmic Orange", "Astrobright Rocket Red", "Astrobright Solar Yellow", "Astrobright Re-entry Red", "Astrobright Fireball Fushcia", "Astrobright Gamma Green", "Astrobright Lift-off Lemon", "Astrobright Martian Green", "Astrobright Terrestial Teal", "Royal Fiber Ros", "Royal Fiber Ice Blu", "Royal Fiber Crea", "Royal Fiber White", "Royal Fiber Sunflower", "Royal Fiber Thyme", "Astroparche Blue", "Astroparche Gray", "Astroparche Sand", "Astroparche Natural", "Astroparche White", "Classic Linen Natural White", "Classic Linen Avon Brilliant White", "Classic Linen Antique Gray", "Classic Linen Whitestone", "Classic Linen Bluestone", "Classic Linen Silverstone", "Classic Linen Sage Green", "Classic Linen Haviland Blue"]
+					-var cardstockChoices = ["Opaque white", "Opaque blue", "Opaque cream", "Opaque green", "Opaque gray", "Opaque ivory", "Opaque yellow", "Opaque orchid", "Opaque pink", "Opaque tan", "Astrobright re-entry red", "Astrobright gamma green", "Astrobright celestial blue", "Astrobright solar yellow", "2-sided glossy white"]
+					-var envelopeChoices = ["Standard White", "Opaque Ivory", "Opaque Orchid", "Opaque Cream", "Opaque Gold", "Opaque Yellow", "Opaque Green", "Opaque Blue", "Opaque White", "Opaque Gray", "Opaque Pink", "Opaque Tan", "Astrobright Venus Violet", "Astrobright Celestial Blue", "Astrobright Lunar Blue", "Astrobright Pulsar Pink", "Astrobright Cosmic Orange", "Astrobright Solar Yellow", "Astrobright Re-entry Red", "Astrobright Fireball Fushcia", "Astrobright Gamma Green", "Astrobright Martian Green", "Astrobright Terrestial Teal", "Royal Fiber Cream", "Royal Fiber Sunflower", "Astroparche Blue", "Astroparche Gray", "Astroparche Sand", "Astroparche Natural", "Astroparche White", "Classic Linen Natural White", "Classic Linen Avon Brilliant White", "Classic Linen Antique Gray", "Classic Linen Whitestone", "Classic Linen Silverstone", "Classic Linen Sage Green"]
+					-var holidayEnvelopes = ["Holiday envelopes I mailed to you", "Holiday envelopes you ordered for me", "Astrobright Re-entry Red", "Astrobright Gamma Green", "Standard White ", "Opaque Ivory", "Opaque Orchid", "Opaque Cream", "Opaque Gold", "Opaque Yellow", "Opaque Green", "Opaque Blue", "Opaque White", "Opaque Gray", "Opaque Pink", "Opaque Tan", "Astrobright Venus Violet", "Astrobright Celestial Blue", "Astrobright Lunar Blue", "Astrobright Pulsar Pink", "Astrobright Cosmic Orange", "Astrobright Solar Yellow", "Astrobright Fireball Fushcia", "Astrobright Martian Green", "Astrobright Terrestial Teal", "Royal Fiber Cream", "Royal Fiber Sunflower ", "Astroparche Blue", "Astroparche Gray", "Astroparche Sand", "Astroparche Natural", "Astroparche White", "Classic Linen Natural White", "Classic Linen Avon Brilliant White ", "Classic Linen Antique Gray", "Classic Linen Whitestone", "Classic Linen Silverstone", "Classic Linen Sage Green"]
 					.col-md-4.col-sm-4
 						if mailerType != 'postcards'
 							h3 Paper Choice
@@ -16,36 +20,31 @@ block content
 								select(name="paperChoice", value=letterDetails ? letterDetails.paperChoice : null)
 									if mailerType === 'brochures'
 										option(selected='selected', value='Glossy White') Glossy White
-										option(value='Opaque White') Opaque White
-										option(value='Black and White') Black And White
+										each option in paperChoices
+											option= option
 									else if mailerType === 'christmasLetter'
-										option(selected='selected') Opaque White
 										option(value='Holiday Letterhead I mailed to you') Holiday letterhead I mailed to you
 										option(value='Holiday Letterhead you ordered for me') Holiday letterhead you ordered for me
-										option(value='Black and White') Black and White
+										each option in paperChoices
+											option= option
+									else if mailerType === 'thankYou'
+										optgroup(label="Cardstock")
+											each option in cardstockChoices
+												option(value='Cardstock - ' + option)= option
+										optgroup(label="Paper")
+											each option in paperChoices
+												option= option
 									else
 										option(selected='selected', value='Opaque White') Opaque White
-										option(value='Black and White') Black And White
+										each option in paperChoices
+											option= option
 						else
 							h3 Cardstock
 								span *
 							div.select-style
 								select(name="cardstockChoice", value=letterDetails ? letterDetails.paperChoice : null)
-									option Opaque white
-									option Opaque blue
-									option Opaque cream
-									option Opaque green
-									option Opaque gray
-									option Opaque ivory
-									option Opaque yellow
-									option Opaque orchid
-									option Opaque pink
-									option Opaque tan
-									option Astrobright re-entry red
-									option Astrobright gamma green
-									option Astrobright celestial blue
-									option Astrobright solar yellow
-									option 2-sided glossy white
+									each option in paperChoices
+										option= option
 						div.line-a.visible-lg-block
 					//- No. of Pages
 					.col-md-4.col-sm-4
@@ -66,8 +65,9 @@ block content
 								span *
 							div.select-style
 								select(name="numberOfPages", value=letterDetails ? letterDetails.numberOfPages : null)
-									option(selected='selected', value='One Printed Side') One Printed Side
-									option Need Options
+									option One printed side
+									option Two printed sides on a single sheet of paper
+									option Two printed sides on separate sheets
 						div.line-a.visible-lg-block
 					//- Size of Paper
 					.col-md-4.col-sm-4
@@ -79,6 +79,13 @@ block content
 									option(selected='selected') 4 Per Sheet (4.25 x 5.5)
 									option 2 Per Sheet (4 x 6) - Requires Price Upgrade
 									option 2 Per Sheet (5.5 x 8.5) - Requires Postage Upgrade
+						else if mailerType === 'thankYou'
+							h3 Type of Cardstock
+								span *
+							div.select-style
+								select(name="paperSize", value=letterDetails ? letterDetails.paperSize : null)
+									option 2 per page (4.25 x 5.5), printed 2 per page, cut/folded, white invitation size envelopes
+									option 1 per page (5.5 x 8.5), folded in half, white 6 x 9 envelopes
 						else
 							if mailerType === 'brochures'
 								h3 Please Ship The Order To: 
@@ -119,11 +126,13 @@ block content
 							span *
 						div.select-style
 							select(name="envelopeChoice", value=letterDetails ? letterDetails.envelopeChoice : null)
-								option Plain Black
-								option(selected='selected') Standard White
 								if mailerType === 'christmasLetter'
-									option Holiday envelopes I mailed to you
-									option Holiday envelopes you ordered for me
+									each option in holidayEnvelopes
+										option= option
+								else
+									each option in envelopeChoices
+										option= option
+								
 						div.line-a.visible-lg-block
 					//- Type of Postage
 					.col-md-4.col-sm-4
@@ -133,11 +142,14 @@ block content
 							span *
 						div.select-style
 							select(name="postageOption", value=letterDetails ? letterDetails.postageOption : null)
-								option First Class Black
-								option(selected='selected') First Class Stamp
+								if mailerType === 'fundAppeal'
+									option First class stamp
 								if mailerType === 'christmasLetter'
 									option Hand stamp religious Christmas stamps
 									option Hand stamp non-religious Christmas stamps
+								else
+									option First class stamp
+									option Non-profit stamp
 					div.line-b.visible-lg-block
 				.row(class=(mailerType === 'postcards' ? 'hide' : null || mailerType === 'brochures' ? 'hide' : null || mailerType === 'thankYou' ? 'hide' : null))
 					.col-md-4.col-sm-4
@@ -203,15 +215,19 @@ block content
 									span *
 								div.select-style.small
 									select(name='paperChoiceOne')
-										option(value='Paper Choice') Paper Choice
-										option(selected='selected', value='Black and White') Black and White
+										optgroup(label="Cardstock")
+											each option in cardstockChoices
+												option(value='Cardstock - ' + option)= option
+										optgroup(label="Paper")
+											each option in paperChoices
+												option= option
 								div.clearfix
 								h4 Printer Option
 									span *
 								div.select-style.small
 									select(name='printerChoiceOne')
-										option(value='G&B Printer') G&amp;B Printer
-										option(selected='selected', value='B&W Printer') B&amp;W Printer
+										option Color Printer
+										option B&amp;W printer
 							.col-md-4.col-sm-4
 								.insertOverlayDetails#two
 								h3 Insert Details
@@ -220,15 +236,19 @@ block content
 									span *
 								div.select-style.small
 									select(name='paperChoiceTwo')
-										option(value='Paper Choice') Paper Choice
-										option(selected='selected', value='Black and White') Black and White
+										optgroup(label="Cardstock")
+											each option in cardstockChoices
+												option(value='Cardstock - ' + option)= option
+										optgroup(label="Paper")
+											each option in paperChoices
+												option= option
 								div.clearfix
 								h4 Printer Option
 									span *
 								div.select-style.small
 									select(name='printerChoiceTwo')
-										option(value='G&B Printer') G&amp;B Printer
-										option(selected='selected', value='B&W Printer') B&amp;W Printer
+										option Color Printer
+										option B&amp;W printer
 					div.line-d.visible-lg-block
 				.row
 					.col-md-5.col-sm-5
@@ -246,15 +266,6 @@ block content
 								span.button Choose a File
 								input(type='file', id='file', data-url='url', data-status='status')
 							input(type='hidden', name='file', id='url')
-							br
-							section.spacer
-							h3 Additional Options
-							br
-							input(type='radio', name='mergeGreeting', value='Please merge the personal greeting (other) field for each letter.')
-							label(for='mergeGreeting') Please merge the personal greeting (other) field for each letter.
-							br
-							input(type='radio', name='mergeGreeting', value='These letters do not need to be personalized.')
-							label(for='doNotPersonalize') These letters do not need to be personalized.
 						else if mailerType === 'thankYou'
 							h3 Upload The File...
 							br
@@ -263,13 +274,57 @@ block content
 								input(type='file', id='file', data-url='url', data-status='status')
 							input(type='hidden', name='file', id='url')
 							br
+							section.spacer
+								|&nbsp;
 							br
+							section.spacer
+								|&nbsp;
+							section.spacer
 							h3 Additional Information
-							span.fa-stack.fa-lg.checkbox(data-input='sendTo', data-type='checkbox')
-								i.fa.fa-square.fa-stack-2x
-								i.fa.fa-check.fa-stack-1x.fa-inverse
-							input(type='checkbox', name='sendTo', value='Please ship the cards to me.', class='hide')
-							label(for='sendTo') Please ship the cards to me. 
+							h4 Please Ship The Order To: 
+							-var Class = 'form-control';
+							.wrapper(style='margin-right: 50px;')
+								div.form-group: input(name='streetAddress', value=letterDetails ? letterDetails.streetAddress : null, placeholder='5234 Ferrari Drive', class=Class)
+								div.form-group
+									.col-md-5(style='padding-left: 0;'): input(name='city', value=returnAddress ? returnAddress.city : null, placeholder='Colorado Springs', class=Class)
+									.col-md-2(style='padding: 0; margin-bottom: 15px;'): input(name='state', value=returnAddress ? returnAddress.state : null, placeholder='CO', class=Class)
+									.col-md-5(style='padding-right: 0;'): input(name='zipCode', value=returnAddress ? returnAddress.zipCode : null, placeholder='80918', class=Class)
+								div.form-group: input(name='country', value=returnAddress ? returnAddress.country : 'United States of America', class=Class)
+						else if mailerType === 'christmasLetter'
+							h3 Upload The Letter File
+							p You may attach up to 4 files
+							div.file-wrapper#statusOne
+								span.button Choose a File
+								input(type='file', id='fileOne', data-url='urlOne', data-status='statusOne')
+							input(type='hidden', name='fileOne', id='urlOne')
+							div.file-wrapper#statustwo
+								span.button Choose a File
+								input(type='file', id='filetwo', data-url='urltwo', data-status='statustwo')
+							input(type='hidden', name='filetwo', id='urltwo')
+							div.file-wrapper#statusThree
+								span.button Choose a File
+								input(type='file', id='fileThree', data-url='urlThree', data-status='statusThree')
+							input(type='hidden', name='fileThree', id='urlThree')
+							div.file-wrapper#statusFour
+								span.button Choose a File
+								input(type='file', id='fileFour', data-url='urlFour', data-status='statusFour')
+							input(type='hidden', name='fileFour', id='urlFour')
+							br
+							section.spacer
+							h3 Additional Information
+							br
+							input(type='radio', name='mergeGreeting', value='Please merge the personal greeting (other) field for each letter.', id='mergeGreeting')
+							label(for='mergeGreeting') Please merge the personal greeting (other) field for each letter.
+							br
+							input(type='radio', name='mergeGreeting', value='These letters do not need to be personalized.' id='doNotPersonalize')
+							label(for='doNotPersonalize') These letters do not need to be personalized.
+							hr
+							div
+								input(type='checkbox', name='noLogo', value='true', id='noLogo')
+								label(for='noLogo') Do not include a logo on my envelopes for this mailing.
+							div
+								input(type='checkbox', name='addressService', value='true', id='addressService')
+								label(for='addressService') Please include "Address Service Requested" for this mailing.
 						else
 							h3 Upload The Letter File
 							p You may attach up to 4 files
@@ -289,17 +344,63 @@ block content
 								span.button Choose a File
 								input(type='file', id='fileFour', data-url='urlFour', data-status='statusFour')
 							input(type='hidden', name='fileFour', id='urlFour')
+							if mailerType === 'fundAppeal'
+								br
+								section.spacer
+								h3 Additional Options
+								br
+								input(type='radio', name='mergeGreeting', value='Please merge the personal greeting (other) field for each letter.', id='mergeGreeting')
+								label(for='mergeGreeting') Please merge the personal greeting (other) field for each letter.
+								br
+								input(type='radio', name='mergeGreeting', value='These letters do not need to be personalized.' id='doNotPersonalize')
+								label(for='doNotPersonalize') These letters do not need to be personalized.
+								hr
+								div
+									input(type='checkbox', name='multipleLists', value='true', id='multipleLists')
+									label(for='multipleLists') I've attached multiple mailing lists to correspond with the attached letters.
+								div
+									input(type='checkbox', name='noLogo', value='true', id='noLogo')
+									label(for='noLogo') Do not include a logo on my envelopes for this mailing.
+								div
+									input(type='checkbox', name='addressService', value='true', id='addressService')
+									label(for='addressService') Please include "Address Service Requested" for this mailing.
+
+								//- I’ve attached multiple mailing lists to correspond with the attached letters.
+								//- Do not include a logo on my envelopes for this mailing.
+								//- Please include “Address Service Requested” for this mailing.
+								//- Please do not include “Address Service Requested” for this mailing.
+
 						div.line-e.visible-lg-block
 					.col-md-7.col-sm-7
 						.row
 							.col-md-12
 								h3 Special Instructions
+								if mailerType === 'christmasLetter'
+									small Please note the special instructions for your holiday mailings&nbsp;
+										a(href='/printing-services/') here
+										|, under Christmas / Holiday
 								textarea(name='specialInstructions')=letterDetails ? letterDetails.specialInstructions : null
 					div.line-f.visible-lg-block
 				.row
 					.col-md-12
 						a(href="/order").btn.btn-success.btn-boder-green.pull-left Start Over
 						button(type="submit").btn.btn-success.pull-right Continue
+
+	.modal.fade
+		.modal-dialog
+			.modal-content
+				button.close(type="button", data-dismiss="modal")
+					span(aria-hidden="true") &#215;
+					span.sr-only Close
+				.modal-body
+					h4 The non-profit postage option is available only to Cru staff and the following requirements are necessary:
+					ul
+						li The name ‘Campus Crusade for Christ’ (legal name) must be on the mailing envelope, along with the PLS return address.
+						li ‘Address Service Requested’ must be printed on the envelopes.
+						li The name ‘Campus Crusade for Christ’ must appear on the letter (small print is fine).
+				.modal-footer
+					button.btn.btn-default(type="button", data-dismiss="modal") I Understand
+
 block js
 	+fileUploads
 		

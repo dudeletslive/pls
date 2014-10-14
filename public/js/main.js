@@ -48,13 +48,19 @@ $(function() {
 	* Else fade out.
 	*/
 	$('select[name="insertOne"]').change(function() {
-		$('.hide#insertTwo').removeClass('hide');
-		if($(this).val().indexOf('response slip') > -1) {
+		if ($(this).val().indexOf('response slip') > -1) {
 			$('.insertOverlayDetails#one').fadeOut();	
 		} else {
 			$('.insertOverlayDetails#one').fadeIn();
 			$('.insertOverlayDetails#two').fadeIn();
+		}
+	});
+	$('select[name="insertOne"]').change(function() {
+		if ($(this).val().indexOf('none') > -1) {
 			$('#insertTwo').addClass('hide');
+			$('#insertThree').not('.hide').addClass('hide');
+		} else {
+			$('.hide#insertTwo').removeClass('hide');
 		}
 	});
 	/* 
@@ -62,12 +68,25 @@ $(function() {
 	* Else fade out.
 	*/
 	$('select[name="insertTwo"]').change(function() {
-		$('.hide#insertThree').removeClass('hide');
 		if($(this).val().indexOf('response slip') > -1) {
 			$('.insertOverlayDetails#two').fadeOut();	
 		} else {
 			$('.insertOverlayDetails#two').fadeIn();
+		}
+	});
+	$('select[name="insertTwo"]').change(function() {
+		if ($(this).val().indexOf('none') > -1) {
 			$('#insertThree').addClass('hide');
+		} else {
+			$('.hide#insertThree').removeClass('hide');
+		}
+	});
+	/*
+	 * Popup when user selects non-profit option for postage
+	 */
+	$('select[name="postageOption"]').change(function() {
+		if ( $(this).val().indexOf('Non') > -1) {
+			$('.modal').modal();
 		}
 	});
 	/*

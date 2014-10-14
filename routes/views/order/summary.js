@@ -79,7 +79,7 @@ exports = module.exports = function(req, res) {
 		
 		updater.process(req.body, {
 			flashErrors: true,
-			fields: 'name, paperChoice, numberOfBrochuresNeeded, shipTheOrderTo, printerOption, file, mailingList, personalization, specialInstructions, customReturnAddress, returnAddress, yourMinistryUpdateFrom',
+			fields: 'name, paperChoice, numberOfBrochuresNeeded, shipTheOrderTo, printerOption, file, mailingList, fspecialInstructions, customReturnAddress, returnAddress, yourMinistryUpdateFrom',
 			errorMessage: 'There was a problem submitting your enquiry:'
 		}, function(err) {
 			if (err) {
@@ -102,7 +102,7 @@ exports = module.exports = function(req, res) {
 		
 		updater.process(req.body, {
 			flashErrors: true,
-			fields: 'name, paperChoice, numberOfPages, sizeOfPaper, printerOption, envelopeChoice, postageOption, fileOne, fileTwo, fileThree, fileFour, mailingList, specialInstructions, customReturnAddress, returnAddress, yourMinistryUpdateFrom',
+			fields: 'name, paperChoice, numberOfPages, sizeOfPaper, printerOption, envelopeChoice, postageOption, fileOne, fileTwo, fileThree, fileFour, mailingList, personalization, multipleLists, noLogo, addressService, specialInstructions, customReturnAddress, returnAddress, yourMinistryUpdateFrom',
 			errorMessage: 'There was a problem submitting your enquiry:'
 		}, function(err) {
 			if (err) {
@@ -125,7 +125,7 @@ exports = module.exports = function(req, res) {
 		
 		updater.process(req.body, {
 			flashErrors: true,
-			fields: 'name, paperChoice, postageOption, file, shipTo, oneTime, mailingList, specialInstructions, customReturnAddress, returnAddress, yourMinistryUpdateFrom',
+			fields: 'name, paperChoice, postageOption, file, shipTheOrderTo, oneTime, mailingList, specialInstructions, customReturnAddress, returnAddress, yourMinistryUpdateFrom',
 			errorMessage: 'There was a problem submitting your enquiry:'
 		}, function(err) {
 			if (err) {
@@ -148,7 +148,7 @@ exports = module.exports = function(req, res) {
 		
 		updater.process(req.body, {
 			flashErrors: true,
-			fields: 'name, paperChoice, numberOfPages, sizeOfPaper, printerOption, envelopeChoice, postageOption, fileOne, fileTwo, fileThree, fileFour, mailingList, specialInstructions, oneTime, customReturnAddress, returnAddress, insertOne.isConfigured, insertTwo.isConfigured, insertThree.isConfigured, insertOne.paperChoice, insertOne.printerOption, insertTwo.paperChoice, insertTwo.printerOption, yourMinistryUpdateFrom',
+			fields: 'name, paperChoice, numberOfPages, sizeOfPaper, printerOption, envelopeChoice, postageOption, fileOne, fileTwo, fileThree, fileFour, mailingList, specialInstructions, oneTime, personalize, noLogo, addressService, customReturnAddress, returnAddress, insertOne.isConfigured, insertTwo.isConfigured, insertThree.isConfigured, insertOne.paperChoice, insertOne.printerOption, insertTwo.paperChoice, insertTwo.printerOption, yourMinistryUpdateFrom',
 			errorMessage: 'There was a problem submitting your enquiry:'
 		}, function(err) {
 			if (err) {

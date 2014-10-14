@@ -26,7 +26,7 @@ Enquiry.add({
 	}, 'Thank You Letter File', {
 		file: { type: String },
 	}, 'Special Instructions', {
-		shipTo: { type: String },
+		shipTheOrderTo: { type: Types.Location },
 		specialInstructions: { type: String },
 	}, 'Mailing List', {
 		oneTime: { type: String },

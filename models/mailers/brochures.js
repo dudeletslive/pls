@@ -27,9 +27,6 @@ Enquiry.add({
 		printerOption: { type: String },
 	}, 'Brochure File', {
 		file: { type: String },
-	}, 'Special Instructions', {
-		personalization: { type: String },
-		specialInstructions: { type: String },
 	}, 'Mailing List', {
 		mailingList: { type: String },
 	}, 'Return Address', {

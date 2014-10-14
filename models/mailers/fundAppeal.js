@@ -51,6 +51,10 @@ Enquiry.add({
 		fileFour: { type: String },
 	}, 'Special Instructions', {
 		specialInstructions: { type: String },
+		personalization: { type: String },
+		multipleLists: { type: Boolean, label: 'I\'ve attached multiple mailing lists to correspond with the attached letters.' },
+		noLogo: { type: Boolean, label: 'Do not include a logo on my envelopes for this mailing.' },
+		addressService: { type: Boolean, label: 'Please include "Address Service Requested" for this mailing' }
 	}, 'Mailing List', {
 		mailingList: { type: String },
 	}, 'Return Address', {
