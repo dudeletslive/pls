@@ -52,8 +52,8 @@ block content
 								tr
 									th Postage Option
 									td= letterDetails.postageOption
-							tr: td(colspan="2"): hr
 							if letterDetails.oneTime
+								tr: td(colspan="2"): hr
 								tr
 									th One Time Mailing List
 									tr True
@@ -86,8 +86,8 @@ block content
 								tr
 									th Third Insert
 									td= Yes
-							tr: td(colspan="2"): hr
 							if letterDetails.fileOne
+								tr: td(colspan="2"): hr
 								tr
 									th File One
 									td= letterDetails.fileOne
@@ -107,8 +107,8 @@ block content
 								tr
 									th File
 									td= letterDetails.file
-							tr: td(colspan="2"): hr
 							if letterDetails.multipleLists
+								tr: td(colspan="2"): hr
 								tr
 									th Multiple Lists
 									td= letterDetails.multipleLists

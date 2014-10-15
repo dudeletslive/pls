@@ -1,4 +1,4 @@
-extends ../../layouts/default
+extends ../../layouts/alt
 
 block content
 	div.contact-list: div.jumbotron: .container
@@ -7,11 +7,11 @@ block content
 				span.icon.home
 				h2
 					a(href='../mailing-lists/') Contact Lists | &nbsp;
-					span= list.listName
+					span= list.prettyName
 			div.nav.navbar-nav.navbar-right.col-md-4
-				a(data-toggle="modal",data-target="#myModal").btn.btn-md.btn-success ADD CONTACT
+				a(data-toggle="modal",data-target="#newContact").btn.btn-md.btn-success ADD CONTACT
 				p
-					span#count= Object.keys(obj).length
+					span#count=contacts.length
 					| &nbsp;
 					span Contacts
 			div.clearfix
@@ -21,73 +21,125 @@ block content
 				thead
 					tr
 						th Edit
-						th(id='lastName'): a(href='/mailing-lists/' + list.slug + '?sortBy=firstName', class=sortBy == 'firstName' ? 'active' : null, data-ajax="true") LAST NAME
-						th(id='firstName'): a(href='/mailing-lists/' + list.slug + '?sortBy=lastName', class=sortBy == 'lastName' ? 'active' : null, data-ajax="true") ENV_LINE
-						th(id='address1'): a(href='/mailing-lists/' + list.slug + '?sortBy=address1', class=sortBy == 'address1' ? 'active' : null, data-ajax="true") ADDRESS 1
-						th(id='address2'): a(href='/mailing-lists/' + list.slug + '?sortBy=address2', class=sortBy == 'address2' ? 'active' : null, data-ajax="true") ADDRESS 2
-						th(id='address3'): a(href='/mailing-lists/' + list.slug + '?sortBy=address3', class=sortBy == 'address3' ? 'active' : null, data-ajax="true") ADDRESS 3
-						th(id='city'): a(href='/mailing-lists/' + list.slug + '?sortBy=city', class=sortBy == 'city' ? 'active' : null, data-ajax="true") CITY
-						th(id='state'): a(href='/mailing-lists/' + list.slug + '?sortBy=state', class=sortBy == 'state' ? 'active' : null, data-ajax="true") STATE
-						th(id='zip'): a(href='/mailing-lists/' + list.slug + '?sortBy=zip', class=sortBy == 'zip' ? 'active' : null, data-ajax="true") ZIP
+						th(id='lastName'): a(href='/mailing-lists/' + list.slug + '?sortBy=lastName&from=' + query, class=sortBy == 'lastName' ? 'active' : null, data-ajax="true") LAST NAME
+						th(id='ENV_LINE'): a(href='/mailing-lists/' + list.slug + '?sortBy=ENV_LINE&from=' + query, class=sortBy == 'ENV_LINE' ? 'active' : null, data-ajax="true") ENV_LINE
+						th(id='addressOne'): a(href='/mailing-lists/' + list.slug + '?sortBy=addressOne&from=' + query, class=sortBy == 'addressOne' ? 'active' : null, data-ajax="true") ADDRESS 1
+						th(id='addressTwo'): a(href='/mailing-lists/' + list.slug + '?sortBy=addressTwo&from=' + query, class=sortBy == 'addressTwo' ? 'active' : null, data-ajax="true") ADDRESS 2
+						th(id='addressThree'): a(href='/mailing-lists/' + list.slug + '?sortBy=addressThree&from=' + query, class=sortBy == 'addressThree' ? 'active' : null, data-ajax="true") ADDRESS 3
+						th(id='city'): a(href='/mailing-lists/' + list.slug + '?sortBy=city&from=' + query, class=sortBy == 'city' ? 'active' : null, data-ajax="true") CITY
+						th(id='state'): a(href='/mailing-lists/' + list.slug + '?sortBy=state&from=' + query, class=sortBy == 'state' ? 'active' : null, data-ajax="true") STATE
+						th(id='zip'): a(href='/mailing-lists/' + list.slug + '?sortBy=postCode&from=' + query, class=sortBy == 'zip' ? 'active' : null, data-ajax="true") ZIP
 				tbody
-					for key, value in obj
+					if contacts
+						for contact in contacts
+							tr
+								td: a(data-toggle="modal", data-target='#' + contact._id): img(src='../images/edit-icon.png')
+								td= contact.lastName
+								td= contact.ENV_LINE
+								td= contact.addressOne
+								td= contact.addressTwo
+								td= contact.addressThree
+								td= contact.city
+								td= contact.state
+								td= contact.postCode
+					else
 						tr
-							td: a(data-toggle="modal",data-target='#' + value)
-								img(src='../images/edit-icon.png')
-							td= key.firstName
-							td= key.lastName
-							td= key.address1
-							td= key.address2
-							td= key.address3
-							td= key.city
-							td= key.state
-							td= key.zip
-		//- for key, value in obj
-		//- 	-var string = JSON.stringify(obj[value]);
-		//- 	div.modal.fade(id=value,tabindex='-1',role='dialog',aria-hidden="true")
-		//- 		div.modal-dialog.modal-ms
-		//- 			div.modal-content
-		//- 				div.modal-body: div.panel
-		//- 					h1 Edit Contact
-		//- 					br
-		//- 					h4 Array You're Editing
-		//- 					form#account
-		//- 						input#string(value=string)
-		//- 						.form-group.clearfix
-		//- 							.col-md-6(style="padding-right: 0px;")
-		//- 								label(for="f_name") FIRST NAME
-		//- 								input(name="f_name", id="fName" class="left form-control", placeholder="Jonathan", data-value=key.lastName, value=key.lastName)
-		//- 							.col-md-6(style="padding-left: 0px;")
-		//- 								label(for="l_name") LAST NAME
-		//- 								input(name="l_name", class="right form-control", placeholder="Bell", value=key.firstName)
-		//- 						.form-group.clearfix
-		//- 							.col-md-12
-		//- 								label(for="env_line") ENV_LINE 
-		//- 								input(name="env_line", class="form-control", placeholder="Jonathan Bell")
-		//- 						.form-group.clearfix
-		//- 							.col-md-12
-		//- 								label(for="address_1") ADDRESS 1
-		//- 								input(name="address_1", class="form-control", placeholder="5234 Ferrari Drive", value=key.address1)
-		//- 						.form-group.clearfix
-		//- 							.col-md-12
-		//- 								label(for="address_2") ADDRESS 2
-		//- 								input(name="address_2", class="form-control", placeholder="Apt, Building Number, etc.", value=key.address2)
-		//- 						.form-group.clearfix
-		//- 							.col-md-12
-		//- 								label(for="address_3") ADDRESS 3
-		//- 								input(name="address_3", class="form-control", placeholder="", value=key.address3)
-		//- 						.form-group.clearfix
-		//- 							.col-md-6(style="padding-right: 0px;")
-		//- 								label(for="city") CITY
-		//- 								input(name="city", class="left form-control", placeholder="", value=key.city)
-		//- 							.col-md-6(style="padding-left: 0px;")
-		//- 								label(for="zip") ZIP
-		//- 								input(name="zip", class="right form-control", placeholder="", value=key.zip)
-		//- 						.form-group.clearfix
-		//- 							.col-md-12
-		//- 								label(for="state") STATE
-		//- 								input(name="state", class="form-control", placeholder="", value=key.state)
-		//- 						.form-group.clearfix#formFooter
-		//- 							.col-md-12
-		//- 								button(type="submit", id="updateContact").btn.btn-success.center SAVE
+							td No contacts found for this list.
+		div.modal.fade(id='newContact',tabindex='-1',role='dialog',aria-hidden="true")
+			div.modal-dialog.modal-ms
+				div.modal-content
+					div.modal-body: div.panel
+						h1 New Contact
+						form(method='post')#account
+							input(type='hidden', name='action', value='newContact')
+							input(type='hidden', name='mailingListID', value=list._id)
+							.form-group.clearfix
+								.col-md-6(style="padding-right: 0px;")
+									label(for="firstName") FIRST NAME
+									input(name="firstName", id="firstName" class="left form-control", placeholder="Jonathan")
+								.col-md-6(style="padding-left: 0px;")
+									label(for="lastName") LAST NAME
+									input(name="lastName", id="lastName" class="right form-control", placeholder="Bell")
+							.form-group.clearfix
+								.col-md-12
+									label(for="ENV_LINE") ENV_LINE 
+									input(name="ENV_LINE", id="ENV_LINE" class="form-control", placeholder="Jonathan Bell")
+							.form-group.clearfix
+								.col-md-12
+									label(for="addressOne") ADDRESS 1
+									input(name="addressOne", id="addressOne", class="form-control", placeholder="5234 Ferrari Drive")
+							.form-group.clearfix
+								.col-md-12
+									label(for="addressTwo") ADDRESS 2
+									input(name="addressTwo", id="addressTwo", class="form-control", placeholder="Apt, Building Number, etc.")
+							.form-group.clearfix
+								.col-md-12
+									label(for="addressThree") ADDRESS 3
+									input(name="addressThree", id="addressThree" class="form-control", placeholder="")
+							.form-group.clearfix
+								.col-md-6(style="padding-right: 0px;")
+									label(for="city") CITY
+									input(name="city", id="city", class="left form-control", placeholder="")
+								.col-md-6(style="padding-left: 0px;")
+									label(for="postCode") ZIP
+									input(name="postCode", id="postCode", class="right form-control", placeholder="")
+							.form-group.clearfix
+								.col-md-12
+									label(for="state") STATE
+									input(name="state", id="state", class="form-control", placeholder="")
+							.form-group.clearfix#formFooter
+								.col-md-12
+									button(type="submit", id="updateContact").btn.btn-success.center SAVE
+		for contact in contacts
+			div.modal.fade(id=contact._id,tabindex='-1',role='dialog',aria-hidden="true")
+				div.modal-dialog.modal-ms
+					div.modal-content
+						div.modal-body: div.panel
+							h1(style='margin-top: 0;') Edit Existing Contact
+							form(method='post')#account
+								input(type='hidden', name='action', value='updateContact')
+								input(type='hidden', name='contactID', action='contactID', value=contact._id)
+								.form-group.clearfix
+									.col-md-6(style="padding-right: 0px;")
+										label(for="firstName") FIRST NAME
+										input(name="firstName", id="firstName" class="left form-control", placeholder="Jonathan", data-value=contact.firstName, value=contact.firstName)
+									.col-md-6(style="padding-left: 0px;")
+										label(for="lastName") LAST NAME
+										input(name="lastName", id="lastName" class="right form-control", placeholder="Bell", value=contact.lastName)
+								.form-group.clearfix
+									.col-md-12
+										label(for="ENV_LINE") ENV_LINE 
+										input(name="ENV_LINE", id="ENV_LINE" class="form-control", placeholder="Jonathan Bell", value=contact.ENV_LINE)
+								.form-group.clearfix
+									.col-md-12
+										label(for="addressOne") ADDRESS 1
+										input(name="addressOne", id="addressOne", class="form-control", placeholder="5234 Ferrari Drive", value=contact.addressOne)
+								.form-group.clearfix
+									.col-md-12
+										label(for="addressTwo") ADDRESS 2
+										input(name="addressTwo", id="addressTwo", class="form-control", placeholder="Apt, Building Number, etc.", value=contact.addressTwo)
+								.form-group.clearfix
+									.col-md-12
+										label(for="addressThree") ADDRESS 3
+										input(name="addressThree", id="addressThree" class="form-control", placeholder="", value=contact.addressThree)
+								.form-group.clearfix
+									.col-md-6(style="padding-right: 0px;")
+										label(for="city") CITY
+										input(name="city", id="city", class="left form-control", placeholder="", value=contact.city)
+									.col-md-6(style="padding-left: 0px;")
+										label(for="postCode") ZIP
+										input(name="postCode", id="postCode", class="right form-control", placeholder="", value=contact.postCode)
+								.form-group.clearfix
+									.col-md-12
+										label(for="state") STATE
+										input(name="state", id="state", class="form-control", placeholder="", value=contact.state)
+								.form-group.clearfix#formFooter
+									.col-md-6
+										span.fa-stack.fa-lg.checkbox2(data-input='deleteContact', data-type='checkbox')
+											i.fa.fa-square.fa-stack-2x
+											i.fa.fa-check.fa-stack-1x.fa-inverse
+										input(type='checkbox', value='true', id='deleteContact', name='deleteContact', class='hide')
+										label(for='deleteContact') Delete Contact
+									.col-md-6
+										button(type="submit", id="updateContact", class='btn btn-success pull-right') SAVE
 block js

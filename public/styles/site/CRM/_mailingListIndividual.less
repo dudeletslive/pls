@@ -25,22 +25,17 @@ div.contact-list {
 			}
 			.navbar-right{				
 				display: inline-block;
-				margin-top: 12px;
 				p,select,a,.select-style{
 					float: right;
 				}
 				a{
-					width: 133px;
-					height: 43px;
-					padding: 8px;
-					font-weight: 700;					
+					padding: 12px 20px 8px 50px;
+					font-weight: 700;		
 					color: white;
 					background-image: url('../images/circle-plus-small.png');
 					background-repeat: no-repeat;
-					background-position: 6px 11px;
-					padding-top: 14px;
-					padding-left: 32px;
-					font-size: 13px;
+					background-position: 20px 10px;
+					font-size: 14px;
 				}
 				p{
 					width: auto;
@@ -98,7 +93,12 @@ div.contact-list {
 	width: 420px !important;
 }
 // Basic Panel
+div.modal-content {
+	box-shadow: none;
+}
 div.panel {
+	box-shadow: 0;
+	border-radius: 2px;
 	background: white;
 	border: 0;
 	font-family: proxima-nova;
@@ -114,7 +114,7 @@ div.panel {
 		color: #000;
 		font-size: 28px;
 		font-weight: 400;
-		margin-top: 15px;
+		margin-top: 0;
 		text-align: center;
 		div.small {
 			color: #000;
@@ -144,6 +144,21 @@ div.panel {
 		}
 		#formFooter {
 			margin: 25px 0 20px;
+			span.fa-stack.fa-lg.checkbox2 {
+				i.fa.fa-square {
+					color: darken(#CCC, 25%);
+				}
+				&.checked {
+					i.fa.fa-square {
+						color: @orange;
+					}
+				}
+			}
+			label[for="deleteContact"] {
+				font-weight: bold;
+				font-size: 14px;
+				margin-top: 10px;
+			}
 			label {
 				margin-left: 5px;
 				text-transform: capitalize;
@@ -228,11 +243,17 @@ table#table-contact-list{
 				padding: 20px;
 				a{
 					color:@dark-gray;
-					&.active:after {
+					&:after {
 						content: "\f0d7";
 						margin-left: 5px;
 						position: relative;
 						font: normal normal normal 14px/1 FontAwesome;
+					}
+					&.active, &:hover, &:focus, &:active {
+						text-decoration: underline;
+						&:after {
+							text-decoration: none;
+						}
 					}					
 				}
 			}

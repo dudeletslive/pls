@@ -8,6 +8,7 @@ block content
 			div.panel
 				h1 My Account
 					.small Edit your account information below
+				-var states = ["AL","AK","AZ","AR","CA","CO","CT","DE","DC","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"]
 				form.formMyAccount(method="post", autocomplete="off")#myAccount
 					input(type='hidden', name='action', value='save')
 					.col-md-6
@@ -29,6 +30,32 @@ block content
 							.col-md-6
 								label(for="password_confirm") Confirm Password
 								input(name="password_confirm", class="right form-control", placeholder="••••••", type="password", autocomplete='off')
+					.col-md-6
+						.form-group.clearfix
+							.col-md-12
+								label(for="address.street1") Address
+								input(name="address.street1", class="form-control", placeholder="5234 Ferrari Drive", value=user.address.street1)
+						.form-group.clearfix#address
+							.col-md-12
+								label(for="address.street2") Address Line Two
+								input(name="address.street2", class="form-control", placeholder="Apt. 123", value=user.address.street2)
+						.form-group.state.clearfix
+							.col-md-5
+								label(for="address.suburb") City
+								input(name="address.suburb", class="left form-control", placeholder="Colorado Springs", value=user.address.suburb)
+							.col-md-2
+								label(for="address.state") State
+								select(name="address.state", class="form-control", placeholder="Apt. 123", value=user.address.state)									
+									for state in states
+										option(value=state, selected=state === user.address.state ? 'selected' : false)= state
+							.col-md-5
+								label(for="address.postcode", class='pull-right') Zip
+								input(name="address.postcode", class="right form-control", placeholder="80918", value=user.address.postcode)
+					.col-md-12
+						br
+						h3 Preferences
+						hr
+					.col-md-6
 						.form-group.clearfix
 							.col-md-12
 								label Cru Staff Or Ministry Chartfield
@@ -41,21 +68,6 @@ block content
 									for option in options
 										option(selected=option == user.mailingEnvelopeLogo ? 'selected' : false)= option
 					.col-md-6
-						.form-group.clearfix
-							.col-md-12
-								label(for="address.street1") Address
-								input(name="address.street1", class="form-control", placeholder="5234 Ferrari Drive", value=user.address.street1)
-						.form-group.clearfix#address
-							.col-md-12
-								label(for="address.street2") Address Line Two
-								input(name="address.street2", class="form-control", placeholder="Apt. 123", value=user.address.street2)
-						.form-group.clearfix
-							.col-md-6
-								label(for="address.suburb") City
-								input(name="address.suburb", class="left form-control", placeholder="Colorado Springs", value=user.address.suburb)
-							.col-md-6
-								label(for="address.postcode") Zip
-								input(name="address.postcode", class="right form-control", placeholder="80918", value=user.address.postcode)
 						.form-group.clearfix
 							.col-md-12
 								label.clearfix Invoice Preferences
@@ -74,20 +86,42 @@ block content
 					.col-md-12
 						.form-group.clearfix
 							.col-md-12
-								label To use the PLS return address, include the following line on my envelopes:
-								.col-md-5
-									p(style='margin-top: 7px;') Your ministry update from: 
-								.col-md-7
-									input(type='text', name='ministryUpdateFrom', class='form-control', value=user.ministryUpdateFrom ? user.ministryUpdateFrom : null)
-					.col-md-12
-						.form-group.clearfix
-							.col-md-12
 								label To maintain my database I would like to:
 								-var dbMaintenance = [ "Send us an updated copy of my mailing list with each order.", "Maintain my mailing list online through the PLS website.", "Ask the Prayer Letter Service to maintain my mailing list for me in Access on their computer." ]
 								select(type='text', name='databaseMaintenance', class='form-control')
 									each option in dbMaintenance
 										option(selected=option == user.databaseMaintenance ? 'selected' : false)= option
-
+					.col-md-12
+						.form-group.clearfix
+							.col-md-12
+								label To use the PLS return address, include the following line on my envelopes:
+								.col-md-5
+									p(style='margin-top: 7px;') Your ministry update from: 
+								.col-md-7
+									input(type='text', name='ministryUpdateFrom', class='form-control', value=user.ministryUpdateFrom ? user.ministryUpdateFrom : null)
+						br
+						h3 Return Address
+						hr
+						.form-group.clearfix
+							.col-md-12
+								label(for="returnAddress.street1") Return Address
+								input(name="returnAddress.street1", class="form-control", placeholder="5234 Ferrari Drive", value=user.returnAddress.street1 ? user.returnAddress.street1 : null)
+						.form-group.clearfix#address
+							.col-md-12
+								label(for="returnAddress.street2") Return Address Line Two
+								input(name="returnAddress.street2", class="form-control", placeholder="Apt. 123", value=user.returnAddress.street2 ? user.returnAddress.street2 : null)
+						.form-group.state.clearfix
+							.col-md-5
+								label(for="returnAddress.suburb") City
+								input(name="returnAddress.suburb", class="left form-control", placeholder="Colorado Springs", value=user.returnAddress.suburb ? user.returnAddress.suburb : null)
+							.col-md-2
+								label(for="returnAddress.state") State
+								select(name="returnAddress.state", class="form-control", placeholder="CO")									
+									for state in states
+										option(value=state, selected=state === user.returnAddress.state ? 'selected' : false)= state
+							.col-md-5
+								label(for="returnAddress.postcode") Zip
+								input(name="returnAddress.postcode", class="right form-control", placeholder="80918", value=user.returnAddress.postcode)
 					div.clearfix
 					.col-md-4.col-md-push-4
 						button(type="submit").btn.btn-lg.btn-success SAVE

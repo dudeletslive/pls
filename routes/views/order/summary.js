@@ -56,7 +56,7 @@ exports = module.exports = function(req, res) {
 		
 		updater.process(req.body, {
 			flashErrors: true,
-			fields: 'name, cardstock, sizeOfPaper, printerOption, file, mailingList, specialInstructions, customReturnAddress, returnAddress, yourMinistryUpdateFrom',
+			fields: 'name, cardstock, sizeOfPaper, printerOption, fileOne, fileTwo, fileThree, fileFour, mailingList, specialInstructions, customReturnAddress, returnAddress, yourMinistryUpdateFrom',
 			errorMessage: 'There was a problem submitting your enquiry:'
 		}, function(err) {
 			if (err) {
@@ -79,7 +79,7 @@ exports = module.exports = function(req, res) {
 		
 		updater.process(req.body, {
 			flashErrors: true,
-			fields: 'name, paperChoice, numberOfBrochuresNeeded, shipTheOrderTo, printerOption, file, mailingList, fspecialInstructions, customReturnAddress, returnAddress, yourMinistryUpdateFrom',
+			fields: 'name, paperChoice, numberOfBrochuresNeeded, shipTheOrderTo, printerOption, fileOne, fileTwo, fileThree, fileFour, mailingList, specialInstructions, customReturnAddress, returnAddress, yourMinistryUpdateFrom',
 			errorMessage: 'There was a problem submitting your enquiry:'
 		}, function(err) {
 			if (err) {
@@ -125,7 +125,7 @@ exports = module.exports = function(req, res) {
 		
 		updater.process(req.body, {
 			flashErrors: true,
-			fields: 'name, paperChoice, postageOption, file, shipTheOrderTo, oneTime, mailingList, specialInstructions, customReturnAddress, returnAddress, yourMinistryUpdateFrom',
+			fields: 'name, paperChoice, postageOption, fileOne, fileTwo, fileThree, fileFour, shipTheOrderTo, oneTime, mailingList, specialInstructions, customReturnAddress, returnAddress, yourMinistryUpdateFrom',
 			errorMessage: 'There was a problem submitting your enquiry:'
 		}, function(err) {
 			if (err) {

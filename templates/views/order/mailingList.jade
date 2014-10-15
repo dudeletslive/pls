@@ -14,27 +14,28 @@ block content
 						span.fa-stack.fa-lg.checkbox(data-input='list', data-type='checkbox')
 							i.fa.fa-square.fa-stack-2x
 							i.fa.fa-check.fa-stack-1x.fa-inverse
-						input(name='list', type='checkbox', value='All Lists for ' + user.userID, class='hide')
+						input(name='list', type='checkbox', value='All Lists for ' + user.name.full, class='hide')
 						label(for="list") Please use the complete mailing list you keep on file
 					.col-md-12.col-sm-12
 						ul.boxes
-							for list in lists
-								li.box
-									.col-md-12
-										img(src='../images/list-name.png')
-										h2= list.listName
-										h5
-											span#Count= Object.keys(JSON.parse(list.csvJSON)).length
-											span &nbsp;Contacts in this list
-										a.btn.btn-sm.btn-green(name='listOption', data-value=list.listName) Select This List
+							if lists.length
+								for list in lists
+									li.box
+										.col-md-12
+											img(src='../images/list-name.png')
+											h2= list.prettyName
+											a.btn.btn-sm.btn-green(name='listOption', data-value=list.listName) Select This List
+							else
+								h4 You have not uploaded any mailing lists yet. You may do so&nbsp;
+									a(href='/mailing-lists') here.
 						select(name='list', class='form-control', class='hide')
 							for list in lists
-								option(value=list.listName)= list.listName
-							option(value='All Lists for ' + user.userID) All
+								option(value=list.listName)= list.prettyName
+							option(value='All Lists for ' + user.name.full) All
 				.row
 					.col-md-12
-						p I will attach my current mailing list
-						a(data-toggle='modal', data-target='#newList', type='button', class='btn btn-primary') Upload Mailing List
+						//- p I will attach my current mailing list
+						//- a(data-toggle='modal', data-target='#newList', type='button', class='btn btn-primary') Upload Mailing List
 						br
 						if mailerType === 'christmasLetter' || mailerType === 'thankYou'
 							br
@@ -50,7 +51,7 @@ block content
 						a(href="/order").btn.btn-success.btn-boder-green.pull-left Start Over
 						button(type="submit").btn.btn-success.pull-right Continue
 		.modal.fade(tab-index='-1', role='dialog', aria-labelledby='newList', aria-hidden='true', id='newList')
-			.modal-dialog.modal-sm: .modal-content: form(method="post", action='/mailing-lists', id='listForm')
+			.modal-dialog.modal-sm: .modal-content: form(method="post", action='/mailing-list?mailer=' + mailerType, id='listForm')
 				.modal-body
 					button.close(type="button", data-dismiss="modal")
 						span(aria-hidden="true") &#215;
@@ -61,9 +62,10 @@ block content
 							.alert.alert-danger
 								| Please complete all fields before continuing.
 					.form-group(class=(errors != null ? 'has-error' : null)).clearfix
-						input(type='hidden', name='redirect', value=redirect)
-						input(type='hidden', name='userID', value=user.userID)
+						input(type='hidden', name='userID', value=user.id)
 						input(type='hidden', name='csvJSON')
+						input(type='hidden', name='name', value=user.name.full)
+						input(type='hidden', name='action', value='newList')
 					.form-group(class=(errors != null ? 'has-error' : null)).clearfix
 						label(for='listName') Name Your Mailing List
 						input(name='listName', type='text', class='form-control')
@@ -71,7 +73,7 @@ block content
 						input(name='mailingList', type='file', class='form-control', id='csv')
 				.modal-footer
 					button.btn.btn-default(type="button", data-dismiss="modal") Cancel
-					button.btn.btn-primary(id="listNew", type="submit") Create List
+					button.btn.btn-primary(type="submit", id="listNew") Create List
 block js
 	+fileUploads
 	script.

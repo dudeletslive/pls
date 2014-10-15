@@ -24,12 +24,13 @@ exports = module.exports = function(req, res) {
 			req.user = user;
 
 		});
+		
 		var user = req.user,
 			updater = user.getUpdateHandler(req);		
 
 		updater.process(req.body, {
 			flashErrors: true,
-			fields: 'name, email, password, address, cruStaffOrMinistryChartfield, emailInvoice, mailInvoice, emailReminders, ministryUpdateFrom, databaseMaintenance, mailingEnvelopeLogo',
+			fields: 'name, email, password, address, returnAddress, cruStaffOrMinistryChartfield, emailInvoice, mailInvoice, emailReminders, ministryUpdateFrom, databaseMaintenance, mailingEnvelopeLogo',
 			errorMessage: 'We were unable to update your account:'
 		}, function(err) {
 			if (err) {

@@ -28,7 +28,8 @@ var _ = require('underscore'),
 	S3_BUCKET = process.env.S3_BUCKET,
 	User = keystone.list('User'),
 	passport = require('passport'), 
-	LinkedInStrategy = require('passport-linkedin').Strategy;
+	LinkedInStrategy = require('passport-linkedin').Strategy,
+	express = require('keystone/node_modules/express');
 
 // Common Middleware
 keystone.pre('routes', middleware.initLocals);
@@ -57,6 +58,10 @@ var routes = {
 
 // Setup Route Bindings
 exports = module.exports = function(app) {
+
+	app.use(express.cookieSession());
+
+	// app.use(express.cookieSession());
 
 	passport.serializeUser(function(user, done) {
 		done(null, user);
@@ -129,7 +134,7 @@ exports = module.exports = function(app) {
 	
 	// Contact List Pages
 	app.all('/mailing-lists', middleware.requireUser, routes.views.CRM.mailingListIndex);
-	app.get('/mailing-lists/:list', middleware.requireUser, routes.views.CRM.mailingList);
+	app.all('/mailing-lists/:list', middleware.requireUser, routes.views.CRM.mailingList);
 
 	// Order Process
 	app.all('/order', routes.views.order.begin);

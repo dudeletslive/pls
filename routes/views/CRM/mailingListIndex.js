@@ -1,5 +1,6 @@
 var keystone = require('keystone')
 	List = keystone.list('Mailing Lists'),
+	Contact = keystone.list('Contact'),
 	User = keystone.list('User'),
 	async = require('async');
 
@@ -14,7 +15,7 @@ exports = module.exports = function(req, res) {
 	locals.form = req.body;
 
 	// Find Current User to Base lists loaded on
-	User.model.findById(req.session.userId).exec(function(err, user) {
+	User.model.findById(locals.user.id).exec(function(err, user) {
 
 		if (err) {
 			return next(err);
@@ -24,15 +25,17 @@ exports = module.exports = function(req, res) {
 
 	});
 
-	view.query('lists', keystone.list('Mailing Lists').model.find().where('userID', req.user.userID).sort('sortOrder'));
+	view.query('lists', keystone.list('Mailing Lists').model.find().where('userID', locals.user.id).sort('sortOrder'));
 
 	view.on('post', function(next) {
+
+		var CSV = JSON.parse(req.body.csvJSON);
 
 		async.series([
 			
 			function(cb) {
 				
-				if (!req.body.listName || !req.body.csvJSON || !req.body.mailingList || !req.body.userID) {
+				if (!req.body.listName || !req.body.csvJSON || !req.body.mailingList) {
 					locals.errors = true;
 					return cb(true);
 					console.log(req.body.redirect);
@@ -45,15 +48,38 @@ exports = module.exports = function(req, res) {
 			function(cb) {
 
 				var mailingList = {
-					userID: req.body.userID,
-					listName: req.body.listName,
-					csvJSON: req.body.csvJSON
+					userID: locals.user.id,
+					uploadedBy: locals.user.id,
+					listName: req.body.listName + ' - ' + locals.user.id,
+					prettyName: req.body.listName
 				};
 				
 				var List = keystone.list('Mailing Lists').model,
 					newList = new List(mailingList);
 
-				newList.save(function(err) {
+
+				newList.save(function(err, model) {
+					var id = model._id;
+					// When you create the mailing list, go through and create contacts from the JSON Array
+					for (contact in CSV) {
+						var contactInfo = {
+							mailingList: id,
+							firstName: CSV[contact].firstName,
+							lastName: CSV[contact].lastName,
+							ENV_LINE: CSV[contact].firstName + ' ' + CSV[contact].lastName,
+							addressOne: CSV[contact].address1,
+							addressTwo: CSV[contact].address2,
+							addressThree: CSV[contact].address3,
+							city: CSV[contact].city,
+							state: CSV[contact].state,
+							postCode: CSV[contact].zip
+
+						};
+						var Contact = keystone.list('Contact').model,
+							newContact = new Contact(contactInfo);
+						newContact.save(function(err) {
+						});
+					}
 					if(!req.body.redirect) {
 						req.flash('success', 'Your new mailing list was created successfully. You can edit it below.');
 						res.redirect('/mailing-lists');

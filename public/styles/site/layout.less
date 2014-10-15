@@ -14,3 +14,32 @@
 .alert {
 	margin-bottom: 0;
 }
+
+.form-group.state {
+	.col-md-5 {
+		&:nth-child(1) {
+			padding-right: 0 !important;
+			input {
+				border-top-right-radius: 0;
+				border-bottom-right-radius: 0;
+			}
+		}
+		&:nth-child(3) {
+			padding-left: 0 !important;
+			input {
+				border-top-left-radius: 0;
+				border-bottom-left-radius: 0;
+			}
+		}
+	}
+	.col-md-2 {
+		select {
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+			border-radius: 0;
+			border-left: 0px;
+			height: 39px;
+		}
+	}
+}

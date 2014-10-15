@@ -255,24 +255,60 @@ block content
 						if mailerType === 'postcards'
 							h3 Upload The Postcard File
 							br
-							div.file-wrapper#status
+							div.file-wrapper#statusOne
 								span.button Choose a File
-								input(type='file', id='file', data-url='url', data-status='status')
-							input(type='hidden', name='file', id='url')
+								input(type='file', id='fileOne', data-url='urlOne', data-status='statusOne', class='letterFile')
+							input(type='hidden', name='fileOne', id='urlOne')
+							div.file-wrapper#statustwo
+								span.button Choose a File
+								input(type='file', id='filetwo', data-url='urltwo', data-status='statustwo', class='letterFile')
+							input(type='hidden', name='filetwo', id='urltwo')
+							div.file-wrapper#statusThree
+								span.button Choose a File
+								input(type='file', id='fileThree', data-url='urlThree', data-status='statusThree', class='letterFile')
+							input(type='hidden', name='fileThree', id='urlThree')
+							div.file-wrapper#statusFour
+								span.button Choose a File
+								input(type='file', id='fileFour', data-url='urlFour', data-status='statusFour', class='letterFile')
+							input(type='hidden', name='fileFour', id='urlFour')
 						else if mailerType === 'brochures'
 							h3 Upload The Brochure File
 							br
-							div.file-wrapper#status
+							div.file-wrapper#statusOne
 								span.button Choose a File
-								input(type='file', id='file', data-url='url', data-status='status')
-							input(type='hidden', name='file', id='url')
+								input(type='file', id='fileOne', data-url='urlOne', data-status='statusOne', class='letterFile')
+							input(type='hidden', name='fileOne', id='urlOne')
+							div.file-wrapper#statustwo
+								span.button Choose a File
+								input(type='file', id='filetwo', data-url='urltwo', data-status='statustwo', class='letterFile')
+							input(type='hidden', name='filetwo', id='urltwo')
+							div.file-wrapper#statusThree
+								span.button Choose a File
+								input(type='file', id='fileThree', data-url='urlThree', data-status='statusThree', class='letterFile')
+							input(type='hidden', name='fileThree', id='urlThree')
+							div.file-wrapper#statusFour
+								span.button Choose a File
+								input(type='file', id='fileFour', data-url='urlFour', data-status='statusFour', class='letterFile')
+							input(type='hidden', name='fileFour', id='urlFour')
 						else if mailerType === 'thankYou'
 							h3 Upload The File...
 							br
-							div.file-wrapper#status
+							div.file-wrapper#statusOne
 								span.button Choose a File
-								input(type='file', id='file', data-url='url', data-status='status')
-							input(type='hidden', name='file', id='url')
+								input(type='file', id='fileOne', data-url='urlOne', data-status='statusOne', class='letterFile')
+							input(type='hidden', name='fileOne', id='urlOne')
+							div.file-wrapper#statustwo
+								span.button Choose a File
+								input(type='file', id='filetwo', data-url='urltwo', data-status='statustwo', class='letterFile')
+							input(type='hidden', name='filetwo', id='urltwo')
+							div.file-wrapper#statusThree
+								span.button Choose a File
+								input(type='file', id='fileThree', data-url='urlThree', data-status='statusThree', class='letterFile')
+							input(type='hidden', name='fileThree', id='urlThree')
+							div.file-wrapper#statusFour
+								span.button Choose a File
+								input(type='file', id='fileFour', data-url='urlFour', data-status='statusFour', class='letterFile')
+							input(type='hidden', name='fileFour', id='urlFour')
 							br
 							section.spacer
 								|&nbsp;
@@ -295,19 +331,19 @@ block content
 							p You may attach up to 4 files
 							div.file-wrapper#statusOne
 								span.button Choose a File
-								input(type='file', id='fileOne', data-url='urlOne', data-status='statusOne')
+								input(type='file', id='fileOne', data-url='urlOne', data-status='statusOne', class='letterFile')
 							input(type='hidden', name='fileOne', id='urlOne')
 							div.file-wrapper#statustwo
 								span.button Choose a File
-								input(type='file', id='filetwo', data-url='urltwo', data-status='statustwo')
+								input(type='file', id='filetwo', data-url='urltwo', data-status='statustwo', class='letterFile')
 							input(type='hidden', name='filetwo', id='urltwo')
 							div.file-wrapper#statusThree
 								span.button Choose a File
-								input(type='file', id='fileThree', data-url='urlThree', data-status='statusThree')
+								input(type='file', id='fileThree', data-url='urlThree', data-status='statusThree', class='letterFile')
 							input(type='hidden', name='fileThree', id='urlThree')
 							div.file-wrapper#statusFour
 								span.button Choose a File
-								input(type='file', id='fileFour', data-url='urlFour', data-status='statusFour')
+								input(type='file', id='fileFour', data-url='urlFour', data-status='statusFour', class='letterFile')
 							input(type='hidden', name='fileFour', id='urlFour')
 							br
 							section.spacer
@@ -330,19 +366,19 @@ block content
 							p You may attach up to 4 files
 							div.file-wrapper#statusOne
 								span.button Choose a File
-								input(type='file', id='fileOne', data-url='urlOne', data-status='statusOne')
+								input(type='file', id='fileOne', data-url='urlOne', data-status='statusOne', class='letterFile')
 							input(type='hidden', name='fileOne', id='urlOne')
 							div.file-wrapper#statustwo
 								span.button Choose a File
-								input(type='file', id='filetwo', data-url='urltwo', data-status='statustwo')
+								input(type='file', id='filetwo', data-url='urltwo', data-status='statustwo', class='letterFile')
 							input(type='hidden', name='filetwo', id='urltwo')
 							div.file-wrapper#statusThree
 								span.button Choose a File
-								input(type='file', id='fileThree', data-url='urlThree', data-status='statusThree')
+								input(type='file', id='fileThree', data-url='urlThree', data-status='statusThree', class='letterFile')
 							input(type='hidden', name='fileThree', id='urlThree')
 							div.file-wrapper#statusFour
 								span.button Choose a File
-								input(type='file', id='fileFour', data-url='urlFour', data-status='statusFour')
+								input(type='file', id='fileFour', data-url='urlFour', data-status='statusFour', class='letterFile')
 							input(type='hidden', name='fileFour', id='urlFour')
 							if mailerType === 'fundAppeal'
 								br

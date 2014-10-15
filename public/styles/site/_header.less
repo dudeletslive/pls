@@ -1,4 +1,22 @@
 @nav-link: #373C42;
+#header.alt {
+	background: #2F56A5;
+	div.navbar ul.nav.navbar-nav.navbar-right li a {
+		color: #FFF;
+		&:hover, &.active, &:active {
+			color: darken(#FFF, 5%)
+		}
+	}
+	div.navbar ul.nav.navbar-nav.navbar-right a.btn.btn-primary {
+		background: #E46A32;
+	}
+	li#startOrder table th a {
+		font-weight: 400;
+	}
+	li#startOrder table th:last-child {
+		border-color: #FFF;
+	}
+}
 #header {
 	border-bottom: 1px solid @light-gray;
 	font-family: proxima-nova;

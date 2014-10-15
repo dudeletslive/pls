@@ -18,7 +18,7 @@ User.add({
 	email: { type: Types.Email, initial: true, required: true, index: true },
 	password: { type: Types.Password },
 	resetPasswordKey: { type: String, hidden: true },
-	userID: { type: String, noedit: true, hidden: true },
+	userID: { type: String, noedit: false, hidden: false },
 	referredBy: { type: String, noedit: true },
 }, 'Address', {
 	address: { type: Types.Location },

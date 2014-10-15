@@ -1,4 +1,4 @@
-extends ../../layouts/default
+extends ../../layouts/alt
 
 block content
 	div.contact-list-home: div.jumbotron: .container
@@ -14,10 +14,7 @@ block content
 					li.box
 						.col-md-12
 							img(src='../images/list-name.png')
-							h2= list.listName
-							h5
-								span#Count= Object.keys(JSON.parse(list.csvJSON)).length
-								span &nbsp;Contacts in this list
+							h2= list.prettyName
 							a.btn.btn-sm.btn-gray(href='/mailing-lists/' + list.slug) VIEW LIST
 							a.btn.btn-sm.btn-green(href='/mailing-lists/' + list.slug + '?contact=add') ADD CONTACT
 				li.box(data-toggle='modal', data-target='#newList')
@@ -36,8 +33,9 @@ block content
 							.alert.alert-danger
 								| Please complete all fields before continuing.
 					.form-group(class=(errors != null ? 'has-error' : null)).clearfix
-						input(type='hidden', name='userID', value=user.userID)
+						input(type='hidden', name='userID', value=user.id)
 						input(type='hidden', name='csvJSON')
+						input(type='hidden', name='name', value=user.name.full)
 					.form-group(class=(errors != null ? 'has-error' : null)).clearfix
 						label(for='listName') Name Your Mailing List
 						input(name='listName', type='text', class='form-control')
@@ -61,8 +59,8 @@ block js
 					header: true,
 					complete: function(results) {
 						var str = JSON.stringify(results.data),
-							str = str.replace(/first ?name/ig, "firstName"),
-							str = str.replace(/last ?name/ig, "lastName"),
+							str = str.replace(/first.? ?name/ig, "firstName"),
+							str = str.replace(/last.? ?name/ig, "lastName"),
 							str = str.replace(/(street|address) ?(1|one)/ig, "address1"),
 							str = str.replace(/street|address ?2|two/ig, "address2"),
 							str = str.replace(/street|address ?3|three/ig, "address3"),

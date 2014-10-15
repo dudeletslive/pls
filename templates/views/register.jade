@@ -13,6 +13,7 @@ block content
 						p Not #{user.name.first}? &nbsp;
 							a(href="/sign-out") Sign out.
 				else
+					-var states = ["AL","AK","AZ","AR","CA","CO","CT","DE","DC","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"]
 					h1 Create An Account
 						.small Register to begin recieving service.
 					form(method="post")#account
@@ -46,14 +47,16 @@ block content
 						.form-group.clearfix: .col-md-12
 							label Street Address
 							input(name='address[street1]', placeholder='5234 Ferrari Drive', class='form-control')
-						.form-group.clearfix
-							.col-md-5(style='padding-left: 0; padding-right: 15px;')
+						.form-group.state.clearfix
+							.col-md-5()
 								label City
 								input(name='address[suburb]', class='form-control')
-							.col-md-2(style='padding: 0;')
+							.col-md-2()
 								label State
-								input(name='address[state]', placeholder='CO', class='form-control')
-							.col-md-5(style='padding-right: 0;')
+								select(name='address[state]', placeholder='CO', class='form-control')
+									each state in states
+										option= state
+							.col-md-5
 								label Post Code
 								input(name='address[postcode]', placeholder='80918', class='form-control')
 						.form-group.clearfix: .col-md-12
@@ -65,14 +68,16 @@ block content
 						.form-group.clearfix: .col-md-12
 							label Street Address
 							input(name='returnAddress[street1]', placeholder='5234 Ferrari Drive', class='form-control')
-						.form-group.clearfix
-							.col-md-5(style='padding-left: 0; padding-right: 15px;')
+						.form-group.state.clearfix
+							.col-md-5
 								label City
 								input(name='returnAddress[suburb]', class='form-control')
-							.col-md-2(style='padding: 0;')
+							.col-md-2
 								label State
-								input(name='returnAddress[state]', placeholder='CO', class='form-control')
-							.col-md-5(style='padding-right: 0;')
+								select(name='returnAddress[state]', placeholder='CO', class='form-control')
+									for state in states
+										option= state
+							.col-md-5
 								label Post Code
 								input(name='returnAddress[postcode]', placeholder='80918', class='form-control')
 						.form-group.clearfix: .col-md-12

@@ -75,7 +75,7 @@ Enquiry.schema.post('save', function() {
 
 Enquiry.schema.methods.sendNotificationEmail = function(callback) {
 	
-	var enqiury = this;
+	var object = this;
 	
 	keystone.list('User').model.find().where('isAdmin', true).exec(function(err, admins) {
 		
@@ -87,8 +87,8 @@ Enquiry.schema.methods.sendNotificationEmail = function(callback) {
 				name: 'Prayer Letter Service',
 				email: 'contact@prayer-letter-service.com'
 			},
-			subject: 'New Enquiry for Prayer Letter Service',
-			enquiry: enqiury
+			subject: 'New Order Processed at Prayer Letter Service',
+			enquiry: object
 		}, callback);
 		
 	});

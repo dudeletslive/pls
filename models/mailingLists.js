@@ -8,18 +8,17 @@ var keystone = require('underscore'),
  */
 
 var mailingList = new keystone.List('Mailing Lists', {
-	autokey: { path: 'slug', from: 'title', unique: true },
-	noedit: true,
-	nocreate: true
+	autokey: { path: 'slug', from: 'listName', unique: true },
+	map: { name: 'listName', noedit: true }
 });
 
 mailingList.add({
-	userID: {type: String},
-	listName: {type: String},
-	csvJSON: {type: String,note: '<a href="#" onClick="alert(\'Hello World!\')">Hello?</a>'}
+	userID: { type: String, hidden: true },
+	listName: { type: String, hidden: true },
+	uploadedBy: { type: Types.Relationship, ref: 'User' },
+	prettyName: { type: String, label: 'List Name' },
+	contacts: { type: Types.Relationship, ref: 'Contact', many: true }
 });
-
-
 
 /**
  * Relationships
@@ -31,5 +30,5 @@ mailingList.add({
  * Registration
  */
 
-mailingList.defaultColumns = 'name';
+mailingList.defaultColumns = 'uploadedBy, prettyName';
 mailingList.register();
