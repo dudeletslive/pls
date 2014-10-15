@@ -73,15 +73,16 @@ html
 								table
 									tr
 										if user
+											th: li: a(href='/sign-out') Sign Out
 											if user.canAccessKeystone
 												th: li: a(href='/keystone') Admin
 											else
-												th: li: a(href='/mailing-lists/') #{user.name.first}
-											th: li: a(href='/sign-out') Sign Out
+												th: li: a(href='/my-account') #{user.name.first}
+											th: li:  a(href="/mailing-lists") My Mailing Lists
 										else
-											th: a(href='/sign-in') Sign In
-											th: a(href='/register') Register
-									tr: td(colspan="2")
+											th: li: a(href='/sign-in') Sign In
+											th: li: a(href='/register') Register
+									tr: td(colspan="3")
 											a.btn.btn-primary(href="/order") Start Order Now!
 		//- BODY
 		#body

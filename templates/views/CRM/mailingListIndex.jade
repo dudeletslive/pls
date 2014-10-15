@@ -37,10 +37,11 @@ block content
 						input(type='hidden', name='csvJSON')
 						input(type='hidden', name='name', value=user.name.full)
 					.form-group(class=(errors != null ? 'has-error' : null)).clearfix
-						label(for='listName') Name Your Mailing List
+						label(for='listName') Name Your Mailing List*
 						input(name='listName', type='text', class='form-control')
 					.form-group.clearfix
 						input(name='mailingList', type='file', class='form-control', id='csv')
+					small *Please make sure your mailing list is a .CSV file. Most applications allow you to export your list as a CSV.
 				.modal-footer
 					button.btn.btn-default(type="button", data-dismiss="modal") Cancel
 					button.btn.btn-primary(type="submit") Create List

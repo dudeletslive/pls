@@ -13,7 +13,7 @@
 	li#startOrder table th a {
 		font-weight: 400;
 	}
-	li#startOrder table th:last-child {
+	li#startOrder table th:last-child, li#startOrder table th:nth-child(2) {
 		border-color: #FFF;
 	}
 }
@@ -57,7 +57,7 @@
 					}
 				}
 				&#startOrder {
-					margin: 0 0 0 20px;
+					margin: 5px 0 0 -80px;
 				}
 			}
 			a.btn.btn-primary {
@@ -98,7 +98,7 @@
 					padding: 0 0 0 10px;
 					text-align: right;
 					text-transform: uppercase;
-					&:last-child {
+					&:last-child, &:nth-child(2) {
 						border-right: 2px solid;
 						padding-right: 10px;
 					}
@@ -106,11 +106,12 @@
 						padding: 0;
 					}
 				}
-				td, tr {
-					text-align: center;
+				td {
+					text-align: right;
 				}
 				tr {
 					padding-bottom: 10px;
+					text-align: center;
 				}
 			}
 		}
