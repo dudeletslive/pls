@@ -132,9 +132,10 @@ block content
 								tr
 									th Custom Return Address
 									td #{returnAddress.street1}, #{returnAddress.city}, #{returnAddress.state} #{returnAddress.zipCode}, #{returnAddress.country}
-							tr
-								th Mailing List
-								td= list.prettyName
+							if list.length
+								tr
+									th Mailing List
+									td= list.prettyName
 				.row
 					.col-md-12
 						.line-0.visible-lg-block
