@@ -53,7 +53,7 @@ Enquiry.add({
 		specialInstructions: { type: String },
 	}, 'Mailing List', {
 		oneTime: { type: String },
-		mailingList: { type: String },
+		mailingList: { type: Types.Relationship, ref: 'Mailing Lists' },
 	}, 'Return Address', {
 		customReturnAddress: { type: Boolean },
 		returnAddress: { type: Types.Location, dependsOn: deps.customReturnAddress },

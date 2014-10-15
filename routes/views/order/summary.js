@@ -26,6 +26,8 @@ exports = module.exports = function(req, res) {
 	req.session.returnAddress = locals.formData;
 	locals.returnAddress = req.session.returnAddress;
 
+	view.query('list', keystone.list('Mailing Lists').model.findById(req.session.mailingList.list).sort('sortOrder'));
+
 	view.on('post', {action: 'prayerLetter'}, function(next) {
 		
 		var newEnquiry = new Enquiry.model(),

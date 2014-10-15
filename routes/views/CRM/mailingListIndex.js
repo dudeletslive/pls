@@ -81,10 +81,8 @@ exports = module.exports = function(req, res) {
 						});
 					}
 					if(!req.body.redirect) {
-						req.flash('success', 'Your new mailing list was created successfully. You can edit it below.');
-						res.redirect('/mailing-lists');
+						res.redirect(req.originalUrl);
 					} else {	
-						req.flash('success', 'Your new mailing list was created successfully. You may now select it below.')
 						res.redirect(req.body.redirect);
 					}
 					return cb(err);

@@ -6,9 +6,10 @@ var keystone = require('keystone'),
  * =============
  */
 
+
 var Enquiry = new keystone.List('Prayer Letters', {
 	nocreate: false,
-	noedit: true
+	// noedit: true
 });
 
 var deps = {
@@ -18,7 +19,7 @@ var deps = {
 	customReturnAddress: { 'customReturnAddress': true },
 	PLS: { 'customReturnAddress': false }
 }
-
+var id;
 Enquiry.add({
 	}, 'Submitted By', {
 		name: { type: Types.Name },
@@ -52,7 +53,7 @@ Enquiry.add({
 	}, 'Special Instructions', {
 		specialInstructions: { type: String },
 	}, 'Mailing List', {
-		mailingList: { type: String },
+		mailingList: { type: Types.Relationship, ref: 'Mailing Lists' },
 	}, 'Return Address', {
 		customReturnAddress: { type: Boolean },
 		returnAddress: { type: Types.Location, dependsOn: deps.customReturnAddress },

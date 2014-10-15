@@ -32,7 +32,7 @@ Enquiry.add({
 	}, 'Special Instructions', {
 		specialInstructions: { type: String },
 	}, 'Mailing List', {
-		mailingList: { type: String },
+		mailingList: { type: Types.Relationship, ref: 'Mailing Lists' },
 	}, 'Return Address', {
 		customReturnAddress: { type: Boolean },
 		returnAddress: { type: Types.Location, dependsOn: deps.customReturnAddress },

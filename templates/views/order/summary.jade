@@ -134,7 +134,7 @@ block content
 									td #{returnAddress.street1}, #{returnAddress.city}, #{returnAddress.state} #{returnAddress.zipCode}, #{returnAddress.country}
 							tr
 								th Mailing List
-								td= mailingList.list
+								td= list.prettyName
 				.row
 					.col-md-12
 						.line-0.visible-lg-block
@@ -246,7 +246,7 @@ block content
 									input(type='text', name='returnAddress.country', value=returnAddress.country)
 								.form-group
 									label Mailing List
-									input(type='text', name='mailingList', value=mailingList.list)
+									input(type='text', name='mailingList', value=list.listName)
 							button(type="submit").btn.btn-success.pull-right Confirm
 block js
 	+fileUploads

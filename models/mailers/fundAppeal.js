@@ -56,7 +56,7 @@ Enquiry.add({
 		noLogo: { type: Boolean, label: 'Do not include a logo on my envelopes for this mailing.' },
 		addressService: { type: Boolean, label: 'Please include "Address Service Requested" for this mailing' }
 	}, 'Mailing List', {
-		mailingList: { type: String },
+		mailingList: { type: Types.Relationship, ref: 'Mailing Lists' },
 	}, 'Return Address', {
 		customReturnAddress: { type: Boolean },
 		returnAddress: { type: Types.Location, dependsOn: deps.customReturnAddress },

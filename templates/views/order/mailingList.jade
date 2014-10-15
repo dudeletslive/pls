@@ -24,13 +24,13 @@ block content
 										.col-md-12
 											img(src='../images/list-name.png')
 											h2= list.prettyName
-											a.btn.btn-sm.btn-green(name='listOption', data-value=list.listName) Select This List
+											a.btn.btn-sm.btn-green(name='listOption', data-value=list.id) Select This List
 							else
 								h4 You have not uploaded any mailing lists yet. You may do so&nbsp;
 									a(href='/mailing-lists') here.
 						select(name='list', class='form-control', class='hide')
 							for list in lists
-								option(value=list.listName)= list.prettyName
+								option(value=list._id)= list.prettyName
 							option(value='All Lists for ' + user.name.full) All
 				.row
 					.col-md-12
