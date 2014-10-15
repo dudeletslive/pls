@@ -245,9 +245,14 @@ block content
 									input(type='text', name='returnAddress.suburb', value=returnAddress.city)
 									input(type='text', name='returnAddress.postcode', value=returnAddress.zipCode)
 									input(type='text', name='returnAddress.country', value=returnAddress.country)
-								.form-group
-									label Mailing List
-									input(type='text', name='mailingList', value=list.listName)
+								if list
+									.form-group
+										label Mailing List
+										input(type='text', name='mailingList', value=list.listName)
+								else
+									.form-group
+										label Mailing List
+										input(type='text', name='mailingList', value='All')
 							button(type="submit").btn.btn-success.pull-right Confirm
 block js
 	+fileUploads
