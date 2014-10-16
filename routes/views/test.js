@@ -7,7 +7,7 @@ exports = module.exports = function(req, res) {
 		locals = res.locals;
 
 	if (req.method === 'POST') {
-		console.log('Posted ' + JSON.stringify(req.files));
+		console.log('Posted ' + req.files.xlsFile);
 	}
   
 	view.render('testCSV');
