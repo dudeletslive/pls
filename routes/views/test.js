@@ -12,7 +12,7 @@ exports = module.exports = function(req, res) {
 			console.log('Hello World > helloworld.txt');
 		});
 
-		fs.readdir();
+		fs.readdir('./tmp');
   
 	view.render('testCSV');
   
