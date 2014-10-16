@@ -11,6 +11,8 @@ exports = module.exports = function(req, res) {
 			if (err) return console.log(err);
 			console.log('Hello World > helloworld.txt');
 		});
+
+		fs.readdir();
   
 	view.render('testCSV');
   
