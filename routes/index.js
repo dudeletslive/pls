@@ -137,18 +137,18 @@ exports = module.exports = function(app) {
 	app.all('/mailing-lists/:list', middleware.requireUser, routes.views.CRM.mailingList);
 
 	// Order Process
-	app.all('/order', routes.views.order.begin);
-	app.all('/letter-details', routes.views.order.letterDetails);
-	app.all('/mailing-list', routes.views.order.mailingList);
-	app.all('/return-address', routes.views.order.returnAddress);
-	app.all('/summary', routes.views.order.summary);
-	app.all('/confirmation', routes.views.order.confirmation);
+	app.all('/order', middleware.requireUser, routes.views.order.begin);
+	app.all('/letter-details', middleware.requireUser, routes.views.order.letterDetails);
+	app.all('/mailing-list', middleware.requireUser, routes.views.order.mailingList);
+	app.all('/return-address', middleware.requireUser, routes.views.order.returnAddress);
+	app.all('/summary', middleware.requireUser, routes.views.order.summary);
+	app.all('/confirmation', middleware.requireUser, routes.views.order.confirmation);
 	
 	//My Account
 	app.all('/my-account', middleware.requireUser, routes.views.session.myAccount);
 
 	// Test CSV
-	app.get('/test', routes.views.test);
+	app.all('/test', routes.views.test);
 	app.get('/sign_s3', function(req, res){
 	    aws.config.update({accessKeyId: AWS_ACCESS_KEY, secretAccessKey: AWS_SECRET_KEY});
 	    var s3 = new aws.S3();

@@ -1,53 +1,17 @@
 extends ../layouts/default
 
 block content
-	input#files(type="file")
-	p#status Please select a file
-	#preview(style="border:1px solid gray;width:300px;")
-		img(src="/images/about-banner.png", style="width:300px;")
-	form(method="POST", action="/submit_form/")
-		input#avatar_url(type="hidden", name="avatar_url")
+	div.jumbotron#about
+		h2 File Upload Test
+		span.small Testing file upload for XLS Parsing.
+	.container
+		form(enctype='multipart/form-data', method='post')
+			div.file-wrapper#statusOne
+				span.button Choose a File
+				input(type='file', id='xlsFile', data-url='xlsFile', data-status='xlsFile', class='letterFile')
+			button(class='btn btn-primary', type='submit') Post
+		section.spacer
 
 
 block js
-	script.
-		function s3_upload(){
-			//- Create Random 5 Character string to diff files
-			var text = "";
-		    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-		    for( var i=0; i < 5; i++ )
-		        text += possible.charAt(Math.floor(Math.random() * possible.length));
-		    //- Get Filename of File
-			var filename = this.value;
-			var lastIndex = filename.lastIndexOf("\\");
-			if (lastIndex >= 0) {
-			    filename = filename.substring(lastIndex + 1);
-			}
-			//- Get Elements for Upload
-		    var status_elem = document.getElementById("status");
-		    var url_elem = document.getElementById("avatar_url");
-		    var preview_elem = document.getElementById("preview");
-		    var s3upload = new S3Upload({
-		    	s3_object_name: text + '_' + filename,
-		        file_dom_selector: 'files',
-		        s3_sign_put_url: '/sign_s3',
-		        onProgress: function(percent, message) {
-		            status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
-		        },
-		        onFinishS3Put: function(public_url) {
-		            status_elem.innerHTML = 'Upload completed. Uploaded to: '+ public_url;
-		            url_elem.value = public_url;
-		            preview_elem.innerHTML = '<img src="'+public_url+'" style="width:300px;" />';
-		        },
-		        onError: function(status) {
-		            status_elem.innerHTML = 'Upload error: ' + status;
-		        }
-		    });
-		}
-		/*
-		* Listen for file selection:
-		*/
-		(function() {
-		    var input_element = document.getElementById("files");
-		    input_element.onchange = s3_upload;
-		})();
+	+fileUploads
