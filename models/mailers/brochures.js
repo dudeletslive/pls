@@ -26,6 +26,7 @@ Enquiry.add({
 		shipTheOrderTo: { type: Types.Location },
 		printerOption: { type: String },
 	}, 'Special Instructions', {
+		personalization: { type: String },
 		specialInstructions: { type: String },
 	}, 'Brochure Files', {
 		fileOne: { type: String },

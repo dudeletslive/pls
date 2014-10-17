@@ -30,6 +30,7 @@ Enquiry.add({
 		fileThree: { type: String },
 		fileFour: { type: String },
 	}, 'Special Instructions', {
+		personalization: { type: String },
 		specialInstructions: { type: String },
 	}, 'Mailing List', {
 		mailingList: { type: Types.Relationship, ref: 'Mailing Lists' },

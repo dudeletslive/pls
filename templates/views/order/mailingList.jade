@@ -11,11 +11,19 @@ block content
 							| Select A List To Mail To
 							span *
 					.col-md-12.col-sm-12
-						span.fa-stack.fa-lg.checkbox(data-input='list', data-type='checkbox')
-							i.fa.fa-square.fa-stack-2x
-							i.fa.fa-check.fa-stack-1x.fa-inverse
-						input(name='list', type='checkbox', value='All Lists for ' + user.name.full, class='hide')
-						label(for="list") Please use the complete mailing list you keep on file
+						.row
+							.col-md-6
+								span.fa-stack.fa-lg.checkbox(data-input='list', data-type='radio', data-value='Use every mailing list I have on file')
+									i.fa.fa-square.fa-stack-2x
+									i.fa.fa-check.fa-stack-1x.fa-inverse
+								input(name='listChoice', type='radio', value='Use every mailing list I have on file', class='hide')
+								label(for='listChoice') Please use the complete mailing list you keep on file
+							.col-md-6
+								span.fa-stack.fa-lg.checkbox(data-input='list', data-type='radio', data-value='Please use my online mailing list')
+									i.fa.fa-square.fa-stack-2x
+									i.fa.fa-check.fa-stack-1x.fa-inverse
+								input(name='listChoice', type='radio', value='Please use my online mailing list', class='hide')
+								label(for='listChoice') Please use my online mailing list
 					.col-md-12.col-sm-12
 						ul.boxes
 							if lists.length
@@ -26,8 +34,8 @@ block content
 											h2= list.prettyName
 											a.btn.btn-sm.btn-green(name='listOption', data-value=list.id) Select This List
 							else
-								h4 You have not uploaded any mailing lists yet. You may do so&nbsp;
-									a(href='/mailing-lists') here.
+								h4 You have not uploaded any mailing lists yet. Attach one now.
+								input(type='file', name='mailingList')
 						select(name='list', class='form-control', class='hide')
 							for list in lists
 								option(value=list._id)= list.prettyName
@@ -78,44 +86,17 @@ block content
 block js
 	+fileUploads
 	script.
+		$('input[type="radio"]').change(function() {
+			$('.box').removeClass('selected');
+			$('.box').find('a[name="listOption"]').text('Select This List');
+		});
 		$('a[name="listOption"]').each(function() {
 			$(this).click(function() {
 				$this = $(this);
 				var selected = $this.attr('data-value');
 				$('.fa-stack.checkbox[data-input="list"]').removeClass('checked');
+				$('input[type="radio"]').prop('checked', false);
 				$this.text('Selected').parent().parent().addClass('selected').siblings('li').removeClass('selected').find('a[name="listOption"]').text('Select This List');
 				$('select[name="list"]').val(selected).trigger('change');
-			});
-		});
-		$('button#listNew[type="submit"]').click(function() {
-			var $this = $(this);
-			event.preventDefault();
-			// Parse local CSV files
-			$('input#csv').parse({
-				config: {
-					header: true,
-					complete: function(results) {
-						var str = JSON.stringify(results.data),
-							str = str.replace(/first ?name/ig, "firstName"),
-							str = str.replace(/last ?name/ig, "lastName"),
-							str = str.replace(/(street|address) ?(1|one)/ig, "address1"),
-							str = str.replace(/street|address ?2|two/ig, "address2"),
-							str = str.replace(/street|address ?3|three/ig, "address3"),
-							str = str.replace(/city|town|county/ig, "city"),
-							str = str.replace(/state|province/ig, "state"),
-							str = str.replace(/zip|postal ?code/ig, "zip");
-							//- str = str.replace(/"/g, "'");
-						$this.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i>');
-						$('input[name="csvJSON"').val(str).trigger('change');
-						//- $.each(results.data, function(key, value) {
-						//- 	var keys = Object.keys(value);
-						//- 	$('pre#json').append(value["TITLE"] + '<br>');
-						//-     console.log(value["TITLE"], keys);
-						//- });
-					}
-				}
-			});
-			$('input[name="csvJSON"').change(function() {
-				document.getElementById('listForm').submit();
 			});
 		});

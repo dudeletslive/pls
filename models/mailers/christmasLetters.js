@@ -50,6 +50,7 @@ Enquiry.add({
 		fileThree: { type: String },
 		fileFour: { type: String },
 	}, 'Special Instructions', {
+		personalization: { type: String },
 		specialInstructions: { type: String },
 	}, 'Mailing List', {
 		oneTime: { type: String },

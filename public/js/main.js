@@ -22,8 +22,9 @@ $(function() {
 		$this.click(function() {
 			$('.fa-stack.checkbox[data-type="radio"], .fa-stack.checkbox2[data-type="radio"]').removeClass('checked');
 			$this.addClass('checked');
-			$('input[value="'+ value +'"]').trigger('click').trigger('change');
-		})
+			$('input[value="'+ value +'"]').prop('checked', true).trigger('change');
+			// $('input[type="radio"]').not($this).prop('checked', false).trigger('change');
+		});
 	});
 	/*
 	* When the list changes, enable selected class on box, or disable.

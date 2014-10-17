@@ -51,9 +51,10 @@ Enquiry.add({
 		fileThree: { type: String },
 		fileFour: { type: String },
 	}, 'Special Instructions', {
+		personalization: { type: String },
 		specialInstructions: { type: String },
 	}, 'Mailing List', {
-		mailingList: { type: Types.Relationship, ref: 'Mailing Lists' },
+		mailingList: { type: Types.Relationship, ref: 'Mailing Lists', many: true },
 	}, 'Return Address', {
 		customReturnAddress: { type: Boolean },
 		returnAddress: { type: Types.Location, dependsOn: deps.customReturnAddress },

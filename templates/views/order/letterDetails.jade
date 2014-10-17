@@ -257,7 +257,8 @@ block content
 				.row
 					.col-md-5.col-sm-5
 						if mailerType === 'postcards'
-							h3 Upload The Postcard File
+							h3 Upload The Postcard Files
+							small Please zip Pages and Numbers files before uploading.
 							br
 							div.file-wrapper#statusOne
 								span.button Choose a File
@@ -277,6 +278,7 @@ block content
 							input(type='hidden', name='fileFour', id='urlFour')
 						else if mailerType === 'brochures'
 							h3 Upload The Brochure File
+							small Please zip Pages and Numbers files before uploading.
 							br
 							div.file-wrapper#statusOne
 								span.button Choose a File
@@ -295,7 +297,8 @@ block content
 								input(type='file', id='fileFour', data-url='urlFour', data-status='statusFour', class='letterFile')
 							input(type='hidden', name='fileFour', id='urlFour')
 						else if mailerType === 'thankYou'
-							h3 Upload The File...
+							h3 Letter Files
+							small Please zip Pages and Numbers files before uploading.
 							br
 							div.file-wrapper#statusOne
 								span.button Choose a File
@@ -333,6 +336,7 @@ block content
 						else if mailerType === 'christmasLetter'
 							h3 Upload The Letter File
 							p You may attach up to 4 files
+							small Please zip Pages and Numbers files before uploading.
 							div.file-wrapper#statusOne
 								span.button Choose a File
 								input(type='file', id='fileOne', data-url='urlOne', data-status='statusOne', class='letterFile')
@@ -368,6 +372,7 @@ block content
 						else
 							h3 Upload The Letter File
 							p You may attach up to 4 files
+							small Please zip Pages and Numbers files before uploading.
 							div.file-wrapper#statusOne
 								span.button Choose a File
 								input(type='file', id='fileOne', data-url='urlOne', data-status='statusOne', class='letterFile')
