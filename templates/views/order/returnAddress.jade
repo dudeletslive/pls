@@ -4,7 +4,7 @@ block content
 	+orderTabs
 	div.tab-content.order-process
 		div.tab-pane.fade.in.active#returnAddress
-			.container: form(action="/summary", method="post", class='clearfix')
+			.container: form(action="/summary?mailer=" + mailerType, method="post", class='clearfix')
 				.row
 					.col-md-12
 						h3 
@@ -14,11 +14,11 @@ block content
 					.col-md-5
 						br
 						.form-group
-							span.fa-stack.fa-lg.checkbox2(data-input='returnAddress', data-value='Custom Address', data-type='radio')
-								i.fa.fa-square.fa-stack-2x
-								i.fa.fa-check.fa-stack-1x.fa-inverse
-							label(for="returnAddress") Use the Return Address Below
+							//- span.fa-stack.fa-lg.checkbox2(data-input='returnAddress', data-value='Custom Address', data-type='radio')
+							//- 	i.fa.fa-square.fa-stack-2x
+							//- 	i.fa.fa-check.fa-stack-1x.fa-inverse
 							input(type='radio', name='customReturnAddress', value='true', class='')
+							label(for="returnAddress") Use the Return Address Below
 						-var Class = 'form-control input-lg';
 						div.form-group: input(name='streetAddress', value=user.returnAddress ? user.returnAddress.street1 : null, placeholder='5234 Ferrari Drive', class=Class)
 						div.form-group.row
@@ -28,19 +28,18 @@ block content
 						div.form-group: input(name='country', value=user.returnAddress ? user.returnAddress.country : 'United States of America', class=Class)
 						br
 						.form-group
-							span.fa-stack.fa-lg.checkbox2.checked(data-input='returnAddress', data-value='true', data-type='radio')
-								i.fa.fa-square.fa-stack-2x
-								i.fa.fa-check.fa-stack-1x.fa-inverse
+							//- span.fa-stack.fa-lg.checkbox2.checked(data-input='returnAddress', data-value='true', data-type='radio')
+							//- 	i.fa.fa-square.fa-stack-2x
+							//- 	i.fa.fa-check.fa-stack-1x.fa-inverse
 							//- input(name="rememberMe", type="checkbox")
-							label(for="returnAddress") Use the Prayer Letter Service Address as my return address
 							input(type='radio', name='customReturnAddress', value='false', class='')
+							label(for="returnAddress") Use the Prayer Letter Service Address as my return address
 				.row
-					.col-md-12
-						div.col-md-6
-							.col-md-4
-								span.phrase "Your Ministry Update from "
-							.col-md-6
-								input(name='yourMinistryUpdateFrom', value=letterDetails.yourMinistryUpdateFrom).form-control.txtPhrase
+					.form-group: .col-md-2
+						.pull-left
+							div.phrase "Your Ministry Update from"
+						.pull-right
+							input(type='text', name='yourMinistryUpdateFrom', value=letterDetails.yourMinistryUpdateFrom).form-control.txtPhrase
 					.col-md-12
 						.line-0.visible-lg-block
 				br

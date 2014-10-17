@@ -21,8 +21,10 @@ block content
 					.col-md-12
 						img(src='../images/circle-plus-big.png')
 						h2.title ADD NEW LIST
+
+		//- Modal for Creating new Mailing List
 		.modal.fade(tab-index='-1', role='dialog', aria-labelledby='newList', aria-hidden='true', id='newList')
-			.modal-dialog.modal-sm: .modal-content: form(method="post", action='/mailing-lists', id='listForm')
+			.modal-dialog.modal-sm: .modal-content: form(method="post", action='/mailing-lists', id='listForm', enctype='multipart/form-data')
 				.modal-body
 					button.close(type="button", data-dismiss="modal")
 						span(aria-hidden="true") &#215;
@@ -34,23 +36,45 @@ block content
 								| Please complete all fields before continuing.
 					.form-group(class=(errors != null ? 'has-error' : null)).clearfix
 						input(type='hidden', name='userID', value=user.id)
-						input(type='hidden', name='csvJSON')
+						//- input(type='hidden', name='csvJSON')
 						input(type='hidden', name='name', value=user.name.full)
 					.form-group(class=(errors != null ? 'has-error' : null)).clearfix
 						label(for='listName') Name Your Mailing List*
 						input(name='listName', type='text', class='form-control')
 					.form-group.clearfix
-						input(name='mailingList', type='file', class='form-control', id='csv')
-					small *Please make sure your mailing list is a .CSV file. Most applications allow you to export your list as a CSV.
+						input(name='xlsFile', type='file', class='form-control', id='csv')
+					small *Please make sure your mailing list is a .CSV file. Most applications allow you to export your list as a CSV. Click <a href="#" data-toggle="modal" data-target="#instructions">here</a> for information on how to do this.
 				.modal-footer
 					button.btn.btn-default(type="button", data-dismiss="modal") Cancel
 					button.btn.btn-primary(type="submit") Create List
+
+		//- Modal for Instructions
+		.modal.fade(id='instructions')
+			.modal-dialog
+				.modal-content
+					button.close(type="button", data-dismiss="modal")
+						span(aria-hidden="true") &#215;
+						span.sr-only Close
+					.modal-body
+						h3 Converting #{fileType} to CSV.
+						ol
+							li Open your excel file.
+							li Click on File and Save as.
+							li Select where you would like to save the file (like your desktop or a drive).
+							img(src='https://www.completecampaigns.com/webhelp/Files/How_to_convert_an_existing_Excel_file_files/image001.jpg', class='img-responsive')
+							li In the File Name area, name your document.
+							li In the Save as Type area, select CSV(Comma Delimited) from the pull down menu.
+							img(src='https://www.completecampaigns.com/webhelp/Files/How_to_convert_an_existing_Excel_file_files/image002.jpg', class='img-responsive')
+							li Click Save.
+							li You may receive one or two warnings about the formatting of .CSV, click yes.
+					.modal-footer
+						button.btn.btn-default(type="button", data-dismiss="modal") Thanks!
 
 block js
 	if errors
 		script.
 			$('#newList').modal();
-	script.
+	//- script.
 		$('button[type="submit"]').click(function() {
 			var $this = $(this);
 			event.preventDefault();

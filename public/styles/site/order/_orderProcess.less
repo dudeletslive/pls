@@ -220,9 +220,15 @@ div.tab-container ul.tabs.order > li.tab {
 	.col-md-12{
 		.box-finish{
 			text-align: center;
+			p {
+				text-align: center;
+			}
 			div{
 				width: auto;
 				padding: 20px 0;
+				p {
+					text-align: center;
+				}
 				.fa-stack{
 					position: inherit;
 					.fa-circle-o{
@@ -322,7 +328,7 @@ div.select-style{
 	overflow: hidden;
 	cursor: pointer;
 	border-radius: 5px;
-	border:1px solid @light-gray;
+	border:1px solid darken(@light-gray, 25%);
 	width: 300px;
 	margin-bottom: 2px;
 	padding:5px;
@@ -341,7 +347,7 @@ div.select-style{
 }
 .file-wrapper .button {
 	color: @dark-gray;
-	border: 1px solid @light-gray;
+	border: 1px solid darken(@light-gray, 25%);
 	background: white;
 	padding: 4px 7px;
 	border-radius: 5px;

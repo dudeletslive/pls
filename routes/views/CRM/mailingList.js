@@ -16,6 +16,9 @@ exports = module.exports = function(req, res) {
 		list: req.params.list
 	};
 
+	if (req.query.contact === 'add') {
+		locals.addContact = true;
+	}
 	if (req.method === 'POST') {
 
 		if (req.body.contactID) {

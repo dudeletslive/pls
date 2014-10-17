@@ -2,6 +2,7 @@ var keystone = require('keystone')
 	List = keystone.list('Mailing Lists'),
 	Contact = keystone.list('Contact'),
 	User = keystone.list('User'),
+	cv2json = require('convert-json'),
 	async = require('async');
 
 exports = module.exports = function(req, res) {
@@ -27,7 +28,46 @@ exports = module.exports = function(req, res) {
 
 	view.query('lists', keystone.list('Mailing Lists').model.find().where('userID', locals.user.id).sort('sortOrder'));
 
+	/*
+
+	*/
+
 	view.on('post', function(next) {
+
+		console.log('Posted ' + JSON.stringify(req.files.xlsFile));
+
+		var file = req.files.xlsFile.path;
+		var fileName = req.files.xlsFile.name;
+		var ext = fileName.split('.')[1];
+
+		locals.fileType = ext;
+
+		// If the file is not a CSV, run this.
+		if (req.files.xlsFile.type != 'text/csv') {
+
+			res.redirect(req.originalUrl);
+			if (ext === 'xlsx' || ext === 'xlx')
+				req.flash('error', 'Please make sure your file is a .CSV. Click <a href="#" data-toggle="modal" data-target="#instructions">here</a> for instructions on converting your .' + ext + ' file to a CSV.');
+			else
+				req.flash('error', 'Please make sure your file is a .CSV.')
+
+		// If it's a CSV file, run this.
+		} else {
+
+			var options = {
+				// objectMode: true,
+				columns: true
+			}
+			var csv_trans = cv2json.csv(file, options, function(err, result) {
+				if(err)
+					console.error(err);
+				else 
+					console.log(result);
+			});
+
+		}
+
+		return false;
 
 		var CSV = JSON.parse(req.body.csvJSON);
 
@@ -64,7 +104,7 @@ exports = module.exports = function(req, res) {
 					for (contact in CSV) {
 						var contactInfo = {
 							mailingList: id,
-							firstName: CSV[contact].firstName,
+							firstName: CSV[contact][xlsindex('firstName')],
 							lastName: CSV[contact].lastName,
 							ENV_LINE: CSV[contact].firstName + ' ' + CSV[contact].lastName,
 							addressOne: CSV[contact].address1,

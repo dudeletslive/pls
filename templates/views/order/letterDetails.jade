@@ -5,10 +5,12 @@ block content
 	div.tab-content.order-process
 		//- Letter Details type, select mailer options.
 		div.tab-pane.fade.in.active#letterDetails
-			.container: .jumbotron: form(action="/mailing-list?mailer=" + mailerType, method="post")
+			.container: .jumbotron: form(action=mailerType != 'brochures' ? "/mailing-list?mailer=" + mailerType : "/summary?mailer=" + mailerType, method="post")
+
+				h3 Ordering: #{prettyList}
 				.row
 					//- Paper Type & Cardstock Choice
-					-var paperChoices = ["Opaque Ivory", "Opaque Orchid", "Opaque Cream", "Opaque Gold", "Opaque Yellow", "Opaque Green", "Opaque Blue", "Opaque White", "Opaque Gray", "Opaque Pink", "Opaque Tan", "Astrobright Venus Violet", "Astrobright Celestial Blue", "Astrobright Lunar Blue", "Astrobright Pulsar Pink", "Astrobright Cosmic Orange", "Astrobright Rocket Red", "Astrobright Solar Yellow", "Astrobright Re-entry Red", "Astrobright Fireball Fushcia", "Astrobright Gamma Green", "Astrobright Lift-off Lemon", "Astrobright Martian Green", "Astrobright Terrestial Teal", "Royal Fiber Ros", "Royal Fiber Ice Blu", "Royal Fiber Crea", "Royal Fiber White", "Royal Fiber Sunflower", "Royal Fiber Thyme", "Astroparche Blue", "Astroparche Gray", "Astroparche Sand", "Astroparche Natural", "Astroparche White", "Classic Linen Natural White", "Classic Linen Avon Brilliant White", "Classic Linen Antique Gray", "Classic Linen Whitestone", "Classic Linen Bluestone", "Classic Linen Silverstone", "Classic Linen Sage Green", "Classic Linen Haviland Blue"]
+					-var paperChoices = ["Opaque Ivory", "Opaque Orchid", "Opaque Cream", "Opaque Gold", "Opaque Yellow", "Opaque Green", "Opaque Blue", "Opaque White", "Glossy White", "Opaque Gray", "Opaque Pink", "Opaque Tan", "Astrobright Venus Violet", "Astrobright Celestial Blue", "Astrobright Lunar Blue", "Astrobright Pulsar Pink", "Astrobright Cosmic Orange", "Astrobright Rocket Red", "Astrobright Solar Yellow", "Astrobright Re-entry Red", "Astrobright Fireball Fushcia", "Astrobright Gamma Green", "Astrobright Lift-off Lemon", "Astrobright Martian Green", "Astrobright Terrestial Teal", "Royal Fiber Rose", "Royal Fiber Ice Blue", "Royal Fiber Cream", "Royal Fiber White", "Royal Fiber Sunflower", "Royal Fiber Thyme", "Astroparche Blue", "Astroparche Gray", "Astroparche Sand", "Astroparche Natural", "Astroparche White", "Classic Linen Natural White", "Classic Linen Avon Brilliant White", "Classic Linen Antique Gray", "Classic Linen Whitestone", "Classic Linen Bluestone", "Classic Linen Silverstone", "Classic Linen Sage Green", "Classic Linen Haviland Blue"]
 					-var cardstockChoices = ["Opaque white", "Opaque blue", "Opaque cream", "Opaque green", "Opaque gray", "Opaque ivory", "Opaque yellow", "Opaque orchid", "Opaque pink", "Opaque tan", "Astrobright re-entry red", "Astrobright gamma green", "Astrobright celestial blue", "Astrobright solar yellow", "2-sided glossy white"]
 					-var envelopeChoices = ["Standard White", "Opaque Ivory", "Opaque Orchid", "Opaque Cream", "Opaque Gold", "Opaque Yellow", "Opaque Green", "Opaque Blue", "Opaque White", "Opaque Gray", "Opaque Pink", "Opaque Tan", "Astrobright Venus Violet", "Astrobright Celestial Blue", "Astrobright Lunar Blue", "Astrobright Pulsar Pink", "Astrobright Cosmic Orange", "Astrobright Solar Yellow", "Astrobright Re-entry Red", "Astrobright Fireball Fushcia", "Astrobright Gamma Green", "Astrobright Martian Green", "Astrobright Terrestial Teal", "Royal Fiber Cream", "Royal Fiber Sunflower", "Astroparche Blue", "Astroparche Gray", "Astroparche Sand", "Astroparche Natural", "Astroparche White", "Classic Linen Natural White", "Classic Linen Avon Brilliant White", "Classic Linen Antique Gray", "Classic Linen Whitestone", "Classic Linen Silverstone", "Classic Linen Sage Green"]
 					-var holidayEnvelopes = ["Holiday envelopes I mailed to you", "Holiday envelopes you ordered for me", "Astrobright Re-entry Red", "Astrobright Gamma Green", "Standard White ", "Opaque Ivory", "Opaque Orchid", "Opaque Cream", "Opaque Gold", "Opaque Yellow", "Opaque Green", "Opaque Blue", "Opaque White", "Opaque Gray", "Opaque Pink", "Opaque Tan", "Astrobright Venus Violet", "Astrobright Celestial Blue", "Astrobright Lunar Blue", "Astrobright Pulsar Pink", "Astrobright Cosmic Orange", "Astrobright Solar Yellow", "Astrobright Fireball Fushcia", "Astrobright Martian Green", "Astrobright Terrestial Teal", "Royal Fiber Cream", "Royal Fiber Sunflower ", "Astroparche Blue", "Astroparche Gray", "Astroparche Sand", "Astroparche Natural", "Astroparche White", "Classic Linen Natural White", "Classic Linen Avon Brilliant White ", "Classic Linen Antique Gray", "Classic Linen Whitestone", "Classic Linen Silverstone", "Classic Linen Sage Green"]
@@ -88,7 +90,7 @@ block content
 									option 1 per page (5.5 x 8.5), folded in half, white 6 x 9 envelopes
 						else
 							if mailerType === 'brochures'
-								h3 Please Ship The Order To: 
+								h3 Shipping Address
 								-var Class = 'form-control';
 								div.form-group: input(name='streetAddress', value=letterDetails ? letterDetails.streetAddress : null, placeholder='5234 Ferrari Drive', class=Class)
 								div.form-group.row
@@ -103,8 +105,9 @@ block content
 									span *
 								div.select-style
 									select(name="paperSize", value=letterDetails ? letterDetails.paperSize : null)
-										option 5.5 x 10
 										option(selected='selected') 8 1/2 x 11
+										option 8 1/2 x 14
+										option 11 x 17
 					.line-b.visible-lg-block
 				.row
 					//- Printer
@@ -145,8 +148,9 @@ block content
 								if mailerType === 'fundAppeal'
 									option First class stamp
 								if mailerType === 'christmasLetter'
-									option Hand stamp religious Christmas stamps
-									option Hand stamp non-religious Christmas stamps
+									option First class stamp
+									option Hand stamp religious Christmas stamp-$.02 upgrade
+									option Hand stamp non-religious Christmas stamp-$.02 upgrade
 								else
 									option First class stamp
 									option Non-profit stamp
@@ -317,7 +321,7 @@ block content
 								|&nbsp;
 							section.spacer
 							h3 Additional Information
-							h4 Please Ship The Order To: 
+							h4 Shipping Address
 							-var Class = 'form-control';
 							.wrapper(style='margin-right: 50px;')
 								div.form-group: input(name='streetAddress', value=letterDetails ? letterDetails.streetAddress : null, placeholder='5234 Ferrari Drive', class=Class)
@@ -439,4 +443,3 @@ block content
 
 block js
 	+fileUploads
-		

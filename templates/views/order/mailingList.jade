@@ -4,7 +4,7 @@ block content
 	+orderTabs
 	div.tab-content.order-process
 		div.tab-pane.fade.in.active#mailingList
-			.container: .jumbotron: form(action="/return-address", method="post")
+			.container: .jumbotron: form(action="/return-address?mailer=" + mailerType, method="post")
 				.row
 					.col-md-12.col-sm-12
 						h2 

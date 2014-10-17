@@ -131,7 +131,7 @@ $(function() {
 	* Listen for file selection:
 	*/
 	(function() {
-		$('input.fileUpload[type="file"]').each(function() {
+		$('input.letterFile[type="file"]').each(function() {
 			$(this).change(function() {
 				var $this = $(this);
 				s3_upload(this);

@@ -16,9 +16,9 @@ exports = module.exports = function(req, res) {
 	// Part Two of formData
 	req.session.mailingList = locals.formData;
 
-	console.log('Return Address: ' + req.session);
+	locals.mailerType = req.query.mailer;
 
-	console.log(locals.formData);
+	console.log(req.session.mailerType);
 	
 	// Render the view
 	view.render('order/returnAddress');

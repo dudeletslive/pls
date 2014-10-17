@@ -143,3 +143,6 @@ block content
 									.col-md-6
 										button(type="submit", id="updateContact", class='btn btn-success pull-right') SAVE
 block js
+	if locals.addContact
+		script.
+			$('#newContact').modal();

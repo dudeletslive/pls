@@ -8,8 +8,22 @@ block content
 		form(enctype='multipart/form-data', method='post')
 			div.file-wrapper#statusOne
 				span.button Choose a File
-				input(type='file', id='xlsFile', data-url='xlsFile', data-status='xlsFile', class='letterFile', name='xlsFile')
+				input(type='file', id='xlf', data-url='xlsFile', data-status='xlsFile', class='letterFile', name='xlsFile')
 			button(class='btn btn-primary', type='submit') Post
+		.modal.fade(id='instructions')
+			.modal-dialog
+				.modal-content
+					button.close(type="button", data-dismiss="modal")
+						span(aria-hidden="true") &#215;
+						span.sr-only Close
+					.modal-body
+						h3 Converting #{fileType} to CSV.
+						ol
+							li Step One
+							li Step Two
+							li Step Three
+					.modal-footer
+						button.btn.btn-default(type="button", data-dismiss="modal") Thanks!
 		section.spacer
 
 

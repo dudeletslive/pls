@@ -14,11 +14,11 @@ exports = module.exports = function(req, res) {
 	req.session.mailerType = locals.mailerType;
 	req.session.letterDetails = locals.formData;
 
-	console.log(locals.letterDetails);
+	locals.prettyList = locals.mailerType.replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); });
 
-	console.log('Letter Details: ' + req.session);
+	console.log(req.session.mailerType);
 
-	if (!req.query.mailer) {
+	if (!req.session.mailerType) {
 		res.redirect('/order');
 		req.flash('error', 'Please select a type of mailer before proceeding.');
 	} else {

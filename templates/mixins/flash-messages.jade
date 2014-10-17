@@ -33,7 +33,7 @@ mixin orderTabs
 		ul.tabs.order#tabs
 			each tab in orderTabs
 				//- #success if Complete
-				li(class=(tabID == tab.key ? 'active tab' : 'tab')): a(href=tab.href)
+				li(class=(tabID == tab.key ? 'active tab' : 'tab')): a(href=tab.href + '?mailer=' + mailerType)
 					//- span.fa-stack
 					//- 	i.fa.fa-stack-2x.fa-circle-o
 					//- 	//- i.fa.fa-stack-1x.fa-check

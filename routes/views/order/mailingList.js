@@ -19,6 +19,9 @@ exports = module.exports = function(req, res) {
 	req.session.letterDetails = locals.formData;
 
 	locals.redirect = req.url;
+	locals.mailerType = req.query.mailer;
+	
+	console.log(req.session.mailerType);
 
 	// console.log('Mailing List: ' + req.session);
 

@@ -19,14 +19,18 @@ exports = module.exports = function(req, res) {
 
 	locals.letterDetails = req.session.letterDetails;
 	locals.mailingList = req.session.mailingList;
-
+	locals.mailerType = req.query.mailer;
 	locals.sessionType = req.session.mailerType;
 
 	// Part Three of formData
 	req.session.returnAddress = locals.formData;
 	locals.returnAddress = req.session.returnAddress;
 
-	view.query('list', keystone.list('Mailing Lists').model.findById(req.session.mailingList.list).sort('sortOrder'));
+	if (locals.mailerType != 'brochures') {
+		view.query('list', keystone.list('Mailing Lists').model.findById(req.session.mailingList.list).sort('sortOrder'));
+	} else {
+		locals.letterDetails = req.body;
+	}
 
 	view.on('post', {action: 'prayerLetter'}, function(next) {
 		
@@ -165,15 +169,16 @@ exports = module.exports = function(req, res) {
 	});
 
 	// Render the view
-	if (typeof req.session.letterDetails === 'undefined' || typeof req.session.mailingList === 'undefined' || typeof req.session.returnAddress === 'undefined') {
-		if (locals.sessionType) {
-			req.flash('error', 'Please fill out all parts of the order form before attempting to view your order summary.');
-			res.redirect('/letter-details?mailer=' + locals.sessionType);
-		} else {
-			req.flash('error', 'Please fill out all parts of the order form before attempting to view your order summary.');
-			res.redirect('/order');
-		}
-	} else {
-		view.render('order/summary');
-	}
+	// if (typeof req.session.letterDetails === 'undefined') {
+	// 	if (locals.sessionType) {
+	// 		req.flash('error', 'Please fill out all parts of the order form before attempting to view your order summary.');
+	// 		res.redirect('/letter-details?mailer=' + locals.sessionType);
+	// 	} else {
+	// 		req.flash('error', 'Please fill out all parts of the order form before attempting to view your order summary.');
+	// 		res.redirect('/order');
+	// 	}
+	// } else {
+	// 	view.render('order/summary');
+	// }
+	view.render('order/summary');
 };
