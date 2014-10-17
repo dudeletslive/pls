@@ -50,32 +50,18 @@ exports = module.exports = function(req, res) {
 				req.flash('error', 'Please make sure your file is a .CSV. Click <a href="#" data-toggle="modal" data-target="#instructions">here</a> for instructions on converting your .' + ext + ' file to a CSV.');
 			else
 				req.flash('error', 'Please make sure your file is a .CSV.')
+			return false;
 
 		// If it's a CSV file, run this.
-		} else {
-
-			var options = {
-				// objectMode: true,
-				columns: true
-			}
-			var csv_trans = cv2json.csv(file, options, function(err, result) {
-				if(err)
-					console.error(err);
-				else 
-					console.log(result);
-			});
-
 		}
 
-		return false;
-
-		var CSV = JSON.parse(req.body.csvJSON);
+		console.log(fileName + ext);
 
 		async.series([
 			
 			function(cb) {
 				
-				if (!req.body.listName || !req.body.csvJSON || !req.body.mailingList) {
+				if (!req.body.listName) {
 					locals.errors = true;
 					return cb(true);
 					console.log(req.body.redirect);
@@ -101,31 +87,57 @@ exports = module.exports = function(req, res) {
 				newList.save(function(err, model) {
 					var id = model._id;
 					// When you create the mailing list, go through and create contacts from the JSON Array
-					for (contact in CSV) {
-						var contactInfo = {
-							mailingList: id,
-							firstName: CSV[contact][xlsindex('firstName')],
-							lastName: CSV[contact].lastName,
-							ENV_LINE: CSV[contact].firstName + ' ' + CSV[contact].lastName,
-							addressOne: CSV[contact].address1,
-							addressTwo: CSV[contact].address2,
-							addressThree: CSV[contact].address3,
-							city: CSV[contact].city,
-							state: CSV[contact].state,
-							postCode: CSV[contact].zip
-
-						};
-						var Contact = keystone.list('Contact').model,
-							newContact = new Contact(contactInfo);
-						newContact.save(function(err) {
-						});
+					var options = {				
+						columns: true
 					}
+					var file = req.files.xlsFile.path;
+					var csv_trans = cv2json.csv(file, options, function(err, result) {
+						if(err)
+							console.error(err);
+						else
+							console.log(JSON.stringify(result));
+							var list = JSON.stringify(result);
+								list = list.replace(/(\w+\s+)*?first(\s*|-*|_*)?(name)?(\s*|-*)?/ig, 'firstName');
+								list = list.replace(/(\w+\s+)*?last(\s*|-*|_*)?(name)?(\s*|-*)?/ig, 'lastName');
+								list = list.replace(/(\w+\s+)*?(address|street|road)(\s*|-*|_*)?(one|1)(\s*|-*)?/ig, 'addressOne');
+								list = list.replace(/(\w+\s+)*?(address|street|road)(\s*|-*|_*)?(two|2)(\s*|-*)?/ig, 'addressTwo');
+								list = list.replace(/(\w+\s+)*?(address|street|road)(\s*|-*|_*)?(three|3)(\s*|-*)?/ig, 'addressThree');
+								list = list.replace(/(\w+\s+)*?(city|suburb|province)(\s*|-*|_*)?(\s*|-*)?/ig, 'city');
+								list = list.replace(/(\w+\s+)*?(state)(\s*|-*|_*)?(\w+\s*|-*)?/ig, 'state');
+								list = list.replace(/(\w+\s+)*?(post(al)?|zip)(\s*|-*)?(code)(\s*|-*)?/ig, 'postCode');
+							// console.log(list);
+							var result = JSON.parse(list);
+							for (contact in result) {
+
+								var contactInfo = {
+									mailingList: id,
+									firstName: result[contact].firstName,
+									lastName: result[contact].lastName,
+									ENV_LINE: result[contact].firstName + ' ' + result[contact].lastName,
+									addressOne: result[contact].addressOne,
+									addressTwo: result[contact].addressTwo,
+									addressThree: result[contact].addressThree,
+									city: result[contact].city,
+									state: result[contact].state,
+									postCode: result[contact].postCode
+
+								};
+
+								var Contact = keystone.list('Contact').model,
+									newContact = new Contact(contactInfo);
+
+								newContact.save(function(err) {});
+
+							}
+					});
+
 					if(!req.body.redirect) {
 						res.redirect(req.originalUrl);
 					} else {	
 						res.redirect(req.body.redirect);
 					}
 					return cb(err);
+					
 				});
 			
 			},
