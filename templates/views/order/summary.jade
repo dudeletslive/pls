@@ -91,10 +91,10 @@ block content
 								tr
 									th File One
 									td= letterDetails.fileOne
-							if letterDetails.fileTwo
+							if letterDetails.filetwo
 								tr
 									th File Two
-									td= letterDetails.fileTwo
+									td= letterDetails.filetwo
 							if letterDetails.fileThree
 								tr
 									th File Three
@@ -136,6 +136,16 @@ block content
 								tr
 									th Mailing List
 									td= list.prettyName
+							if mailingList
+								if mailingList.listChoice
+									tr
+										th Mailing List
+										td= mailingList.listChoice
+							if mailingList
+								if mailingList.mailingListFile
+									tr
+										th Mailing List
+										td= mailingList.mailingListFile
 				.row
 					.col-md-12
 						.line-0.visible-lg-block
@@ -218,7 +228,7 @@ block content
 									input(type='text', name='fileOne', value=letterDetails.fileOne)
 								.form-group
 									label File Two
-									input(type='text', name='fileTwo', value=letterDetails.fileTwo)
+									input(type='text', name='fileTwo', value=letterDetails.filetwo)
 								.form-group
 									label File Three
 									input(type='text', name='fileThree', value=letterDetails.fileThree)
@@ -251,6 +261,15 @@ block content
 									.form-group
 										label Mailing List
 										input(type='text', name='mailingList', value=list._id)
+								else if mailingList
+									if mailingList.listChoice
+										.form-group
+											label Mailing List
+											input(type='text', name='listChoice', value=mailingList.listChoice)
+									else if mailingList.mailingListFile
+										.form-group
+											label Mailing List
+											input(type='text', name='listChoice', value=mailingList.mailingListFile)
 							button(type="submit").btn.btn-success.pull-right Confirm
 block js
 	+fileUploads

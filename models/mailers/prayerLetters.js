@@ -55,6 +55,7 @@ Enquiry.add({
 		specialInstructions: { type: String },
 	}, 'Mailing List', {
 		mailingList: { type: Types.Relationship, ref: 'Mailing Lists', many: true },
+		listChoice: { type: String, label: 'Custom Mailing List'},
 	}, 'Return Address', {
 		customReturnAddress: { type: Boolean },
 		returnAddress: { type: Types.Location, dependsOn: deps.customReturnAddress },

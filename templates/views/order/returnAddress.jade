@@ -25,7 +25,7 @@ block content
 							.col-md-5: input(name='city', value=user.returnAddress.suburb ? user.returnAddress.suburb : null, placeholder='Colorado Springs', class=Class)
 							.col-md-2: input(name='state', value=user.returnAddress ? user.returnAddress.state : null, placeholder='CO', class=Class)
 							.col-md-5: input(name='zipCode', value=user.returnAddress ? user.returnAddress.postcode : null, placeholder='80918', class=Class)
-						div.form-group: input(name='country', value=user.returnAddress ? user.returnAddress.country : 'United States of America', class=Class)
+						div.form-group: input(name='country', value=user.returnAddress ? user.returnAddress.country : null, class=Class)
 						br
 						.form-group
 							//- span.fa-stack.fa-lg.checkbox2.checked(data-input='returnAddress', data-value='true', data-type='radio')

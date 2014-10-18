@@ -35,6 +35,7 @@ Enquiry.add({
 		fileFour: { type: String },
 	}, 'Mailing List', {
 		mailingList: { type: Types.Relationship, ref: 'Mailing Lists' },
+		listChoice: { type: String, label: 'Custom Mailing List'},
 	}, 'Return Address', {
 		customReturnAddress: { type: Boolean },
 		returnAddress: { type: Types.Location, dependsOn: deps.customReturnAddress },

@@ -97,30 +97,29 @@ exports = module.exports = function(req, res) {
 						else
 							console.log(JSON.stringify(result));
 							var list = JSON.stringify(result);
-								list = list.replace(/(\w+\s+)*?first(\s*|-*|_*)?(name)?(\s*|-*)?/ig, 'firstName');
-								list = list.replace(/(\w+\s+)*?last(\s*|-*|_*)?(name)?(\s*|-*)?/ig, 'lastName');
-								list = list.replace(/(\w+\s+)*?(address|street|road)(\s*|-*|_*)?(one|1)(\s*|-*)?/ig, 'addressOne');
-								list = list.replace(/(\w+\s+)*?(address|street|road)(\s*|-*|_*)?(two|2)(\s*|-*)?/ig, 'addressTwo');
-								list = list.replace(/(\w+\s+)*?(address|street|road)(\s*|-*|_*)?(three|3)(\s*|-*)?/ig, 'addressThree');
+								list = list.replace(/(\w+([^spouse])\s)?first(\/*|\s*|-*|_*)?(given\s)?(name)?/ig, 'firstName');
+								list = list.replace(/(\w+([^spouse])\s)?(last|maiden)(\/*|\s*|-*|_*)?((family|maiden)\s)?(name)?/ig, 'lastName');
+								list = list.replace(/(\w+\s)?(env|envelope)(\/*|\s*|-*|_*)?(line(\sone)?)/ig, 'ENV_LINE');
+								list = list.replace(/(\w+\s+)*?(address|street|road)(\s*|-*|_*)?((\s)address|one|1)((\s)?-*|\r|\\r|\n|\\n)?/ig, 'addressOne');
+								list = list.replace(/(\w+\s+)*?(address|street|road)(\s*|-*|_*)?((\s)address|two|2)((\s)?-*|\r|\\r|\n|\\n)??/ig, 'addressTwo');
+								list = list.replace(/(\w+\s+)*?(address|street|road)(\s*|-*|_*)?((\s)address|three|3)((\s)?-*|\r|\\r|\n|\\n)?/ig, 'addressThree');
 								list = list.replace(/(\w+\s+)*?(city|suburb|province)(\s*|-*|_*)?(\s*|-*)?/ig, 'city');
 								list = list.replace(/(\w+\s+)*?(state)(\s*|-*|_*)?(\w+\s*|-*)?/ig, 'state');
-								list = list.replace(/(\w+\s+)*?(post(al)?|zip)(\s*|-*)?(code)(\s*|-*)?/ig, 'postCode');
+								list = list.replace(/(\w+\s+)*?(post(al)?|zip)(\s*|-*)?(code)(\s*|-*|\r|\\r|\\n)?/ig, 'zip');
 							// console.log(list);
 							var result = JSON.parse(list);
 							for (contact in result) {
-
 								var contactInfo = {
 									mailingList: id,
 									firstName: result[contact].firstName,
 									lastName: result[contact].lastName,
-									ENV_LINE: result[contact].firstName + ' ' + result[contact].lastName,
+									ENV_LINE: result[contact].ENV_LINE,
 									addressOne: result[contact].addressOne,
 									addressTwo: result[contact].addressTwo,
 									addressThree: result[contact].addressThree,
 									city: result[contact].city,
 									state: result[contact].state,
-									postCode: result[contact].postCode
-
+									postCode: result[contact].zip
 								};
 
 								var Contact = keystone.list('Contact').model,
