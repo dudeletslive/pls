@@ -6,6 +6,8 @@ block body-contents
 	br
 	|User: <strong>#{enquiry.name.full}</strong>
 	br
+	|Email Address: #{enquiry.email}
+	br
 	p.text-muted Registered #{enquiry.submittedOn}
 	p &nbsp;
 	+button({ url: 'http://www.myletterservice.org/keystone/users/', label: 'Open Keystone' })
