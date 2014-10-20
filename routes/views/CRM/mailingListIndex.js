@@ -76,7 +76,7 @@ exports = module.exports = function(req, res) {
 				var mailingList = {
 					userID: locals.user.id,
 					uploadedBy: locals.user.id,
-					listName: req.body.listName + ' - ' + locals.user.id,
+					listName: req.body.listName + ' - ' + locals.user.name.first + ' ' + locals.user.name.last,
 					prettyName: req.body.listName
 				};
 				
@@ -99,7 +99,7 @@ exports = module.exports = function(req, res) {
 							var list = JSON.stringify(result);
 								list = list.replace(/(\w+([^spouse])\s)?first(\/*|\s*|-*|_*)?(given\s)?(name)?/ig, 'firstName');
 								list = list.replace(/(\w+([^spouse])\s)?(last|maiden)(\/*|\s*|-*|_*)?((family|maiden)\s)?(name)?/ig, 'lastName');
-								list = list.replace(/(\w+\s)?(env|envelope)(\/*|\s*|-*|_*)?(line(\sone)?)/ig, 'ENV_LINE');
+								list = list.replace(/(\w+\s)?(env|envelope)(\/*|\s*|-*|_*)?(line(\sone)?)(_*|\s*)?(1|one)?/ig, 'ENV_LINE');
 								list = list.replace(/(\w+\s+)*?(address|street|road)(\s*|-*|_*)?((\s)address|one|1)((\s)?-*|\r|\\r|\n|\\n)?/ig, 'addressOne');
 								list = list.replace(/(\w+\s+)*?(address|street|road)(\s*|-*|_*)?((\s)address|two|2)((\s)?-*|\r|\\r|\n|\\n)??/ig, 'addressTwo');
 								list = list.replace(/(\w+\s+)*?(address|street|road)(\s*|-*|_*)?((\s)address|three|3)((\s)?-*|\r|\\r|\n|\\n)?/ig, 'addressThree');
