@@ -94,7 +94,7 @@ keystone.set('email tests', require('./routes/emails'));
 keystone.set('nav', {
 	'Mailing Lists': ['Mailing Lists', 'Contact'],
 	'users': 'users',
-	'mailers': ['Prayer Letters', 'Postcards', 'Brochures', 'Fund Appeals', 'Thank You Letters', 'Christmas Letters'],
+	'Orders': ['Prayer Letters', 'Postcards', 'Brochures', 'Fund Appeals', 'Thank You Letters', 'Christmas Letters'],
 	'enquiries': 'enquiries',
 });
 

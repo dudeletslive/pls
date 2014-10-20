@@ -1,0 +1,11 @@
+extends /layouts/default
+
+block body-contents
+	h1 Hi *|first_name|*,
+	p.text-larger A new user has registered at #{brand}:
+	br
+	|User: <strong>#{enquiry.name.full}</strong>
+	br
+	p.text-muted Registered #{enquiry.submittedOn}
+	p &nbsp;
+	+button({ url: 'http://www.myletterservice.org/keystone/users/', label: 'Open Keystone' })

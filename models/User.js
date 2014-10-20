@@ -57,6 +57,39 @@ User.add({
 	}
 });
 
+User.schema.pre('save', function(next) {
+	this.wasNew = this.isNew;
+	next();
+})
+
+User.schema.post('save', function() {
+	if (this.wasNew) {
+		this.sendNotificationEmail();
+	}
+});
+
+User.schema.methods.sendNotificationEmail = function(callback) {
+	
+	var object = this;
+	
+	keystone.list('User').model.find().where('isAdmin', true).exec(function(err, admins) {
+		
+		if (err) return callback(err);
+		
+		new keystone.Email('new-user').send({
+			to: admins,
+			from: {
+				name: 'Prayer Letter Service',
+				email: 'contact@prayer-letter-service.com'
+			},
+			subject: 'New User Registered at Prayer Letter Service',
+			enquiry: object
+		}, callback);
+		
+	});
+	
+}
+
 // Provide access to Keystone
 User.schema.virtual('canAccessKeystone').get(function() {
 	return this.isAdmin;
