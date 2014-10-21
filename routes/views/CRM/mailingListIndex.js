@@ -47,7 +47,7 @@ exports = module.exports = function(req, res) {
 		locals.fileType = ext;
 
 		// If the file is not a CSV, run this.
-		if (req.files.xlsFile.type != 'text/csv') {
+		if (req.files.xlsFile.type.indexOf('csv') === -1 || req.files.xlsFile.type.indexOf('text') === -1) {
 
 			res.redirect(req.originalUrl);
 			if (ext === 'xlsx' || ext === 'xlx')
