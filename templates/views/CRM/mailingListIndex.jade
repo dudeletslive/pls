@@ -74,36 +74,7 @@ block js
 	if errors
 		script.
 			$('#newList').modal();
-	//- script.
+	script.
 		$('button[type="submit"]').click(function() {
-			var $this = $(this);
-			event.preventDefault();
-			// Parse local CSV files
-			$('input#csv').parse({
-				config: {
-					header: true,
-					complete: function(results) {
-						var str = JSON.stringify(results.data),
-							str = str.replace(/first.? ?name/ig, "firstName"),
-							str = str.replace(/last.? ?name/ig, "lastName"),
-							str = str.replace(/(street|address) ?(1|one)/ig, "address1"),
-							str = str.replace(/street|address ?2|two/ig, "address2"),
-							str = str.replace(/street|address ?3|three/ig, "address3"),
-							str = str.replace(/city|town|county/ig, "city"),
-							str = str.replace(/state|province/ig, "state"),
-							str = str.replace(/zip|postal ?code/ig, "zip");
-							//- str = str.replace(/"/g, "'");
-						$this.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i>');
-						$('input[name="csvJSON"').val(str).trigger('change');
-						//- $.each(results.data, function(key, value) {
-						//- 	var keys = Object.keys(value);
-						//- 	$('pre#json').append(value["TITLE"] + '<br>');
-						//-     console.log(value["TITLE"], keys);
-						//- });
-					}
-				}
-			});
-			$('input[name="csvJSON"').change(function() {
-				document.getElementById('listForm').submit();
-			});
+			$(this).html('<i class="fa fa-spinner fa-spin"></i>');
 		});

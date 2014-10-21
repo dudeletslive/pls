@@ -95,39 +95,48 @@ exports = module.exports = function(req, res) {
 						if(err)
 							console.error(err);
 						else
-							console.log(JSON.stringify(result));
 							var list = JSON.stringify(result);
-								list = list.replace(/(\w+([^spouse])\s)?first(\/*|\s*|-*|_*)?(given\s)?(name)?/ig, 'firstName');
-								list = list.replace(/(\w+([^spouse])\s)?(last|maiden)(\/*|\s*|-*|_*)?((family|maiden)\s)?(name)?/ig, 'lastName');
-								list = list.replace(/(\w+\s)?(env|envelope)(\/*|\s*|-*|_*)?(line(\sone)?)(_*|\s*)?(1|one)?/ig, 'ENV_LINE');
-								list = list.replace(/(\w+\s+)*?(address|street|road)(\s*|-*|_*)?((\s)address|one|1)((\s)?-*|\r|\\r|\n|\\n)?/ig, 'addressOne');
-								list = list.replace(/(\w+\s+)*?(address|street|road)(\s*|-*|_*)?((\s)address|two|2)((\s)?-*|\r|\\r|\n|\\n)??/ig, 'addressTwo');
-								list = list.replace(/(\w+\s+)*?(address|street|road)(\s*|-*|_*)?((\s)address|three|3)((\s)?-*|\r|\\r|\n|\\n)?/ig, 'addressThree');
-								list = list.replace(/(\w+\s+)*?(city|suburb|province)(\s*|-*|_*)?(\s*|-*)?/ig, 'city');
-								list = list.replace(/(\w+\s+)*?(state)(\s*|-*|_*)?(\w+\s*|-*)?/ig, 'state');
-								list = list.replace(/(\w+\s+)*?(post(al)?|zip)(\s*|-*)?(code)(\s*|-*|\r|\\r|\\n)?/ig, 'zip');
-							// console.log(list);
+								list = list.replace(/(\w+([^spouse])\s|\s)?first(\/*|\s*|-*|_*)?(given\s)?(name)?/ig, 'firstName');
+								list = list.replace(/(\w+([^spouse])\s|\s)?(last|maiden)(\/*|\s*|-*|_*)?((family|maiden)\s)?(name)?/ig, 'lastName');
+								list = list.replace(/(\w+\s|\s)?(env|envelope)(\/*|\s*|-*|_*)?(line(\sone)?)(_*|\s*)?(1|one)?/ig, 'ENV_LINE');
+								list = list.replace(/(\w+\s+|\s)*?(address|street|road)(\s*|-*|_*)?((\s)address|one|1)?((\s)?-*|\r|\\r|\n|\\n)?/ig, 'addressOne');
+								list = list.replace(/(\w+\s+|\s)*?(address|street|road)(\s*|-*|_*)?((\s)address|two|2)((\s)?-*|\r|\\r|\n|\\n)??/ig, 'addressTwo');
+								list = list.replace(/(\w+\s+|\s)*?(address|street|road)(\s*|-*|_*)?((\s)address|three|3)((\s)?-*|\r|\\r|\n|\\n)?/ig, 'addressThree');
+								list = list.replace(/(\w+\s+|\s)*?(city|suburb|province)(\s*|-*|_*)?(\s*|-*)?/ig, 'city');
+								list = list.replace(/(\w+\s+|\s)*?(state|\b\s?st\b)(\s*|-*|_*)?(\w+\s*|-*)?/ig, 'state');
+								list = list.replace(/(\w+\s+|\s)*?(post(al)?|zip)(\s*|-*)?(code)?(\s*|-*|\r|\\r|\\n)?/ig, 'zip');
+							
 							var result = JSON.parse(list);
+							
+							// console.log(result);
+							var i = 0;
 							for (contact in result) {
-								var contactInfo = {
-									mailingList: id,
-									firstName: result[contact].firstName,
-									lastName: result[contact].lastName,
-									ENV_LINE: result[contact].ENV_LINE,
-									addressOne: result[contact].addressOne,
-									addressTwo: result[contact].addressTwo,
-									addressThree: result[contact].addressThree,
-									city: result[contact].city,
-									state: result[contact].state,
-									postCode: result[contact].zip
-								};
+								if (result[contact].firstName != '' && result[contact].lastName != '' && result[contact].state != '' && result[contact].zip != '') {
 
-								var Contact = keystone.list('Contact').model,
-									newContact = new Contact(contactInfo);
+									var contactInfo = {
+										mailingList: id,
+										firstName: result[contact].firstName,
+										lastName: result[contact].lastName,
+										ENV_LINE: result[contact].ENV_LINE,
+										addressOne: result[contact].addressOne,
+										addressTwo: result[contact].addressTwo,
+										addressThree: result[contact].addressThree,
+										city: result[contact].city,
+										state: result[contact].state,
+										postCode: result[contact].zip
+									};
 
-								newContact.save(function(err) {});
+									var Contact = keystone.list('Contact').model,
+										newContact = new Contact(contactInfo);
 
+									newContact.save(function(err) {});
+
+								} else {
+									locals.emptyCount = i++;
+									console.log(locals.emptyCount);
+								}
 							}
+							console.log('Final Count: ' + locals.emptyCount);
 					});
 
 					if(!req.body.redirect) {
