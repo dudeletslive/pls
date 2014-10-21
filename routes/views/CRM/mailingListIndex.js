@@ -3,7 +3,9 @@ var keystone = require('keystone')
 	Contact = keystone.list('Contact'),
 	User = keystone.list('User'),
 	cv2json = require('convert-json'),
-	async = require('async');
+	async = require('async'),
+	csvjs = require('csv-json'),
+	underscore_ = require('underscore');
 
 exports = module.exports = function(req, res) {
 	
@@ -39,6 +41,8 @@ exports = module.exports = function(req, res) {
 		var file = req.files.xlsFile.path;
 		var fileName = req.files.xlsFile.name;
 		var ext = fileName.split('.')[1];
+
+		console.log(fileName);
 
 		locals.fileType = ext;
 
@@ -91,28 +95,38 @@ exports = module.exports = function(req, res) {
 						columns: true
 					}
 					var file = req.files.xlsFile.path;
-					var csv_trans = cv2json.csv(file, options, function(err, result) {
-						if(err)
-							console.error(err);
+					
+					csvjs.parseCsv(file, function(error, json, stats) {
+						var i = 0;
+						var stats = JSON.stringify(stats);
+						var list = JSON.stringify(json);
+						console.log('============= LIST =============');
+						// console.log(list);
+						console.log('============= STATS =============');
+						// console.log(stats);
+						if(error)
+							console.log(error)
 						else
-							var list = JSON.stringify(result);
-								list = list.replace(/(\w+([^spouse])\s|\s)?first(\/*|\s*|-*|_*)?(given\s)?(name)?/ig, 'firstName');
-								list = list.replace(/(\w+([^spouse])\s|\s)?(last|maiden)(\/*|\s*|-*|_*)?((family|maiden)\s)?(name)?/ig, 'lastName');
-								list = list.replace(/(\w+\s|\s)?(env|envelope)(\/*|\s*|-*|_*)?(line(\sone)?)(_*|\s*)?(1|one)?/ig, 'ENV_LINE');
-								list = list.replace(/(\w+\s+|\s)*?(address|street|road)(\s*|-*|_*)?((\s)address|one|1)?((\s)?-*|\r|\\r|\n|\\n)?/ig, 'addressOne');
-								list = list.replace(/(\w+\s+|\s)*?(address|street|road)(\s*|-*|_*)?((\s)address|two|2)((\s)?-*|\r|\\r|\n|\\n)??/ig, 'addressTwo');
-								list = list.replace(/(\w+\s+|\s)*?(address|street|road)(\s*|-*|_*)?((\s)address|three|3)((\s)?-*|\r|\\r|\n|\\n)?/ig, 'addressThree');
-								list = list.replace(/(\w+\s+|\s)*?(city|suburb|province)(\s*|-*|_*)?(\s*|-*)?/ig, 'city');
-								list = list.replace(/(\w+\s+|\s)*?(state|\b\s?st\b)(\s*|-*|_*)?(\w+\s*|-*)?/ig, 'state');
-								list = list.replace(/(\w+\s+|\s)*?(post(al)?|zip)(\s*|-*)?(code)?(\s*|-*|\r|\\r|\\n)?/ig, 'zip');
+							list = list.replace(/(\w+([^spouse])\s|\s)?first(\/*|\s*|-*|_*)?(given\s)?(name)?/ig, 'firstName');
+							list = list.replace(/(\w+([^spouse])\s|\s)?(last|maiden)(\/*|\s*|-*|_*)?((family|maiden)\s)?(name)?/ig, 'lastName');
+							list = list.replace(/(\w+\s|\s)?(env|envelope)(\/*|\s*|-*|_*)?(line(\sone)?)(_*|\s*)?(1|one)?/ig, 'ENV_LINE');
+							list = list.replace(/(\w+\s+|\s)*?(address|street|road)(\s*|-*|_*)?((\s)address|one|1)?((\s)?-*|\r|\\r|\n|\\n)?/ig, 'addressOne');
+							// list = list.replace(/(\w+\s+|\s)*?(address|street|road)(\s*|-*|_*)?((\s)two|2)((\s)?-*|\r|\\r|\n|\\n)?/ig, 'addressTwo');
+							// list = list.replace(/(\w+\s+|\s)*?(address|street|road)(\s*|-*|_*)?((\s)three|3)((\s)?-*|\r|\\r|\n|\\n)?/ig, 'addressThree');
+							list = list.replace(/(\w+\s+|\s)*?(city|suburb|province)(\s*|-*|_*)?(\s*|-*)?/ig, 'city');
+							list = list.replace(/(\w+\s+|\s)*?(state|\b\s?st\b)(\s*|-*|_*)?(\w+\s*|-*)?/ig, 'state');
+							list = list.replace(/(\w+\s+|\s)*?(post(al)?|zip)(\s*|-*)?(code)?(\s*|-*|\r|\\r|\\n)?/ig, 'zip');
 							
 							var result = JSON.parse(list);
-							
-							// console.log(result);
-							var i = 0;
-							for (contact in result) {
-								if (result[contact].firstName != '' && result[contact].lastName != '' && result[contact].state != '' && result[contact].zip != '') {
 
+							console.log('============= RESULT =============')
+							// console.log(result);
+
+							for (contact in result) {
+
+								if (underscore_.isEmpty(result[contact])) {
+									// Do Nothing
+								} else {
 									var contactInfo = {
 										mailingList: id,
 										firstName: result[contact].firstName,
@@ -130,13 +144,10 @@ exports = module.exports = function(req, res) {
 										newContact = new Contact(contactInfo);
 
 									newContact.save(function(err) {});
-
-								} else {
-									locals.emptyCount = i++;
-									console.log(locals.emptyCount);
 								}
+
 							}
-							console.log('Final Count: ' + locals.emptyCount);
+							
 					});
 
 					if(!req.body.redirect) {
