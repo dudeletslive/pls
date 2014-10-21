@@ -47,14 +47,16 @@ exports = module.exports = function(req, res) {
 		locals.fileType = ext;
 
 		// If the file is not a CSV, run this.
-		// if (req.files.xlsFile.type.indexOf('csv') === -1 || req.files.xlsFile.type.indexOf('text') === -1) {
+		if (req.files.xlsFile.type.indexOf('csv') === -1 || req.files.xlsFile.type.indexOf('text') === -1) {
 
-		// 	res.redirect(req.originalUrl);
-		// 	if (ext === 'xlsx' || ext === 'xlx')
-		// 		req.flash('error', 'Please make sure your file is a .CSV. Click <a href="#" data-toggle="modal" data-target="#instructions">here</a> for instructions on converting your .' + ext + ' file to a CSV.');
-		// 	else
-		// 		req.flash('error', 'Please make sure your file is a .CSV.')
-		// 	return false;
+			// res.redirect(req.originalUrl);
+			if (ext === 'xlsx' || ext === 'xlx')
+				// req.flash('error', 'Please make sure your file is a .CSV. Click <a href="#" data-toggle="modal" data-target="#instructions">here</a> for instructions on converting your .' + ext + ' file to a CSV.');
+				console.log('This.')
+			else
+				console.log('This.')
+				// req.flash('error', 'Please make sure your file is a .CSV.')
+			// return false;
 
 		// If it's a CSV file, run this.
 		}
