@@ -63,15 +63,24 @@ block content
 							label Country
 							input(name='address[country]', class='form-control')
 						hr
-						h3 Return Address
+						h3 I’ll Use My Own Return Address
 							div.small (Leave blank if you wish to use the PLS Return Address)
 						.form-group.clearfix: .col-md-12
-							label Street Address
+							label Envelope Line
+							input(name='returnAddress[name]', placeholder='Mr. and Mrs. Smith', class='form-control')
+						.form-group.clearfix: .col-md-12
+							label Address Line One
 							input(name='returnAddress[street1]', placeholder='5234 Ferrari Drive', class='form-control')
+						.form-group.clearfix: .col-md-12
+							label Address Line Two
+							input(name='returnAddress[street2]', placeholder='Apartment 03-05', class='form-control')
+						.form-group.clearfix: .col-md-12
+							label Address Line Three
+							input(name='returnAddress[number]', placeholder='', class='form-control')
 						.form-group.state.clearfix
 							.col-md-5
 								label City
-								input(name='returnAddress[suburb]', class='form-control')
+								input(name='returnAddress[suburb]', placeholder='Colorado Springs', class='form-control')
 							.col-md-2
 								label State
 								select(name='returnAddress[state]', placeholder='CO', class='form-control')
@@ -82,10 +91,10 @@ block content
 								input(name='returnAddress[postcode]', placeholder='80918', class='form-control')
 						.form-group.clearfix: .col-md-12
 							label Country
-							input(name='returnAddress[country]', class='form-control')
+							input(name='returnAddress[country]', placeholder='USA', class='form-control')
 						.form-group.clearfix
 							.col-md-12
-								label To use the PLS return address, include the following line on my envelopes:
+								label I'll use the PLS return address, include the following line on my envelopes:
 								p(style='margin-top: 7px;') Your ministry update from: 
 								input(type='text', name='ministryUpdateFrom', class='form-control')
 						.form-group.clearfix
@@ -99,17 +108,17 @@ block content
 									|&nbsp; Mail my invoice to me.
 						.form-group.clearfix
 							.col-md-12
-								label Mailing List
+								label Communication
 								div
 									input(type='checkbox' id='mailingList', name='emailReminders' value='true', checked=form.emailReminders ? 'checked' : false)
-									|&nbsp; Periodically email me reminders.
+									|&nbsp; Please add me to your MailChimp mailing list so I'll receive updated information and reminders.
 						.form-group.clearfix
 							.col-md-12
-								label To maintain my database I would like to:
+								label To maintain my mailing list I would like to:
 								select(type='text', name='databaseMaintenance', class='form-control')
-									option Send us an updated copy of my mailing list with each order.
 									option Maintain my mailing list online through the PLS website.
-									option Ask the Prayer Letter Service to maintain my mailing list for me in Access on their computer.
+									option Send an updated copy of my mailing list with each order.
+									option Have the Prayer Letter Service to maintain my mailing list for me in Access on their computer.
 						hr
 						.form-group.clearfix
 							.col-md-12

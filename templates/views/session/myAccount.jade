@@ -63,7 +63,7 @@ block content
 						.form-group.clearfix
 							.col-md-12
 								label Use this logo for my mailing envelopes:
-								-var options = [ "Agage France", "Atheles In Action", "Bridges International", "Corporate", "CRU", "CRU City", "CRU High School", "CRU Inner City", "CRU Military", "Destino", "Enfoque Mexico", "Epic Movement", "Faculty Commons", "Family Life", "GAIN", "Global Service Network", "ILAM", "IMPACT", "Jesus Film", "Keynote",  "Master Plan",  "Navigators",  "One Story",  "Pioneers", "Priority Associates", "Probe", "Student Venture", "I will email my ministry's logo to you" ]
+								-var options = ["CRU", "Agage France", "Atheles In Action", "Bridges International", "Corporate", "CRU City", "CRU High School", "CRU Inner City", "CRU Military", "Destino", "Enfoque Mexico", "Epic Movement", "Faculty Commons", "Family Life", "GAIN", "Global Service Network", "ILAM", "IMPACT", "Jesus Film", "Keynote",  "Master Plan",  "Navigators",  "One Story",  "Pioneers", "Priority Associates", "Probe", "Student Venture", "I will email my ministry's logo to you" ]
 								select(name='mailingEnvelopeLogo', class='form-control')
 									for option in options
 										option(selected=option == user.mailingEnvelopeLogo ? 'selected' : false)= option
@@ -79,37 +79,41 @@ block content
 									|&nbsp; Mail my invoice to me.
 						.form-group.clearfix
 							.col-md-12
-								label Mailing List
+								label Communication
 								div
 									input(type='checkbox' id='mailingList', name='emailReminders' value='true', checked=user.emailReminders ? 'checked' : false)
-									|&nbsp; Periodically email me reminders.
+									|&nbsp; Please add me to your MailChimp mailing list so I'll receive updated information and reminders.
 					.col-md-12
 						.form-group.clearfix
 							.col-md-12
-								label To maintain my database I would like to:
-								-var dbMaintenance = [ "Send us an updated copy of my mailing list with each order.", "Maintain my mailing list online through the PLS website.", "Ask the Prayer Letter Service to maintain my mailing list for me in Access on their computer." ]
+								label To maintain my mailing list I would like to:
+								-var dbMaintenance = [ "Maintain my mailing list online through the PLS website.", "Send an updated copy of my mailing list with each order.", "Have the Prayer Letter Service to maintain my mailing list for me in Access on their computer." ]
 								select(type='text', name='databaseMaintenance', class='form-control')
 									each option in dbMaintenance
 										option(selected=option == user.databaseMaintenance ? 'selected' : false)= option
 					.col-md-12
 						.form-group.clearfix
 							.col-md-12
-								label To use the PLS return address, include the following line on my envelopes:
+								label I'll use the PLS return address, include the following line on my envelopes:
 								.col-md-5
 									p(style='margin-top: 7px;') Your ministry update from: 
 								.col-md-7
 									input(type='text', name='ministryUpdateFrom', class='form-control', value=user.ministryUpdateFrom ? user.ministryUpdateFrom : null)
 						br
-						h3 Return Address
+						h3 I’ll Use My Own Return Address
 						hr
-						.form-group.clearfix
-							.col-md-12
-								label(for="returnAddress.street1") Return Address
-								input(name="returnAddress.street1", class="form-control", placeholder="5234 Ferrari Drive", value=user.returnAddress.street1 ? user.returnAddress.street1 : null)
-						.form-group.clearfix#address
-							.col-md-12
-								label(for="returnAddress.street2") Return Address Line Two
-								input(name="returnAddress.street2", class="form-control", placeholder="Apt. 123", value=user.returnAddress.street2 ? user.returnAddress.street2 : null)
+						.form-group.clearfix: .col-md-12
+							label Envelope Line
+							input(name='returnAddress.name', placeholder='Mr. and Mrs. Smith', class='form-control', value=user.returnAddress.name)
+						.form-group.clearfix: .col-md-12
+							label Address Line One
+							input(name='returnAddress.street1', placeholder='5234 Ferrari Drive', class='form-control', value=user.returnAddress.street1)
+						.form-group.clearfix: .col-md-12
+							label Address Line Two
+							input(name='returnAddress.street2', placeholder='Apartment 03-05', class='form-control', value=user.returnAddress.street2)
+						.form-group.clearfix: .col-md-12
+							label Address Line Three
+							input(name='returnAddress.number', placeholder='', class='form-control', value=user.returnAddress.number)
 						.form-group.state.clearfix
 							.col-md-5
 								label(for="returnAddress.suburb") City
