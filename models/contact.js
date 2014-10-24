@@ -9,7 +9,8 @@ var keystone = require('underscore'),
 
 var contact = new keystone.List('Contact', {
 	autokey: { path: 'slug', from: 'title', unique: true },
-	map: { name: 'firstName' }
+	map: { name: 'firstName' },
+	track: { createdAt: true, createdBy: true, updatedAt: true, updatedBy: true }
 	// noedit: true,
 	// nocreate: true
 });
