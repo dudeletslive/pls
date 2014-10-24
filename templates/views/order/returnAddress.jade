@@ -39,7 +39,7 @@ block content
 						.pull-left
 							div.phrase "Your Ministry Update from"
 						.pull-right
-							input(type='text', name='yourMinistryUpdateFrom', value=letterDetails.yourMinistryUpdateFrom).form-control.txtPhrase
+							input(type='text', name='yourMinistryUpdateFrom', value=user.ministryUpdateFrom ? user.ministryUpdateFrom : null).form-control.txtPhrase
 					.col-md-12
 						.line-0.visible-lg-block
 				br

@@ -39,6 +39,7 @@ mixin orderTabs
 					//- 	//- i.fa.fa-stack-1x.fa-check
 					//- | &nbsp;
 					span= tab.label
+			li(class=(tabID === 'confirmation' ? 'active tab' : 'tab')): span Confirmation
 
 mixin fileUploads
 	script(type='text/javascript').
