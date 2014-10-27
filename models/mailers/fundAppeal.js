@@ -54,7 +54,7 @@ Enquiry.add({
 		personalization: { type: String },
 		multipleLists: { type: Boolean, label: 'I\'ve attached multiple mailing lists to correspond with the attached letters.' },
 		noLogo: { type: Boolean, label: 'Do not include a logo on my envelopes for this mailing.' },
-		addressService: { type: Boolean, label: 'Please include "Address Service Requested" for this mailing' }
+		addressService: { type: Boolean, label: 'Please do not include "Address Service Requested" for this mailing' }
 	}, 'Mailing List', {
 		mailingList: { type: Types.Relationship, ref: 'Mailing Lists' },
 		listChoice: { type: String, label: 'Custom Mailing List'},

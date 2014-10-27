@@ -10,17 +10,33 @@ block content
 		div.col-md-12.line
 		div.col-md-12
 			ul
-				for list in lists
-					li.box
+				if lists.length >= 1
+					for list in lists
+						li.box
+							.col-md-12
+								img(src='../images/list-name.png')
+								h2= list.prettyName
+								a.btn.btn-sm.btn-gray(href='/mailing-lists/' + list.slug) VIEW LIST
+								a.btn.btn-sm.btn-green(href='/mailing-lists/' + list.slug + '?contact=add') ADD CONTACT
+					li.box(data-toggle='modal', data-target='#newList')
 						.col-md-12
-							img(src='../images/list-name.png')
-							h2= list.prettyName
-							a.btn.btn-sm.btn-gray(href='/mailing-lists/' + list.slug) VIEW LIST
-							a.btn.btn-sm.btn-green(href='/mailing-lists/' + list.slug + '?contact=add') ADD CONTACT
-				li.box(data-toggle='modal', data-target='#newList')
-					.col-md-12
-						img(src='../images/circle-plus-big.png')
-						h2.title ADD NEW LIST
+							img(src='../images/circle-plus-big.png')
+							h2.title ADD NEW LIST
+				else
+					div.col-md-4
+						li.box(data-toggle='modal', data-target='#newList')
+							.col-md-12
+								img(src='../images/circle-plus-big.png')
+								h2.title ADD NEW LIST
+					div.col-md-8
+						p If you would like the PLS to maintain your mailing list online you have two options for getting your list to us:
+						ul
+							li: p You may upload your list directly to the website. Click here for instructions. Each time you sign in you will find your mailing list under My Mailing Lists.
+							li: p You may email your mailing list as any type of file and in any format.  The columns and field names are not important.  The PLS will format the mailing list for you and connect the list to your account.  The next time you sign in the mailing list will appear under My Mailing Lists.
+						p If you would like the PLS to maintain your mailing list in Access on our computer, please email your mailing list. 
+						p If you plan to send us your mailing list with each order, you may skip this step.  Simply attach your mailing list during the ordering process.
+						p If you’re an existing client, feel free to start an order!
+
 
 		//- Modal for Creating new Mailing List
 		.modal.fade(tab-index='-1', role='dialog', aria-labelledby='newList', aria-hidden='true', id='newList')

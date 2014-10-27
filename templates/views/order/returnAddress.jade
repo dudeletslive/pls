@@ -14,25 +14,43 @@ block content
 					.col-md-5
 						br
 						.form-group
-							//- span.fa-stack.fa-lg.checkbox2(data-input='returnAddress', data-value='Custom Address', data-type='radio')
-							//- 	i.fa.fa-square.fa-stack-2x
-							//- 	i.fa.fa-check.fa-stack-1x.fa-inverse
-							input(type='radio', name='customReturnAddress', value='true', class='')
+							span.fa-stack.fa-lg.checkbox2(data-input='customReturnAddress', data-value='true', data-type='radio')
+								i.fa.fa-square.fa-stack-2x
+								i.fa.fa-check.fa-stack-1x.fa-inverse
+							input(type='radio', name='customReturnAddress', value='true', class='hide')
 							label(for="returnAddress") Use the Return Address Below
 						-var Class = 'form-control input-lg';
-						div.form-group: input(name='streetAddress', value=user.returnAddress ? user.returnAddress.street1 : null, placeholder='5234 Ferrari Drive', class=Class)
+						div.form-group
+							label Envelope Line
+							input(name='name', value=user.returnAddress ? user.returnAddress.name : null, placeholder='Mr. and Mrs. Smith', class='form-control')
+						div.form-group
+							label Address Line One
+							input(name='streetAddress', value=user.returnAddress ? user.returnAddress.street1 : null, placeholder='5234 Ferrari Drive', class='form-control')
+						div.form-group
+							label Address Line Two
+							input(name='streetAddress2', value=user.returnAddress ? user.returnAddress.street2 : null, placeholder='Apartment 03-05', class='form-control')
+						div.form-group
+							label Address Line Three
+							input(name='streetAddress3', value=user.returnAddress ? user.returnAddress.number : null, placeholder='', class='form-control')
 						div.form-group.row
-							.col-md-5: input(name='city', value=user.returnAddress.suburb ? user.returnAddress.suburb : null, placeholder='Colorado Springs', class=Class)
-							.col-md-2: input(name='state', value=user.returnAddress ? user.returnAddress.state : null, placeholder='CO', class=Class)
-							.col-md-5: input(name='zipCode', value=user.returnAddress ? user.returnAddress.postcode : null, placeholder='80918', class=Class)
-						div.form-group: input(name='country', value=user.returnAddress ? user.returnAddress.country : null, class=Class)
+							.col-md-5
+								label City
+								input(name='city', value=user.returnAddress.suburb ? user.returnAddress.suburb : null, placeholder='Colorado Springs', class=Class)
+							.col-md-2
+								label State
+								input(name='state', value=user.returnAddress ? user.returnAddress.state : null, placeholder='CO', class=Class)
+							.col-md-5
+								label Zip
+								input(name='zipCode', value=user.returnAddress ? user.returnAddress.postcode : null, placeholder='80918', class=Class)
+						div.form-group
+							label Country
+							input(name='country', value=user.returnAddress ? user.returnAddress.country : null, class=Class)
 						br
 						.form-group
-							//- span.fa-stack.fa-lg.checkbox2.checked(data-input='returnAddress', data-value='true', data-type='radio')
-							//- 	i.fa.fa-square.fa-stack-2x
-							//- 	i.fa.fa-check.fa-stack-1x.fa-inverse
-							//- input(name="rememberMe", type="checkbox")
-							input(type='radio', name='customReturnAddress', value='false', class='')
+							span.fa-stack.fa-lg.checkbox2(data-input='customReturnAddress', data-value='false', data-type='radio')
+								i.fa.fa-square.fa-stack-2x
+								i.fa.fa-check.fa-stack-1x.fa-inverse
+							input(type='radio', name='customReturnAddress', value='false', class='hide')
 							label(for="returnAddress") Use the Prayer Letter Service Address as my return address
 				.row
 					.form-group: .col-md-2

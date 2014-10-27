@@ -13,12 +13,14 @@ exports = module.exports = function(req, res) {
 	locals.letterDetails = req.session.letterDetails;
 	locals.mailingList = req.session.mailingList;
 	locals.returnAddress = req.session.returnAddress;
+
+	console.log(req.session.mailingList)
 	// Part Two of formData
 	req.session.mailingList = locals.formData;
 
 	locals.mailerType = req.query.mailer;
 
-	console.log(req.session.mailerType);
+	// console.log(req.session.mailerType);
 	
 	// Render the view
 	view.render('order/returnAddress');

@@ -29,7 +29,7 @@ block content
 								else
 									th Paper Choice
 									td= letterDetails.paperChoice ? letterDetails.paperChoice : 'Not Specified'
-							//- tr
+							tr
 								if sessionType == 'brochures'
 									th Number of Brochures
 									td= letterDetails.numberOfPages ? letterDetails.numberOfPages : 'Not Specified'
@@ -44,14 +44,15 @@ block content
 								tr
 									th Printer Option
 									td= letterDetails.printerOption
-							//- if letterDetails.envelopeChoice
+							if letterDetails.envelopeChoice
 								tr
 									th Envelope Choice
 									td= letterDetails.envelopeChoice
-							if letterDetails.postageOption
-								tr
-									th Postage Option
-									td= letterDetails.postageOption
+							if sessionType != 'brochures'
+								if letterDetails.postageOption 
+									tr
+										th Postage Option
+										td= letterDetails.postageOption
 							if letterDetails.oneTime
 								tr: td(colspan="2"): hr
 								tr
@@ -65,6 +66,7 @@ block content
 								tr
 									th Shipping Address
 									td #{letterDetails.streetAddress}, #{letterDetails.city}, #{letterDetails.state} #{letterDetails.zipCode}, #{letterDetails.country}
+							if sessionType != 'brochures'
 								tr
 									th Merge Greetings
 									td= letterDetails.mergeGreeting ? letterDetails.mergeGreeting : 'Not Specified'
@@ -124,14 +126,14 @@ block content
 							tr
 								th Special Instructions
 								td= letterDetails.specialInstructions ? letterDetails.specialInstructions : 'None specified.'
-							if returnAddress.yourMinistryUpdateFrom
+							if returnAddress.customReturnAddress === 'false'
 								tr
 									th Return Address
 									td Your Ministry Update From #{returnAddress.yourMinistryUpdateFrom}
 							else if returnAddress.customReturnAddress
 								tr
 									th Custom Return Address
-									td #{returnAddress.street1}, #{returnAddress.city}, #{returnAddress.state} #{returnAddress.zipCode}, #{returnAddress.country}
+									td #{returnAddress.street1} #{returnAddress.city} #{returnAddress.state} #{returnAddress.zipCode} #{returnAddress.country}
 							if list
 								tr
 									th Mailing List
@@ -201,9 +203,9 @@ block content
 										input(type='text', name='shipTheOrderTo.suburb', value=letterDetails.city)
 										input(type='text', name='shipTheOrderTo.postcode', value=letterDetails.zipCode)
 										input(type='text', name='shipTheOrderTo.country', value=letterDetails.country)
-									.form-group
-										label Merge Greetings
-										input(type='text', name='personalization', value=letterDetails.mergeGreeting)
+								.form-group
+									label Merge Greetings
+									input(type='text', name='personalization', value=letterDetails.mergeGreeting)
 								.form-group
 									label Insert One
 									if letterDetails.insertOne != 'none'
@@ -253,7 +255,10 @@ block content
 											input(type='checkbox', name='addressService', value=letterDetails.addressService)
 									.form-group
 										label Return Address Custom
+										input(type='text', name='returnAddress.name', value=returnAddress.name)
 										input(type='text', name='returnAddress.street1', value=returnAddress.streetAddress)
+										input(type='text', name='returnAddress.street2', value=returnAddress.streetAddress2)
+										input(type='text', name='returnAddress.number', value=returnAddress.streetAddress3)
 										input(type='text', name='returnAddress.suburb', value=returnAddress.city)
 										input(type='text', name='returnAddress.postcode', value=returnAddress.zipCode)
 										input(type='text', name='returnAddress.country', value=returnAddress.country)

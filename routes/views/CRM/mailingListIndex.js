@@ -28,7 +28,7 @@ exports = module.exports = function(req, res) {
 
 	});
 
-	view.query('lists', keystone.list('Mailing Lists').model.find().where('userID', locals.user.id).sort('sortOrder'));
+	view.query('lists', keystone.list('Mailing Lists').model.find().where('uploadedBy', locals.user.id).sort('sortOrder'));
 
 	/*
 
@@ -103,8 +103,8 @@ exports = module.exports = function(req, res) {
 						var stats = JSON.stringify(stats);
 						var list = JSON.stringify(json);
 						console.log('============= LIST =============');
-						// console.log(list);
-						console.log('============= STATS =============');
+						console.log(list);
+						// console.log('============= STATS =============');
 						// console.log(stats);
 						if(error)
 							console.log(error)
@@ -112,8 +112,8 @@ exports = module.exports = function(req, res) {
 							list = list.replace(/(\w+([^spouse])\s|\s)?first(\/*|\s*|-*|_*)?(given\s)?(name)?/ig, 'firstName');
 							list = list.replace(/(\w+([^spouse])\s|\s)?(last|maiden)(\/*|\s*|-*|_*)?((family|maiden)\s)?(name)?/ig, 'lastName');
 							list = list.replace(/(\w+\s|\s)?(env|envelope)(\/*|\s*|-*|_*)?(line(\sone)?)(_*|\s*)?(1|one)?/ig, 'ENV_LINE');
-							list = list.replace(/(\w+\s+|\s)*?(address|street|road)(\s*|-*|_*)?((\s)address|one|1)?((\s)?-*|\r|\\r|\n|\\n)?/ig, 'addressOne');
-							// list = list.replace(/(\w+\s+|\s)*?(address|street|road)(\s*|-*|_*)?((\s)two|2)((\s)?-*|\r|\\r|\n|\\n)?/ig, 'addressTwo');
+							list = list.replace(/(\w+\s+|\s)*?(address|street|road)(\s*|-*|_*)?((\s)address|one|1)((\s)?-*|\r|\\r|\n|\\n)?/ig, 'addressOne');
+							list = list.replace(/(\w+\s+|\s)*?(address|street|road)(\s*|-*|_*)?((\s)two|2)((\s)?-*|\r|\\r|\n|\\n)?/ig, 'addressTwo');
 							// list = list.replace(/(\w+\s+|\s)*?(address|street|road)(\s*|-*|_*)?((\s)three|3)((\s)?-*|\r|\\r|\n|\\n)?/ig, 'addressThree');
 							list = list.replace(/(\w+\s+|\s)*?(city|suburb|province)(\s*|-*|_*)?(\s*|-*)?/ig, 'city');
 							list = list.replace(/(\w+\s+|\s)*?(state|\b\s?st\b)(\s*|-*|_*)?(\w+\s*|-*)?/ig, 'state');
@@ -122,7 +122,7 @@ exports = module.exports = function(req, res) {
 							var result = JSON.parse(list);
 
 							console.log('============= RESULT =============')
-							// console.log(result);
+							console.log(result);
 
 							for (contact in result) {
 

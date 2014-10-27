@@ -10,8 +10,8 @@ block content
 				h3 Ordering: #{prettyList}
 				.row
 					//- Paper Type & Cardstock Choice
-					-var paperChoices = ["Opaque Ivory", "Opaque Orchid", "Opaque Cream", "Opaque Gold", "Opaque Yellow", "Opaque Green", "Opaque Blue", "Opaque White", "Glossy White", "Opaque Gray", "Opaque Pink", "Opaque Tan", "Astrobright Venus Violet", "Astrobright Celestial Blue", "Astrobright Lunar Blue", "Astrobright Pulsar Pink", "Astrobright Cosmic Orange", "Astrobright Rocket Red", "Astrobright Solar Yellow", "Astrobright Re-entry Red", "Astrobright Fireball Fushcia", "Astrobright Gamma Green", "Astrobright Lift-off Lemon", "Astrobright Martian Green", "Astrobright Terrestial Teal", "Royal Fiber Rose", "Royal Fiber Ice Blue", "Royal Fiber Cream", "Royal Fiber White", "Royal Fiber Sunflower", "Royal Fiber Thyme", "Astroparche Blue", "Astroparche Gray", "Astroparche Sand", "Astroparche Natural", "Astroparche White", "Classic Linen Natural White", "Classic Linen Avon Brilliant White", "Classic Linen Antique Gray", "Classic Linen Whitestone", "Classic Linen Bluestone", "Classic Linen Silverstone", "Classic Linen Sage Green", "Classic Linen Haviland Blue"]
-					-var cardstockChoices = ["Opaque white", "Opaque blue", "Opaque cream", "Opaque green", "Opaque gray", "Opaque ivory", "Opaque yellow", "Opaque orchid", "Opaque pink", "Opaque tan", "Astrobright re-entry red", "Astrobright gamma green", "Astrobright celestial blue", "Astrobright solar yellow", "2-sided glossy white"]
+					-var paperChoices = ["Glossy White", "Opaque Ivory", "Opaque Orchid", "Opaque Cream", "Opaque Gold", "Opaque Yellow", "Opaque Green", "Opaque Blue", "Opaque White", "Opaque Gray", "Opaque Pink", "Opaque Tan", "Astrobright Venus Violet", "Astrobright Celestial Blue", "Astrobright Lunar Blue", "Astrobright Pulsar Pink", "Astrobright Cosmic Orange", "Astrobright Rocket Red", "Astrobright Solar Yellow", "Astrobright Re-entry Red", "Astrobright Fireball Fushcia", "Astrobright Gamma Green", "Astrobright Lift-off Lemon", "Astrobright Martian Green", "Astrobright Terrestial Teal", "Royal Fiber Rose", "Royal Fiber Ice Blue", "Royal Fiber Cream", "Royal Fiber White", "Royal Fiber Sunflower", "Royal Fiber Thyme", "Astroparche Blue", "Astroparche Gray", "Astroparche Sand", "Astroparche Natural", "Astroparche White", "Classic Linen Natural White", "Classic Linen Avon Brilliant White", "Classic Linen Antique Gray", "Classic Linen Whitestone", "Classic Linen Bluestone", "Classic Linen Silverstone", "Classic Linen Sage Green", "Classic Linen Haviland Blue"]
+					-var cardstockChoices = [ "Opaque white", "Opaque blue", "Opaque cream", "Opaque green", "Opaque gray", "Opaque ivory", "Opaque yellow", "Opaque orchid", "Opaque pink", "Opaque tan", "Astrobright re-entry red", "Astrobright gamma green", "Astrobright celestial blue", "Astrobright solar yellow", "2-sided glossy white" ]
 					-var envelopeChoices = ["Standard White", "Opaque Ivory", "Opaque Orchid", "Opaque Cream", "Opaque Gold", "Opaque Yellow", "Opaque Green", "Opaque Blue", "Opaque White", "Opaque Gray", "Opaque Pink", "Opaque Tan", "Astrobright Venus Violet", "Astrobright Celestial Blue", "Astrobright Lunar Blue", "Astrobright Pulsar Pink", "Astrobright Cosmic Orange", "Astrobright Solar Yellow", "Astrobright Re-entry Red", "Astrobright Fireball Fushcia", "Astrobright Gamma Green", "Astrobright Martian Green", "Astrobright Terrestial Teal", "Royal Fiber Cream", "Royal Fiber Sunflower", "Astroparche Blue", "Astroparche Gray", "Astroparche Sand", "Astroparche Natural", "Astroparche White", "Classic Linen Natural White", "Classic Linen Avon Brilliant White", "Classic Linen Antique Gray", "Classic Linen Whitestone", "Classic Linen Silverstone", "Classic Linen Sage Green"]
 					-var holidayEnvelopes = ["Holiday envelopes I mailed to you", "Holiday envelopes you ordered for me", "Astrobright Re-entry Red", "Astrobright Gamma Green", "Standard White ", "Opaque Ivory", "Opaque Orchid", "Opaque Cream", "Opaque Gold", "Opaque Yellow", "Opaque Green", "Opaque Blue", "Opaque White", "Opaque Gray", "Opaque Pink", "Opaque Tan", "Astrobright Venus Violet", "Astrobright Celestial Blue", "Astrobright Lunar Blue", "Astrobright Pulsar Pink", "Astrobright Cosmic Orange", "Astrobright Solar Yellow", "Astrobright Fireball Fushcia", "Astrobright Martian Green", "Astrobright Terrestial Teal", "Royal Fiber Cream", "Royal Fiber Sunflower ", "Astroparche Blue", "Astroparche Gray", "Astroparche Sand", "Astroparche Natural", "Astroparche White", "Classic Linen Natural White", "Classic Linen Avon Brilliant White ", "Classic Linen Antique Gray", "Classic Linen Whitestone", "Classic Linen Silverstone", "Classic Linen Sage Green"]
 					.col-md-4.col-sm-4
@@ -45,7 +45,7 @@ block content
 								span *
 							div.select-style
 								select(name="cardstockChoice", value=letterDetails ? letterDetails.paperChoice : null)
-									each option in paperChoices
+									each option in cardstockChoices
 										option= option
 						div.line-a.visible-lg-block
 					//- No. of Pages
@@ -82,7 +82,7 @@ block content
 									option 2 Per Sheet (4 x 6) - Requires Price Upgrade
 									option 2 Per Sheet (5.5 x 8.5) - Requires Postage Upgrade
 						else if mailerType === 'thankYou'
-							h3 Type of Cardstock
+							h3 Type of Card
 								span *
 							div.select-style
 								select(name="paperSize", value=letterDetails ? letterDetails.paperSize : null)
@@ -145,9 +145,9 @@ block content
 							span *
 						div.select-style
 							select(name="postageOption", value=letterDetails ? letterDetails.postageOption : null)
-								if mailerType === 'fundAppeal'
+								if mailerType === 'fundAppeal' || mailerType === 'thankYou'
 									option First class stamp
-								if mailerType === 'christmasLetter'
+								else if mailerType === 'christmasLetter'
 									option First class stamp
 									option Hand stamp religious Christmas stamp-$.02 upgrade
 									option Hand stamp non-religious Christmas stamp-$.02 upgrade
@@ -255,7 +255,7 @@ block content
 										option B&amp;W printer
 					div.line-d.visible-lg-block
 				.row
-					.col-md-5.col-sm-5
+					.col-md-6.col-sm-6
 						if mailerType === 'postcards'
 							h3 Upload The Postcard Files
 							small Please zip Pages and Numbers files before uploading.
@@ -368,7 +368,7 @@ block content
 								label(for='noLogo') Do not include a logo on my envelopes for this mailing.
 							div
 								input(type='checkbox', name='addressService', value='true', id='addressService')
-								label(for='addressService') Please include "Address Service Requested" for this mailing.
+								label(for='addressService') Please do not include "Address Service Requested" for this mailing.
 						else
 							h3 Upload The Letter File
 							p You may attach up to 4 files
@@ -408,6 +408,9 @@ block content
 									label(for='noLogo') Do not include a logo on my envelopes for this mailing.
 								div
 									input(type='checkbox', name='addressService', value='true', id='addressService')
+									label(for='addressService') Please include do not "Address Service Requested" for this mailing.
+								div
+									input(type='checkbox', name='addressService', value='false', id='addressService')
 									label(for='addressService') Please include "Address Service Requested" for this mailing.
 
 								//- I’ve attached multiple mailing lists to correspond with the attached letters.
@@ -416,7 +419,7 @@ block content
 								//- Please do not include “Address Service Requested” for this mailing.
 
 						div.line-e.visible-lg-block
-					.col-md-7.col-sm-7
+					.col-md-6.col-sm-6
 						.row
 							.col-md-12
 								h3 Special Instructions

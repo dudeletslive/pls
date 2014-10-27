@@ -90,7 +90,7 @@ exports = module.exports = function(req, res) {
 				} else if (req.body.target && !/join|signin/.test(req.body.target)) {
 					res.redirect(req.body.target);
 				} else {
-					res.redirect('/my-account');
+					res.redirect('/mailing-lists');
 				}
 			}
 			

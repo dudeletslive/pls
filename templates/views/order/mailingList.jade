@@ -17,7 +17,7 @@ block content
 									i.fa.fa-square.fa-stack-2x
 									i.fa.fa-check.fa-stack-1x.fa-inverse
 								input(name='listChoice', type='radio', value='Use every mailing list I have on file', class='hide')
-								label(for='listChoice') Please use the complete mailing list you keep on file
+								label(for='listChoice') Please use the mailing list you keep for me in Access.
 							.col-md-6
 								span.fa-stack.fa-lg.checkbox(data-input='list', data-type='radio', data-value='Please use my online mailing list')
 									i.fa.fa-square.fa-stack-2x
@@ -36,10 +36,11 @@ block content
 							else
 								h4 You have not uploaded any mailing lists yet. Attach one below or select one of the above options.
 								//- input(type='file', name='mailingList')
-						select(name='list', class='form-control', class='hide')
+						select(name='list', class='form-control', class='')
 							option(selected disabled) Placeholder
 							for list in lists
 								option(value=list._id)= list.prettyName
+						//- input(name='list', type='text')
 				.row
 					.col-md-12
 						p I will attach my current mailing list
@@ -94,20 +95,35 @@ block js
 	+fileUploads
 	script.
 		$('input[type="file"]').change(function() {
-			$('select[name="list"]').val('Placeholder');
+			$('input[name="list"]').val('Placeholder');
 		});
 		$('input[type="radio"]').change(function() {
 			$('.box').removeClass('selected');
 			$('.box').find('a[name="listOption"]').text('Select This List');
-			$('select[name="list"]').val('Placeholder');
+			$('select[name="list"]').val('');
+			var data = [];
 		});
+		var data = [];
 		$('a[name="listOption"]').each(function() {
 			$(this).click(function() {
 				$this = $(this);
+
 				var selected = $this.attr('data-value');
+
+				if (data.indexOf(selected) > -1)
+					data.splice(data.indexOf(selected), 1)
+				else
+					data.push(selected);
+
+				$('select[name="list"]').val(data);
+
 				$('.fa-stack.checkbox[data-input="list"]').removeClass('checked');
 				$('input[type="radio"]').prop('checked', false);
-				$this.text('Selected').parent().parent().addClass('selected').siblings('li').removeClass('selected').find('a[name="listOption"]').text('Select This List');
-				$('select[name="list"]').val(selected).trigger('change');
+
+				if ($this.parent().parent().hasClass('selected'))
+					$this.text('Select This List').parent().parent().removeClass('selected');
+				else
+					$this.text('Selected').parent().parent().addClass('selected');
+
 			});
 		});
