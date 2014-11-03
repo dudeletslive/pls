@@ -155,7 +155,7 @@ block content
 					.col-md-12
 						a(href="/order").btn.btn-success.btn-boder-green.pull-left Start Over
 						form(name='summary', method='post', action='/summary?action='+sessionType)
-							div.hide
+							div
 								.form-group
 									label Action
 									input(type='text', name='action', value=sessionType)
@@ -262,10 +262,10 @@ block content
 										input(type='text', name='returnAddress.suburb', value=returnAddress.city)
 										input(type='text', name='returnAddress.postcode', value=returnAddress.zipCode)
 										input(type='text', name='returnAddress.country', value=returnAddress.country)
-								if list
+								if mailingList.list
 									.form-group
 										label Mailing List
-										input(type='text', name='mailingList', value=list._id)
+										input(type='text', name='mailingList', value=mailingList.list)
 								else if mailingList
 									if mailingList.listChoice
 										.form-group

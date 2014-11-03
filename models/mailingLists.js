@@ -15,7 +15,7 @@ var mailingList = new keystone.List('Mailing Lists', {
 mailingList.add({
 	userID: { type: String, hidden: true },
 	listName: { type: String, hidden: true },
-	uploadedBy: { type: Types.Relationship, ref: 'User' },
+	uploadedBy: { type: Types.Relationship, ref: 'User', many: true },
 	prettyName: { type: String, label: 'List Name' },
 	contacts: { type: Types.Relationship, ref: 'Contact', many: true }
 });

@@ -22,7 +22,7 @@ block content
 					tr
 						th Edit
 						th(id='lastName'): a(href='/mailing-lists/' + list.slug + '?sortBy=lastName&from=' + query, class=sortBy == 'lastName' ? 'active' : null, data-ajax="true") LAST NAME
-						th(id='ENV_LINE'): a(href='/mailing-lists/' + list.slug + '?sortBy=ENV_LINE&from=' + query, class=sortBy == 'ENV_LINE' ? 'active' : null, data-ajax="true") ENV_LINE
+						th(id='ENV_LINE'): a(href='/mailing-lists/' + list.slug + '?sortBy=ENV_LINE&from=' + query, class=sortBy == 'ENV_LINE' ? 'active' : null, data-ajax="true") ENVELOPE LINE
 						th(id='addressOne'): a(href='/mailing-lists/' + list.slug + '?sortBy=addressOne&from=' + query, class=sortBy == 'addressOne' ? 'active' : null, data-ajax="true") ADDRESS 1
 						th(id='addressTwo'): a(href='/mailing-lists/' + list.slug + '?sortBy=addressTwo&from=' + query, class=sortBy == 'addressTwo' ? 'active' : null, data-ajax="true") ADDRESS 2
 						th(id='addressThree'): a(href='/mailing-lists/' + list.slug + '?sortBy=addressThree&from=' + query, class=sortBy == 'addressThree' ? 'active' : null, data-ajax="true") ADDRESS 3
@@ -62,7 +62,7 @@ block content
 									input(name="lastName", id="lastName" class="right form-control", placeholder="Bell")
 							.form-group.clearfix
 								.col-md-12
-									label(for="ENV_LINE") ENV_LINE 
+									label(for="ENV_LINE") ENVELOPE LINE 
 									input(name="ENV_LINE", id="ENV_LINE" class="form-control", placeholder="Jonathan Bell")
 							.form-group.clearfix
 								.col-md-12

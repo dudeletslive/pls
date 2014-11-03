@@ -10,6 +10,7 @@
 
     S3Upload.prototype.onFinishS3Put = function(public_url) {
       return console.log('base.onFinishS3Put()', public_url);
+
     };
 
     S3Upload.prototype.onProgress = function(percent, status) {
@@ -31,6 +32,7 @@
     S3Upload.prototype.handleFileSelect = function(file_element) {
       var f, files, output, _i, _len, _results;
       this.onProgress(0, 'Upload started.');
+      document.getElementsByTagName('button')[1].disabled = true;
       files = file_element.files;
       output = [];
       _results = [];
@@ -87,6 +89,7 @@
       } else {
         xhr.onload = function() {
           if (xhr.status === 200) {
+            document.getElementsByTagName('button')[1].disabled = false;
             this_s3upload.onProgress(100, 'Upload completed.');
             return this_s3upload.onFinishS3Put(public_url);
           } else {

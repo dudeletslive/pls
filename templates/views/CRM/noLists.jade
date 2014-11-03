@@ -1,0 +1,28 @@
+extends ../../layouts/alt
+
+block content
+	div.container
+		div.spacer &nbsp;
+			br
+		div(class='col-md-6 col-md-offset-3', id='obscure')
+			p If you would like the PLS to maintain your mailing list online you have two options for getting your list to us:
+
+			ol
+				li: p You may upload your list directly to the website. Each time you sign in you will find your mailing list under My Mailing Lists.
+
+				li: p You may email your mailing list as any type of file and in any format. The columns and field names are not important. The PLS will format the mailing list for you and connect the list to your account. The next time you sign in the mailing list will appear under My Mailing Lists.
+
+			p If you would like the PLS to maintain your mailing list in Access on our computer, please email your mailing list.
+
+			p If you plan to send us your mailing list with each order, you may skip this step. Simply attach your mailing list during the ordering process.
+
+			p If you’re an existing client, feel free to start an order!
+			br
+			
+			div.row(style='text-align: center')
+				h3 I understand, I prefer to:
+				br
+				div.col-md-6
+					a(class='btn btn-primary', href='mailto:' + user.email) Mail My List
+				div.col-md-6
+					a(class='btn btn-success', href='/mailing-lists/') Upload List Myself

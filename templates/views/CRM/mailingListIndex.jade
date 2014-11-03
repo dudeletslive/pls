@@ -28,16 +28,6 @@ block content
 							.col-md-12
 								img(src='../images/circle-plus-big.png')
 								h2.title ADD NEW LIST
-					div.col-md-8
-						p If you would like the PLS to maintain your mailing list online you have two options for getting your list to us:
-						ul
-							li: p You may upload your list directly to the website. Click here for instructions. Each time you sign in you will find your mailing list under My Mailing Lists.
-							li: p You may email your mailing list as any type of file and in any format.  The columns and field names are not important.  The PLS will format the mailing list for you and connect the list to your account.  The next time you sign in the mailing list will appear under My Mailing Lists.
-						p If you would like the PLS to maintain your mailing list in Access on our computer, please email your mailing list. 
-						p If you plan to send us your mailing list with each order, you may skip this step.  Simply attach your mailing list during the ordering process.
-						p If you’re an existing client, feel free to start an order!
-
-
 		//- Modal for Creating new Mailing List
 		.modal.fade(tab-index='-1', role='dialog', aria-labelledby='newList', aria-hidden='true', id='newList')
 			.modal-dialog.modal-sm: .modal-content: form(method="post", action='/mailing-lists', id='listForm', enctype='multipart/form-data')
@@ -46,6 +36,9 @@ block content
 						span(aria-hidden="true") &#215;
 						span.sr-only Close
 					h3 Create New Mailing List
+					//- if !lists.length >= 1
+					div.alert.alert-danger
+						small Please make sure your headers match those listed <a href="#", data-toggle='modal', data-target='#normalize'>here</a> before uploading your list.
 					if errors
 						.form-group
 							.alert.alert-danger
@@ -85,6 +78,59 @@ block content
 							li You may receive one or two warnings about the formatting of .CSV, click yes.
 					.modal-footer
 						button.btn.btn-default(type="button", data-dismiss="modal") Thanks!
+
+				//- Modal for Instructions
+		.modal.fade(id='normalize')
+			.modal-dialog
+				.modal-content
+					button.close(type="button", data-dismiss="modal")
+						span(aria-hidden="true") &#215;
+						span.sr-only Close
+					.modal-body
+						h3 Required Headers
+						table(class='table table-bordered')
+							tr
+								th EXAMPLE HEADER
+								th EXAMPLE DATA
+							tr
+								th First name
+								td: span.text-muted John
+							tr
+								th Last name
+								td: span.text-muted Doe
+							tr
+								th Spouse name
+								td: span.text-muted Jane
+							tr
+								th Greeting
+								td: span.text-muted Mr.
+							tr
+								th Envelope line
+								td: span.text-muted John and Jane Doe
+							tr
+								th Address 1
+								td: span.text-muted 2760 E Dartmouth Drive
+							tr
+								th Address 2
+								td: span.text-muted Apt 107
+							tr
+								th Address 3
+								td: p.text-muted 
+							tr
+								th City
+								td: span.text-muted College Park
+							tr
+								th State
+								td: span.text-muted CO
+							tr
+								th Zip
+								td: span.text-muted 90210
+							tr
+								th Country
+								td: span.text-muted United States
+					.modal-footer
+						button.btn.btn-default(type="button", data-dismiss="modal") Thanks!
+
 
 block js
 	if errors

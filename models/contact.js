@@ -19,13 +19,18 @@ contact.add({
 	mailingList: { type: Types.Relationship, ref: 'Mailing Lists' },
 	firstName: { type: String },
 	lastName: { type: String },
-	ENV_LINE: { type: String },
+	spouseName: { type: String },
+	greeting: { type: String },
+	envelopeLine: { type: String },
 	addressOne: { type: String, label: 'Address Line One' },
 	addressTwo: { type: String, label: 'Address Line Two' },
 	addressThree: { type: String, label: 'Address Line Three' },
 	city: { type: String },
 	state: { type: String },
-	postCode: { type: String, label: 'Postal / Zip Code' }
+	postCode: { type: String, label: 'Postal / Zip Code' },
+	}, 'Legacy Fields', {
+		ENV_LINE: { type: String, note: 'Legacy ENV_LINE field, contacts created before the update on November 3rd, 2014 will have this completed.'
+	}
 });
 
 
@@ -40,5 +45,5 @@ contact.add({
  * Registration
  */
 
-contact.defaultColumns = 'mailingList, lastName, ENV_LINE, addressOne, addressTwo, city, state, postCode';
+contact.defaultColumns = 'mailingList, lastName, envelopeLine, addressOne, addressTwo, city, state, postCode';
 contact.register();

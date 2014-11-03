@@ -99,6 +99,13 @@ block content
 								input(type='text', name='ministryUpdateFrom', class='form-control')
 						.form-group.clearfix
 							.col-md-12
+								label Use this logo for my mailing envelopes:
+								-var options = ["CRU", "Agape France", "Atheles In Action", "Bridges International", "Corporate", "CRU City", "CRU High School", "CRU Inner City", "CRU Military", "Destino", "Enfoque Mexico", "Epic Movement", "Faculty Commons", "Family Life", "GAIN", "Global Service Network", "ILAM", "IMPACT", "Jesus Film", "Keynote",  "Master Plan",  "Navigators",  "One Story",  "Pioneers", "Priority Associates", "Probe", "Student Venture", "I will email my ministry's logo to you" ]
+								select(name='mailingEnvelopeLogo', class='form-control')
+									for option in options
+										option(selected=option == form.mailingEnvelopeLogo ? 'selected' : false)= option
+						.form-group.clearfix
+							.col-md-12
 								label.clearfix Invoice Preferences
 								div
 									input(type='checkbox' id='invoicePreference' name='emailInvoice' value='true' checked=form.emailInvoice ? 'checked' : false)

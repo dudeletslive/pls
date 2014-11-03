@@ -135,6 +135,7 @@ exports = module.exports = function(app) {
 	// Contact List Pages
 	app.all('/mailing-lists', middleware.requireUser, routes.views.CRM.mailingListIndex);
 	app.all('/mailing-lists/:list', middleware.requireUser, routes.views.CRM.mailingList);
+	app.all('/no-mailing-lists', middleware.requireUser, routes.views.CRM.noLists);
 
 	// Order Process
 	app.all('/order', middleware.requireUser, routes.views.order.begin);

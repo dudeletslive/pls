@@ -36,17 +36,18 @@ block content
 							else
 								h4 You have not uploaded any mailing lists yet. Attach one below or select one of the above options.
 								//- input(type='file', name='mailingList')
-						select(name='list', class='form-control', class='')
-							option(selected disabled) Placeholder
-							for list in lists
-								option(value=list._id)= list.prettyName
+						input(name='list', class='form-control', value='')
+						//- select(name='list', class='form-control', class='')
+						//- 	option(selected disabled) Placeholder
+						//- 	for list in lists
+						//- 		option(value=list._id)= list.prettyName
 						//- input(name='list', type='text')
 				.row
 					.col-md-12
 						p I will attach my current mailing list
 						div.file-wrapper#mailingListStatus
-								span.button Choose a File
-								input(type='file', id='mailingListFile', data-url='url', data-status='mailingListStatus', class='letterFile')
+							span.button Choose a File
+							input(type='file', id='mailingListFile', data-url='url', data-status='mailingListStatus', class='letterFile')
 							input(type='hidden', name='mailingListFile', id='url')
 						//- div.file-wrapper#statusList
 						//- 	span.button Upload List
@@ -94,28 +95,33 @@ block content
 block js
 	+fileUploads
 	script.
+		var data = [];
 		$('input[type="file"]').change(function() {
 			$('input[name="list"]').val('Placeholder');
 		});
 		$('input[type="radio"]').change(function() {
 			$('.box').removeClass('selected');
 			$('.box').find('a[name="listOption"]').text('Select This List');
-			$('select[name="list"]').val('');
-			var data = [];
+			$('input[name="list"]').val('');
+			data.splice(0, data.length);
+			console.log(data);
 		});
-		var data = [];
 		$('a[name="listOption"]').each(function() {
 			$(this).click(function() {
 				$this = $(this);
 
 				var selected = $this.attr('data-value');
 
+				console.log(data.indexOf(selected));
+
 				if (data.indexOf(selected) > -1)
 					data.splice(data.indexOf(selected), 1)
 				else
 					data.push(selected);
 
-				$('select[name="list"]').val(data);
+				$('input[name="list"]').val(data);
+
+				console.log(data);
 
 				$('.fa-stack.checkbox[data-input="list"]').removeClass('checked');
 				$('input[type="radio"]').prop('checked', false);

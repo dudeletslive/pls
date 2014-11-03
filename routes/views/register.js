@@ -66,7 +66,8 @@ exports = module.exports = function(req, res) {
 					mailInvoice: req.body.mailInvoice,
 					emailReminders: req.body.emailReminders,
 					ministryUpdateFrom: req.body.ministryUpdateFrom,
-					databaseMaintance: req.body.databaseMaintance,
+					databaseMaintenance: req.body.databaseMaintenance,
+					mailingEnvelopeLogo: req.body.mailingEnvelopeLogo,
 					referredBy: req.body.referral,
 					cruStaffOrMinistryChartfield: req.body.CRUstaffAccount
 				};

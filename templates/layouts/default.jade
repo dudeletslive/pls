@@ -78,7 +78,7 @@ html
 												th: li: a(href='/keystone') Admin
 											else
 												th: li: a(href='/my-account') #{user.name.first}
-											th: li:  a(href="/mailing-lists") My Mailing Lists
+											th(style='margin-left: -75px'): li:  a(href="/mailing-lists") My Mailing Lists
 										else
 											th: li: a(href='/sign-in') Sign In
 											th: li: a(href='/register') Register

@@ -1,4 +1,41 @@
 @gray-ligh-2 :#dbdee7;
+
+div#obscure {
+	margin-top: 80px;
+	margin-bottom: 80px;
+	li {
+		font-size: 16px;
+	}
+	p, li {
+		line-height: 22px;
+		margin-bottom: 15px;
+	}
+	ol {
+		margin: 15px 0 30px;
+	}
+	.btn {
+		width: 100%;
+		border-radius: 0;
+		letter-spacing: 0.075em;
+		text-transform: uppercase;
+		&.btn-primary {
+			background: transparent;
+			border: 2px solid @green;
+			color: @green;
+			&:hover, &:focus {
+				background: lighten(@green, 50%);
+			}
+		}
+		&.btn-success {
+			background: @green;
+			border: 2px solid @green;
+			&:hover, &:focus {
+				background: darken(@green, 5%);
+				border: 2px solid darken(@green, 5%);
+			}
+		}
+	}
+}
 // Contact List Home
 div.contact-list-home {
 	li.box[data-toggle='modal'] {
