@@ -155,7 +155,7 @@ block content
 					.col-md-12
 						a(href="/order").btn.btn-success.btn-boder-green.pull-left Start Over
 						form(name='summary', method='post', action='/summary?action='+sessionType)
-							div
+							div.hide
 								.form-group
 									label Action
 									input(type='text', name='action', value=sessionType)
