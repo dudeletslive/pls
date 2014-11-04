@@ -22,7 +22,7 @@ block content
 					tr
 						th Edit
 						th(id='lastName'): a(href='/mailing-lists/' + list.slug + '?sortBy=lastName&from=' + query, class=sortBy == 'lastName' ? 'active' : null, data-ajax="true") LAST NAME
-						th(id='ENV_LINE'): a(href='/mailing-lists/' + list.slug + '?sortBy=ENV_LINE&from=' + query, class=sortBy == 'ENV_LINE' ? 'active' : null, data-ajax="true") ENVELOPE LINE
+						th(id='ENV_LINE'): a(href='/mailing-lists/' + list.slug + '?sortBy=envelopeLine&from=' + query, class=sortBy == 'envelopeLine' ? 'active' : null, data-ajax="true") ENVELOPE LINE
 						th(id='addressOne'): a(href='/mailing-lists/' + list.slug + '?sortBy=addressOne&from=' + query, class=sortBy == 'addressOne' ? 'active' : null, data-ajax="true") ADDRESS 1
 						th(id='addressTwo'): a(href='/mailing-lists/' + list.slug + '?sortBy=addressTwo&from=' + query, class=sortBy == 'addressTwo' ? 'active' : null, data-ajax="true") ADDRESS 2
 						th(id='addressThree'): a(href='/mailing-lists/' + list.slug + '?sortBy=addressThree&from=' + query, class=sortBy == 'addressThree' ? 'active' : null, data-ajax="true") ADDRESS 3
@@ -35,7 +35,7 @@ block content
 							tr
 								td: a(data-toggle="modal", data-target='#' + contact._id): img(src='../images/edit-icon.png')
 								td= contact.lastName
-								td= contact.ENV_LINE
+								td= contact.envelopeLine
 								td= contact.addressOne
 								td= contact.addressTwo
 								td= contact.addressThree
