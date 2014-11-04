@@ -111,7 +111,7 @@ exports = module.exports = function(req, res) {
 						else
 							list = list.replace(/first name/ig, 'firstName');
 							list = list.replace(/last name/ig, 'lastName');
-							list = list.replace(/envelope line/ig, 'ENV_LINE')
+							list = list.replace(/envelope line/ig, 'envLine')
 							list = list.replace(/address 1/ig, 'addressOne');
 							list = list.replace(/address 2/ig, 'addressTwo');
 							list = list.replace(/address 3/ig, 'addressThree');
@@ -142,7 +142,7 @@ exports = module.exports = function(req, res) {
 										mailingList: id,
 										firstName: result[contact].firstName,
 										lastName: result[contact].lastName,
-										ENV_LINE: result[contact].ENV_LINE,
+										envelopeLine: result[contact].envLine,
 										addressOne: result[contact].addressOne,
 										addressTwo: result[contact].addressTwo,
 										addressThree: result[contact].addressThree,
