@@ -36,7 +36,7 @@ block content
 							else
 								h4 You have not uploaded any mailing lists yet. Attach one below or select one of the above options.
 								//- input(type='file', name='mailingList')
-						input(name='list', class='form-control', value='')
+						input(type='hidden', name='list', class='form-control', value='')
 						//- select(name='list', class='form-control', class='')
 						//- 	option(selected disabled) Placeholder
 						//- 	for list in lists
@@ -97,7 +97,7 @@ block js
 	script.
 		var data = [];
 		$('input[type="file"]').change(function() {
-			$('input[name="list"]').val('Placeholder');
+			$('input[name="list"]').val('');
 		});
 		$('input[type="radio"]').change(function() {
 			$('.box').removeClass('selected');
