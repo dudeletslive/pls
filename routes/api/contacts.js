@@ -4,7 +4,7 @@ var async = require('async'),
  
 var Contact = keystone.list('Contact'),
 	username = 'PrayerLetterService',
-	password = '543d6f57f48d1d4caef597e5';
+	password = 'd41d8cd98f00b204e9800998ecf8427e';
 
 /**
  * List Contacts
