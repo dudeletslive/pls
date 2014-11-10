@@ -53,7 +53,8 @@ passport.use(new LinkedInStrategy({
 
 var routes = {
 	views: importRoutes('./views'),
-	auth: importRoutes('./auth')
+	auth: importRoutes('./auth'),
+	api: importRoutes('./api')
 };
 
 // Setup Route Bindings
@@ -147,6 +148,12 @@ exports = module.exports = function(app) {
 	
 	//My Account
 	app.all('/my-account', middleware.requireUser, routes.views.session.myAccount);
+
+	// API
+	app.get('/api/v1/contacts/list', keystone.initAPI, routes.api.contacts.list);
+	app.all('/api/v1/contacts/create', keystone.initAPI, routes.api.contacts.create);
+	app.all('/api/v1/contacts/update/:id', keystone.initAPI, routes.api.contacts.update);
+	app.all('/api/v1/contacts/remove/:id', keystone.initAPI, routes.api.contacts.remove);
 
 	// Test CSV
 	app.all('/test', routes.views.test);

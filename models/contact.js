@@ -27,10 +27,7 @@ contact.add({
 	addressThree: { type: String, label: 'Address Line Three' },
 	city: { type: String },
 	state: { type: String },
-	postCode: { type: String, label: 'Postal / Zip Code' },
-	}, 'Legacy Fields', {
-		ENV_LINE: { type: String, note: 'Legacy ENV_LINE field, contacts created before the update on November 3rd, 2014 will have this completed.'
-	}
+	postCode: { type: String, label: 'Postal / Zip Code' }
 });
 
 
@@ -45,5 +42,5 @@ contact.add({
  * Registration
  */
 
-contact.defaultColumns = 'mailingList, lastName, envelopeLine, addressOne, addressTwo, city, state, postCode';
+contact.defaultColumns = 'mailingList, lastName, firstName, spouseName, envelopeLine, addressOne, addressTwo, addressThree, city, state, postCode';
 contact.register();

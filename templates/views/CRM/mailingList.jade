@@ -96,6 +96,19 @@ block content
 					div.modal-content
 						div.modal-body: div.panel
 							h1(style='margin-top: 0;') Edit Existing Contact
+							//- 
+								mailingList: { type: Types.Relationship, ref: 'Mailing Lists' },
+								firstName: { type: String },
+								lastName: { type: String },
+								spouseName: { type: String },
+								greeting: { type: String },
+								envelopeLine: { type: String },
+								addressOne: { type: String, label: 'Address Line One' },
+								addressTwo: { type: String, label: 'Address Line Two' },
+								addressThree: { type: String, label: 'Address Line Three' },
+								city: { type: String },
+								state: { type: String },
+								postCode: { type: String, label: 'Postal / Zip Code' },
 							form(method='post')#account
 								input(type='hidden', name='action', value='updateContact')
 								input(type='hidden', name='contactID', action='contactID', value=contact._id)
@@ -108,8 +121,12 @@ block content
 										input(name="lastName", id="lastName" class="right form-control", placeholder="Bell", value=contact.lastName)
 								.form-group.clearfix
 									.col-md-12
-										label(for="ENV_LINE") ENV_LINE 
-										input(name="ENV_LINE", id="ENV_LINE" class="form-control", placeholder="Jonathan Bell", value=contact.ENV_LINE)
+										label(for="spouseName") Spouse Name 
+										input(name="spouseName", id="spouseName" class="form-control", placeholder="Jane", value=contact.spouseName)
+								.form-group.clearfix
+									.col-md-12
+										label(for="envelopeLine") Envelope Line 
+										input(name="envelopeLine", id="envelopeLine" class="form-control", placeholder="Jonathan Bell", value=contact.envelopeLine)
 								.form-group.clearfix
 									.col-md-12
 										label(for="addressOne") ADDRESS 1

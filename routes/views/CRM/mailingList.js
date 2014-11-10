@@ -50,7 +50,7 @@ exports = module.exports = function(req, res) {
 
 					updater.process(req.body, {
 						flashErrors: true,
-						fields: 'firstName, lastName, ENV_LINE, addressOne, addressTwo, addressThree, city, state, postCode',
+						fields: 'firstName, lastName, spouseName, envelopeLine, addressOne, addressTwo, addressThree, city, state, postCode',
 						errorMessage: 'There was a problem submitting your enquiry:'
 					}, function(err) {
 
