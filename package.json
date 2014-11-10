@@ -5,6 +5,7 @@
   "dependencies": {
     "async": "~0.9.0",
     "aws-sdk": "*",
+    "basic-auth": "^1.0.0",
     "convert-json": "^0.4.0",
     "csv": "^0.3.7",
     "csv-json": "^0.1.0",
