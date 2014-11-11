@@ -411,19 +411,19 @@ block content
 									p= form ? form.fileTwo : null
 								span.button Choose a File
 								input(type='file', id='filetwo', data-url='urltwo', data-status='statustwo', class='letterFile')
-							input(type='hidden', name='filetwo', id='urltwo', value=form ? form.fileOne : null)
+							input(type='hidden', name='filetwo', id='urltwo', value=form ? form.fileTwo : null)
 							div.file-wrapper#statusThree
 								if form && form.fileThree
 									p= form ? form.fileThree : null
 								span.button Choose a File
 								input(type='file', id='fileThree', data-url='urlThree', data-status='statusThree', class='letterFile')
-							input(type='hidden', name='fileThree', id='urlThree', value=form ? form.fileOne : null)
+							input(type='hidden', name='fileThree', id='urlThree', value=form ? form.fileThree : null)
 							div.file-wrapper#statusFour
 								if form && form.fileFour
 									p= form ? form.fileFour : null
 								span.button Choose a File
 								input(type='file', id='fileFour', data-url='urlFour', data-status='statusFour', class='letterFile')
-							input(type='hidden', name='fileFour', id='urlFour', value=form ? form.fileOne : null)
+							input(type='hidden', name='fileFour', id='urlFour', value=form ? form.fileFour : null)
 							if mailerType === 'fundAppeal'
 								br
 								section.spacer
