@@ -1,7 +1,16 @@
 extends ../../layouts/default
 
 block content
-	+orderTabs
+	.jumbotron#order: .container
+		h1 Let's Get Your Order <br> To The Presses!
+		p.small Use the form below to submit your order and we'll get to work.
+	div.tab-container: .container
+		ul.tabs.order#tabs
+			a(href="/order/process?mailer="+sessionType+"#letterDetails"): li(class=(tabID === 'letterDetails' ? 'active tab' : 'tab')): span Letter Details
+			a(href="/order/process?mailer="+sessionType+"#mailingList"): li(class=(tabID === 'mailingList' ? 'active tab' : 'tab')): span Mailing List
+			a(href="/order/process?mailer="+sessionType+"#returnAddress"): li(class=(tabID === 'returnAddress' ? 'active tab' : 'tab')): span Return Address
+			li(class=(tabID === 'summary' ? 'active tab' : 'tab')): span Summary
+			li(class=(tabID === 'confirmation' ? 'active tab' : 'tab')): span Confirmation
 	div.tab-content.order-process
 		div.tab-pane.fade.in.active#confirmation
 			.container: .jumbotron

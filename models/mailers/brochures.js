@@ -77,5 +77,5 @@ Enquiry.schema.methods.sendNotificationEmail = function(callback) {
 }
 
 Enquiry.defaultSort = '-createdAt';
-Enquiry.defaultColumns = 'name, email, enquiryType, createdAt';
+Enquiry.defaultColumns = 'name, submittedOn';
 Enquiry.register();
