@@ -71,7 +71,7 @@ Enquiry.schema.pre('save', function(next) {
 
 Enquiry.schema.post('save', function() {
 	if (this.wasNew) {
-		// this.sendNotificationEmail();
+		this.sendNotificationEmail();
 	}
 });
 
@@ -84,7 +84,7 @@ Enquiry.schema.methods.sendNotificationEmail = function(callback) {
 		if (err) return callback(err);
 		
 		new keystone.Email('enquiry-notification').send({
-			to: admins,
+			to: 'plservice@myletterservice.org',
 			from: {
 				name: 'Prayer Letter Service',
 				email: 'contact@prayer-letter-service.com'
