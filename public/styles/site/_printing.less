@@ -92,7 +92,14 @@ div.tab-container {
 		list-style-type: none;
 		margin: 0 auto;
 		padding: 0;
-		& > li.tab {
+		a {
+			&:last-child {
+				li.tab {
+					border-right: 0;
+				}
+			}
+		}
+		li.tab {
 			background: white;
 			border-right: 1px solid #E7E7E7;
 			cursor: pointer;
@@ -104,9 +111,6 @@ div.tab-container {
 			text-transform: uppercase;
 			background-repeat: no-repeat;
 			background-position: 9px 18px;
-			&:last-child {
-				border-right: 0;
-			}
 			&.active, &:hover, &:focus {
 				background-color: @orange;
 				color: white !important;

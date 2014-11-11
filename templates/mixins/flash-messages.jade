@@ -29,16 +29,11 @@ mixin orderTabs
 		h1 Let's Get Your Order <br> To The Presses!
 		p.small Use the form below to submit your order and we'll get to work.
 	div.tab-container: .container
-		//- li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
 		ul.tabs.order#tabs
-			each tab in orderTabs
-				//- #success if Complete
-				li(class=(tabID == tab.key ? 'active tab' : 'tab')): a(href=tab.href + '?mailer=' + mailerType)
-					//- span.fa-stack
-					//- 	i.fa.fa-stack-2x.fa-circle-o
-					//- 	//- i.fa.fa-stack-1x.fa-check
-					//- | &nbsp;
-					span= tab.label
+			li(class='active tab', data-toggle='tab', data-target='#letterDetails'): span Letter Details
+			li(class='tab', data-toggle='tab', data-target='#mailingList'): span Mailing List
+			li(class='tab', data-toggle='tab', data-target='#returnAddress'): span Return Address
+			li(class=(tabID === 'summary' ? 'active tab' : 'tab')): span Summary
 			li(class=(tabID === 'confirmation' ? 'active tab' : 'tab')): span Confirmation
 
 mixin fileUploads

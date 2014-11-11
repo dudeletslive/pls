@@ -5,7 +5,13 @@
 	padding: 30px;
 	background-color: transparent;
 }
-div.tab-container ul.tabs.order > li.tab {
+ul.tabs.order {
+	a {
+		// border-right: 1px solid #737C85;
+		color: #737C85;
+	}
+}
+div.tab-container ul.tabs.order li.tab {
 	padding: 15px 50px;
 	&.active#success, &:hover#success {
 		& > a > span.fa-stack {
@@ -21,11 +27,79 @@ div.tab-container ul.tabs.order > li.tab {
 		margin-right: 5px;
 	}
 }
+form[name=order] {
+	.fade:not(.in) {
+		height: 0;
+		overflow: hidden;
+	}
+	span.checkbox, span.checkbox2 {
+		.fa-stack-2x {
+			color: #737C85;
+		}
+	}
+	textarea{
+		width: 100%;
+		height: 168px;
+		border: 1px solid darken(@light-gray, 25%);
+		border-radius: 5px;
+		margin-top: 25px;
+		resize: none;
+	}
+}
 .container > .jumbotron {
+	.row.main {
+		padding-bottom: 50px;
+		margin-bottom: 50px;
+		border-bottom: 1px solid #ccc;
+		.col-md-6 {
+			padding-top: 0;
+			&:first-of-type {
+				&:after {
+					content: "";
+					width: 1px;
+					background: #ccc;
+					position: absolute;
+					right: 80px;
+					top: 0;
+					height: 100%;
+				}
+			}
+		}
+		.col-md-4 {
+			position: relative;
+			&:last-child {
+				&:after {
+					display: none;
+				}
+			}
+			&:after {
+				content: "";
+				width: 1px;
+				background: #ccc;
+				position: absolute;
+				right: 20px;
+				top: 0;
+				height: 100%;
+			}
+			input[type=text] {
+				max-width: 240px;
+				width: 100%;
+				padding: 5px 15px;
+				height: 43px;
+				font-size: 14px;
+			}
+		}
+		h3 {
+			margin-top: 0;
+			text-align: left;
+		}
+		h4 {
+			text-align: left;
+		}
+	}
 	.row{
-		margin-bottom: 30px;
 		&:nth-child(2){
-			padding-bottom: 30px;			
+			padding-top: 30px;			
 		}
 		.col-md-4 {
 			text-align: center;
@@ -37,7 +111,6 @@ div.tab-container ul.tabs.order > li.tab {
 			}
 		}
 		.col-md-8 {
-			margin-bottom: 50px;
 			position: relative;
 			h1 {
 				color: #737C85;
@@ -87,11 +160,10 @@ div.tab-container ul.tabs.order > li.tab {
 
 #letterDetails > .container > .jumbotron > form{
 	> .row{
-		margin-bottom: 70px;
 		.col-md-4{
 			h3{
 				text-align: left;
-				margin-bottom: 20px;				
+				margin-bottom: 0 0;				
 				span{
 					font-size: 18px;
 					color: @orange;
@@ -129,17 +201,7 @@ div.tab-container ul.tabs.order > li.tab {
 			}
 		}
 	}
-	textarea{
-		width: 440px;
-		height: 168px;
-		border: 1px solid darken(@light-gray, 25%);
-		border-radius: 5px;
-		margin-top: 25px;
-		resize: none;
-		@media (min-width:320px) and (max-width:679px) {
-			width: 100%;
-		}
-	}
+
 }
 #mailingList > .container > .jumbotron{
 	> .row{
@@ -153,14 +215,6 @@ div.tab-container ul.tabs.order > li.tab {
 				margin-bottom: 20px;
 				span{
 					color: @orange;
-				}
-			}
-			.checkbox{
-				.fa-stack-2x{
-					color: @orange;
-				}
-				.fa-inverse {
-					color: #fff;
 				}
 			}
 		}
@@ -252,9 +306,10 @@ div.tab-container ul.tabs.order > li.tab {
 	display: block;
 	margin-top: 13px;
 	text-align: center;			
-}	
-div.select-style{
-	width:240px !important;
+}
+div.select-style {
+	max-width: 240px;
+	width: 100%;
 	padding: 0;
     border: 1px solid #ccc;
     border-radius: 3px;
@@ -332,6 +387,13 @@ div.select-style{
 	width: 300px;
 	margin-bottom: 2px;
 	padding:5px;
+	p {
+		margin: 2px 0 0 !important;
+		font-size: 12px;
+		left: -203px;
+		position: absolute;
+		z-index: 0;
+	}
 }
 .file-wrapper input {
 	position: absolute;
@@ -358,6 +420,8 @@ div.select-style{
 	height: 22px;
 	font-size: 10px;
 	float: right;
+	position: relative;
+	z-index: 999;
 }
 .file-holder{
 	color: #000;

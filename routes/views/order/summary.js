@@ -17,21 +17,17 @@ exports = module.exports = function(req, res) {
 	locals.formData = req.body || {};
 	locals.validationErrors = {};
 
-	locals.letterDetails = req.session.letterDetails;
-	locals.mailingList = req.session.mailingList;
-	locals.mailerType = req.query.mailer;
-	locals.sessionType = req.session.mailerType;
+	locals.sessionType = req.query.mailerType;
 
-	console.log(locals.mailingList);
+	req.session.formData = req.body;
 
-	// Part Three of formData
-	req.session.returnAddress = locals.formData;
-	locals.returnAddress = req.session.returnAddress;
-
+	console.log(req.body);
+	
 	if (locals.mailerType != 'brochures') {
-		view.query('list', keystone.list('Mailing Lists').model.findById(req.session.mailingList.list).sort('sortOrder'));
+		view.query('list', keystone.list('Mailing Lists').model.findById(req.body.list).sort('sortOrder'));
+		locals.form = req.body;
 	} else {
-		locals.letterDetails = req.body;
+		locals.form = req.body;
 	}
 
 	view.on('post', {action: 'prayerLetter'}, function(next) {
@@ -156,7 +152,7 @@ exports = module.exports = function(req, res) {
 		
 		updater.process(req.body, {
 			flashErrors: true,
-			fields: 'name, paperChoice, numberOfPages, sizeOfPaper, printerOption, envelopeChoice, postageOption, fileOne, fileTwo, fileThree, fileFour, mailingList, specialInstructions, oneTime, personalize, noLogo, addressService, customReturnAddress, returnAddress, insertOne.isConfigured, insertTwo.isConfigured, listChoice, insertThree.isConfigured, insertOne.paperChoice, insertOne.printerOption, insertTwo.paperChoice, insertTwo.printerOption, yourMinistryUpdateFrom',
+			fields: 'name, paperChoice, numberOfPages, sizeOfPaper, printerOption, envelopeChoice, postageOption, fileOne, fileTwo, fileThree, fileFour, mailingList, specialInstructions, oneTime, personalization, noLogo, addressService, customReturnAddress, returnAddress, insertOne.isConfigured, insertTwo.isConfigured, listChoice, insertThree.isConfigured, insertOne.paperChoice, insertOne.printerOption, insertTwo.paperChoice, insertTwo.printerOption, yourMinistryUpdateFrom',
 			errorMessage: 'There was a problem submitting your enquiry:'
 		}, function(err) {
 			if (err) {

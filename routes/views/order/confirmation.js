@@ -14,6 +14,8 @@ exports = module.exports = function(req, res) {
 		res.redirect('/order');
 	}
 	console.log('Confirmation Page: ' + req.session);
+
+	req.session.formData = null;
 	
 	// Render the view
 	view.render('order/confirmation');

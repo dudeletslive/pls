@@ -1,0 +1,649 @@
+extends ../../layouts/default
+
+block content
+	+orderTabs
+	div.tab-content.order-process: form(action='/summary?mailerType=' + mailerType, name='order', method='POST')
+		div(class='tab-pane fade in active', id='letterDetails')
+			.container: .jumbotron
+				h3 Ordering: #{finalResult}
+				.row.main
+					//- Paper Type & Cardstock Choice
+					-var paperChoices = ["Glossy White", "Opaque Ivory", "Opaque Orchid", "Opaque Cream", "Opaque Gold", "Opaque Yellow", "Opaque Green", "Opaque Blue", "Opaque White", "Opaque Gray", "Opaque Pink", "Opaque Tan", "Astrobright Venus Violet", "Astrobright Celestial Blue", "Astrobright Lunar Blue", "Astrobright Pulsar Pink", "Astrobright Cosmic Orange", "Astrobright Rocket Red", "Astrobright Solar Yellow", "Astrobright Re-entry Red", "Astrobright Fireball Fushcia", "Astrobright Gamma Green", "Astrobright Lift-off Lemon", "Astrobright Martian Green", "Astrobright Terrestial Teal", "Royal Fiber Rose", "Royal Fiber Ice Blue", "Royal Fiber Cream", "Royal Fiber White", "Royal Fiber Sunflower", "Royal Fiber Thyme", "Astroparche Blue", "Astroparche Gray", "Astroparche Sand", "Astroparche Natural", "Astroparche White", "Classic Linen Natural White", "Classic Linen Avon Brilliant White", "Classic Linen Antique Gray", "Classic Linen Whitestone", "Classic Linen Bluestone", "Classic Linen Silverstone", "Classic Linen Sage Green", "Classic Linen Haviland Blue"]
+					-var cardstockChoices = [ "Opaque white", "Opaque blue", "Opaque cream", "Opaque green", "Opaque gray", "Opaque ivory", "Opaque yellow", "Opaque orchid", "Opaque pink", "Opaque tan", "Astrobright re-entry red", "Astrobright gamma green", "Astrobright celestial blue", "Astrobright solar yellow", "2-sided glossy white" ]
+					-var envelopeChoices = ["Standard White", "Opaque Ivory", "Opaque Orchid", "Opaque Cream", "Opaque Gold", "Opaque Yellow", "Opaque Green", "Opaque Blue", "Opaque White", "Opaque Gray", "Opaque Pink", "Opaque Tan", "Astrobright Venus Violet", "Astrobright Celestial Blue", "Astrobright Lunar Blue", "Astrobright Pulsar Pink", "Astrobright Cosmic Orange", "Astrobright Solar Yellow", "Astrobright Re-entry Red", "Astrobright Fireball Fushcia", "Astrobright Gamma Green", "Astrobright Martian Green", "Astrobright Terrestial Teal", "Royal Fiber Cream", "Royal Fiber Sunflower", "Astroparche Blue", "Astroparche Gray", "Astroparche Sand", "Astroparche Natural", "Astroparche White", "Classic Linen Natural White", "Classic Linen Avon Brilliant White", "Classic Linen Antique Gray", "Classic Linen Whitestone", "Classic Linen Silverstone", "Classic Linen Sage Green"]
+					-var holidayEnvelopes = ["Holiday envelopes I mailed to you", "Holiday envelopes you ordered for me", "Astrobright Re-entry Red", "Astrobright Gamma Green", "Standard White ", "Opaque Ivory", "Opaque Orchid", "Opaque Cream", "Opaque Gold", "Opaque Yellow", "Opaque Green", "Opaque Blue", "Opaque White", "Opaque Gray", "Opaque Pink", "Opaque Tan", "Astrobright Venus Violet", "Astrobright Celestial Blue", "Astrobright Lunar Blue", "Astrobright Pulsar Pink", "Astrobright Cosmic Orange", "Astrobright Solar Yellow", "Astrobright Fireball Fushcia", "Astrobright Martian Green", "Astrobright Terrestial Teal", "Royal Fiber Cream", "Royal Fiber Sunflower ", "Astroparche Blue", "Astroparche Gray", "Astroparche Sand", "Astroparche Natural", "Astroparche White", "Classic Linen Natural White", "Classic Linen Avon Brilliant White ", "Classic Linen Antique Gray", "Classic Linen Whitestone", "Classic Linen Silverstone", "Classic Linen Sage Green"]
+					.col-md-4.col-sm-4
+						if mailerType != 'postcards'
+							h3 Paper Choice
+								span *
+							div.select-style
+								select(name="paperChoice", value=form ? form.paperChoice : null)
+									if mailerType === 'brochures'
+										option(selected='selected', value='Glossy White') Glossy White
+										each option in paperChoices
+											option= option
+									else if mailerType === 'christmasLetter'
+										option(value='Holiday Letterhead I mailed to you') Holiday letterhead I mailed to you
+										option(value='Holiday Letterhead you ordered for me') Holiday letterhead you ordered for me
+										each option in paperChoices
+											option= option
+									else if mailerType === 'thankYou'
+										optgroup(label="Cardstock")
+											each option in cardstockChoices
+												option(value='Cardstock - ' + option)= option
+										optgroup(label="Paper")
+											each option in paperChoices
+												option= option
+									else
+										option(selected='selected', value='Opaque White') Opaque White
+										each option in paperChoices
+											option= option
+						else
+							h3 Cardstock
+								span *
+							div.select-style
+								select(name="cardstockChoice", value=form ? form.paperChoice : null)
+									each option in cardstockChoices
+										option= option
+						//- div.line-a.visible-lg-block
+					//- No. of Pages
+					.col-md-4.col-sm-4
+						if mailerType === 'postcards' || mailerType === 'thankYou'
+							.insertOverlayDetails
+							h3 Number of Pages
+								span *
+							div.select-style
+								select(name="numberOfPages", value=form ? form.numberOfPages : null)
+									option(selected='selected', value='One Printed Side') One Printed Side
+									option(value='Need Options') Need Options
+						else if mailerType === 'brochures'
+							h3 Number of Brochures Needed
+								span *
+							input(type='text', name='numberOfPages', class='form-control')
+						else
+							h3 Number of Pages
+								span *
+							div.select-style
+								select(name="numberOfPages", value=form ? form.numberOfPages : null)
+									option One printed side
+									option Two printed sides on a single sheet of paper
+									option Two printed sides on separate sheets
+						//- div.line-a.visible-lg-block
+					//- Size of Paper
+					.col-md-4.col-sm-4
+						if mailerType === 'postcards'
+							h3 Size of Paper
+								span *
+							div.select-style
+								select(name="paperSize", value=form ? form.paperSize : null)
+									option(selected='selected') 4 Per Sheet (4.25 x 5.5)
+									option 2 Per Sheet (4 x 6) - Requires Price Upgrade
+									option 2 Per Sheet (5.5 x 8.5) - Requires Postage Upgrade
+						else if mailerType === 'thankYou'
+							h3 Type of Card
+								span *
+							div.select-style
+								select(name="paperSize", value=form ? form.paperSize : null)
+									option 2 per page (4.25 x 5.5), printed 2 per page, cut/folded, white invitation size envelopes
+									option 1 per page (5.5 x 8.5), folded in half, white 6 x 9 envelopes
+						else
+							if mailerType === 'brochures'
+								h3 Shipping Address
+								-var Class = 'form-control';
+								div.form-group: input(name='streetAddress', value=letterDetails ? letterDetails.streetAddress : null, placeholder='5234 Ferrari Drive', class=Class)
+								div.form-group.row
+									.col-md-5(style='padding-left: 0;'): input(name='city', value=returnAddress ? returnAddress.city : null, placeholder='Colorado Springs', class=Class)
+									.col-md-2(style='padding: 0;'): input(name='state', value=returnAddress ? returnAddress.state : null, placeholder='CO', class=Class)
+									.col-md-5(style='padding-right: 0;'): input(name='zipCode', value=returnAddress ? returnAddress.zipCode : null, placeholder='80918', class=Class)
+								div.form-group: input(name='country', value=returnAddress ? returnAddress.country : 'United States of America', class=Class)
+							else
+								if mailerType === 'thankYou'
+									.insertOverlayDetails
+								h3 Size of Paper
+									span *
+								div.select-style
+									select(name="paperSize", value=form ? form.paperSize : null)
+										option(selected='selected') 8 1/2 x 11
+										option 8 1/2 x 14
+										option 11 x 17
+				.row.main
+					//- Printer
+					.col-md-4.col-sm-4
+						if mailerType === 'thankYou'
+							.insertOverlayDetails
+						h3 Printer Option
+							span *
+						div.select-style
+							select(name="printerOption", value=form ? form.printerOption : null)
+								option(selected='selected') Color Printer
+								option B&amp;W Printer
+						//- div.line-a.visible-lg-block
+					//- Type of Envelope
+					.col-md-4.col-sm-4
+						if mailerType === 'postcards' || mailerType === 'brochures' || mailerType === 'thankYou'
+							.insertOverlayDetails
+						h3 Envelope Choice
+							span *
+						div.select-style
+							select(name="envelopeChoice", value=form ? form.envelopeChoice : null)
+								if mailerType === 'christmasLetter'
+									each option in holidayEnvelopes
+										option= option
+								else
+									each option in envelopeChoices
+										option= option
+						//- div.line-a.visible-lg-block
+					//- Type of Postage
+					.col-md-4.col-sm-4
+						if mailerType === 'postcards' || mailerType === 'brochures'
+							.insertOverlayDetails
+						h3 Postage Option
+							span *
+						div.select-style
+							select(name="postageOption", value=form ? form.postageOption : null)
+								if mailerType === 'fundAppeal' || mailerType === 'thankYou'
+									option First class stamp
+								else if mailerType === 'christmasLetter'
+									option First class stamp
+									option Hand stamp religious Christmas stamp-$.02 upgrade
+									option Hand stamp non-religious Christmas stamp-$.02 upgrade
+								else
+									option First class stamp
+									option Non-profit stamp
+					//- div.line-b.visible-lg-block
+				.row.main(class=(mailerType === 'postcards' ? 'hide' : null || mailerType === 'brochures' ? 'hide' : null || mailerType === 'thankYou' ? 'hide' : null))
+					.col-md-4.col-sm-4
+						if mailerType === 'postcards'
+							.insertOverlayDetails
+						h3 Inserts
+							span *
+						p You can add multiple Inserts
+						br
+						div.clearfix.insert
+							h4 Insert #1
+							div.select-style#insertOne
+								select(name="insertOne")
+									option(selected='selected', value='none') None
+									option(value='2 per page response slip') 2 per page response slip
+									option(value='3 per page response slip') 3 per page response slip
+									option(value='4 per page response slip') 4 per page response slip
+									option(value='White response envelopes-not stamped') White response envelopes-not stamped
+									option(value='White response envelopes-stamped') White response envelopes-stamped
+									option(value='Cru giving envelopes-not stamped') Cru giving envelopes-not stamped
+									option(value='Cru giving envelopes-stamped') Cru giving envelopes-stamped
+									option(value='Please insert the items I mailed to you') Please insert the items I mailed to you
+									option(value='See special instructions') See special instructions
+						div.clearfix.insert.hide#insertTwo
+							br
+							h4 Insert #2
+							div.select-style
+								select(name="insertTwo")
+									option(selected='selected', value='none') None
+									option(value='2 per page response slip') 2 per page response slip
+									option(value='3 per page response slip') 3 per page response slip
+									option(value='4 per page response slip') 4 per page response slip
+									option(value='White response envelopes-not stamped') White response envelopes-not stamped
+									option(value='White response envelopes-stamped') White response envelopes-stamped
+									option(value='Cru giving envelopes-not stamped') Cru giving envelopes-not stamped
+									option(value='Cru giving envelopes-stamped') Cru giving envelopes-stamped
+									option(value='Please insert the items I mailed to you') Please insert the items I mailed to you
+									option(value='See special instructions') See special instructions
+						div.clearfix.insert.hide#insertThree
+							br
+							h4 Insert #3
+							div.select-style
+								select(name="insertThree")
+									option(selected='selected', value='none') None
+									option(value='2 Per Page Response Slip') 2 per page response slip
+									option(value='3 Per Page Response Slip') 3 per page response slip
+									option(value='4 Per Page Response Slip') 4 per page response slip
+									option(value='White Response Envelopes - Not Stamped') White response envelopes-not stamped
+									option(value='White Response Envelopes - Stamped') White response envelopes - Stamped
+									option(value='Cru Giving Envelopes - Not Stamped') Cru giving envelopes-not stamped
+									option(value='Cru Giving Envelopes - Not Stamped') Cru giving envelopes-stamped
+									option(value='Please insert the items I mailed to you') Please insert the items I mailed to you
+									option(value='See Special Instructions') See special instructions
+						br
+						//- div.line-c.visible-lg-block
+					.col-md-8.col-sm-8(id='fade')
+						.row
+							.col-md-4.col-sm-4
+								.insertOverlayDetails#one
+								h3 Insert Details
+								p Insert #1:
+								h4 Paper Choice
+									span *
+								div.select-style.small
+									select(name='paperChoiceOne')
+										optgroup(label="Cardstock")
+											each option in cardstockChoices
+												option(value='Cardstock - ' + option)= option
+										optgroup(label="Paper")
+											each option in paperChoices
+												option= option
+								div.clearfix
+								h4 Printer Option
+									span *
+								div.select-style.small
+									select(name='printerChoiceOne')
+										option Color Printer
+										option B&amp;W printer
+							.col-md-4.col-sm-4
+								.insertOverlayDetails#two
+								h3 Insert Details
+								p Insert #2:
+								h4 Paper Choice
+									span *
+								div.select-style.small
+									select(name='paperChoiceTwo')
+										optgroup(label="Cardstock")
+											each option in cardstockChoices
+												option(value='Cardstock - ' + option)= option
+										optgroup(label="Paper")
+											each option in paperChoices
+												option= option
+								div.clearfix
+								h4 Printer Option
+									span *
+								div.select-style.small
+									select(name='printerChoiceTwo')
+										option Color Printer
+										option B&amp;W printer
+				.row.main
+					.col-md-6.col-sm-6
+						if mailerType === 'postcards'
+							h3 Upload The Postcard Files
+							small Please zip Pages and Numbers files before uploading.
+							br
+							div.file-wrapper#statusOne
+								if form && form.fileOne
+									p= form ? form.fileOne : null
+								span.button Choose a File
+								input(type='file', id='fileOne', data-url='urlOne', data-status='statusOne', class='letterFile')
+							input(type='hidden', name='fileOne', id='urlOne', value=form ? form.fileOne : null)
+							div.file-wrapper#statustwo
+								if form && form.fileTwo
+									p= form ? form.fileTwo : null
+								span.button Choose a File
+								input(type='file', id='filetwo', data-url='urltwo', data-status='statustwo', class='letterFile')
+							input(type='hidden', name='filetwo', id='urltwo', value=form ? form.fileTwo : null)
+							div.file-wrapper#statusThree
+								if form && form.fileThree
+									p= form ? form.fileThree : null
+								span.button Choose a File
+								input(type='file', id='fileThree', data-url='urlThree', data-status='statusThree', class='letterFile')
+							input(type='hidden', name='fileThree', id='urlThree', value=form ? form.fileThree : null)
+							div.file-wrapper#statusFour
+								if form && form.fileFour
+									p= form ? form.fileFour : null
+								span.button Choose a File
+								input(type='file', id='fileFour', data-url='urlFour', data-status='statusFour', class='letterFile')
+							input(type='hidden', name='fileFour', id='urlFour', value=form ? form.fileFour : null)
+						else if mailerType === 'brochures'
+							h3 Upload The Brochure File
+							small Please zip Pages and Numbers files before uploading.
+							br
+							div.file-wrapper#statusOne
+								if form && form.fileOne
+									p= form ? form.fileOne : null
+								span.button Choose a File
+								input(type='file', id='fileOne', data-url='urlOne', data-status='statusOne', class='letterFile')
+							input(type='hidden', name='fileOne', id='urlOne', value=form ? form.fileOne : null)
+							div.file-wrapper#statustwo
+								if form && form.fileTwo
+									p= form ? form.fileTwo : null
+								span.button Choose a File
+								input(type='file', id='filetwo', data-url='urltwo', data-status='statustwo', class='letterFile')
+							input(type='hidden', name='filetwo', id='urltwo', value=form ? form.fileTwo : null)
+							div.file-wrapper#statusThree
+								if form && form.fileThree
+									p= form ? form.fileThree : null
+								span.button Choose a File
+								input(type='file', id='fileThree', data-url='urlThree', data-status='statusThree', class='letterFile')
+							input(type='hidden', name='fileThree', id='urlThree', , value=form ? form.fileThree : null)
+							div.file-wrapper#statusFour
+								if form && form.fileFour
+									p= form ? form.fileFour : null
+								span.button Choose a File
+								input(type='file', id='fileFour', data-url='urlFour', data-status='statusFour', class='letterFile')
+							input(type='hidden', name='fileFour', id='urlFour', , value=form ? form.fileFour : null)
+						else if mailerType === 'thankYou'
+							h3 Letter Files
+							small Please zip Pages and Numbers files before uploading.
+							br
+							div.file-wrapper#statusOne
+								if form && form.fileOne
+									p= form ? form.fileOne : null
+								span.button Choose a File
+								input(type='file', id='fileOne', data-url='urlOne', data-status='statusOne', class='letterFile')
+							input(type='hidden', name='fileOne', id='urlOne', value=form ? form.fileOne : null)
+							div.file-wrapper#statustwo
+								if form && form.fileTwo
+									p= form ? form.fileTwo : null
+								span.button Choose a File
+								input(type='file', id='filetwo', data-url='urltwo', data-status='statustwo', class='letterFile')
+							input(type='hidden', name='filetwo', id='urltwo', value=form ? form.fileTwo : null)
+							div.file-wrapper#statusThree
+								if form && form.fileThree
+									p= form ? form.fileThree : null
+								span.button Choose a File
+								input(type='file', id='fileThree', data-url='urlThree', data-status='statusThree', class='letterFile')
+							input(type='hidden', name='fileThree', id='urlThree', value=form ? form.fileThree : null)
+							div.file-wrapper#statusFour
+								if form && form.fileFour
+									p= form ? form.fileFour : null
+								span.button Choose a File
+								input(type='file', id='fileFour', data-url='urlFour', data-status='statusFour', class='letterFile')
+							input(type='hidden', name='fileFour', id='urlFour', value=form ? form.fileFour : null)
+							br
+							section.spacer
+								|&nbsp;
+							br
+							section.spacer
+								|&nbsp;
+							section.spacer
+							h3 Additional Information
+							h4 Shipping Address
+							-var Class = 'form-control';
+							.wrapper(style='margin-right: 50px;')
+								div.form-group: input(name='streetAddress', value=letterDetails ? letterDetails.streetAddress : null, placeholder='5234 Ferrari Drive', class=Class)
+								div.form-group
+									.col-md-5(style='padding-left: 0;'): input(name='city', value=returnAddress ? returnAddress.city : null, placeholder='Colorado Springs', class=Class)
+									.col-md-2(style='padding: 0; margin-bottom: 15px;'): input(name='state', value=returnAddress ? returnAddress.state : null, placeholder='CO', class=Class)
+									.col-md-5(style='padding-right: 0;'): input(name='zipCode', value=returnAddress ? returnAddress.zipCode : null, placeholder='80918', class=Class)
+								div.form-group: input(name='country', value=returnAddress ? returnAddress.country : 'United States of America', class=Class)
+						else if mailerType === 'christmasLetter'
+							h3 Upload The Letter File
+							p You may attach up to 4 files
+							small Please zip Pages and Numbers files before uploading.
+							div.file-wrapper#statusOne
+								if form && form.fileOne
+									p= form ? form.fileOne : null
+								span.button Choose a File
+								input(type='file', id='fileOne', data-url='urlOne', data-status='statusOne', class='letterFile')
+							input(type='hidden', name='fileOne', id='urlOne', value=form ? form.fileOne : null)
+							div.file-wrapper#statustwo
+								if form && form.fileThree
+									p= form ? form.fileThree : null
+								span.button Choose a File
+								input(type='file', id='filetwo', data-url='urltwo', data-status='statustwo', class='letterFile')
+							input(type='hidden', name='filetwo', id='urltwo', value=form ? form.fileTwo : null)
+							div.file-wrapper#statusThree
+								if form && form.fileThree
+									p= form ? form.fileThree : null
+								span.button Choose a File
+								input(type='file', id='fileThree', data-url='urlThree', data-status='statusThree', class='letterFile')
+							input(type='hidden', name='fileThree', id='urlThree', value=form ? form.fileThree : null)
+							div.file-wrapper#statusFour
+								if form && form.fileFour
+									p= form ? form.fileFour : null
+								span.button Choose a File
+								input(type='file', id='fileFour', data-url='urlFour', data-status='statusFour', class='letterFile')
+							input(type='hidden', name='fileFour', id='urlFour', value=form ? form.fileFour : null)
+							br
+							section.spacer
+							h3 Additional Information
+							br
+							input(type='radio', name='mergeGreeting', value='Please merge the personal greeting (other) field for each letter.', id='mergeGreeting')
+							label(for='mergeGreeting') Please merge the personal greeting (other) field for each letter.
+							br
+							input(type='radio', name='mergeGreeting', value='These letters do not need to be personalized.' id='doNotPersonalize')
+							label(for='doNotPersonalize') These letters do not need to be personalized.
+							hr
+							div
+								input(type='checkbox', name='noLogo', value='true', id='noLogo')
+								label(for='noLogo') Do not include a logo on my envelopes for this mailing.
+							div
+								input(type='checkbox', name='addressService', value='true', id='addressService')
+								label(for='addressService') Please do not include "Address Service Requested" for this mailing.
+						else
+							h3 Upload The Letter File
+							p You may attach up to 4 files
+							small Please zip Pages and Numbers files before uploading.
+							div.file-wrapper#statusOne
+								if form && form.fileOne
+									p= form ? form.fileOne : null
+								span.button Choose a File
+								input(type='file', id='fileOne', data-url='urlOne', data-status='statusOne', class='letterFile')
+							input(type='hidden', name='fileOne', id='urlOne', value=form ? form.fileOne : null)
+							div.file-wrapper#statustwo
+								if form && form.fileTwo
+									p= form ? form.fileTwo : null
+								span.button Choose a File
+								input(type='file', id='filetwo', data-url='urltwo', data-status='statustwo', class='letterFile')
+							input(type='hidden', name='filetwo', id='urltwo', value=form ? form.fileOne : null)
+							div.file-wrapper#statusThree
+								if form && form.fileThree
+									p= form ? form.fileThree : null
+								span.button Choose a File
+								input(type='file', id='fileThree', data-url='urlThree', data-status='statusThree', class='letterFile')
+							input(type='hidden', name='fileThree', id='urlThree', value=form ? form.fileOne : null)
+							div.file-wrapper#statusFour
+								if form && form.fileFour
+									p= form ? form.fileFour : null
+								span.button Choose a File
+								input(type='file', id='fileFour', data-url='urlFour', data-status='statusFour', class='letterFile')
+							input(type='hidden', name='fileFour', id='urlFour', value=form ? form.fileOne : null)
+							if mailerType === 'fundAppeal'
+								br
+								section.spacer
+								h3 Additional Options
+								br
+								input(type='radio', name='mergeGreeting', value='Please merge the personal greeting (other) field for each letter.', id='mergeGreeting')
+								label(for='mergeGreeting') Please merge the personal greeting (other) field for each letter.
+								br
+								input(type='radio', name='mergeGreeting', value='These letters do not need to be personalized.' id='doNotPersonalize')
+								label(for='doNotPersonalize') These letters do not need to be personalized.
+								hr
+								div
+									input(type='checkbox', name='multipleLists', value='true', id='multipleLists')
+									label(for='multipleLists') I've attached multiple mailing lists to correspond with the attached letters.
+								div
+									input(type='checkbox', name='noLogo', value='true', id='noLogo')
+									label(for='noLogo') Do not include a logo on my envelopes for this mailing.
+								div
+									input(type='checkbox', name='addressService', value='true', id='addressService')
+									label(for='addressService') Please include do not "Address Service Requested" for this mailing.
+								div
+									input(type='checkbox', name='addressService', value='false', id='addressService')
+									label(for='addressService') Please include "Address Service Requested" for this mailing.
+
+								//- I’ve attached multiple mailing lists to correspond with the attached letters.
+								//- Do not include a logo on my envelopes for this mailing.
+								//- Please include “Address Service Requested” for this mailing.
+								//- Please do not include “Address Service Requested” for this mailing.
+
+						//- div.line-e.visible-lg-block
+					.col-md-6.col-sm-6
+						.row
+							.col-md-12
+								h3 Special Instructions
+								if mailerType === 'christmasLetter'
+									small Please note the special instructions for your holiday mailings&nbsp;
+										a(href='/printing-services/') here
+										|, under Christmas / Holiday
+								textarea(name='specialInstructions')=form ? form.specialInstructions : null
+					//- div.line-f.visible-lg-block
+				.row
+					.col-md-12
+						a(href="/order").btn.btn-success.btn-boder-green.pull-left Start Over
+						a(data-target='#mailingList', class='btn btn-success pull-right', data-toggle='tab').btn.btn-success.pull-right Continue
+		div(class='tab-pane fade', id='mailingList')
+			.container: .jumbotron
+				.row
+					.col-md-12.col-sm-12
+						h2 
+							| Select A List To Mail To
+							span *
+					.col-md-12.col-sm-12
+						.row
+							.col-md-6
+								span.fa-stack.fa-lg.checkbox(data-input='list', data-type='radio', data-value='Use every mailing list I have on file')
+									i.fa.fa-square.fa-stack-2x
+									i.fa.fa-check.fa-stack-1x.fa-inverse
+								input(name='listChoice', type='radio', value='Use every mailing list I have on file', class='hide mailingListRadio')
+								label(for='listChoice') Please use the mailing list you keep for me in Access.
+							.col-md-6
+								span.fa-stack.fa-lg.checkbox(data-input='list', data-type='radio', data-value='Please use my online mailing list')
+									i.fa.fa-square.fa-stack-2x
+									i.fa.fa-check.fa-stack-1x.fa-inverse
+								input(name='listChoice', type='radio', value='Please use my online mailing list', class='hide mailingListRadio')
+								label(for='listChoice') Please use my online mailing list
+					.col-md-12.col-sm-12
+						ul.boxes
+							if lists.length
+								for list in lists
+									li.box
+										.col-md-12
+											img(src='../images/list-name.png')
+											h2= list.prettyName
+											a.btn.btn-sm.btn-green(name='listOption', data-value=list.id) Select This List
+							else
+								h4 You have not uploaded any mailing lists yet. Attach one below or select one of the above options.
+								//- input(type='file', name='mailingList')
+						input(type='hidden', name='list', class='form-control', value='')
+						//- select(name='list', class='form-control', class='')
+						//- 	option(selected disabled) Placeholder
+						//- 	for list in lists
+						//- 		option(value=list._id)= list.prettyName
+						//- input(name='list', type='text')
+				.row.main
+					.col-md-12
+						p I will attach my current mailing list
+						div.file-wrapper#mailingListStatus
+							span.button Choose a File
+							input(type='file', id='mailingListFile', data-url='url', data-status='mailingListStatus', class='letterFile mailingListFile')
+							input(type='hidden', name='mailingListFile', id='url')
+						//- div.file-wrapper#statusList
+						//- 	span.button Upload List
+						//- 	input(type='file', id='mailingList', data-url='mailingList', data-status='statusList', class='letterFile')
+						//- 	input(type='hidden', name='mailingListFile', id='mailingList')
+						br
+						if mailerType === 'christmasLetter' || mailerType === 'thankYou'
+							br
+							span.fa-stack.fa-lg.checkbox(data-input='oneTime', data-type='checkbox')
+								i.fa.fa-square.fa-stack-2x
+								i.fa.fa-check.fa-stack-1x.fa-inverse
+							input(type='checkbox', name='oneTime', value='This is a one time mailing list for this order only.', class='hide')
+							label(for='oneTime') This is a one time mailing list for this order only.
+				.row
+					.col-md-12
+						a(href="/order").btn.btn-success.btn-boder-green.pull-left Start Over
+						a(data-target='#returnAddress', class='btn btn-success pull-right', data-toggle='tab').btn.btn-success.pull-right Continue
+		div(class='tab-pane fade', id='returnAddress')
+			.container: .jumbotron
+				.row
+					.col-md-12
+						h3 Confirm Return Address
+							span *
+				.row.main
+					div.col-md-5
+						.form-group
+							span.fa-stack.fa-lg.checkbox2(data-input='customReturnAddress', data-value='true', data-type='radio')
+								i.fa.fa-square.fa-stack-2x
+								i.fa.fa-check.fa-stack-1x.fa-inverse
+							input(type='radio', name='customReturnAddress', value='true', class='hide mailingListRadio')
+							label(for="returnAddress") Use the Return Address Below
+						-var Class = 'form-control input-lg';
+						div.form-group
+							label Envelope Line
+							input(name='name', value=user.returnAddress ? user.returnAddress.name : null, placeholder='Mr. and Mrs. Smith', class='form-control')
+						div.form-group
+							label Address Line One
+							input(name='streetAddress', value=user.returnAddress ? user.returnAddress.street1 : null, placeholder='5234 Ferrari Drive', class='form-control')
+						div.form-group
+							label Address Line Two
+							input(name='streetAddress2', value=user.returnAddress ? user.returnAddress.street2 : null, placeholder='Apartment 03-05', class='form-control')
+						div.form-group
+							label Address Line Three
+							input(name='streetAddress3', value=user.returnAddress ? user.returnAddress.number : null, placeholder='', class='form-control')
+						div.form-group.row
+							.col-md-5
+								label City
+								input(name='city', value=user.returnAddress.suburb ? user.returnAddress.suburb : null, placeholder='Colorado Springs', class=Class)
+							.col-md-2(style='padding: 0;')
+								label State
+								input(name='state', value=user.returnAddress ? user.returnAddress.state : null, placeholder='CO', class=Class)
+							.col-md-5
+								label Zip
+								input(name='zipCode', value=user.returnAddress ? user.returnAddress.postcode : null, placeholder='80918', class=Class)
+						div.form-group
+							label Country
+							input(name='country', value=user.returnAddress ? user.returnAddress.country : null, class=Class)
+					div.col-md-5.col-md-offset-1
+						.form-group
+							span.fa-stack.fa-lg.checkbox2(data-input='customReturnAddress', data-value='false', data-type='radio')
+								i.fa.fa-square.fa-stack-2x
+								i.fa.fa-check.fa-stack-1x.fa-inverse
+							input(type='radio', name='customReturnAddress', value='false', class='hide mailingListRadio')
+							label(for="returnAddress") Use the Prayer Letter Service Address as my return address
+						.form-group
+							label "Your Ministry Update from"							
+							input(type='text', name='yourMinistryUpdateFrom', value=user.ministryUpdateFrom ? user.ministryUpdateFrom : null, class='form-control')
+				.row
+					.col-md-12
+						a(href="/order").btn.btn-success.btn-boder-green.pull-left Start Over
+						button(type="submit").btn.btn-success.pull-right Continue
+		div.tab-pane.fade#summary
+			h1 New
+	.modal.fade
+		.modal-dialog
+			.modal-content
+				button.close(type="button", data-dismiss="modal")
+					span(aria-hidden="true") &#215;
+					span.sr-only Close
+				.modal-body
+					h4 The non-profit postage option is available only to Cru staff and the following requirements are necessary:
+					ul
+						li The name ‘Campus Crusade for Christ’ (legal name) must be on the mailing envelope, along with the PLS return address.
+						li ‘Address Service Requested’ must be printed on the envelopes.
+						li The name ‘Campus Crusade for Christ’ must appear on the letter (small print is fine).
+				.modal-footer
+					button.btn.btn-default(type="button", data-dismiss="modal") I Understand
+block js
+	+fileUploads
+	script.
+		var data = [];
+		$('input.mailingListFile').change(function() {
+			$('input[name="list"]').val('');
+		});
+		$('input.mailingListRadio[type="radio"]').change(function() {
+			$('.box').removeClass('selected');
+			$('.box').find('a[name="listOption"]').text('Select This List');
+			$('input[name="list"]').val('');
+			data.splice(0, data.length);
+			console.log(data);
+		});
+		$('a[name="listOption"]').each(function() {
+			$(this).click(function() {
+				$this = $(this);
+
+				var selected = $this.attr('data-value');
+
+				console.log(data.indexOf(selected));
+
+				if (data.indexOf(selected) > -1)
+					data.splice(data.indexOf(selected), 1)
+				else
+					data.push(selected);
+
+				$('input[name="list"]').val(data);
+
+				console.log(data);
+
+				$('.fa-stack.checkbox[data-input="list"]').removeClass('checked');
+				$('input.mailingListRadio[type="radio"]').prop('checked', false);
+
+				if ($this.parent().parent().hasClass('selected'))
+					$this.text('Select This List').parent().parent().removeClass('selected');
+				else
+					$this.text('Selected').parent().parent().addClass('selected');
+
+			});
+		});
+		$('a.btn.btn-success').each(function() {
+			$(this).click(function() {
+				var toggle = $(this).attr('data-target');
+				$('li[data-target='+toggle+']').addClass('active').siblings().removeClass('active');
+			});
+		});

@@ -127,7 +127,6 @@ exports = module.exports = function(app) {
 
 	// User Auth
 	app.all('/auth/:service', routes.auth.service);
-	// app.all('/auth/facebook', routes.auth.service);
 	app.all('/confirm', routes.auth.confirm);
 
 	// Register
@@ -139,12 +138,14 @@ exports = module.exports = function(app) {
 	app.all('/no-mailing-lists', middleware.requireUser, routes.views.CRM.noLists);
 
 	// Order Process
-	app.all('/order', middleware.requireUser, routes.views.order.begin);
+	app.all('/old-order', middleware.requireUser, routes.views.order.begin);
 	app.all('/letter-details', middleware.requireUser, routes.views.order.letterDetails);
 	app.all('/mailing-list', middleware.requireUser, routes.views.order.mailingList);
 	app.all('/return-address', middleware.requireUser, routes.views.order.returnAddress);
 	app.all('/summary', middleware.requireUser, routes.views.order.summary);
 	app.all('/confirmation', middleware.requireUser, routes.views.order.confirmation);
+	app.all('/order', middleware.requireUser, routes.views.order.begin);
+	app.all('/order/process', middleware.requireUser, routes.views.order.orderProcess);
 	
 	//My Account
 	app.all('/my-account', middleware.requireUser, routes.views.session.myAccount);
