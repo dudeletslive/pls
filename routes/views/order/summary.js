@@ -106,7 +106,7 @@ exports = module.exports = function(req, res) {
 		
 		updater.process(req.body, {
 			flashErrors: true,
-			fields: 'name, paperChoice, numberOfPages, sizeOfPaper, printerOption, envelopeChoice, postageOption, fileOne, fileTwo, fileThree, fileFour, mailingList, personalization, multipleLists, listChoice, noLogo, addressService, specialInstructions, customReturnAddress, returnAddress, yourMinistryUpdateFrom',
+			fields: 'name, paperChoice, numberOfPages, sizeOfPaper, printerOption, envelopeChoice, postageOption, fileOne, fileTwo, fileThree, fileFour, mailingList, personalization, multipleLists, listChoice, noLogo, addressService, specialInstructions, customReturnAddress, returnAddress, yourMinistryUpdateFrom, insertOne.isConfigured, insertTwo.isConfigured, insertThree.isConfigured, insertOne.insertType, insertTwo.insertType, insertThree.insertType, insertOne.paperChoice, insertOne.printerOption, insertTwo.paperChoice, insertTwo.printerOption',
 			errorMessage: 'There was a problem submitting your enquiry:'
 		}, function(err) {
 			if (err) {
@@ -152,7 +152,7 @@ exports = module.exports = function(req, res) {
 		
 		updater.process(req.body, {
 			flashErrors: true,
-			fields: 'name, paperChoice, numberOfPages, sizeOfPaper, printerOption, envelopeChoice, postageOption, fileOne, fileTwo, fileThree, fileFour, mailingList, specialInstructions, oneTime, personalization, noLogo, addressService, customReturnAddress, returnAddress, insertOne.isConfigured, insertTwo.isConfigured, listChoice, insertThree.isConfigured, insertOne.paperChoice, insertOne.printerOption, insertTwo.paperChoice, insertTwo.printerOption, yourMinistryUpdateFrom',
+			fields: 'name, paperChoice, numberOfPages, sizeOfPaper, printerOption, envelopeChoice, postageOption, fileOne, fileTwo, fileThree, fileFour, mailingList, specialInstructions, oneTime, personalization, noLogo, addressService, customReturnAddress, returnAddress, insertOne.isConfigured, insertTwo.isConfigured, listChoice, insertThree.isConfigured, insertOne.insertType, insertTwo.insertType, insertThree.insertType, insertOne.paperChoice, insertOne.printerOption, insertTwo.paperChoice, insertTwo.printerOption, yourMinistryUpdateFrom',
 			errorMessage: 'There was a problem submitting your enquiry:'
 		}, function(err) {
 			if (err) {

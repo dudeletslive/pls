@@ -33,16 +33,19 @@ Enquiry.add({
 	}, 'Inserts', {
 		insertOne: {
 			isConfigured: { type: Boolean, label: 'First Insert', default: true },
+			insertType: { type: String, dependsOn: deps.insertOne },
 			paperChoice: { type: String, dependsOn: deps.insertOne },
 			printerOption: { type: String, dependsOn: deps.insertOne }
 		},
 		insertTwo: {
 			isConfigured: { type: Boolean, label: 'Second Insert' },
+			insertType: { type: String, dependsOn: deps.insertTwo },
 			paperChoice: { type: String, dependsOn: deps.insertTwo },
 			printerOption: { type: String, dependsOn: deps.insertTwo }
 		},
 		insertThree: {
 			isConfigured: { type: Boolean, label: 'Third Insert' },
+			insertType: { type: String, dependsOn: deps.insertThree },
 		},
 	}, 'Letter Files', {
 		fileOne: { type: String },
@@ -50,8 +53,10 @@ Enquiry.add({
 		fileThree: { type: String },
 		fileFour: { type: String },
 	}, 'Special Instructions', {
-		personalization: { type: String },
 		specialInstructions: { type: String },
+		personalization: { type: String },
+		noLogo: { type: Boolean, label: 'Do not include a logo on my envelopes for this mailing.' },
+		addressService: { type: Boolean, label: 'Please do not include "Address Service Requested" for this mailing' },
 	}, 'Mailing List', {
 		oneTime: { type: String },
 		mailingList: { type: Types.Relationship, ref: 'Mailing Lists' },

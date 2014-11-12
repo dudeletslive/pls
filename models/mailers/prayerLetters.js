@@ -46,7 +46,7 @@ Enquiry.add({
 		},
 		insertThree: {
 			isConfigured: { type: Boolean, label: 'Third Insert' },
-			insertType: { type: String, dependsOn: deps.insertTwo },
+			insertType: { type: String, dependsOn: deps.insertThree },
 		},
 	}, 'Letter Files', {
 		fileOne: { type: String },
