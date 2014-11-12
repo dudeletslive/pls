@@ -39,7 +39,8 @@ Enquiry.schema.methods.sendNotificationEmail = function(callback) {
 		if (err) return callback(err);
 		
 		new keystone.Email('enquiry-notification').send({
-			to: admins,
+			// to: admins,
+			to: 'plservice@myletterservice.org',
 			from: {
 				name: 'Prayer Letter Service',
 				email: 'contact@prayer-letter-service.com'

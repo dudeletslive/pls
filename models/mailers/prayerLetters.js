@@ -34,16 +34,19 @@ Enquiry.add({
 	}, 'Inserts', {
 		insertOne: {
 			isConfigured: { type: Boolean, label: 'First Insert' },
+			insertType: { type: String, dependsOn: deps.insertOne },
 			paperChoice: { type: String, dependsOn: deps.insertOne },
 			printerOption: { type: String, dependsOn: deps.insertOne },
 		},
 		insertTwo: {
 			isConfigured: { type: Boolean, label: 'Second Insert' },
+			insertType: { type: String, dependsOn: deps.insertTwo },
 			paperChoice: { type: String, dependsOn: deps.insertTwo },
 			printerOption: { type: String, dependsOn: deps.insertTwo },
 		},
 		insertThree: {
 			isConfigured: { type: Boolean, label: 'Third Insert' },
+			insertType: { type: String, dependsOn: deps.insertTwo },
 		},
 	}, 'Letter Files', {
 		fileOne: { type: String },

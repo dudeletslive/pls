@@ -50,10 +50,14 @@ $(function() {
 	*/
 	$('select[name="insertOne"]').change(function() {
 		if ($(this).val().indexOf('response slip') > -1) {
-			$('.insertOverlayDetails#one').fadeOut();	
+			$('.insertOverlayDetails#one').fadeOut();
 		} else {
 			$('.insertOverlayDetails#one').fadeIn();
 			$('.insertOverlayDetails#two').fadeIn();
+			$('select[name=paperChoiceOne]').val('N/A');
+			$('select[name=printerChoiceOne]').val('N/A');
+			$('select[name=paperChoiceTwo]').val('N/A');
+			$('select[name=printerChoiceTwo]').val('N/A');
 		}
 	});
 	$('select[name="insertOne"]').change(function() {
@@ -73,6 +77,8 @@ $(function() {
 			$('.insertOverlayDetails#two').fadeOut();	
 		} else {
 			$('.insertOverlayDetails#two').fadeIn();
+			$('select[name=paperChoiceTwo]').val('N/A');
+			$('select[name=printerChoiceTwo]').val('N/A');
 		}
 	});
 	$('select[name="insertTwo"]').change(function() {

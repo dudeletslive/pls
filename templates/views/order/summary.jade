@@ -81,12 +81,18 @@ block content
 									td= form.mergeGreeting ? form.mergeGreeting : 'Not Specified'
 							if form.insertOne != 'none'
 								tr
+									th  Insert One type
+									td= form.insertOne
+								tr
 									th Insert One Paper Choice
 									td= form.paperChoiceOne
 								tr
 									th Insert One Printer Option
 									td= form.printerChoiceOne
 							if form.insertTwo != 'none'
+								tr
+									th  Insert Two type
+									td= form.insertTwo
 								tr
 									th Insert Two Paper Choice
 									td= form.paperChoiceTwo
@@ -96,7 +102,7 @@ block content
 							if form.insertThree != 'none'
 								tr
 									th Third Insert
-									td= Yes
+									td= form.insertThree
 							if form.fileOne
 								tr: td(colspan="2"): hr
 								tr
@@ -220,18 +226,21 @@ block content
 									label Insert One
 									if form.insertOne != 'none'
 										input(type='checkbox', value='true', name='insertOne.isConfigured', checked)
+										input(type='text', name='insertOne.insertType', value=form.insertOne)
 										input(type='text', name='insertOne.paperChoice', value=form.paperChoiceOne)
 										input(type='text', name='insertOne.printerOption', value=form.printerChoiceOne)
 								.form-group
 									label Insert Two
 									if form.insertTwo != 'none'
 										input(type='checkbox', value='true', name='insertTwo.isConfigured', checked)
+										input(type='text', name='insertTwo.insertType', value=form.insertTwo)
 										input(type='text', name='insertTwo.paperChoice', value=form.paperChoiceTwo)
 										input(type='text', name='insertTwo.printerOption', value=form.printerChoiceTwo)
 								.form-group
 									label Insert Three
 									if form.insertThree != 'none'
 										input(type='checkbox', value='true', name='insertThree.isConfigured', checked)
+										input(type='text', name='insertThree.insertType', value=form.insertThree)
 								.form-group
 									label File
 									input(type='text', name='file', value=form.file)
