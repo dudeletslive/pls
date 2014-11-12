@@ -92,9 +92,9 @@ block content
 								-var Class = 'form-control';
 								div.form-group: input(name='streetAddress', value=letterDetails ? letterDetails.streetAddress : null, placeholder='5234 Ferrari Drive', class=Class)
 								div.form-group.row
-									.col-md-5(style='padding-left: 0;'): input(name='city', value=returnAddress ? returnAddress.city : null, placeholder='Colorado Springs', class=Class)
+									.col-md-5: input(name='city', value=returnAddress ? returnAddress.city : null, placeholder='Colorado Springs', class=Class)
 									.col-md-2(style='padding: 0;'): input(name='state', value=returnAddress ? returnAddress.state : null, placeholder='CO', class=Class)
-									.col-md-5(style='padding-right: 0;'): input(name='zipCode', value=returnAddress ? returnAddress.zipCode : null, placeholder='80918', class=Class)
+									.col-md-5: input(name='zipCode', value=returnAddress ? returnAddress.zipCode : null, placeholder='80918', class=Class)
 								div.form-group: input(name='country', value=returnAddress ? returnAddress.country : 'United States of America', class=Class)
 							else
 								if mailerType === 'thankYou'
@@ -542,7 +542,7 @@ block content
 							span.fa-stack.fa-lg.checkbox2(data-input='customReturnAddress', data-value='true', data-type='radio')
 								i.fa.fa-square.fa-stack-2x
 								i.fa.fa-check.fa-stack-1x.fa-inverse
-							input(type='radio', name='customReturnAddress', value='true', class='hide mailingListRadio')
+							input(type='radio', name='customReturnAddress', value='true', class='hide')
 							label(for="returnAddress") Use the Return Address Below
 						-var Class = 'form-control input-lg';
 						div.form-group
@@ -575,7 +575,7 @@ block content
 							span.fa-stack.fa-lg.checkbox2(data-input='customReturnAddress', data-value='false', data-type='radio')
 								i.fa.fa-square.fa-stack-2x
 								i.fa.fa-check.fa-stack-1x.fa-inverse
-							input(type='radio', name='customReturnAddress', value='false', class='hide mailingListRadio')
+							input(type='radio', name='customReturnAddress', value='false', class='hide')
 							label(for="returnAddress") Use the Prayer Letter Service Address as my return address
 						.form-group
 							label "Your Ministry Update from"							
