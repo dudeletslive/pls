@@ -647,3 +647,8 @@ block js
 				$('li[data-target='+toggle+']').addClass('active').siblings().removeClass('active');
 			});
 		});
+		function closeEditorWarning(){
+		    return 'We noticed you began placing an order, but did not submit. If you leave or refresh before submitting your changes will be lost.'
+		}
+
+		window.onbeforeunload = closeEditorWarning
