@@ -135,8 +135,8 @@ block content
 									td= form.noLogo
 							if form.addressService
 								tr
-									th Include "Address Service Requested"
-									td= form.addressService
+									th Do <em>not</em> include "Address Service Requested"
+									td True
 							tr: td(colspan="2"): hr
 							tr
 								th Special Instructions
@@ -266,12 +266,13 @@ block content
 										label Your Ministry Update From
 										input(type='text', name='yourMinistryUpdateFrom', value=form.yourMinistryUpdateFrom)
 										label Multiple Mailing Lists
-										if form.multipleLists
-											input(type='checkbox', name='multipleLists', value=form.multipleLists, checked)
-										if form.noLogo
-											input(type='checkbox', name='noLogo', value=form.noLogo, checked)
+									.form-group
+										input(type='checkbox', name='multipleLists', value=form.multipleLists, checked)
+										input(type='checkbox', name='noLogo', value=form.noLogo, checked)
+									.form-group
 										if form.addressService
-											input(type='checkbox', name='addressService', value=form.addressService)
+											label Address Service Requested
+											input(type='checkbox', name='addressService', value='true', checked)
 									.form-group
 										label Return Address Custom
 										input(type='text', name='form.name', value=form.name)
