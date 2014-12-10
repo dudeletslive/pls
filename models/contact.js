@@ -19,7 +19,7 @@ contact.add({
 	mailingList: { type: Types.Relationship, ref: 'Mailing Lists' },
 	firstName: { type: String },
 	lastName: { type: String },
-	spouseName: { type: String },
+	spouseFirstName: { type: String },
 	greeting: { type: String },
 	envelopeLine: { type: String },
 	addressOne: { type: String, label: 'Address Line One' },

@@ -482,16 +482,16 @@ block content
 					.col-md-12.col-sm-12
 						.row
 							.col-md-6
-								span.fa-stack.fa-lg.checkbox(data-input='list', data-type='radio', data-value='Use every mailing list I have on file')
+								//- span.fa-stack.fa-lg.checkbox(data-input='list', data-type='radio', data-value='Use every mailing list I have on file')
 									i.fa.fa-square.fa-stack-2x
 									i.fa.fa-check.fa-stack-1x.fa-inverse
-								input(name='listChoice', type='radio', value='Use every mailing list I have on file', class='hide mailingListRadio')
+								input(name='listChoice', type='radio', value='Use every mailing list I have on file', class='mailingListRadio')
 								label(for='listChoice') Please use the mailing list you keep for me in Access.
 							.col-md-6
-								span.fa-stack.fa-lg.checkbox(data-input='list', data-type='radio', data-value='Please use my online mailing list')
+								//- span.fa-stack.fa-lg.checkbox(data-input='list', data-type='radio', data-value='Please use my online mailing list')
 									i.fa.fa-square.fa-stack-2x
 									i.fa.fa-check.fa-stack-1x.fa-inverse
-								input(name='listChoice', type='radio', value='Please use my online mailing list', class='hide mailingListRadio')
+								input(name='listChoice', type='radio', value='Please use my online mailing list', class='mailingListRadio')
 								label(for='listChoice') Please use my online mailing list
 					.col-md-12.col-sm-12
 						ul.boxes
@@ -517,7 +517,7 @@ block content
 						div.file-wrapper#mailingListStatus
 							span.button Choose a File
 							input(type='file', id='mailingListFile', data-url='url', data-status='mailingListStatus', class='letterFile mailingListFile')
-							input(type='hidden', name='mailingListFile', id='url')
+						input(type='hidden', name='mailingListFile', id='url')
 						//- div.file-wrapper#statusList
 						//- 	span.button Upload List
 						//- 	input(type='file', id='mailingList', data-url='mailingList', data-status='statusList', class='letterFile')
@@ -525,10 +525,10 @@ block content
 						br
 						if mailerType === 'christmasLetter' || mailerType === 'thankYou'
 							br
-							span.fa-stack.fa-lg.checkbox(data-input='oneTime', data-type='checkbox')
+							//- span.fa-stack.fa-lg.checkbox(data-input='oneTime', data-type='checkbox')
 								i.fa.fa-square.fa-stack-2x
 								i.fa.fa-check.fa-stack-1x.fa-inverse
-							input(type='checkbox', name='oneTime', value='This is a one time mailing list for this order only.', class='hide')
+							input(type='checkbox', name='oneTime', value='This is a one time mailing list for this order only.')
 							label(for='oneTime') This is a one time mailing list for this order only.
 				.row
 					.col-md-12
@@ -543,10 +543,10 @@ block content
 				.row.main
 					div.col-md-5
 						.form-group
-							span.fa-stack.fa-lg.checkbox2(data-input='customReturnAddress', data-value='true', data-type='radio')
+							//- span.fa-stack.fa-lg.checkbox2(data-input='customReturnAddress', data-value='true', data-type='radio')
 								i.fa.fa-square.fa-stack-2x
 								i.fa.fa-check.fa-stack-1x.fa-inverse
-							input(type='radio', name='customReturnAddress', value='true', class='hide')
+							input(type='radio', name='customReturnAddress', value='true')
 							label(for="returnAddress") Use the Return Address Below
 						-var Class = 'form-control input-lg';
 						div.form-group
@@ -576,10 +576,10 @@ block content
 							input(name='country', value=user.returnAddress ? user.returnAddress.country : null, class=Class)
 					div.col-md-5.col-md-offset-1
 						.form-group
-							span.fa-stack.fa-lg.checkbox2(data-input='customReturnAddress', data-value='false', data-type='radio')
+							//- span.fa-stack.fa-lg.checkbox2(data-input='customReturnAddress', data-value='false', data-type='radio')
 								i.fa.fa-square.fa-stack-2x
 								i.fa.fa-check.fa-stack-1x.fa-inverse
-							input(type='radio', name='customReturnAddress', value='false', class='hide')
+							input(type='radio', name='customReturnAddress', value='false')
 							label(for="returnAddress") Use the Prayer Letter Service Address as my return address
 						.form-group
 							label "Your Ministry Update from"							

@@ -111,22 +111,15 @@ exports = module.exports = function(req, res) {
 						else
 							list = list.replace(/first name/ig, 'firstName');
 							list = list.replace(/last name/ig, 'lastName');
+							list = list.replace(/spouse first name/ig, 'spouseFirstName'),
 							list = list.replace(/envelope line/ig, 'envLine')
 							list = list.replace(/address 1/ig, 'addressOne');
 							list = list.replace(/address 2/ig, 'addressTwo');
 							list = list.replace(/address 3/ig, 'addressThree');
+							list = list.replace(/greeting/ig, 'greeting');
 							list = list.replace(/city/ig, 'city');
 							list = list.replace(/state/ig, 'state');
 							list = list.replace(/zip/ig, 'zip');
-							// list = list.replace(/(\w+([^spouse])\s|\s)?first(\/*|\s*|-*|_*)?(given\s)?(name)?/ig, 'firstName');
-							// list = list.replace(/(\w+([^spouse])\s|\s)?(last|maiden)(\/*|\s*|-*|_*)?((family|maiden)\s)?(name)?/ig, 'lastName');
-							// list = list.replace(/(\w+\s|\s)?(env|envelope)(\/*|\s*|-*|_*)?(line(\sone)?)(_*|\s*)?(1|one)?/ig, 'ENV_LINE');
-							// list = list.replace(/(\w+\s+|\s)*?(address|street|road)(\s*|-*|_*)?((\s)address|one|1)((\s)?-*|\r|\\r|\n|\\n)?/ig, 'addressOne');
-							// list = list.replace(/(\w+\s+|\s)*?(address|street|road)(\s*|-*|_*)?((\s)two|2)((\s)?-*|\r|\\r|\n|\\n)?/ig, 'addressTwo');
-							// list = list.replace(/(\w+\s+|\s)*?(address|street|road)(\s*|-*|_*)?((\s)three|3)((\s)?-*|\r|\\r|\n|\\n)?/ig, 'addressThree');
-							// list = list.replace(/(\w+\s+|\s)*?(city|suburb|province)(\s*|-*|_*)?(\s*|-*)?/ig, 'city');
-							// list = list.replace(/(\w+\s+|\s)*?(state|\b\s?st\b)(\s*|-*|_*)?(\w+\s*|-*)?/ig, 'state');
-							// list = list.replace(/(\w+\s+|\s)*?(post(al)?|zip)(\s*|-*)?(code)?(\s*|-*|\r|\\r|\\n)?/ig, 'zip');
 							
 							var result = JSON.parse(list);
 
@@ -142,10 +135,12 @@ exports = module.exports = function(req, res) {
 										mailingList: id,
 										firstName: result[contact].firstName,
 										lastName: result[contact].lastName,
+										spouseFirstName: result[contact].spouseFirstName,
 										envelopeLine: result[contact].envLine,
 										addressOne: result[contact].addressOne,
 										addressTwo: result[contact].addressTwo,
 										addressThree: result[contact].addressThree,
+										greeting: result[contact].greeting,
 										city: result[contact].city,
 										state: result[contact].state,
 										postCode: result[contact].zip
