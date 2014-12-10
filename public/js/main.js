@@ -113,13 +113,21 @@ $(function() {
 		if (lastIndex >= 0) {
 			filename = filename.substring(lastIndex + 1);
 		}
+		function convertToSlug(Text)
+		{
+		    return Text
+		        .toLowerCase()
+		        .replace(/ /g,'-')
+		        .replace(/[^\w-]+/g,'')
+		        ;
+		}
 		//- Get Elements for Upload
 		var dataStatus = $(file).data('status'),
 			dataUrl = $(file).data('url');
 		var status_elem = document.getElementById(dataStatus),
 			url_elem =  document.getElementById(dataUrl);
 		var s3upload = new S3Upload({
-			s3_object_name: text + '_' + filename,
+			s3_object_name: text + '_' + convertToSlug(filename).replace(/[^\w\s]/gi, ''),
 			file_dom_selector: file.id,
 			s3_sign_put_url: '/sign_s3',
 			onProgress: function(percent, message) {
