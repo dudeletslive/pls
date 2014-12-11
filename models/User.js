@@ -56,7 +56,7 @@ User.add({
 		},
 		MPDX: {
 			isConfigured: { type: Boolean, label: 'MPDX has been configured', noedit: true },
-			'MPDX Code': { type: String, label: 'Hide this field', noedit: true }
+			code: { type: String, label: 'Hide this field', noedit: true }
 		}
 	}
 });

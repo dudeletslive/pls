@@ -48,7 +48,7 @@ exports = module.exports = function(req, res) {
 
 		updater.process(req.body, {
 			flashErrors: true,
-			fields: 'MPDX Code',
+			fields: 'MPDX.code',
 			errorMessage: 'We were unable to update your account:'
 		}, function(err) {
 			if (err) {
