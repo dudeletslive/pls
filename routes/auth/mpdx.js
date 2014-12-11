@@ -29,22 +29,17 @@ exports = module.exports = function(req, res) {
 
 	}));
 
+	console.log(locals.existingUser);
+
 	view.on('post', function() {
 
 		var userData = {
 			services: locals.existingUser.services || {}
 		};
-					
+		
 		_.extend(userData.services['MPDX'], {
 			isConfigured: true,
 			code: locals.code
-			// profileId: locals.authUser.profileId,
-			
-			// username: locals.authUser.username,
-			// avatar: locals.authUser.avatar,
-			
-			// accessToken: locals.authUser.accessToken,
-			// refreshToken: locals.authUser.refreshToken
 		});
 					
 		locals.existingUser.set(userData);

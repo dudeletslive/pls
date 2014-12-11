@@ -12,11 +12,11 @@ exports = module.exports = function(req, res) {
 		server = oauth2orize.createServer(),
 		token  = keystone.utils.randomString(48);
 
-	console.log(req.body);
-
 	User.model.find({'services.MPDX.code': req.body.code}, function(err, user) {
 
 		if (err) return false;
+
+		var user = user[0];
 		
 		var userData = {
 			services: user.services || {}
@@ -46,5 +46,4 @@ exports = module.exports = function(req, res) {
 		"token_type": "bearer"
 	});
 
-	view.render('auth/mpdx');
 }
