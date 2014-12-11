@@ -29,8 +29,8 @@ exports = module.exports = function(req, res) {
 	}));
 
 	view.on('post', function() {
-		console.log(locals.redirectURI + '?code=' + locals.code + '&?state=' + locals.state);
-		res.redirect(301, locals.redirectURI + '?code=' + locals.code + '&?state=' + locals.state);
+		console.log(locals.redirectURI + '?code=' + locals.code + '&state=' + locals.state);
+		res.redirect(301, locals.redirectURI + '?code=' + locals.code + '&state=' + locals.state);
 	})
 	
 	view.render('auth/mpdx');
