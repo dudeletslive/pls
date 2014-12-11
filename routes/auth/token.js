@@ -12,6 +12,7 @@ exports = module.exports = function(req, res) {
 		server = oauth2orize.createServer();
 
 	console.log(req.query.grant_type);
+	console.log(req.body);
 	
 	view.render('auth/mpdx');
 
