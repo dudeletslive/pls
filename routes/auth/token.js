@@ -11,10 +11,10 @@ exports = module.exports = function(req, res) {
 		locals = res.locals,
 		server = oauth2orize.createServer();
 
-	console.log(req.query.grant_type);
-	console.log('--------------')
-	console.log('Request: ', req.body);
-	console.log('--------------')
+	User.model.find({'services.MPDX.code': req.body.code}, function(err, user) {
+		if (err) return false;
+		console.log(user);
+	})
 
 	view.render('auth/mpdx');
 

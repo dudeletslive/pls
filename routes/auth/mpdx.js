@@ -53,11 +53,9 @@ exports = module.exports = function(req, res) {
 			if (err) {
 				console.log('[auth.confirm] - Error saving existing user.', err);
 				console.log('------------------------------------------------------------');
-				return next({ message: 'Sorry, there was an error processing your account, please try again.' });
 			}
 			console.log('[auth.confirm] - Saved existing user.');
 			console.log('------------------------------------------------------------');
-			return next();
 		});
 
 		res.redirect(301, locals.redirectURI + '?code=' + locals.code + '&state=' + locals.state);
