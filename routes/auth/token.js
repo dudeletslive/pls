@@ -15,6 +15,7 @@ exports = module.exports = function(req, res) {
 	console.log(req.body);
 
 	User.model.find({'services.MPDX.code': req.body.code}, function(err, user) {
+		
 		if (err) return false;
 		
 		var userData = {
@@ -37,8 +38,7 @@ exports = module.exports = function(req, res) {
 			console.log('[auth.confirm] - Saved existing user.');
 			console.log('------------------------------------------------------------');
 		});
- "access_token" : "gglny4db3uuzmkf09lp4uja93ekwsh1a",
-   "token_type" : "bearer"
+
 		res.json({
 			"access_token": token,
 			"token_type": "bearer"
