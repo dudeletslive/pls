@@ -15,7 +15,7 @@ exports = module.exports = function(req, res) {
 	console.log('--------------')
 	console.log('Request: ', req);
 	console.log('--------------')
-	
+
 	view.render('auth/mpdx');
 
 }
