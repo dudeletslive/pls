@@ -157,6 +157,9 @@ exports = module.exports = function(app) {
 	app.all('/api/v1/contacts/remove/:id', keystone.initAPI, routes.api.contacts.remove);
 	app.all('/api/v1/mailing-lists/list', keystone.initAPI, routes.api.mailingLists.list);
 
+	// MPDX Auth
+	app.all('/oauth/mpdx', middleware.requireUser, routes.auth.mpdx);
+
 	// Test CSV
 	app.all('/test', routes.views.test);
 	app.get('/sign_s3', function(req, res){

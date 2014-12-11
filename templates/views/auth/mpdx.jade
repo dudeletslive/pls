@@ -1,0 +1,13 @@
+extends ../../layouts/default
+
+block content
+	div.myAccount
+		section.spacer
+		div.jumbotron: .container
+			div.panel
+				form(method="post")#myAccount
+					input(type='hidden', name='action', value='confirm.details')
+					h1.lead MPDX Would Like Permission to Access Your Account
+					+flash-messages(messages)
+					
+		section.spacer

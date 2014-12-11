@@ -16,6 +16,7 @@
     "excel": "^0.1.1",
     "keystone": "~0.2.27",
     "node-xlsx": "^0.5.1",
+    "oauth2orize": "^1.0.1",
     "passport": "^0.2.1",
     "passport-facebook": "^1.0.2",
     "passport-github": "^0.1.5",
