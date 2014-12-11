@@ -160,18 +160,18 @@ exports = module.exports = function(app) {
 	app.all('/api/v1/mailing-lists/list', keystone.initAPI, routes.api.mailingLists.list);
 
 	// MPDX Auth
-	// app.all('/oauth/authorize', middleware.requireUser, routes.auth.mpdx);
-	app.all('/oauth/authorize',
-		server.authorize(function(clientID, redirectURI, done) {
-    		// Nothing to do here, move along.
-		}),
-		function(req, res) {
-			view.render('auth/mpdx', { 
-				transactionID: req.oauth2.transactionID,
-				user: req.user, 
-				client: req.oauth2.client 
-			});
-		});
+	app.all('/oauth/authorize', middleware.requireUser, routes.auth.mpdx);
+	// app.all('/oauth/authorize',
+	// 	server.authorize(function(clientID, redirectURI, done) {
+	// 		// Nothing to do here, move along.
+	// 	}),
+	// 	function(req, res) {
+	// 		view.render('auth/mpdx', { 
+	// 			transactionID: req.oauth2.transactionID,
+	// 			user: req.user, 
+	// 			client: req.oauth2.client 
+	// 		});
+	// 	});
 
 	// Test CSV
 	app.all('/test', routes.views.test);

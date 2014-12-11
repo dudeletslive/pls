@@ -11,6 +11,9 @@ exports = module.exports = function(req, res) {
 		locals = res.locals,
 		server = oauth2orize.createServer();
 
+	locals.code = keystone.utils.randomString([16,24]);
+	locals.redirectURI = req.query.redirect_uri;
+
 	server.grant(oauth2orize.grant.code(function(client, redirectURI, user, ares, done) {
 
 		var code = utils.uid(16),

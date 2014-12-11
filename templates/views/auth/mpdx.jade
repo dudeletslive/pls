@@ -8,6 +8,11 @@ block content
 				form(method="post")#myAccount
 					input(type='hidden', name='action', value='confirm.details')
 					h1.lead MPDX Would Like Permission to Access Your Account
+					form(action="#{redirectURI}/?code=#{code}")
+						input(type='text', value='#{redirectURI}/?code=#{code}')
+						button(type='submit') Allow
+					//- p= redirectURI
+					//- p= code
 					+flash-messages(messages)
 					
 		section.spacer
