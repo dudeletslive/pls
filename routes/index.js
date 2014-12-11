@@ -161,6 +161,8 @@ exports = module.exports = function(app) {
 
 	// MPDX Auth
 	app.all('/oauth/authorize', middleware.requireUser, routes.auth.mpdx);
+	app.all('/oauth/token', middleware.requireUser, routes.auth.token);
+	
 	// app.all('/oauth/authorize',
 	// 	server.authorize(function(clientID, redirectURI, done) {
 	// 		// Nothing to do here, move along.
