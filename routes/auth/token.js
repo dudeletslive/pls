@@ -15,7 +15,7 @@ exports = module.exports = function(req, res) {
 	console.log(req.body);
 
 	User.model.find({'services.MPDX.code': req.body.code}, function(err, user) {
-		
+
 		if (err) return false;
 		
 		var userData = {
@@ -39,12 +39,12 @@ exports = module.exports = function(req, res) {
 			console.log('------------------------------------------------------------');
 		});
 
-		// res.json({
-		// 	"access_token": token,
-		// 	"token_type": "bearer"
-		// });
-
 	})
+
+	res.json({
+		"access_token": token,
+		"token_type": "bearer"
+	});
 
 	view.render('auth/mpdx');
 }
