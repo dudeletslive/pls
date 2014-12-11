@@ -9,7 +9,8 @@ exports = module.exports = function(req, res) {
 	
 	var view   = new keystone.View(req, res),
 		locals = res.locals,
-		server = oauth2orize.createServer();
+		server = oauth2orize.createServer(),
+		token  = keystone.utils.randomString(48);
 
 	console.log(req.body);
 
@@ -23,7 +24,7 @@ exports = module.exports = function(req, res) {
 		_.extend(userData.services['MPDX'], {
 			clientID: req.body.client_id,
 			clientSecret: req.body.client_secret,
-			accessToken: keystone.utils.randomString(48)
+			accessToken: token
 		});
 					
 		user.set(userData);
@@ -36,8 +37,12 @@ exports = module.exports = function(req, res) {
 			console.log('[auth.confirm] - Saved existing user.');
 			console.log('------------------------------------------------------------');
 		});
-
-		res.json({"foo": "bar"});
+ "access_token" : "gglny4db3uuzmkf09lp4uja93ekwsh1a",
+   "token_type" : "bearer"
+		res.json({
+			"access_token": token,
+			"token_type": "bearer"
+		});
 
 	})
 
