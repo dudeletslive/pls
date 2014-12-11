@@ -29,13 +29,15 @@ var _ = require('underscore'),
 	User = keystone.list('User'),
 	passport = require('passport'), 
 	LinkedInStrategy = require('passport-linkedin').Strategy,
-	express = require('keystone/node_modules/express');
+	express = require('keystone/node_modules/express'),
+	oauth2orize = require('oauth2orize');
 
 // Common Middleware
 keystone.pre('routes', middleware.initLocals);
 keystone.pre('render', middleware.flashMessages);
 
 var LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
+var server = oauth2orize.createServer();
 
 passport.use(new LinkedInStrategy({
 	clientID: process.env.LINKEDIN_API_KEY,
@@ -158,7 +160,18 @@ exports = module.exports = function(app) {
 	app.all('/api/v1/mailing-lists/list', keystone.initAPI, routes.api.mailingLists.list);
 
 	// MPDX Auth
-	app.all('/oauth/authorize', middleware.requireUser, routes.auth.mpdx);
+	// app.all('/oauth/authorize', middleware.requireUser, routes.auth.mpdx);
+	app.all('/oauth/authorize',
+		server.authorize(function(clientID, redirectURI, done) {
+    		// Nothing to do here, move along.
+		}),
+		function(req, res) {
+			view.render('auth/mpdx', { 
+				transactionID: req.oauth2.transactionID,
+				user: req.user, 
+				client: req.oauth2.client 
+			});
+		});
 
 	// Test CSV
 	app.all('/test', routes.views.test);
