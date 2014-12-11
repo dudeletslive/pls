@@ -13,7 +13,7 @@ exports = module.exports = function(req, res) {
 
 	console.log(req.query.grant_type);
 	console.log('--------------')
-	console.log('Request: ', req);
+	console.log('Request: ', req.body);
 	console.log('--------------')
 
 	view.render('auth/mpdx');
