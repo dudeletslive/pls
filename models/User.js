@@ -53,6 +53,10 @@ User.add({
 			
 			accessToken: { type: String, label: 'Access Token', dependsOn: deps.facebook, noedit: true },
 			refreshToken: { type: String, label: 'Refresh Token', dependsOn: deps.facebook, noedit: true }
+		},
+		MPDX: {
+			isConfigured: { type: Boolean, label: 'MPDX has been configured', noedit: true },
+			'MPDX Code': { type: String, label: 'Hide this field', noedit: true }
 		}
 	}
 });
