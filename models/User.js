@@ -8,7 +8,8 @@ var keystone = require('keystone'),
 
 var deps = {
 	facebook: { 'services.facebook.isConfigured': true },
-	linkedIn: { 'services.linkedIn.isConfigured': true }
+	linkedIn: { 'services.linkedIn.isConfigured': true },
+	mpdx: { 'services.MPDX.isConfigured': true }
 }
 
 var User = new keystone.List('User');
@@ -56,7 +57,10 @@ User.add({
 		},
 		MPDX: {
 			isConfigured: { type: Boolean, label: 'MPDX has been configured', noedit: true },
-			code: { type: String, label: 'Hide this field', noedit: true }
+			code: { type: String, label: 'Hide this field', hidden: true },
+			clientID: { type: String, label: 'Hide this field', hidden: true },
+			clientSecret: { type: String, label: 'Hide this field', hidden: true },
+			accessToken: { type: String, label: 'Access Token', noedit: true, dependsOn: deps.mpdx }
 		}
 	}
 });
