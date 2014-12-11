@@ -39,10 +39,10 @@ exports = module.exports = function(req, res) {
 			console.log('------------------------------------------------------------');
 		});
 
-		res.json({
-			"access_token": token,
-			"token_type": "bearer"
-		});
+		// res.json({
+		// 	"access_token": token,
+		// 	"token_type": "bearer"
+		// });
 
 	})
 
