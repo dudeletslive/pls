@@ -11,6 +11,8 @@ exports = module.exports = function(req, res) {
 		locals = res.locals,
 		server = oauth2orize.createServer();
 
+	console.log(req.body);
+
 	User.model.find({'services.MPDX.code': req.body.code}, function(err, user) {
 		if (err) return false;
 		console.log(user);
