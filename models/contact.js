@@ -42,5 +42,5 @@ contact.add({
  * Registration
  */
 
-contact.defaultColumns = 'mailingList, lastName, firstName, spouseName, envelopeLine, addressOne, addressTwo, addressThree, city, state, postCode';
+contact.defaultColumns = 'mailingList, lastName, firstName, spouseFirstName, envelopeLine, addressOne, addressTwo, addressThree, city, state, postCode';
 contact.register();
