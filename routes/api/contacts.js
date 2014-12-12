@@ -114,14 +114,7 @@ exports.update = function(req, res) {
  * Delete Contact
  */
 exports.remove = function(req, res) {
-
-	var credentials = auth(req);
-
-	if (!credentials || credentials.name !== 'PrayerLetterService' || credentials.pass !== password) {
-		req.flash('error', 'API Auth failed');
-		res.redirect('/');
-	}
-
+	
 	Contact.model.findById(req.params.id).exec(function (err, item) {
 		
 		if (err) return res.apiError('database error', err);
