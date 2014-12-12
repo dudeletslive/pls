@@ -56,8 +56,6 @@ exports.create = function(req, res) {
 			// Add Contacts to MPDX Mailing List
 			for (i = 0; i < contacts.length; ++i) {
 
-				console.log('Response: ', test);
-
 				var contactInfo = {
 					mailingList: id,
 					firstName: contacts[i].name,
