@@ -55,6 +55,21 @@ exports.create = function(req, res) {
 
 			// Add Contacts to MPDX Mailing List
 			for (i = 0; i < contacts.length; ++i) {
+
+				Contact.model.findOne({'external_id': contacts[i].external_id}).exec(function(err, contacts) {
+
+					if (err) return res.apiError('database error', err);
+					
+					res.apiResponse({
+						contacts: contacts
+					});
+
+					var test = contacts;
+
+				});
+
+				console.log('Response: ', test);
+
 				var contactInfo = {
 					mailingList: id,
 					firstName: contacts[i].name,
@@ -114,7 +129,7 @@ exports.update = function(req, res) {
  * Delete Contact
  */
 exports.remove = function(req, res) {
-	
+
 	Contact.model.findById(req.params.id).exec(function (err, item) {
 		
 		if (err) return res.apiError('database error', err);
