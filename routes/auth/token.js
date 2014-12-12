@@ -3,7 +3,8 @@ var keystone 	= require('keystone'),
 	request 	= require('request'),
 	_ 			= require('underscore'),
 	oauth2orize = require('oauth2orize'),
-	User 		= keystone.list('User');
+	User 		= keystone.list('User'),
+	List 		= keystone.list('Mailing Lists');
 
 exports = module.exports = function(req, res) {
 	
@@ -39,7 +40,21 @@ exports = module.exports = function(req, res) {
 			console.log('------------------------------------------------------------');
 		});
 
-	})
+		var listData = {
+			userID: user._id,
+			uploadedBy: user._id,
+			listName: 'MPDX List' + ' - ' + user.name['first'] + ' ' + user.name['last'],
+			prettyName: 'MPDX List' + ' - ' + user.name['first'] + ' ' + user.name['last'],
+		};
+
+		var saveList = new List(listData);
+
+		saveList.save(function(err, newList) {
+			if (err) return false;
+			console.log(newList);
+		})
+
+	});
 
 	res.json({
 		"access_token": token,
