@@ -21,8 +21,6 @@ exports.list = function(req, res) {
 
 			console.log('List: ', list);
 
-			var Contact = keystone.list('Contact');
-
 			Contact.model.find({'mailingList': list._id}).exec(function(err, contacts) {
 
 				if (err) return res.apiError('database error', err);
@@ -57,6 +55,8 @@ exports.create = function(req, res) {
 
 			// Add Contacts to MPDX Mailing List
 			for (i = 0; i < contacts.length; ++i) {
+
+				var Contact = keystone.list('Contact');
 
 				Contact.model.findOne({'external_id': contacts[i].external_id}).exec(function(err, contacts) {
 
