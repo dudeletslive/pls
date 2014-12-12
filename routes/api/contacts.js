@@ -37,7 +37,7 @@ exports.list = function(req, res) {
 exports.create = function(req, res) {
 	
 	// TODO: Add Contacts to MPDX Mailing List
-	console.log('PUT: ', req.body);
+	console.log('PUT: ', req);
 
 	// Find User by Authorization
 	User.model.findOne({'services.MPDX.accessToken': req.headers.authorization}).exec(function (err, user) {
