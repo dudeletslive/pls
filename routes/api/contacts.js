@@ -52,10 +52,10 @@ exports.create = function(req, res) {
 				var contactInfo = {
 					mailingList: id,
 					firstName: contacts[i].name,
-					addressOne: contacts[i].street,
-					city: contacts[i].city,
-					state: contacts[i].state,
-					postCode: contacts[i].postal_code,
+					addressOne: contacts[i].address['street'],
+					city: contacts[i].address['city'],
+					state: contacts[i].address['state'],
+					postCode: contacts[i].address['postal_code'],
 					externalID: contacts[i].contact_id
 				};
 
