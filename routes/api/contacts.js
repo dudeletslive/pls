@@ -15,11 +15,17 @@ exports.list = function(req, res) {
 
 	User.model.findOne({'services.MPDX.accessToken': req.headers.authorization}).exec(function (err, user) {
 
+		console.log('User: ', user);
+
 		List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
 
-			Contact.model.find({'mailingList': list}).exec(function(err, contacts) {
+			console.log('List: ', list)
+
+			Contact.model.find({'mailingList': list._id}).exec(function(err, contacts) {
 
 				if (err) return res.apiError('database error', err);
+
+				console.log('Contacts: ', contacts);
 				
 				res.apiResponse({
 					contacts: contacts
