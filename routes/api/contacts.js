@@ -35,7 +35,7 @@ exports.list = function(req, res) {
  */
 exports.create = function(req, res) {
 
-	console.log(req.headers);
+	console.log('Headers', req.headers);
 	
 	var item = new Contact.model(),
 		data = (req.method == 'POST') ? req.body : req.query;
