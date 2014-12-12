@@ -43,10 +43,13 @@ exports.create = function(req, res) {
 
 		// Find MPDX Mailing List
 		List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
+			
 			var id = list._id;
 
 			// Add Contacts to MPDX Mailing List
-			for (contact in contacts) {
+			for (contact in req.body.contacts) {
+
+				console.log(contact)
 												
 				var contactInfo = {
 					mailingList: id,
