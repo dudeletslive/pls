@@ -19,7 +19,9 @@ exports.list = function(req, res) {
 
 		List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
 
-			console.log('List: ', list)
+			console.log('List: ', list);
+
+			var Contact = keystone.list('Contact');
 
 			Contact.model.find({'mailingList': list._id}).exec(function(err, contacts) {
 
