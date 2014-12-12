@@ -37,13 +37,14 @@ exports.list = function(req, res) {
 exports.create = function(req, res) {
 	
 	// TODO: Add Contacts to MPDX Mailing List
-	console.log('PUT: ', req.body);
+	console.log('PUT: ', req);
 
 	// Find User by Authorization
 	User.model.findOne({'services.MPDX.accessToken': req.headers.authorization}).exec(function (err, user) {
 		// Find MPDX Mailing List
 		List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
 			var id = list._id;
+			for 
 		});
 	});
 	
