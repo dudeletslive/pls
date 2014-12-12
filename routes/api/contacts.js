@@ -35,7 +35,11 @@ exports.list = function(req, res) {
  */
 exports.create = function(req, res) {
 
-	console.log('Headers', req.headers);
+	console.log('Headers', req.headers.authorization);
+
+	// Find User by Authorization
+	// Find MPDX Mailing List
+	// Add Contacts to MPDX Mailing List
 	
 	var item = new Contact.model(),
 		data = (req.method == 'POST') ? req.body : req.query;
