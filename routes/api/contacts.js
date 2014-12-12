@@ -43,8 +43,14 @@ exports.create = function(req, res) {
 	// Add Contacts to MPDX Mailing List
 
 	User.model.findOne({'services.MPDX.accessToken': req.headers.authorization}).exec(function (err, user) {
-		console.log(user);
+		var user = user;
 	});
+
+	console.log('User: ', user);
+
+	List.model.findOne({'prettyName': 'MPDX', 'userID': user._id}).exec(function(err, list) {
+		console.log('List: ', list);
+	})
 	
 	var item = new Contact.model,
 		data = (req.method == 'POST') ? req.body : req.query;
