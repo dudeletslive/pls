@@ -35,12 +35,7 @@ exports.list = function(req, res) {
  */
 exports.create = function(req, res) {
 
-	var credentials = auth(req);
-
-	if (!credentials || credentials.name !== 'PrayerLetterService' || credentials.pass !== password) {
-		req.flash('error', 'API Auth failed');
-		res.redirect('/');
-	}
+	console.log(req.headers);
 	
 	var item = new Contact.model(),
 		data = (req.method == 'POST') ? req.body : req.query;
