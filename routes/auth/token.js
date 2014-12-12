@@ -25,7 +25,7 @@ exports = module.exports = function(req, res) {
 		_.extend(userData.services['MPDX'], {
 			clientID: req.body.client_id,
 			clientSecret: req.body.client_secret,
-			accessToken: token
+			accessToken: 'Bearer ' + token
 		});
 					
 		user.set(userData);
