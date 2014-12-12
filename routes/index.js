@@ -160,7 +160,7 @@ exports = module.exports = function(app) {
 	app.all('/api/v1/mailing-lists/list', keystone.initAPI, routes.api.mailingLists.list);
 
 	// MPDX Auth
-	app.all('/oauth/authorize', routes.auth.mpdx);
+	app.all('/oauth/authorize', middleware.requireUser, routes.auth.mpdx);
 	app.all('/oauth/token', routes.auth.token);
 	
 	// app.all('/oauth/authorize',
