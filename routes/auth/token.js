@@ -44,13 +44,12 @@ exports = module.exports = function(req, res) {
 			userID: user._id,
 			uploadedBy: user._id,
 			listName: 'MPDX List' + ' - ' + user.name['first'] + ' ' + user.name['last'],
-			prettyName: 'MPDX List' + ' - ' + user.name['first'] + ' ' + user.name['last'],
+			prettyName: 'MPDX List' + ' - ' + user.name['first'] + ' ' + user.name['last']
 		};
 
 		var saveList = new List(listData);
 
 		saveList.save(function(err, newList) {
-			if (err) return false;
 			console.log('New Mailing List', newList);
 		})
 
