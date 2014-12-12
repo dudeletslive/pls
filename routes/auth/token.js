@@ -51,7 +51,7 @@ exports = module.exports = function(req, res) {
 
 		saveList.save(function(err, newList) {
 			if (err) return false;
-			console.log(newList);
+			console.log('New Mailing List', newList);
 		})
 
 	});
