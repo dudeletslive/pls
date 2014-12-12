@@ -28,7 +28,8 @@ contact.add({
 	city: { type: String },
 	state: { type: String },
 	postCode: { type: String, label: 'Postal / Zip Code' },
-	externalID: { type: String, note: 'ID used for MPDX' }
+	contact_id: { type: String, note: 'ID used for MPDX' },
+	external_id: { type: String, note: 'ID used for MPDX' }
 });
 
 

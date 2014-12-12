@@ -43,7 +43,7 @@ exports = module.exports = function(req, res) {
 		var listData = {
 			userID: user._id,
 			uploadedBy: user._id,
-			listName: 'MPDX List ' + user.name.first + ' ' + user.name.last,
+			listName: 'MPDX List - ' + user.name.first + ' ' + user.name.last,
 			prettyName: 'MPDX List'
 		};
 

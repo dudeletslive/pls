@@ -9,16 +9,9 @@ var Contact = keystone.list('Contact'),
 	password = 'd41d8cd98f00b204e9800998ecf8427e';
 
 /**
- * List Contacts
+ * Get Contact ID
  */
 exports.list = function(req, res) {
-
-	var credentials = auth(req);
-
-	if (!credentials || credentials.name !== 'PrayerLetterService' || credentials.pass !== password) {
-		req.flash('error', 'API Auth failed');
-		res.redirect('/');
-	}
 
 	Contact.model.find(function(err, items) {
 		
@@ -29,14 +22,13 @@ exports.list = function(req, res) {
 		});
 		
 	});
+
 }
 
 /**
  * Create Contact
  */
 exports.create = function(req, res) {
-	
-	console.log(req.body.contacts)
 
 	// Find User by Authorization
 	User.model.findOne({'services.MPDX.accessToken': req.headers.authorization}).exec(function (err, user) {
@@ -56,7 +48,8 @@ exports.create = function(req, res) {
 					city: contacts[i].address['city'],
 					state: contacts[i].address['state'],
 					postCode: contacts[i].address['postal_code'],
-					externalID: contacts[i].contact_id
+					contact_id: keystone.utils.randomString([24,32]),
+					external_id: contacts[i].external_id
 				};
 
 				var Contact = keystone.list('Contact').model,
