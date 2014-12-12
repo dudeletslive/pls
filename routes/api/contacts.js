@@ -53,22 +53,24 @@ exports.create = function(req, res) {
 			var id = list._id,
 				contacts = req.body.contacts;
 
+			Contact.model.find({'mailingList': list._id}).exec(function(err, contacts) {
+
+				if (err) return res.apiError('database error', err);
+
+				for (contact in contacts) {
+					contact.remove(function(err) {
+						console.log('Removed');
+					})
+				}
+				
+				res.apiResponse({
+					contacts: contacts
+				});
+
+			});
+
 			// Add Contacts to MPDX Mailing List
 			for (i = 0; i < contacts.length; ++i) {
-
-				var Contact = keystone.list('Contact');
-
-				Contact.model.findOne({'external_id': contacts[i].external_id}).exec(function(err, contacts) {
-
-					if (err) return res.apiError('database error', err);
-					
-					res.apiResponse({
-						contacts: contacts
-					});
-
-					var test = contacts;
-
-				});
 
 				console.log('Response: ', test);
 
