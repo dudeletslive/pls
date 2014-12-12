@@ -13,14 +13,23 @@ var Contact = keystone.list('Contact'),
  */
 exports.list = function(req, res) {
 
-	Contact.model.find(function(err, items) {
-		
-		if (err) return res.apiError('database error', err);
-		
-		res.apiResponse({
-			contacts: items
+	User.model.findOne({'services.MPDX.accessToken': req.headers.authorization}).exec(function (err, user) {
+
+		// Find MPDX Mailing List
+		List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
+
+			Contact.model.find({'mailingList': list}, function() {
+
+				if (err) return res.apiError('database error', err);
+				
+				res.apiResponse({
+					contacts: items
+				});
+
+			})
+
 		});
-		
+
 	});
 
 }
