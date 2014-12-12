@@ -4,7 +4,7 @@ var keystone 	= require('keystone'),
 	_ 			= require('underscore'),
 	oauth2orize = require('oauth2orize'),
 	User 		= keystone.list('User'),
-	List 		= keystone.list('Mailing Lists');
+	mailingList	= keystone.list('Mailing Lists').model;
 
 exports = module.exports = function(req, res) {
 	
@@ -43,11 +43,11 @@ exports = module.exports = function(req, res) {
 		var listData = {
 			userID: user._id,
 			uploadedBy: user._id,
-			listName: 'MPDX List' + ' - ' + user.name['first'] + ' ' + user.name['last'],
-			prettyName: 'MPDX List' + ' - ' + user.name['first'] + ' ' + user.name['last']
+			listName: 'MPDX List',
+			prettyName: 'MPDX List'
 		};
 
-		var saveList = new List(listData);
+		var saveList = new mailingList(listData);
 
 		saveList.save(function(err, newList) {
 			console.log('New Mailing List', newList);
