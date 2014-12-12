@@ -47,31 +47,23 @@ exports.create = function(req, res) {
 			var id = list._id,
 				contacts = req.body.contacts;
 
+			// Add Contacts to MPDX Mailing List
 			for (i = 0; i < contacts.length; ++i) {
-				console.log(contacts[i]);
+				var contactInfo = {
+					mailingList: id,
+					firstName: contacts[i].name,
+					addressOne: contacts[i].street,
+					city: contacts[i].city,
+					state: contacts[i].state,
+					postCode: contacts[i].postal_code,
+					externalID: contacts[i].contact_id
+				};
+
+				var Contact = keystone.list('Contact').model,
+					newContact = new Contact(contactInfo);
+
+				newContact.save(function(err) {});
 			}
-
-			// // Add Contacts to MPDX Mailing List
-			// for (contact in req.body.contacts) {
-
-			// 	console.log(contact)
-												
-			// 	var contactInfo = {
-			// 		mailingList: id,
-			// 		firstName: contact.name,
-			// 		addressOne: contact.street,
-			// 		city: contact.city,
-			// 		state: contact.state,
-			// 		postCode: contact.postal_code,
-			// 		externalID: contact.contact_id
-			// 	};
-
-			// 	var Contact = keystone.list('Contact').model,
-			// 		newContact = new Contact(contactInfo);
-
-			// 	newContact.save(function(err) {});
-
-			// }
 
 		});
 
