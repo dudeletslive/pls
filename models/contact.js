@@ -27,7 +27,8 @@ contact.add({
 	addressThree: { type: String, label: 'Address Line Three' },
 	city: { type: String },
 	state: { type: String },
-	postCode: { type: String, label: 'Postal / Zip Code' }
+	postCode: { type: String, label: 'Postal / Zip Code' },
+	externalID: { type: String, note: 'ID used for MPDX' }
 });
 
 
