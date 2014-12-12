@@ -35,8 +35,6 @@ exports.list = function(req, res) {
  * Create Contact
  */
 exports.create = function(req, res) {
-
-	console.log('Headers', req.headers.authorization);
 	
 	// TODO: Add Contacts to MPDX Mailing List
 	console.log('PUT: ', req.body);
@@ -45,22 +43,13 @@ exports.create = function(req, res) {
 	User.model.findOne({'services.MPDX.accessToken': req.headers.authorization}).exec(function (err, user) {
 		// Find MPDX Mailing List
 		List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
-			console.log('List: ', list);
+			var id = list._id;
 		});
 	});
 	
-	var item = new Contact.model,
-		data = (req.method == 'POST') ? req.body : req.query;
+	var item = new Contact.model();
+		// data = (req.method == 'POST') ? req.body : req.query;
 	
-	item.getUpdateHandler(req).process(data, function(err) {
-		
-		if (err) return res.apiError('error', err);
-		
-		res.apiResponse({
-			contact: item
-		});
-		
-	});
 }
 
 /**
