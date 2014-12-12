@@ -53,18 +53,6 @@ exports.create = function(req, res) {
 			var id = list._id,
 				contacts = req.body.contacts;
 
-			Contact.model.find({'mailingList': list._id}).exec(function(err, contacts) {
-
-				if (err) return res.apiError('database error', err);
-				
-				res.apiResponse({
-					contacts: contacts
-				});
-
-				console.log(contacts);
-				
-			});
-
 			// Add Contacts to MPDX Mailing List
 			for (i = 0; i < contacts.length; ++i) {
 
