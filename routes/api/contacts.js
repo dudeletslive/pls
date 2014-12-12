@@ -4,6 +4,7 @@ var async = require('async'),
  
 var Contact = keystone.list('Contact'),
 	List = keystone.list('Mailing Lists'),
+	User = keystone.list('User'),
 	username = 'PrayerLetterService',
 	password = 'd41d8cd98f00b204e9800998ecf8427e';
 
@@ -40,8 +41,12 @@ exports.create = function(req, res) {
 	// Find User by Authorization
 	// Find MPDX Mailing List
 	// Add Contacts to MPDX Mailing List
+
+	user.model.findOne({'services.MPDX.accessToken': req.headers.authorization}).exec(function (err, user) {
+		console.log(user);
+	});
 	
-	var item = new Contact.model(),
+	var item = new Contact.model,
 		data = (req.method == 'POST') ? req.body : req.query;
 	
 	item.getUpdateHandler(req).process(data, function(err) {
