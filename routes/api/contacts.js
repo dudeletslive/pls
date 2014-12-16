@@ -50,6 +50,8 @@ exports.create = function(req, res) {
 		// Find MPDX Mailing List
 		List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
 
+			console.log(req.body);
+
 			var id 		 = list._id,
 				contacts = req.body.contacts;
 
