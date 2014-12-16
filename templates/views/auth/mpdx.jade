@@ -7,8 +7,8 @@ block content
 			div.panel
 				form(method="post")#myAccount
 					input(type='hidden', name='action', value='confirm.details')
-					h1.lead MPDX Would Like Permission to Access Your Account
-					small This will allow you to manage your contact lists with MPDX.
+					h1.lead MPDX Would Like to Access Your Account
+						small This will allow you to manage your contact lists with MPDX.
 				form(method="post")#myAccount
 					//- input(type='text', value='#{redirectURI}/?code=#{code}&?state=#{state}')
 					input(name="redirectURI", value="#{redirectURI}", type="hidden")
