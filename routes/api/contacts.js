@@ -108,13 +108,13 @@ exports.new = function(req, res) {
 				// Add single Contact from Contact[data]
 				var contactInfo = {
 					mailingList: id,
-					firstName: contacts[i].name,
-					addressOne: contacts[i].address['street'],
-					city: contacts[i].address['city'],
-					state: contacts[i].address['state'],
-					postCode: contacts[i].address['postal_code'],
+					firstName: contact[i].name,
+					addressOne: contact[i].address['street'],
+					city: contact[i].address['city'],
+					state: contact[i].address['state'],
+					postCode: contact[i].address['postal_code'],
 					contact_id: keystone.utils.randomString([24,32]),
-					external_id: contacts[i].external_id
+					external_id: contact[i].external_id
 				};
 
 				var Contact = keystone.list('Contact').model,
