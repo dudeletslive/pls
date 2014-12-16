@@ -95,17 +95,17 @@ exports.new = function(req, res) {
 	var test;
 	var contact = req.body;
 
-	Contact.model.findOne({'external_id': contact.external_id}).exec(function(err, item) {
+	// Contact.model.findOne({'external_id': contact.external_id}).exec(function(err, item) {
 				
-		if (err) return res.apiError('database error', err);
+	// 	if (err) return res.apiError('database error', err);
 
-		if (!item) {
-			return res.apiError('not found')
-		} else {
-			test = item;
-		}
+	// 	if (!item) {
+	// 		return res.apiError('not found')
+	// 	} else {
+	// 		test = item;
+	// 	}
 
-	});
+	// });
 
 	console.log(test);
 
