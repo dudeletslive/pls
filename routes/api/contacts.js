@@ -100,7 +100,7 @@ exports.new = function(req, res) {
 		if (err) return res.apiError('database error', err);
 		if (item) {
 			console.log(item);
-			global.test = item;
+			var global.test = item;
 		}
 
 	});
