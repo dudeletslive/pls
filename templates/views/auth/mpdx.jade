@@ -14,7 +14,8 @@ block content
 					input(name="redirectURI", value="#{redirectURI}", type="hidden")
 					input(name="state", value="#{state}", type="hidden")
 					input(name="MPDX Code", value="#{code}", type="hidden")
-					button(type='submit') Allow
+					.col-md-4.col-md-push-4
+						button(type='submit', class='btn btn-lg btn-success') Allow
 					//- p= redirectURI
 					//- p= code
 					+flash-messages(messages)
