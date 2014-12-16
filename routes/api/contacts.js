@@ -37,8 +37,6 @@ exports.list = function(req, res) {
 
 	});
 
-	res.end();
-
 }
 
 /**
@@ -78,6 +76,7 @@ exports.create = function(req, res) {
 						newContact = new Contact(contactInfo);
 
 					newContact.save(function(err) {});
+
 				}
 
 			}
@@ -86,8 +85,6 @@ exports.create = function(req, res) {
 
 	});
 
-	res.end();
-	
 }
 
 /**
@@ -106,7 +103,7 @@ exports.new = function(req, res) {
 			if (!item) return res.apiError('not found');
 			
 			if (item) {
-				console.log('Item: ', item);
+				var item = item;
 			}
 			
 		});
@@ -114,7 +111,7 @@ exports.new = function(req, res) {
 		// Find MPDX Mailing List
 		List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
 
-			console.log(req.body);
+			console.log('Item: ', item);
 
 			var id 		 = list._id,
 				contact = req.body;
@@ -144,8 +141,6 @@ exports.new = function(req, res) {
 		});
 
 	});
-
-	res.end();
 	
 }
 
