@@ -106,7 +106,7 @@ exports.new = function(req, res) {
 
 	console.log('Testing: ', test);
 
-	if (!item) {
+	if (!test) {
 
 		// Find User by Authorization
 		User.model.findOne({'services.MPDX.accessToken': req.headers.authorization}).exec(function (err, user) {
@@ -144,7 +144,7 @@ exports.new = function(req, res) {
 			});		
 
 		});
-		
+
 	}
 	
 }
