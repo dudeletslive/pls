@@ -102,35 +102,41 @@ exports.new = function(req, res) {
 			if (err) return res.apiError('database error', err);
 			if (!item) return res.apiError('not found');
 
-			var item = item;
-			
-		});
+			if (item) {
 
-		// Find MPDX Mailing List
-		List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
+				console.log('Update: ', item);
 
-			var id 		 = list._id,
-				contact = req.body;
+			} else {
 
-			// Check for Contact data to map
-			if (contact) {
+				// Find MPDX Mailing List
+				List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
 
-				// Add single Contact from Contact[data]
-				var contactInfo = {
-					mailingList: id,
-					firstName: contact.name,
-					addressOne: contact.street,
-					city: contact.city,
-					state: contact.state,
-					postCode: contact.postal_code,
-					contact_id: keystone.utils.randomString([24,32]),
-					external_id: contact.external_id
-				};
+					var id 		 = list._id,
+						contact = req.body;
 
-				var Contact = keystone.list('Contact').model,
-					newContact = new Contact(contactInfo);
+					// Check for Contact data to map
+					if (contact) {
 
-				newContact.save(function(err) {});
+						// Add single Contact from Contact[data]
+						var contactInfo = {
+							mailingList: id,
+							firstName: contact.name,
+							addressOne: contact.street,
+							city: contact.city,
+							state: contact.state,
+							postCode: contact.postal_code,
+							contact_id: keystone.utils.randomString([24,32]),
+							external_id: contact.external_id
+						};
+
+						var Contact = keystone.list('Contact').model,
+							newContact = new Contact(contactInfo);
+
+						newContact.save(function(err) {});
+
+					}
+
+				});
 
 			}
 
