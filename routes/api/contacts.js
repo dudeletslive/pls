@@ -37,6 +37,8 @@ exports.list = function(req, res) {
 
 	});
 
+	res.end();
+
 }
 
 /**
@@ -83,6 +85,8 @@ exports.create = function(req, res) {
 		});
 
 	});
+
+	res.end();
 	
 }
 
@@ -101,6 +105,17 @@ exports.new = function(req, res) {
 
 			var id 		 = list._id,
 				contact = req.body;
+
+			Contact.model.findOne({'external_id': contact.external_id}).exec(function(err, item) {
+				
+				if (err) return res.apiError('database error', err);
+				if (!item) return res.apiError('not found');
+				
+				if (item) {
+					console.log('Item: ', item);
+				}
+				
+			});
 
 			// Check for Contact data to map
 			if (contact) {
@@ -127,6 +142,8 @@ exports.new = function(req, res) {
 		});
 
 	});
+
+	res.end();
 	
 }
 
