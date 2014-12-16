@@ -142,17 +142,19 @@ exports.new = function(req, res) {
 
 		} else {
 
-			var data = req.body;
+			var contact = req.body;
 
-			item.getUpdateHandler(req).process(data, function(err) {
-			
-				if (err) return res.apiError('create error', err);
-				
-				res.apiResponse({
-					contact: item
-				});
-				
+			item.set({ 
+				firstName: contact.name,
+				addressOne: contact.street,
+				city: contact.city,
+				state: contact.state,
+				postCode: contact.postal_code,
+				contact_id: keystone.utils.randomString([24,32]),
+				external_id: contact.external_id
 			});
+
+			item.save();
 
 		}
 
