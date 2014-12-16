@@ -156,7 +156,7 @@ exports = module.exports = function(app) {
 	app.get('/api/v1/contacts', keystone.initAPI, routes.api.contacts.list);
 	app.put('/api/v1/contacts', keystone.initAPI, routes.api.contacts.create);
 	app.post('/api/v1/contacts', keystone.initAPI, routes.api.contacts.new);
-	app.all('/api/v1/contacts/:id', keystone.initAPI, routes.api.contacts.remove);
+	app.delete('/api/v1/contacts/:id', keystone.initAPI, routes.api.contacts.remove);
 	// app.all('/api/v1/mailing-lists/list', keystone.initAPI, routes.api.mailingLists.list);
 
 	// MPDX Auth
