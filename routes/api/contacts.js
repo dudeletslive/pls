@@ -98,6 +98,19 @@ exports.new = function(req, res) {
 	// Find User by Authorization
 	User.model.findOne({'services.MPDX.accessToken': req.headers.authorization}).exec(function (err, user) {
 
+		var contact = req.body;
+
+		Contact.model.findOne({'external_id': contact.external_id}).exec(function(err, item) {
+				
+			if (err) return res.apiError('database error', err);
+			if (!item) return res.apiError('not found');
+			
+			if (item) {
+				console.log('Item: ', item);
+			}
+			
+		});
+
 		// Find MPDX Mailing List
 		List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
 
@@ -105,17 +118,6 @@ exports.new = function(req, res) {
 
 			var id 		 = list._id,
 				contact = req.body;
-
-			Contact.model.findOne({'external_id': contact.external_id}).exec(function(err, item) {
-				
-				if (err) return res.apiError('database error', err);
-				if (!item) return res.apiError('not found');
-				
-				if (item) {
-					console.log('Item: ', item);
-				}
-				
-			});
 
 			// Check for Contact data to map
 			if (contact) {
