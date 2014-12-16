@@ -100,7 +100,7 @@ exports.new = function(req, res) {
 		Contact.model.findOne({'external_id': contact.external_id}).exec(function(err, item) {
 				
 			if (err) return res.apiError('database error', err);
-			if (!item) return res.apiError('not found');
+			// if (!item) return res.apiError('not found');
 
 			if (item) {
 
