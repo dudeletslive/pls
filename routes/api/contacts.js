@@ -130,6 +130,10 @@ exports.new = function(req, res) {
 
 						newContact.save(function(err) {});
 
+						res.apiResponse({
+							newContact
+						});
+
 					}
 
 				});		
@@ -145,7 +149,7 @@ exports.new = function(req, res) {
 				if (err) return res.apiError('create error', err);
 				
 				res.apiResponse({
-					contact: item
+					item
 				});
 				
 			});
