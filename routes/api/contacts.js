@@ -92,6 +92,7 @@ exports.create = function(req, res) {
  */
 exports.new = function(req, res) {
 
+	var test;
 	var contact = req.body;
 
 	Contact.model.findOne({'external_id': contact.external_id}).exec(function(err, item) {
@@ -99,14 +100,14 @@ exports.new = function(req, res) {
 		if (err) return res.apiError('database error', err);
 		if (item) {
 			console.log(item);
-			window.test = item;
+			global.test = item;
 		}
 
 	});
 
-	console.log('Testing: ', window.test);
+	console.log('Testing: ', global.test);
 
-	if (!window.test) {
+	if (!test) {
 
 		// Find User by Authorization
 		User.model.findOne({'services.MPDX.accessToken': req.headers.authorization}).exec(function (err, user) {
