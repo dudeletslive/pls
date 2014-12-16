@@ -97,9 +97,7 @@ exports.new = function(req, res) {
 	Contact.model.findOne({'external_id': contact.external_id}).exec(function(err, item) {
 				
 		if (err) return res.apiError('database error', err);
-		if (item) {
-			
-			console.log(item);
+		if (!item) {
 
 			// Find User by Authorization
 			User.model.findOne({'services.MPDX.accessToken': req.headers.authorization}).exec(function (err, user) {
@@ -137,6 +135,19 @@ exports.new = function(req, res) {
 				});		
 
 			});
+
+		} else {
+
+			item.getUpdateHandler(req).process(data, function(err) {
+			
+				if (err) return res.apiError('create error', err);
+				
+				res.apiResponse({
+					contact: item
+				});
+				
+			});
+
 		}
 
 	});
