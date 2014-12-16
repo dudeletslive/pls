@@ -156,6 +156,8 @@ exports.new = function(req, res) {
 
 			item.save();
 
+			res.apiResponse(item)
+
 		}
 
 	});
