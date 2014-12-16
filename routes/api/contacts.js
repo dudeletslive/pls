@@ -98,10 +98,7 @@ exports.new = function(req, res) {
 	Contact.model.findOne({'external_id': contact.external_id}).exec(function(err, item) {
 				
 		if (err) return res.apiError('database error', err);
-
-		if (!item) {
-			return res.apiError('not found')
-		} else {
+		if (item) {
 			test = item;
 		}
 
@@ -109,42 +106,46 @@ exports.new = function(req, res) {
 
 	console.log('Testing: ', test);
 
-	// Find User by Authorization
-	// User.model.findOne({'services.MPDX.accessToken': req.headers.authorization}).exec(function (err, user) {
+	if (!item) {
 
-	// 	var contact = req.body;
+		// Find User by Authorization
+		User.model.findOne({'services.MPDX.accessToken': req.headers.authorization}).exec(function (err, user) {
 
-	// 	// Find MPDX Mailing List
-	// 	List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
+			var contact = req.body;
 
-	// 		var id 		 = list._id,
-	// 			contact = req.body;
+			// Find MPDX Mailing List
+			List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
 
-	// 		// Check for Contact data to map
-	// 		if (contact) {
+				var id 		 = list._id,
+					contact = req.body;
 
-	// 			// Add single Contact from Contact[data]
-	// 			var contactInfo = {
-	// 				mailingList: id,
-	// 				firstName: contact.name,
-	// 				addressOne: contact.street,
-	// 				city: contact.city,
-	// 				state: contact.state,
-	// 				postCode: contact.postal_code,
-	// 				contact_id: keystone.utils.randomString([24,32]),
-	// 				external_id: contact.external_id
-	// 			};
+				// Check for Contact data to map
+				if (contact) {
 
-	// 			var Contact = keystone.list('Contact').model,
-	// 				newContact = new Contact(contactInfo);
+					// Add single Contact from Contact[data]
+					var contactInfo = {
+						mailingList: id,
+						firstName: contact.name,
+						addressOne: contact.street,
+						city: contact.city,
+						state: contact.state,
+						postCode: contact.postal_code,
+						contact_id: keystone.utils.randomString([24,32]),
+						external_id: contact.external_id
+					};
 
-	// 			newContact.save(function(err) {});
+					var Contact = keystone.list('Contact').model,
+						newContact = new Contact(contactInfo);
 
-	// 		}
+					newContact.save(function(err) {});
 
-	// 	});		
+				}
 
-	// });
+			});		
+
+		});
+		
+	}
 	
 }
 
