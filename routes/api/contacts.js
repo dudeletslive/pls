@@ -92,6 +92,40 @@ exports.create = function(req, res) {
  */
 exports.new = function(req, res) {
 
+	var creation = function() {
+
+		// Find MPDX Mailing List
+		List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
+
+			var id 		 = list._id,
+				contact = req.body;
+
+			// Check for Contact data to map
+			if (contact) {
+
+				// Add single Contact from Contact[data]
+				var contactInfo = {
+					mailingList: id,
+					firstName: contact.name,
+					addressOne: contact.street,
+					city: contact.city,
+					state: contact.state,
+					postCode: contact.postal_code,
+					contact_id: keystone.utils.randomString([24,32]),
+					external_id: contact.external_id
+				};
+
+				var Contact = keystone.list('Contact').model,
+					newContact = new Contact(contactInfo);
+
+				newContact.save(function(err) {});
+
+			}
+
+		});
+
+	}
+
 	// Find User by Authorization
 	User.model.findOne({'services.MPDX.accessToken': req.headers.authorization}).exec(function (err, user) {
 
@@ -102,44 +136,19 @@ exports.new = function(req, res) {
 			if (err) return res.apiError('database error', err);
 			// if (!item) return res.apiError('not found');
 
-			if (item) {
+			if (!item) {
 
-				console.log('Update: ', item);
+				console.log('Create!');
+				creation();
 
 			} else {
 
-				// Find MPDX Mailing List
-				List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
-
-					var id 		 = list._id,
-						contact = req.body;
-
-					// Check for Contact data to map
-					if (contact) {
-
-						// Add single Contact from Contact[data]
-						var contactInfo = {
-							mailingList: id,
-							firstName: contact.name,
-							addressOne: contact.street,
-							city: contact.city,
-							state: contact.state,
-							postCode: contact.postal_code,
-							contact_id: keystone.utils.randomString([24,32]),
-							external_id: contact.external_id
-						};
-
-						var Contact = keystone.list('Contact').model,
-							newContact = new Contact(contactInfo);
-
-						newContact.save(function(err) {});
-
-					}
-
-				});
+				console.log('Update: ', item);
 
 			}
 
+
+			
 		});
 
 	});
