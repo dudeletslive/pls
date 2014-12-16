@@ -110,41 +110,41 @@ exports.new = function(req, res) {
 	console.log(test);
 
 	// Find User by Authorization
-	User.model.findOne({'services.MPDX.accessToken': req.headers.authorization}).exec(function (err, user) {
+	// User.model.findOne({'services.MPDX.accessToken': req.headers.authorization}).exec(function (err, user) {
 
-		var contact = req.body;
+	// 	var contact = req.body;
 
-		// Find MPDX Mailing List
-		List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
+	// 	// Find MPDX Mailing List
+	// 	List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
 
-			var id 		 = list._id,
-				contact = req.body;
+	// 		var id 		 = list._id,
+	// 			contact = req.body;
 
-			// Check for Contact data to map
-			if (contact) {
+	// 		// Check for Contact data to map
+	// 		if (contact) {
 
-				// Add single Contact from Contact[data]
-				var contactInfo = {
-					mailingList: id,
-					firstName: contact.name,
-					addressOne: contact.street,
-					city: contact.city,
-					state: contact.state,
-					postCode: contact.postal_code,
-					contact_id: keystone.utils.randomString([24,32]),
-					external_id: contact.external_id
-				};
+	// 			// Add single Contact from Contact[data]
+	// 			var contactInfo = {
+	// 				mailingList: id,
+	// 				firstName: contact.name,
+	// 				addressOne: contact.street,
+	// 				city: contact.city,
+	// 				state: contact.state,
+	// 				postCode: contact.postal_code,
+	// 				contact_id: keystone.utils.randomString([24,32]),
+	// 				external_id: contact.external_id
+	// 			};
 
-				var Contact = keystone.list('Contact').model,
-					newContact = new Contact(contactInfo);
+	// 			var Contact = keystone.list('Contact').model,
+	// 				newContact = new Contact(contactInfo);
 
-				newContact.save(function(err) {});
+	// 			newContact.save(function(err) {});
 
-			}
+	// 		}
 
-		});		
+	// 	});		
 
-	});
+	// });
 	
 }
 
