@@ -138,6 +138,8 @@ exports.new = function(req, res) {
 
 		} else {
 
+			var data = req.body;
+
 			item.getUpdateHandler(req).process(data, function(err) {
 			
 				if (err) return res.apiError('create error', err);
