@@ -40,7 +40,7 @@ exports.list = function(req, res) {
 }
 
 /**
- * Create Contact
+ * Create Contacts
  */
 exports.create = function(req, res) {
 
@@ -51,13 +51,7 @@ exports.create = function(req, res) {
 		List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
 
 			var id 		 = list._id,
-				contacts = req.body.contacts,
-				// How do get single contact data?
-				contact  = req.body.contact;
-
-			Contact.model.findOne({'external_id': contact.external_id}).exec(function(err, single) {
-				var solo = single;	
-			})
+				contacts = req.body.contacts;
 
 			// Check for Contact data to map
 			if (contacts) {
@@ -82,8 +76,48 @@ exports.create = function(req, res) {
 					newContact.save(function(err) {});
 				}
 
-			} else {
-				console.log(single);
+			}
+
+		});
+
+	});
+	
+}
+
+/**
+ * Create Contact
+ */
+exports.new = function(req, res) {
+
+	// Find User by Authorization
+	User.model.findOne({'services.MPDX.accessToken': req.headers.authorization}).exec(function (err, user) {
+
+		// Find MPDX Mailing List
+		List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
+
+			var id 		 = list._id,
+				contact = req.body.contact;
+
+			// Check for Contact data to map
+			if (contact) {
+
+				// Add single Contact from Contact[data]
+				var contactInfo = {
+					mailingList: id,
+					firstName: contacts[i].name,
+					addressOne: contacts[i].address['street'],
+					city: contacts[i].address['city'],
+					state: contacts[i].address['state'],
+					postCode: contacts[i].address['postal_code'],
+					contact_id: keystone.utils.randomString([24,32]),
+					external_id: contacts[i].external_id
+				};
+
+				var Contact = keystone.list('Contact').model,
+					newContact = new Contact(contactInfo);
+
+				newContact.save(function(err) {});
+
 			}
 
 		});
