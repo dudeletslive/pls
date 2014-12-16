@@ -97,17 +97,15 @@ exports.new = function(req, res) {
 
 		var contact = req.body;
 
-		Contact.model.findOne({'external_id': contact.external_id}).exec(function(err, item) {
-				
+		Contact.model.findOne({'external_id': contact.external_id}, function(err, item) {
 			if (err) return res.apiError('database error', err);
 			if (!item) return res.apiError('not found');
 
 			var item = item;
-			
 		});
 
 		console.log('Item: ', item);
-
+		
 		// Find MPDX Mailing List
 		List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
 
