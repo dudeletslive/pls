@@ -24,7 +24,6 @@ exports = module.exports = function(req, res) {
 		ac.save(function(err) {
 			if (err) { return done(err); }
     		return done(null, code);
-    		console.log(code);
 		});
 
 	}));

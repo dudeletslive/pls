@@ -56,7 +56,7 @@ User.add({
 			refreshToken: { type: String, label: 'Refresh Token', dependsOn: deps.facebook, noedit: true }
 		},
 		MPDX: {
-			isConfigured: { type: Boolean, label: 'MPDX has been configured', noedit: true },
+			isConfigured: { type: Boolean, label: 'MPDX has been configured', noedit: false },
 			code: { type: String, label: 'Hide this field', hidden: true },
 			clientID: { type: String, label: 'Hide this field', hidden: true },
 			clientSecret: { type: String, label: 'Hide this field', hidden: true },
