@@ -109,10 +109,10 @@ exports.new = function(req, res) {
 				var contactInfo = {
 					mailingList: id,
 					firstName: contact.name,
-					addressOne: contact.address['street'],
-					city: contact.address['city'],
-					state: contact.address['state'],
-					postCode: contact.address['postal_code'],
+					addressOne: contact.street,
+					city: contact.city,
+					state: contact.state,
+					postCode: contact.postal_code,
 					contact_id: keystone.utils.randomString([24,32]),
 					external_id: contact.external_id
 				};
