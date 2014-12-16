@@ -201,7 +201,7 @@ exports.update = function(req, res) {
  */
 exports.remove = function(req, res) {
 
-	Contact.model.findById(req.params.id).exec(function (err, item) {
+	Contact.model.findOne({'contact_id': req.params.id).exec(function (err, item) {
 		
 		if (err) return res.apiError('database error', err);
 		if (!item) return res.apiError('not found');
