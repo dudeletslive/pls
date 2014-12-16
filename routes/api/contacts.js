@@ -100,7 +100,7 @@ exports.new = function(req, res) {
 			console.log(req.body);
 
 			var id 		 = list._id,
-				contact = req.body.contact;
+				contact = req.body;
 
 			// Check for Contact data to map
 			if (contact) {
