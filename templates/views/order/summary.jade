@@ -282,19 +282,18 @@ block content
 										input(type='text', name='form.suburb', value=form.city)
 										input(type='text', name='form.postcode', value=form.zipCode)
 										input(type='text', name='form.country', value=form.country)
-								if form.list
+								if form.mailingListFile
+									.form-group
+										label Mailing List
+										input(type='text', name='listChoice', value=form.mailingListFile)
+								else if form.list
 									.form-group
 										label Mailing List
 										input(type='text', name='mailingList', value=form.list)
-								else if form
-									if form.listChoice
-										.form-group
-											label Mailing List
-											input(type='text', name='listChoice', value=form.listChoice)
-									else if form.form
-										.form-group
-											label Mailing List
-											input(type='text', name='listChoice', value=form.mailingListFile)
+								else if form.listChoice
+									.form-group
+										label Mailing List
+										input(type='text', name='listChoice', value=form.listChoice)
 							button(type="submit").btn.btn-success.pull-right Confirm
 block js
 	+fileUploads
