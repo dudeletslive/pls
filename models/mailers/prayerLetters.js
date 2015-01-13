@@ -62,7 +62,7 @@ Enquiry.add({
 	}, 'Return Address', {
 		customReturnAddress: { type: Boolean },
 		returnAddress: { type: Types.Location, dependsOn: deps.customReturnAddress },
-		prayerLetterServiceReturnAddress: { type: Boolean, dependsOn: deps.PLS, default: true },
+		prayerLetterServiceReturnAddress: { type: Boolean, dependsOn: deps.PLS },
 		yourMinistryUpdateFrom: { type: String, dependsOn: deps.PLS }
 });
 

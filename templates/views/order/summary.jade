@@ -259,12 +259,28 @@ block content
 								.form-group
 									label Special Instructions
 									input(type='text', name='specialInstructions', value=form.specialInstructions)
-								if form
+								if form.customReturnAddress == 'true'
 									.form-group
 										label Return Address
-										input(type='checkbox', name='customform', value=form.customform, checked)
+										input(type='checkbox', name='customReturnAddress', value='true', checked)
+										input(type='checkbox', name='prayerLetterServiceReturnAddress', value='false', checked)
+										label Return Address Custom
+										input(type='text', name='returnAddress.name', value=form.name)
+										input(type='text', name='returnAddress.street1', value=form.streetAddress)
+										input(type='text', name='returnAddress.street2', value=form.streetAddress2)
+										input(type='text', name='returnAddress.number', value=form.streetAddress3)
+										input(type='text', name='returnAddress.suburb', value=form.city)
+										input(type='text', name='returnAddress.postcode', value=form.zipCode)
+										input(type='text', name='returnAddress.country', value=form.country)
+								else if form.customReturnAddress == 'false'
+									.form-group
+										label Return Address
+										input(type='checkbox', name='customReturnAddress', value='false', checked)
+										input(type='checkbox', name='prayerLetterServiceReturnAddress', value='true', checked)
 										label Your Ministry Update From
 										input(type='text', name='yourMinistryUpdateFrom', value=form.yourMinistryUpdateFrom)
+								if form
+									.form-group
 										label Multiple Mailing Lists
 									.form-group
 										input(type='checkbox', name='multipleLists', value=form.multipleLists, checked)
@@ -273,15 +289,7 @@ block content
 										if form.addressService
 											label Address Service Requested
 											input(type='checkbox', name='addressService', value='true', checked)
-									.form-group
-										label Return Address Custom
-										input(type='text', name='form.name', value=form.name)
-										input(type='text', name='form.street1', value=form.streetAddress)
-										input(type='text', name='form.street2', value=form.streetAddress2)
-										input(type='text', name='form.number', value=form.streetAddress3)
-										input(type='text', name='form.suburb', value=form.city)
-										input(type='text', name='form.postcode', value=form.zipCode)
-										input(type='text', name='form.country', value=form.country)
+									
 								if form.mailingListFile
 									.form-group
 										label Mailing List
@@ -295,5 +303,7 @@ block content
 										label Mailing List
 										input(type='text', name='listChoice', value=form.listChoice)
 							button(type="submit").btn.btn-success.pull-right Confirm
+							p= form.customReturnAddress
+
 block js
 	+fileUploads
