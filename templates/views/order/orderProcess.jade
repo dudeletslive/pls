@@ -621,6 +621,13 @@ block js
 			data.splice(0, data.length);
 			console.log(data);
 		});
+		$('input#mailingListFile').change(function() {
+			$('.box').removeClass('selected');
+			$('.box').find('a[name="listOption"]').text('Select This List');
+			$('input[name="list"]').val('');
+			$('input[name=listChoice').prop('checked', false);
+			data.splice(0, data.length);
+		})
 		$('a[name="listOption"]').each(function() {
 			$(this).click(function() {
 				$this = $(this);
