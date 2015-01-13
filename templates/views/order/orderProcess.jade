@@ -582,7 +582,7 @@ block content
 							//- span.fa-stack.fa-lg.checkbox2(data-input='customReturnAddress', data-value='false', data-type='radio')
 								i.fa.fa-square.fa-stack-2x
 								i.fa.fa-check.fa-stack-1x.fa-inverse
-							input(type='radio', name='customReturnAddress', value='false', checked, required)
+							input(type='radio', name='customReturnAddress', value='false', required)
 							label(for="returnAddress") Use the Prayer Letter Service Address as my return address
 						.form-group
 							label "Your Ministry Update from"							
@@ -590,7 +590,7 @@ block content
 				.row
 					.col-md-12
 						a(href="/order").btn.btn-success.btn-boder-green.pull-left Start Over
-						button(type="submit").btn.btn-success.pull-right Continue
+						button(type="submit", id="returnAddress").btn.btn-success.pull-right Continue
 		div.tab-pane.fade#summary
 			h1 New
 	.modal.fade
@@ -648,6 +648,15 @@ block js
 
 			});
 		});
+		$('button[type=submit]#returnAddress').click(function() {
+			if (!$("input[name=customReturnAddress]:checked").val()) {
+				alert('Please select an option for your return address before continuing.');
+				return false;
+			}
+			else {
+				return true;
+			}
+		})
 		$('a.btn.btn-success').each(function() {
 			$(this).click(function() {
 				var toggle = $(this).attr('data-target');
