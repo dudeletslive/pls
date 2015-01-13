@@ -549,7 +549,7 @@ block content
 							//- span.fa-stack.fa-lg.checkbox2(data-input='customReturnAddress', data-value='true', data-type='radio')
 								i.fa.fa-square.fa-stack-2x
 								i.fa.fa-check.fa-stack-1x.fa-inverse
-							input(type='radio', name='customReturnAddress', value='true')
+							input(type='radio', name='customReturnAddress', value='true', required)
 							label(for="returnAddress") Use the Return Address Below
 						-var Class = 'form-control input-lg';
 						div.form-group
@@ -582,7 +582,7 @@ block content
 							//- span.fa-stack.fa-lg.checkbox2(data-input='customReturnAddress', data-value='false', data-type='radio')
 								i.fa.fa-square.fa-stack-2x
 								i.fa.fa-check.fa-stack-1x.fa-inverse
-							input(type='radio', name='customReturnAddress', value='false')
+							input(type='radio', name='customReturnAddress', value='false', checked, required)
 							label(for="returnAddress") Use the Prayer Letter Service Address as my return address
 						.form-group
 							label "Your Ministry Update from"							
