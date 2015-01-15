@@ -1,5 +1,6 @@
 var keystone = require('keystone'),
 	Enquiry = keystone.list('Prayer Letters'),
+	Lists = keystone.list('Mailing Lists'),
 	Two = keystone.list('Postcards'),
 	Three = keystone.list('Brochures'),
 	Four = keystone.list('Fund Appeals'),
@@ -24,12 +25,15 @@ exports = module.exports = function(req, res) {
 	console.log(req.body);
 	
 	if (locals.mailerType != 'brochures') {
-		var string = req.body.list;
-		var array = string.split(',');
-		for (i=0; i < array.length; i++){
-			view.query('list-' + [i] + '', keystone.list('Mailing Lists').model.findById(req.body.list).sort('sortOrder'));
-			console.log('list-' + [i] + '');
-		}
+    /* Goal 
+     * ===================
+     * Convert a list of ID's 
+     * to a list of Names
+     */
+    // This console.log is undefined, this is the problem.
+    // I need to be able to access the "listNames" array
+    // And / or string on the frontend 
+
 		locals.form = req.body;
 	} else {
 		locals.form = req.body;
