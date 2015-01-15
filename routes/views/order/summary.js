@@ -24,7 +24,12 @@ exports = module.exports = function(req, res) {
 	console.log(req.body);
 	
 	if (locals.mailerType != 'brochures') {
-		view.query('list', keystone.list('Mailing Lists').model.findById(req.body.list).sort('sortOrder'));
+		var string = req.body.list;
+		var array = string.split(',');
+		for (i=0; i < array.length; i++){
+			view.query('list-' + [i] + '', keystone.list('Mailing Lists').model.findById(req.body.list).sort('sortOrder'));
+			console.log('list-' + [i] + '');
+		}
 		locals.form = req.body;
 	} else {
 		locals.form = req.body;
