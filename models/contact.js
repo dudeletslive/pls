@@ -22,12 +22,13 @@ contact.add({
 	spouseFirstName: { type: String },
 	greeting: { type: String },
 	envelopeLine: { type: String },
-	addressOne: { type: String, label: 'Address Line One' },
-	addressTwo: { type: String, label: 'Address Line Two' },
-	addressThree: { type: String, label: 'Address Line Three' },
+	addressOne: { type: String },
+	addressTwo: { type: String },
+	addressThree: { type: String },
 	city: { type: String },
 	state: { type: String },
-	postCode: { type: String, label: 'Postal / Zip Code' },
+	postCode: { type: String },
+	country: { type: String },
 	contact_id: { type: String, note: 'ID used for MPDX' },
 	external_id: { type: String, note: 'ID used for MPDX' }
 });
@@ -44,5 +45,5 @@ contact.add({
  * Registration
  */
 
-contact.defaultColumns = 'mailingList, lastName, firstName, spouseFirstName, envelopeLine, addressOne, addressTwo, addressThree, city, state, postCode';
+contact.defaultColumns = 'mailingList, lastName, firstName, spouseFirstName, envelopeLine, addressOne, addressTwo, addressThree, city, state, postCode, country';
 contact.register();

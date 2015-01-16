@@ -111,8 +111,8 @@ exports = module.exports = function(req, res) {
 						else
 							list = list.replace(/first name/ig, 'firstName');
 							list = list.replace(/last name/ig, 'lastName');
-							list = list.replace(/spouse first name/ig, 'spouseFirstName'),
-							list = list.replace(/envelope line/ig, 'envLine')
+							list = list.replace(/spouse firstname/ig, 'spouseFirstName');
+							list = list.replace(/envelope line/ig, 'envLine');
 							list = list.replace(/address 1/ig, 'addressOne');
 							list = list.replace(/address 2/ig, 'addressTwo');
 							list = list.replace(/address 3/ig, 'addressThree');
@@ -120,8 +120,10 @@ exports = module.exports = function(req, res) {
 							list = list.replace(/city/ig, 'city');
 							list = list.replace(/state/ig, 'state');
 							list = list.replace(/zip/ig, 'zip');
+							list = list.replace(/country/ig, 'country');
 							
 							var result = JSON.parse(list);
+
 
 							console.log('============= RESULT =============')
 							console.log(result);
@@ -143,7 +145,8 @@ exports = module.exports = function(req, res) {
 										greeting: result[contact].greeting,
 										city: result[contact].city,
 										state: result[contact].state,
-										postCode: result[contact].zip
+										postCode: result[contact].zip,
+										country: result[contact].country
 									};
 
 									var Contact = keystone.list('Contact').model,
