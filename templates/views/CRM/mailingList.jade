@@ -54,6 +54,10 @@ block content
 							input(type='hidden', name='action', value='newContact')
 							input(type='hidden', name='mailingListID', value=list._id)
 							.form-group.clearfix
+								.col-md-12
+									label(for="greeting") Greeting
+									input(name="greeting", id="greeting" class="form-control", placeholder="Mr.")
+							.form-group.clearfix
 								.col-md-6(style="padding-right: 0px;")
 									label(for="firstName") FIRST NAME
 									input(name="firstName", id="firstName" class="left form-control", placeholder="Jonathan")
@@ -62,8 +66,12 @@ block content
 									input(name="lastName", id="lastName" class="right form-control", placeholder="Bell")
 							.form-group.clearfix
 								.col-md-12
-									label(for="ENV_LINE") ENVELOPE LINE 
-									input(name="ENV_LINE", id="ENV_LINE" class="form-control", placeholder="Jonathan Bell")
+									label(for="spouseName") Spouse First Name 
+									input(name="spouseFirstName", id="spouseName" class="form-control", placeholder="Jane")
+							.form-group.clearfix
+								.col-md-12
+									label(for="envelopeLine") Envelope Line 
+									input(name="envelopeLine", id="envelopeLine" class="form-control", placeholder="Jonathan Bell")
 							.form-group.clearfix
 								.col-md-12
 									label(for="addressOne") ADDRESS 1
@@ -87,6 +95,10 @@ block content
 								.col-md-12
 									label(for="state") STATE
 									input(name="state", id="state", class="form-control", placeholder="")
+							.form-group.clearfix
+								.col-md-12
+									label(for="country") COUNTRY
+									input(name="country", id="country", class="form-control", placeholder="")
 							.form-group.clearfix#formFooter
 								.col-md-12
 									button(type="submit", id="updateContact").btn.btn-success.center SAVE
@@ -112,6 +124,10 @@ block content
 							form(method='post')#account
 								input(type='hidden', name='action', value='updateContact')
 								input(type='hidden', name='contactID', action='contactID', value=contact._id)
+								.form-group.clearfix
+									.col-md-12
+										label(for="greeting") Greeting
+										input(name="greeting", id="greeting" class="form-control", placeholder="Mr.", value=contact.greeting)
 								.form-group.clearfix
 									.col-md-6(style="padding-right: 0px;")
 										label(for="firstName") FIRST NAME

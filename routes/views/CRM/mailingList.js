@@ -50,7 +50,7 @@ exports = module.exports = function(req, res) {
 
 					updater.process(req.body, {
 						flashErrors: true,
-						fields: 'firstName, lastName, spouseFirstName, envelopeLine, addressOne, addressTwo, addressThree, city, state, postCode',
+						fields: 'greeting, firstName, lastName, spouseFirstName, envelopeLine, addressOne, addressTwo, addressThree, city, state, postCode, country',
 						errorMessage: 'There was a problem submitting your enquiry:'
 					}, function(err) {
 
@@ -76,13 +76,16 @@ exports = module.exports = function(req, res) {
 				mailingList: req.body.mailingListID,
 				firstName: req.body.firstName,
 				lastName: req.body.lastName,
-				ENV_LINE: req.body.ENV_LINE,
+				greeting: req.body.greeting,
+				spouseFirstName: req.body.spouseFirstName,
+				envelopeLine: req.body.envelopeLine,
 				addressOne: req.body.addressOne,
 				addressTwo: req.body.addressTwo,
 				addressThree: req.body.addressThree,
 				city: req.body.city,
 				state: req.body.state,
-				postCode: req.body.postCode
+				postCode: req.body.postCode,
+				country: req.body.country
 			};
 			
 			var ContactList = keystone.list('Contact').model,
