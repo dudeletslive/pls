@@ -28,7 +28,7 @@ exports = module.exports = function(req, res) {
 
 	});
 
-	view.query('lists', keystone.list('Mailing Lists').model.find().where('uploadedBy', locals.user.id).sort('sortOrder'));
+	view.query('lists', keystone.list('Mailing Lists').model.find().where('uploadedBy', locals.user.id).sort('listName'));
 
 	/*
 

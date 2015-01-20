@@ -25,14 +25,24 @@ exports = module.exports = function(req, res) {
 	console.log(req.body);
 	
 	if (locals.mailerType != 'brochures') {
-    /* Goal 
-     * ===================
-     * Convert a list of ID's 
-     * to a list of Names
-     */
-    // This console.log is undefined, this is the problem.
-    // I need to be able to access the "listNames" array
-    // And / or string on the frontend 
+	    /* Goal 
+	     * ===================
+	     * Convert a list of ID's 
+	     * to a list of Names
+	     */
+	    // This console.log is undefined, this is the problem.
+	    // I need to be able to access the "listNames" array
+	    // And / or string on the frontend 
+	    var list = req.body.list;
+
+	    if (list.indexOf(',') > -1) {
+	    	// Store Array Locally for Length Measurement
+	    	var listArray = list.split(',');
+	    	locals.list = listArray;
+	    } else {
+	    	// Find One & Get Name
+	    	view.query('list', keystone.list('Mailing Lists').model.findById(req.body.list).sort('sortOrder'));
+	    }
 
 		locals.form = req.body;
 	} else {

@@ -156,7 +156,10 @@ block content
 							if list
 								tr
 									th Mailing List
-									td= list.prettyName
+									if list.length > 1
+										td Use the #{list.length} lists I have selected online.
+									else
+										td= list.prettyName
 							if form
 								if form.listChoice
 									tr
