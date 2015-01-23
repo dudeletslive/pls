@@ -42,22 +42,23 @@ block content
 							label Communication
 							div
 								input(type='checkbox' id='mailingList', name='emailReminders' value='true', checked=form.emailReminders ? 'checked' : false)
-								|&nbsp; Please add me to your MailChimp mailing list so I'll receive updated information and reminders.					
-					h3 I’ll Use My Own Return Address
-						div.small (Leave blank if you wish to use the PLS Return Address)
-					.form-group.clearfix: .col-md-12
+								|&nbsp; Please add me to your MailChimp mailing list so I'll receive updated information and reminders.	
+					.form-group.col-md-12				
+						h3 I’ll Use My Own Return Address
+							div.small (Leave blank if you wish to use the PLS Return Address)
+					.form-group.clearfix.col-md-12
 						label Envelope Line
 						input(name='returnAddress[name]', placeholder='Mr. and Mrs. Smith', class='form-control')
-					.form-group.clearfix: .col-md-12
+					.form-group.clearfix.col-md-12
 						label Address Line One
 						input(name='returnAddress[street1]', placeholder='5234 Ferrari Drive', class='form-control')
-					.form-group.clearfix: .col-md-12
+					.form-group.clearfix.col-md-12
 						label Address Line Two
 						input(name='returnAddress[street2]', placeholder='Apartment 03-05', class='form-control')
-					.form-group.clearfix: .col-md-12
+					.form-group.clearfix.col-md-12
 						label Address Line Three
 						input(name='returnAddress[number]', placeholder='', class='form-control')
-					.form-group.state.clearfix
+					.form-group.state.clearfix.col-md-12
 						.col-md-5
 							label City
 							input(name='returnAddress[suburb]', placeholder='Colorado Springs', class='form-control')
@@ -69,14 +70,13 @@ block content
 						.col-md-5
 							label Post Code
 							input(name='returnAddress[postcode]', placeholder='80918', class='form-control')
-					.form-group.clearfix: .col-md-12
+					.form-group.clearfix.col-md-12
 						label Country
 						input(name='returnAddress[country]', placeholder='USA', class='form-control')
-					.form-group.clearfix
-						.col-md-12
-							label I'll use the PLS return address, include the following line on my envelopes:
-							p(style='margin-top: 7px;') Your ministry update from: 
-							input(type='text', name='ministryUpdateFrom', class='form-control')
+					.form-group.clearfix.col-md-12
+						label I'll use the PLS return address, include the following line on my envelopes:
+						p(style='margin-top: 7px;') Your ministry update from: 
+						input(type='text', name='ministryUpdateFrom', class='form-control')
 					.form-group.col-md-12
 						section.spacer
 						button(type='submit').btn.btn-primary.btn-block That all checks out, let's go &rarr;

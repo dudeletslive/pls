@@ -175,6 +175,8 @@ exports = module.exports = function(req, res) {
 						mailInvoice: locals.form.mailInvoice,
 						emailReminders: locals.form.emailReminders,
 						databaseMaintenance: locals.form.databaseMaintenance,
+						returnAddress: locals.form.returnAddress,
+						ministryUpdateFrom: locals.form.ministryUpdateFrom,
 						isVerified: true,
 						services: {}
 					};
