@@ -22,6 +22,26 @@ block content
 						label(for='email') Email Address
 						input(type='email' name='email' placeholder='Email (required)' value=authUser.email).form-control.form-control-labelled
 					.form-group.col-md-12
+						h3 Mailing Address
+					.form-group.clearfix.col-md-12
+						label Street Address
+						input(name='address[street1]', placeholder='5234 Ferrari Drive', class='form-control')
+					.form-group.state.clearfix.col-md-12
+						.col-md-5()
+							label City
+							input(name='address[suburb]', class='form-control')
+						.col-md-2()
+							label State
+							select(name='address[state]', placeholder='CO', class='form-control')
+								each state in states
+									option= state
+						.col-md-5
+							label Post Code
+							input(name='address[postcode]', placeholder='80918', class='form-control')
+					.form-group.clearfix.col-md-12
+						label Country
+						input(name='address[country]', class='form-control')
+					.form-group.col-md-12
 						label(for='CRUstaffAccount') CRU Staff Account or Ministry Chartfield
 						input(type='text', class='form-control', name='CRUstaffAccount', value=form.CRUstaffAccount ? form.CRUstaffAccount : null)
 					.form-group.col-md-12
