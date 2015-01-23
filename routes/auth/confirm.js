@@ -166,14 +166,10 @@ exports = module.exports = function(req, res) {
 							last: locals.form['name.last']
 						},
 						email: locals.form.email,
-						password: Math.random().toString(36).slice(-8),
-						
+						password: Math.random().toString(36).slice(-8),						
 						state: 'enabled',
-						
 						userID: locals.form.userID,
-						
 						isVerified: true,
-						
 						services: {}
 					};
 					

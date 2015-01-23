@@ -39,10 +39,10 @@ User.add({
 		linkedIn: {
 			isConfigured: { type: Boolean, label: 'LinkedIn has been authenticated', noedit: false },
 			
-			profileId: { type: String, label: 'Profile ID', dependsOn: deps.linkedIn, noedit: true },
+			profileId: { type: String, label: 'Profile ID', dependsOn: deps.linkedIn, noedit: false },
 			
-			username: { type: String, label: 'Username', dependsOn: deps.linkedIn, noedit: true },
-			avatar: { type: String, label: 'Image', dependsOn: deps.linkedIn, noedit: true },
+			username: { type: String, label: 'Username', dependsOn: deps.linkedIn, noedit: false },
+			avatar: { type: String, label: 'Image', dependsOn: deps.linkedIn, noedit: false },
 		},
 		facebook: {
 			isConfigured: { type: Boolean, label: 'Facebook has been authenticated', noedit: false },
@@ -50,7 +50,7 @@ User.add({
 			profileId: { type: String, label: 'Profile ID', dependsOn: deps.facebook, noedit: false },
 			
 			username: { type: String, label: 'Username', dependsOn: deps.facebook, noedit: false },
-			avatar: { type: String, label: 'Image', dependsOn: deps.facebook, noedit: true },
+			avatar: { type: String, label: 'Image', dependsOn: deps.facebook, noedit: false },
 			
 			accessToken: { type: String, label: 'Access Token', dependsOn: deps.facebook, noedit: false },
 			refreshToken: { type: String, label: 'Refresh Token', dependsOn: deps.facebook, noedit: false }

@@ -7,10 +7,10 @@ block content
 			div.panel
 				form(method="post")#myAccount
 					input(type='hidden', name='action', value='confirm.details')
-					h1.lead Thanks for joining! Please confirm your details.
+					h1.lead Welcome to PLS! Please confirm your details.
 					+flash-messages(messages)
 					input(type='hidden', name='userID', value=authUser.profileId)
-					.form-group.row
+					.form-group
 						.col-xs-6
 							label(for='name.first') First Name
 							input(type='text' name='name.first' placeholder='First Name (required)' value=authUser.name.first).form-control
@@ -20,6 +20,24 @@ block content
 					.form-group.col-md-12
 						label(for='email') Email Address
 						input(type='email' name='email' placeholder='Email (required)' value=authUser.email).form-control.form-control-labelled
+					.form-group.col-md-12
+						label(for='CRUstaffAccount') CRU Staff Account or Ministry Chartfield
+						input(type='text', class='form-control', name='CRUstaffAccount', value=form.CRUstaffAccount ? form.CRUstaffAccount : null)
+					.form-group.col-md-12
+						label Use this logo for my mailing envelopes:
+						-var options = ["CRU", "Agape France", "Atheles In Action", "Bridges International", "Corporate", "CRU City", "CRU High School", "CRU Inner City", "CRU Military", "Destino", "Enfoque Mexico", "Epic Movement", "Faculty Commons", "Family Life", "GAIN", "Global Service Network", "ILAM", "IMPACT", "Jesus Film", "Keynote",  "Master Plan",  "Navigators",  "One Story",  "Pioneers", "Priority Associates", "Probe", "Student Venture", "I will email my ministry's logo to you" ]
+						select(name='mailingEnvelopeLogo', class='form-control')
+							for option in options
+								option(selected=option == form.mailingEnvelopeLogo ? 'selected' : false)= option
+					.form-group.col-md-12
+						label.clearfix Invoice Preferences
+						div
+							input(type='checkbox' id='invoicePreference' name='emailInvoice' value='true' checked=form.emailInvoice ? 'checked' : false)
+							|&nbsp; Email my invoice to me.
+						div
+							input(type='checkbox' id='invoicePreference' name='mailInvoice' value='true' checked=form.mailInvoice ? 'checked' : false)
+							|&nbsp; Mail my invoice to me.
+
 					.form-group.col-md-12
 						section.spacer
 						button(type='submit').btn.btn-primary.btn-block That all checks out, let's go &rarr;
