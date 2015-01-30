@@ -20,9 +20,13 @@ block content
 			br
 			
 			div.row(style='text-align: center')
-				h3 I understand, I prefer to:
+				h3 I understand, I prefer:
 				br
 				div.col-md-6
-					a(class='btn btn-primary', href='mailto:plservice@myletterservice.org') Email My List
+					form(method="post", autocomplete="off", action="/no-mailing-lists")
+						//- input(type='hidden', name='action', value='save')
+						input(type='hidden', name='noCRM', value='true')
+						button(type='submit', class='btn btn-primary') Not to Upload my List
+					//- a(class='btn btn-primary', href='mailto:plservice@myletterservice.org') Not to Upload a List
 				div.col-md-6
-					a(class='btn btn-success', href='/mailing-lists/') Upload List Myself
+					a(class='btn btn-success', href='/mailing-lists/') To Upload My List

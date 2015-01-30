@@ -142,6 +142,13 @@ $(function() {
 			}
 		});
 	}
+	$('select[name=mailingListPageOption]').on('change', function() {
+		var target = $(this).find(':selected').data('target');
+		console.log('#' + target);
+		$('#' + target).fadeIn().siblings().fadeOut();
+		$('input[name=listChoice]').val($(this).val())
+	});
+
 	/*
 	* Listen for file selection:
 	*/

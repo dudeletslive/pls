@@ -190,9 +190,10 @@ exports = module.exports = function(req, res) {
 	});
 
 	// Render the view
+	console.log(req.user.noCRM);
 	// console.log(req.session.uploadMyOwn)
 	keystone.list('Mailing Lists').model.find().where('uploadedBy', locals.user.id).exec(function(err, lists) {
-		if (lists <= 0 && req.session.uploadMyOwn != true) {
+		if (lists <= 0 && req.session.uploadMyOwn != true && req.user.noCRM != true) {
 			req.session.uploadMyOwn = true;
 			console.log(req.session.uploadMyOwn);
 			view.render('CRM/noLists');

@@ -12,8 +12,6 @@ exports = module.exports = function(req, res) {
 	// item in the header navigation.
 	locals.section = 'mailingListIndex';
 
-	
-
 	User.model.find().where('isAdmin', true).exec(function(err, user) {
 
 		if (err) {
@@ -25,9 +23,45 @@ exports = module.exports = function(req, res) {
 
 	});
 
-	// Find Current User to Base lists loaded on
-	req.session.uploadMyOwn = true;
+	if (req.method === 'POST') {
 
-	// Render the view
-	view.render('CRM/noLists');
+		User.model.findById(req.session.userId).exec(function(err, user) {
+
+			if (err) {
+				return next(err);
+			}
+
+			req.user = user;
+
+		});
+
+		console.log('Posted! Updating ' + req.user.firstName + ' now.');
+		
+		var user = req.user,
+				updater = user.getUpdateHandler(req);
+
+		updater.process(req.body, {
+			flashErrors: true,
+			fields: 'noCRM',
+			errorMessage: 'We were unable to update your account:'
+		}, function(err) {
+			if (err) {
+				locals.validationErrors = err.errors;
+			} else {
+				locals.enquirySubmitted = true;
+				req.session.uploadMyOwn = true;
+				res.redirect('/mailing-lists');
+			}
+		});
+
+	} else {
+
+		// Find Current User to Base lists loaded on
+		req.session.uploadMyOwn = true;
+
+		// Render the view
+		view.render('CRM/noLists');
+
+	}
+
 };
