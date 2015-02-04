@@ -1,14 +1,14 @@
 var keystone 	= require('keystone'),
-	async 		= require('async'),
-	request 	= require('request'),
-	_ 			= require('underscore'),
+	async 		  = require('async'),
+	request 	  = require('request'),
+	_ 			    = require('underscore'),
 	oauth2orize = require('oauth2orize'),
-	User 		= keystone.list('User'),
+	User 		    = keystone.list('User'),
 	mailingList	= keystone.list('Mailing Lists').model;
 
 exports = module.exports = function(req, res) {
 	
-	var view   = new keystone.View(req, res),
+	var view = new keystone.View(req, res),
 		locals = res.locals,
 		server = oauth2orize.createServer(),
 		token  = keystone.utils.randomString(48);

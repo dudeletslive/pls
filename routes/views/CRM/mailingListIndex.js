@@ -36,8 +36,6 @@ exports = module.exports = function(req, res) {
 
 	view.on('post', function(next) {
 
-		console.log('Posted ' + JSON.stringify(req.files.xlsFile));
-
 		var file = req.files.xlsFile.path;
 		var fileName = req.files.xlsFile.name;
 		var ext = fileName.split('.')[1];
@@ -61,8 +59,6 @@ exports = module.exports = function(req, res) {
 		// If it's a CSV file, run this.
 		}
 
-		console.log(fileName + ext);
-
 		async.series([
 			
 			function(cb) {
@@ -70,7 +66,6 @@ exports = module.exports = function(req, res) {
 				if (!req.body.listName) {
 					locals.errors = true;
 					return cb(true);
-					console.log(req.body.redirect);
 				}
 				
 				return cb();
@@ -102,8 +97,6 @@ exports = module.exports = function(req, res) {
 						var i = 0;
 						var stats = JSON.stringify(stats);
 						var list = JSON.stringify(json);
-						console.log('============= LIST =============');
-						console.log(list);
 						// console.log('============= STATS =============');
 						// console.log(stats);
 						if(error)
@@ -123,10 +116,6 @@ exports = module.exports = function(req, res) {
 							list = list.replace(/country/ig, 'country');
 							
 							var result = JSON.parse(list);
-
-
-							console.log('============= RESULT =============')
-							console.log(result);
 
 							for (contact in result) {
 
@@ -190,7 +179,6 @@ exports = module.exports = function(req, res) {
 	});
 
 	// Render the view
-	console.log(req.user.noCRM);
 	// console.log(req.session.uploadMyOwn)
 	keystone.list('Mailing Lists').model.find().where('uploadedBy', locals.user.id).exec(function(err, lists) {
 		if (lists <= 0 && req.session.uploadMyOwn != true && req.user.noCRM != true) {

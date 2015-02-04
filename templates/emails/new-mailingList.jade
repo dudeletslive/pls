@@ -1,0 +1,9 @@
+extends /layouts/default
+
+block body-contents
+	p.text-larger A New Mailing List was just uploaded
+	br
+	p List Name: #{enquiry.listName}
+	br
+	p &nbsp;
+	+button({ url: 'http://www.myletterservice.org/keystone/', label: 'Open Keystone' })

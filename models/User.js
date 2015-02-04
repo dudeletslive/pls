@@ -104,6 +104,38 @@ User.schema.virtual('canAccessKeystone').get(function() {
 	return this.isAdmin;
 });
 
+User.schema.post('save', function() {
+	if (!this.wasNew) {
+		this.sendNotificationEmail();
+	}
+});
+
+User.schema.methods.sendNotificationEmail = function(callback) {
+	
+	var object = this;
+
+	console.log(object);
+	
+	keystone.list('User').model.find().where('isAdmin', true).exec(function(err, admins) {
+		
+		if (err) return callback(err);
+		
+		new keystone.Email('profile-update').send({
+			to: 'plservice@myletterservice.org',
+			from: {
+				name: 'Prayer Letter Service',
+				email: 'contact@myletterservice.com'
+			},
+			subject: object.name.first + ' ' + object.name.last + ' has Updated Their Profile',
+			enquiry: object
+		}, callback);
+		
+	});
+	
+}
+
+/* Reset Password */
+
 User.schema.methods.resetPassword = function(callback) {
 	
 	var user = this;
