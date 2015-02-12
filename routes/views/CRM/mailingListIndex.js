@@ -16,6 +16,7 @@ exports = module.exports = function(req, res) {
 	// item in the header navigation.
 	locals.section = 'mailingListIndex';
 	locals.form = req.body;
+	var user;
 
 	// Find Current User to Base lists loaded on
 	User.model.findById(locals.user.id).exec(function(err, user) {
@@ -27,8 +28,13 @@ exports = module.exports = function(req, res) {
 		req.user = user;
 
 	});
-
-	view.query('lists', keystone.list('Mailing Lists').model.find().where('uploadedBy', locals.user.id).sort('listName'));
+	var user = locals.user;
+	
+	if (user.isAdmin) {
+		view.query('lists', keystone.list('Mailing Lists').model.find().where('uploadedBy', locals.user.id).sort('listName'));
+	} else {
+		view.query('lists', keystone.list('Mailing Lists').model.find().where('userID', locals.user.id).sort('listName'));	
+	}
 
 	/*
 
