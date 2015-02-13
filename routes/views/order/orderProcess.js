@@ -29,7 +29,7 @@ exports = module.exports = function(req, res) {
 
 	});
 
-	view.query('lists', keystone.list('Mailing Lists').model.find().where('userID', req.user._id).sort('sortOrder'));
+	view.query('lists', keystone.list('Mailing Lists').model.find().where('uploadedBy', req.user._id).sort('sortOrder'));
 	
 	// Render the view
 	view.render('order/orderProcess');
