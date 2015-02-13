@@ -103,9 +103,9 @@ block content
 									span *
 								div.select-style
 									select(name="paperSize", value=form ? form.paperSize : null)
-										option(selected='selected') 8 1/2 x 11
+										option(selected='selected') 8 1/2 x 11 (Legal)
 										option 8 1/2 x 14
-										option 11 x 17
+										option 11 x 17 (Booklet)
 				.row.main
 					//- Printer
 					.col-md-4.col-sm-4
@@ -589,12 +589,12 @@ block content
 				button.close(type="button", data-dismiss="modal")
 					span(aria-hidden="true") &#215;
 					span.sr-only Close
-				.modal-body
+				.modal-body(style="color: #333; font-size: 15px;")
 					h4 The non-profit postage option is available only to Cru staff and the following requirements are necessary:
 					ul
-						li The name ‘Campus Crusade for Christ’ (legal name) must be on the mailing envelope, along with the PLS return address.
-						li ‘Address Service Requested’ must be printed on the envelopes.
-						li The name ‘Campus Crusade for Christ’ must appear on the letter (small print is fine).
+						li The name 'Cru' must be on the mailing envelope, along with the PLS return address.
+						li 'Address Service Requested' must be on each envelope under the return address.
+						li Include the name 'Cru' somewhere on the letter (logo or small print is fine).
 				.modal-footer
 					button.btn.btn-default(type="button", data-dismiss="modal") I Understand
 block js

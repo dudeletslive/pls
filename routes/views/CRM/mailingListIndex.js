@@ -33,7 +33,7 @@ exports = module.exports = function(req, res) {
 	if (user.isAdmin) {
 		view.query('lists', keystone.list('Mailing Lists').model.find().where('uploadedBy', locals.user.id).sort('listName'));
 	} else {
-		view.query('lists', keystone.list('Mailing Lists').model.find().where('userID', locals.user.id).sort('listName'));	
+		view.query('lists', keystone.list('Mailing Lists').model.find().where('uploadedBy', locals.user.id).sort('listName'));	
 	}
 
 	/*
