@@ -103,8 +103,8 @@ block content
 									span *
 								div.select-style
 									select(name="paperSize", value=form ? form.paperSize : null)
-										option(selected='selected') 8 1/2 x 11 (Legal)
-										option 8 1/2 x 14
+										option(selected='selected') 8 1/2 x 11
+										option 8 1/2 x 14 (Legal)
 										option 11 x 17 (Booklet)
 				.row.main
 					//- Printer
@@ -493,6 +493,7 @@ block content
 							.col-sm-12.col-md-7
 								.pane#a
 									h4 Please use the mailing list you keep for me in Access.
+									input(type='hidden', name='listChoice', value='Please use the mailing list you keep for me in Access.')
 								.pane#b
 									ul.boxes
 										if lists.length

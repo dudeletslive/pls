@@ -59,7 +59,7 @@ Enquiry.add({
 		addressService: { type: Boolean, label: 'Please do not include "Address Service Requested" for this mailing' },
 	}, 'Mailing List', {
 		oneTime: { type: String },
-		mailingList: { type: Types.Relationship, ref: 'Mailing Lists' },
+		mailingList: { type: Types.Relationship, ref: 'Mailing Lists', many: true },
 		listChoice: { type: String, label: 'Custom Mailing List'},
 	}, 'Return Address', {
 		customReturnAddress: { type: Boolean },
