@@ -40,7 +40,7 @@ exports = module.exports = function(req, res) {
 
 	*/
 
-	view.on('post', function(next) {
+	if (req.method == 'POST') {
 
 		var file = req.files.xlsFile.path;
 		var fileName = req.files.xlsFile.name;
@@ -50,20 +50,20 @@ exports = module.exports = function(req, res) {
 
 		locals.fileType = ext;
 
-		// If the file is not a CSV, run this.
-		if (req.files.xlsFile.type.indexOf('csv') === -1 || req.files.xlsFile.type.indexOf('text') === -1) {
+		// // If the file is not a CSV, run this.
+		// if (req.files.xlsFile.type.indexOf('csv') === -1 || req.files.xlsFile.type.indexOf('text') === -1) {
 
-			// res.redirect(req.originalUrl);
-			if (ext === 'xlsx' || ext === 'xlx')
-				// req.flash('error', 'Please make sure your file is a .CSV. Click <a href="#" data-toggle="modal" data-target="#instructions">here</a> for instructions on converting your .' + ext + ' file to a CSV.');
-				console.log('This.')
-			else
-				console.log('This.')
-				// req.flash('error', 'Please make sure your file is a .CSV.')
-			// return false;
+		// 	// res.redirect(req.originalUrl);
+		// 	if (ext === 'xlsx' || ext === 'xlx')
+		// 		// req.flash('error', 'Please make sure your file is a .CSV. Click <a href="#" data-toggle="modal" data-target="#instructions">here</a> for instructions on converting your .' + ext + ' file to a CSV.');
+		// 		console.log('This.')
+		// 	else
+		// 		console.log('This.')
+		// 		// req.flash('error', 'Please make sure your file is a .CSV.')
+		// 	// return false;
 
-		// If it's a CSV file, run this.
-		}
+		// // If it's a CSV file, run this.
+		// }
 
 		async.series([
 			
@@ -88,7 +88,7 @@ exports = module.exports = function(req, res) {
 				};
 				
 				var List = keystone.list('Mailing Lists').model,
-					newList = new List(mailingList);
+						newList = new List(mailingList);
 
 
 				newList.save(function(err, model) {
@@ -104,10 +104,10 @@ exports = module.exports = function(req, res) {
 						var stats = JSON.stringify(stats);
 						var list = JSON.stringify(json);
 						// console.log('============= STATS =============');
-						// console.log(stats);
-						if(error)
+						console.log(stats);
+						if(error) {
 							console.log(error)
-						else
+						} else {
 							list = list.replace(/first name/ig, 'firstName');
 							list = list.replace(/last name/ig, 'lastName');
 							list = list.replace(/spouse firstname/ig, 'spouseFirstName');
@@ -152,47 +152,36 @@ exports = module.exports = function(req, res) {
 
 							}
 							
+						}
+							
 					});
-
-					if(!req.body.redirect) {
-						res.redirect(req.originalUrl);
-					} else {	
-						res.redirect(req.body.redirect);
-					}
-					return cb(err);
 					
 				});
+
+				res.redirect('/mailing-lists');
 			
 			},
 			
 		], function(err){
 			
-			if (err) return next();
-			
-			// var onSuccess = function() {
-			// 	res.redirect('/mailing-lists');
-			// }
-			
-			// var onFail = function(e) {
-			// 	req.flash('error', 'Something went wrong when we tried to create your mailing list. Please try again, and contact us if the error persists.');
-			// 	return next();
-			// }
+			if (err) return err;
 
-			// keystone.session.signin({ email: req.body.email, password: req.body.password }, req, res, onSuccess, onFail);
-			
 		});
 
-	});
+	} else {
 
-	// Render the view
-	// console.log(req.session.uploadMyOwn)
-	keystone.list('Mailing Lists').model.find().where('uploadedBy', locals.user.id).exec(function(err, lists) {
-		if (lists <= 0 && req.session.uploadMyOwn != true && req.user.noCRM != true) {
-			req.session.uploadMyOwn = true;
-			console.log(req.session.uploadMyOwn);
-			view.render('CRM/noLists');
-		} else {
-			view.render('CRM/mailingListIndex');
-		}
-	})
+		// Render the view
+		// console.log(req.session.uploadMyOwn)
+		keystone.list('Mailing Lists').model.find().where('uploadedBy', locals.user.id).exec(function(err, lists) {
+			if (lists <= 0 && req.session.uploadMyOwn != true && req.user.noCRM != true) {
+				req.session.uploadMyOwn = true;
+				console.log(req.session.uploadMyOwn);
+				view.render('CRM/noLists');
+			} else {
+				view.render('CRM/mailingListIndex');
+			}
+		});
+
+	}
+
 };
