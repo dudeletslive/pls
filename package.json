@@ -7,6 +7,7 @@
     "aws-sdk": "*",
     "basic-auth": "^1.0.0",
     "convert-json": "^0.4.0",
+    "cookie-session": "^1.1.0",
     "csv": "^0.3.7",
     "csv-json": "^0.1.0",
     "csv-to-json": "0.0.1",
@@ -14,7 +15,7 @@
     "dotenv": "0.4.0",
     "ejs": "*",
     "excel": "^0.1.1",
-    "keystone": "~0.2.27",
+    "keystone": "latest",
     "node-xlsx": "^0.5.1",
     "oauth2orize": "^1.0.1",
     "passport": "^0.2.1",
@@ -30,6 +31,7 @@
     "xls-to-json": "^0.3.2"
   },
   "devDependencies": {
+    "cookie-session": "^1.1.0",
     "grunt": "~0.4.4",
     "grunt-concurrent": "~0.5.0",
     "grunt-contrib-jshint": "~0.7.1",

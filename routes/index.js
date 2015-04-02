@@ -30,7 +30,8 @@ var _ = require('underscore'),
 	passport = require('passport'), 
 	LinkedInStrategy = require('passport-linkedin').Strategy,
 	express = require('keystone/node_modules/express'),
-	oauth2orize = require('oauth2orize');
+	oauth2orize = require('oauth2orize'),
+	session     = require('cookie-session');
 
 // Common Middleware
 keystone.pre('routes', middleware.initLocals);
@@ -62,7 +63,7 @@ var routes = {
 // Setup Route Bindings
 exports = module.exports = function(app) {
 
-	app.use(express.cookieSession());
+	// app.use(session({secret: 'prayerletterservice'}));
 
 	// app.use(express.cookieSession());
 
@@ -153,10 +154,10 @@ exports = module.exports = function(app) {
 	app.all('/my-account', middleware.requireUser, routes.views.session.myAccount);
 
 	// API Routes
-	app.get('/api/v1/contacts', keystone.initAPI, routes.api.contacts.list);
-	app.put('/api/v1/contacts', keystone.initAPI, routes.api.contacts.create);
-	app.post('/api/v1/contacts', keystone.initAPI, routes.api.contacts.new);
-	app.delete('/api/v1/contacts/:id', keystone.initAPI, routes.api.contacts.remove);
+	app.get('/api/v1/contacts', keystone.middleware.api, routes.api.contacts.list);
+	app.put('/api/v1/contacts', keystone.middleware.api, routes.api.contacts.create);
+	app.post('/api/v1/contacts', keystone.middleware.api, routes.api.contacts.new);
+	app.delete('/api/v1/contacts/:id', keystone.middleware.api, routes.api.contacts.remove);
 	// app.all('/api/v1/mailing-lists/list', keystone.initAPI, routes.api.mailingLists.list);
 
 	// MPDX Auth
