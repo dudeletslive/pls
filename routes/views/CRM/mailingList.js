@@ -19,6 +19,7 @@ exports = module.exports = function(req, res) {
 	if (req.query.contact === 'add') {
 		locals.addContact = true;
 	}
+
 	if (req.method === 'POST') {
 
 		if (req.body.contactID) {
@@ -97,45 +98,50 @@ exports = module.exports = function(req, res) {
 
 		}
 
+	} else {
+
+		view.on('init', function(next) {
+
+			mailingList.model.findOne()
+				.where('slug', locals.filters.list)
+				.exec(function(err, list) {
+					locals.list = list;
+
+					Contact.model.find().where('mailingList', list._id).exec(function(err, contacts) {
+
+						sortBy = req.query.sortBy != null ? req.query.sortBy : 'lastName';
+						from = req.query.from;
+						sortString = String(sortBy);
+
+						if (sortBy === from) {
+							contacts.sort(function (a, b) {
+								if(a[sortString] < b[sortString]) return 1;
+								if(a[sortString] > b[sortString]) return -1;
+								return 0;
+							});
+						} else {
+							contacts.sort(function (a, b) {
+								if(a[sortString] < b[sortString]) return -1;
+								if(a[sortString] > b[sortString]) return 1;
+								return 0;
+							});
+						}
+						
+						locals.contacts = contacts;
+						res.render('CRM/mailingList');
+
+					})
+
+					
+				});
+
+		});
+
+		view.render('CRM/mailingList');
+
 	}
 
-	view.on('init', function(next) {
+	// // Render the view
+	
 
-		mailingList.model.findOne()
-			.where('slug', locals.filters.list)
-			.exec(function(err, list) {
-				locals.list = list;
-
-				Contact.model.find().where('mailingList', list._id).exec(function(err, contacts) {
-
-					sortBy = req.query.sortBy != null ? req.query.sortBy : 'lastName';
-					from = req.query.from;
-					sortString = String(sortBy);
-
-					if (sortBy === from) {
-						contacts.sort(function (a, b) {
-							if(a[sortString] < b[sortString]) return 1;
-							if(a[sortString] > b[sortString]) return -1;
-							return 0;
-						});
-					} else {
-						contacts.sort(function (a, b) {
-							if(a[sortString] < b[sortString]) return -1;
-							if(a[sortString] > b[sortString]) return 1;
-							return 0;
-						});
-					}
-					
-					locals.contacts = contacts;
-					res.render('CRM/mailingList');
-
-				})
-
-				
-			});
-
-	});
-
-	// Render the view
-	view.render('CRM/mailingList');
 };
