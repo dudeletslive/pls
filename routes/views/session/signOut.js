@@ -15,5 +15,5 @@ exports = module.exports = function(req, res) {
 	});
 	
 	// Render the view
-	view.render('session/signOut');
+	// view.render('session/signOut');
 };
