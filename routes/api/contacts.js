@@ -59,11 +59,6 @@ exports.create = function(req, res) {
 		// Find MPDX Mailing List
 		List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
 
-			if (!list) {
-				res.send(500).json({'error': 'Unable to find mailing list.'});
-				return false;
-			}
-
 			var id 		 = list._id,
 				contacts = req.body.contacts;
 
