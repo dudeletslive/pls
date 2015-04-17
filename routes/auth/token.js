@@ -42,9 +42,12 @@ exports = module.exports = function(req, res) {
 
 		keystone.list('Mailing Lists').model.findOne({'userID': user._id, prettyName: 'MPDX List'}, function(err, list) {
 			if (list) {
-				list.prettyName = 'MPDX List (Old)';
-				list.listName = 'MPDX List (Old) - ' + user.name.first + ' ' + user.name.last;
-				list.save();
+				// list.prettyName = 'MPDX List (Old)';
+				// list.listName = 'MPDX List (Old) - ' + user.name.first + ' ' + user.name.last;
+				list.remove(function(err) {
+					if (err) console.log(err);
+					console.log('List removed.');
+				});
 			}
 		});
 
