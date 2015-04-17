@@ -40,16 +40,6 @@ exports = module.exports = function(req, res) {
 			console.log('------------------------------------------------------------');
 		});
 
-		mailingList.find({'prettyName': 'MPDX List', 'userID': user._id}, function(err, list) {
-
-			if (list) {
-				list.remove(function (err) {
-					console.log('Removed list')
-				});
-			}
-
-		})
-
 		var listData = {
 				userID: user._id,
 				uploadedBy: user._id,
@@ -61,7 +51,7 @@ exports = module.exports = function(req, res) {
 
 		saveList.save(function(err, newList) {
 			console.log('New Mailing List', newList);
-		})
+		});
 
 		
 
