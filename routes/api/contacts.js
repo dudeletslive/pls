@@ -15,25 +15,34 @@ exports.list = function(req, res) {
 
 	User.model.findOne({'services.MPDX.accessToken': req.headers.authorization}).exec(function (err, user) {
 
-		console.log('User: ', user);
+		if (err) {
 
-		List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
+			res.status(500).json({error: 'No user specified.'});
 
-			console.log('List: ', list);
+		} else {
 
-			Contact.model.find({'mailingList': list._id}).exec(function(err, contacts) {
+			List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
 
-				if (err) return res.apiError('database error', err);
+				if (!list) {
+					res.status(500).json({error: 'No list found.'});
+					return false;
+				}
 
-				console.log('Contacts: ', contacts);
-				
-				res.apiResponse({
-					contacts: contacts
+				Contact.model.find({'mailingList': list._id}).exec(function(err, contacts) {
+
+					if (err) return res.apiError('database error', err);
+
+					console.log('Contacts: ', contacts);
+					
+					res.apiResponse({
+						contacts: contacts
+					});
+
 				});
 
 			});
 
-		});
+		}
 
 	});
 
