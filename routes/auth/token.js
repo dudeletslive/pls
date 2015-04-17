@@ -40,17 +40,24 @@ exports = module.exports = function(req, res) {
 			console.log('------------------------------------------------------------');
 		});
 
-		var listData = {
-			userID: user._id,
-			uploadedBy: user._id,
-			listName: 'MPDX List - ' + user.name.first + ' ' + user.name.last,
-			prettyName: 'MPDX List'
-		};
+		mailingList.find({'prettyName': 'MPDX List'}, function(err, list) {
+			if (list) {
+				// DO NOTHING!~
+			}
+			else {
+				var listData = {
+					userID: user._id,
+					uploadedBy: user._id,
+					listName: 'MPDX List - ' + user.name.first + ' ' + user.name.last,
+					prettyName: 'MPDX List'
+				};
 
-		var saveList = new mailingList(listData);
+				var saveList = new mailingList(listData);
 
-		saveList.save(function(err, newList) {
-			console.log('New Mailing List', newList);
+				saveList.save(function(err, newList) {
+					console.log('New Mailing List', newList);
+				})
+			}
 		})
 
 	});
