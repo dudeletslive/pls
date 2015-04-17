@@ -41,11 +41,8 @@ exports = module.exports = function(req, res) {
 		});
 
 		mailingList.find({'prettyName': 'MPDX List', 'userID': user._id}, function(err, list) {
-			if (list) {
-				list.save(function(err, list) {
-					console.log('Found List', list)
-				});
-			} else {
+
+			if (!list) {
 				var listData = {
 					userID: user._id,
 					uploadedBy: user._id,
@@ -59,6 +56,7 @@ exports = module.exports = function(req, res) {
 					console.log('New Mailing List', newList);
 				})
 			}
+
 		})
 
 		
