@@ -40,6 +40,13 @@ exports = module.exports = function(req, res) {
 			console.log('------------------------------------------------------------');
 		});
 
+		keystone.list('Mailing Lists').model.findOne({'userID': user._id, prettyName: 'MPDX List'}, function(err, list) {
+			if (list) {
+				list.listName = 'MPDX List (Old)';
+				list.save();
+			}
+		});
+
 		var listData = {
 				userID: user._id,
 				uploadedBy: user._id,
