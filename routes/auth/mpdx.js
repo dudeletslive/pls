@@ -11,15 +11,17 @@ exports = module.exports = function(req, res) {
 		locals = res.locals,
 		server = oauth2orize.createServer();
 
-	locals.code 		= keystone.utils.randomString([16,24]);
-	locals.state		= req.query.state;
-	locals.redirectURI  = req.query.redirect_uri;
+	console.log('State: ', req.cookies.state);
+
+	locals.code 		    = keystone.utils.randomString([16,24]);
+	locals.state		    = (req.query.state ? req.query.state : req.cookies.state);
+	locals.redirectURI  = (req.query.redirect_uri ? req.query.redirect_uri : req.cookies.redirect);
 	locals.existingUser = req.user;
 
 	server.grant(oauth2orize.grant.code(function(client, redirectURI, user, ares, done) {
 
 		var code = utils.uid(16),
-			ac 	 = new AuthorizationCode(code, client.id, redirectURI, user.id, ares.scope);
+			  ac 	 = new AuthorizationCode(code, client.id, redirectURI, user.id, ares.scope);
 
 		ac.save(function(err) {
 			if (err) { return done(err); }
@@ -27,8 +29,6 @@ exports = module.exports = function(req, res) {
 		});
 
 	}));
-
-	console.log(locals.existingUser);
 
 	view.on('post', function() {
 
