@@ -61,7 +61,7 @@ User.add({
 			code: { type: String, label: 'Hide this field', hidden: true },
 			clientID: { type: String, label: 'Hide this field', hidden: true },
 			clientSecret: { type: String, label: 'Hide this field', hidden: true },
-			accessToken: { type: String, label: 'Access Token', noedit: true, dependsOn: deps.mpdx }
+			accessToken: { type: String, label: 'Access Token', noedit: false, dependsOn: deps.mpdx }
 		}
 	}
 });
