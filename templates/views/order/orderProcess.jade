@@ -10,7 +10,7 @@ block content
 					//- Paper Type & Cardstock Choice
 					-var paperChoices = ["Glossy White", "Opaque Ivory", "Opaque Orchid", "Opaque Cream", "Opaque Gold", "Opaque Yellow", "Opaque Green", "Opaque Blue", "Opaque White", "Opaque Gray", "Opaque Pink", "Opaque Tan", "Cougar white (heavier, brighter)", "Astrobright Venus Violet", "Astrobright Celestial Blue", "Astrobright Lunar Blue", "Astrobright Pulsar Pink", "Astrobright Cosmic Orange", "Astrobright Rocket Red", "Astrobright Solar Yellow", "Astrobright Re-entry Red", "Astrobright Fireball Fushcia", "Astrobright Gamma Green", "Astrobright Lift-off Lemon", "Astrobright Martian Green", "Astrobright Terrestial Teal", "Royal Fiber Rose", "Royal Fiber Ice Blue", "Royal Fiber Cream", "Royal Fiber White", "Royal Fiber Sunflower", "Royal Fiber Thyme", "Astroparche Blue", "Astroparche Gray", "Astroparche Sand", "Astroparche Natural", "Astroparche White", "Classic Linen Natural White", "Classic Linen Avon Brilliant White", "Classic Linen Antique Gray", "Classic Linen Bluestone", "Classic Linen Sage Green", "Classic Linen Haviland Blue"]
 					-var cardstockChoices = [ "Opaque white", "Opaque blue", "Opaque cream", "Opaque green", "Opaque gray", "Opaque ivory", "Opaque yellow", "Opaque orchid", "Opaque pink", "Opaque tan", "Astrobright re-entry red", "Astrobright gamma green", "Astrobright celestial blue", "Astrobright solar yellow", "2-sided glossy white" ]
-					-var envelopeChoices = ["Standard White", "Opaque Ivory", "Opaque Orchid", "Opaque Cream", "Opaque Gold", "Opaque Yellow", "Opaque Green", "Opaque Blue", "Opaque White", "Opaque Gray", "Opaque Pink", "Opaque Tan", "Astrobright Venus Violet", "Astrobright Celestial Blue", "Astrobright Lunar Blue", "Astrobright Pulsar Pink", "Astrobright Cosmic Orange", "Astrobright Solar Yellow", "Astrobright Re-entry Red", "Astrobright Fireball Fushcia", "Astrobright Gamma Green", "Astrobright Martian Green", "Astrobright Terrestial Teal", "Royal Fiber Cream", "Royal Fiber Sunflower", "Astroparche Blue", "Astroparche Natural", "Astroparche White", "Classic Linen Natural White", "Classic Linen Avon Brilliant White", "Classic Linen Antique Gray", "Classic Linen Sage Green", "6 x 9 white", "Invitation White"]
+					-var envelopeChoices = ["Standard White", "Opaque Ivory", "Opaque Orchid", "Opaque Cream", "Opaque Gold", "Opaque Yellow", "Opaque Green", "Opaque Blue", "Opaque White", "Opaque Gray", "Opaque Pink", "Opaque Tan", "Astrobright Venus Violet", "Astrobright Celestial Blue", "Astrobright Lunar Blue", "Astrobright Pulsar Pink", "Astrobright Cosmic Orange", "Astrobright Solar Yellow", "Astrobright Re-entry Red", "Astrobright Fireball Fushcia", "Astrobright Gamma Green", "Astrobright Martian Green", "Astrobright Terrestial Teal", "Royal Fiber Cream", "Royal Fiber Sunflower", "Astroparche Blue", "Astroparche Natural", "Astroparche White", "Classic Linen Natural White", "Classic Linen Avon Brilliant White", "Classic Linen Sage Green", "6 x 9 white", "Invitation White"]
 					-var holidayEnvelopes = ["Holiday envelopes I mailed to you", "Holiday envelopes you ordered for me", "Astrobright Re-entry Red", "Astrobright Gamma Green", "Standard White ", "Opaque Ivory", "Opaque Orchid", "Opaque Cream", "Opaque Gold", "Opaque Yellow", "Opaque Green", "Opaque Blue", "Opaque White", "Opaque Gray", "Opaque Pink", "Opaque Tan", "Astrobright Venus Violet", "Astrobright Celestial Blue", "Astrobright Lunar Blue", "Astrobright Pulsar Pink", "Astrobright Cosmic Orange", "Astrobright Solar Yellow", "Astrobright Fireball Fushcia", "Astrobright Martian Green", "Astrobright Terrestial Teal", "Royal Fiber Cream", "Royal Fiber Sunflower ", "Astroparche Blue", "Astroparche Natural", "Astroparche White", "Classic Linen Natural White", "Classic Linen Avon Brilliant White ", "Classic Linen Antique Gray", "Classic Linen Sage Green", "6 x 9 White", "Invitation White"]
 					.col-md-4.col-sm-4
 						if mailerType != 'postcards'
@@ -485,7 +485,7 @@ block content
 					.col-md-12.col-sm-12
 						.row
 							.col-sm-12.col-md-5
-								input(type='hidden', name='listChoice')
+								//- input(type='hidden', name='listChoice')
 								select(name='mailingListPageOption', class='form-control')
 									option(data-target='a') Please use the mailing list you keep for me in Access.
 									option(data-target='b') Please use my online mailing list.
@@ -506,7 +506,7 @@ block content
 										else
 											h4 You have not uploaded any mailing lists yet.
 											//- input(type='file', name='mailingList')
-									input(type='hidden', name='list', class='form-control', value='')
+									//- input(type='hidden', name='list', class='form-control', value='')
 								.pane#c
 									h1(style="margin-top: 0;") Upload mailing list
 									p I will attach my current mailing list
@@ -603,7 +603,7 @@ block js
 	script.
 		var data = [];
 		$('input.mailingListFile').change(function() {
-			$('input[name="list"]').val('');
+			$('input[name="listChoice"]').val('');
 		});
 		$('input.mailingListRadio[type="radio"]').change(function() {
 			$('.box').removeClass('selected');
@@ -632,7 +632,7 @@ block js
 				else
 					data.push(selected);
 
-				$('input[name="list"]').val(data);
+				$('input[name="listChoice"]').val(data);
 
 				console.log(data);
 

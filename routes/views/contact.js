@@ -17,6 +17,8 @@ exports = module.exports = function(req, res) {
 		
 		var newEnquiry = new Enquiry.model(),
 			updater = newEnquiry.getUpdateHandler(req);
+
+		console.log(req.body.message);
 		
 		updater.process(req.body, {
 			flashErrors: true,

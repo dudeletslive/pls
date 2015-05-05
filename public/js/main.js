@@ -146,7 +146,7 @@ $(function() {
 		var target = $(this).find(':selected').data('target');
 		console.log('#' + target);
 		$('#' + target).fadeIn().siblings().fadeOut();
-		$('input[name=listChoice]').val($(this).val())
+		$('input[name="listChoice"]').val($(this).val())
 	});
 
 	/*

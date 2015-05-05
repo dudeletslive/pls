@@ -22,7 +22,7 @@ exports = module.exports = function(req, res) {
 
 	req.session.formData = req.body;
 
-	console.log(req.body);
+	console.log(req.body.listChoice);
 	
 	if (locals.mailerType != 'brochures') {
 	    /* Goal 
@@ -33,9 +33,10 @@ exports = module.exports = function(req, res) {
 	    // This console.log is undefined, this is the problem.
 	    // I need to be able to access the "listNames" array
 	    // And / or string on the frontend 
-	    var list = req.body.list;
+	    var list = req.body.listChoice;
+	    console.log (list);
 	    if (list) {
-		    if (list.indexOf(',') > -1) {
+		    if (list.indexOf(',') >= 1) {
 		    	// Store Array Locally for Length Measurement
 		    	var listArray = list.split(',');
 		    	locals.list = listArray;
