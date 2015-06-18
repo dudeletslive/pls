@@ -286,9 +286,12 @@ block content
                     if form.noLogo
                       input(type='checkbox', name='noLogo', value=form.noLogo, checked)
                   .form-group
-                    if form.addressService
+                    if form.addressService == 'true'
                       label Address Service Requested
                       input(type='checkbox', name='addressService', value='true', checked)
+                    else
+                      label Address Service Requested
+                      input(type='checkbox', name='addressService', value='false')
                   
                 if form.mailingListFile
                   .form-group

@@ -70,11 +70,11 @@ exports.create = function(req, res) {
 
 					var contactInfo = {
 						mailingList: id,
-						firstName: contacts[i].name,
-						addressOne: contacts[i].address['street'],
-						city: contacts[i].address['city'],
-						state: contacts[i].address['state'],
-						postCode: contacts[i].address['postal_code'],
+						firstName: contacts[i].firstName,
+						addressOne: contacts[i].addressOne['street'],
+						city: contacts[i].city,
+						state: contacts[i].state,
+						postCode: contacts[i].postCode,
 						contact_id: keystone.utils.randomString([24,32]),
 						external_id: contacts[i].external_id
 					};
@@ -127,7 +127,7 @@ exports.new = function(req, res) {
 							addressOne: contact.street,
 							city: contact.city,
 							state: contact.state,
-							postCode: contact.postal_code,
+							postCode: contact.postCode,
 							contact_id: keystone.utils.randomString([24,32]),
 							external_id: contact.external_id
 						};
@@ -156,7 +156,7 @@ exports.new = function(req, res) {
 				addressOne: contact.street,
 				city: contact.city,
 				state: contact.state,
-				postCode: contact.postal_code,
+				postCode: contact.postcode,
 				contact_id: keystone.utils.randomString([24,32]),
 				external_id: contact.external_id
 			});

@@ -9,7 +9,8 @@ block content
 					a(href='../mailing-lists/') Contact Lists | &nbsp;
 					span= list.prettyName
 			div.nav.navbar-nav.navbar-right.col-md-4
-				a(data-toggle="modal",data-target="#newContact").btn.btn-md.btn-success ADD CONTACT
+				if !user.services.MPDX.isConfigured
+					a(data-toggle="modal",data-target="#newContact").btn.btn-md.btn-success ADD CONTACT
 				p
 					span#count=contacts.length
 					| &nbsp;
@@ -20,7 +21,8 @@ block content
 			table.table.table-bordered.table-striped.table-responsive#table-contact-list
 				thead
 					tr
-						th Edit
+						if !user.services.MPDX.isConfigured
+							th Edit
 						th(id='lastName'): a(href='/mailing-lists/' + list.slug + '?sortBy=lastName&from=' + query, class=sortBy == 'lastName' ? 'active' : null, data-ajax="true") LAST NAME
 						th(id='ENV_LINE'): a(href='/mailing-lists/' + list.slug + '?sortBy=envelopeLine&from=' + query, class=sortBy == 'envelopeLine' ? 'active' : null, data-ajax="true") ENVELOPE LINE
 						th(id='addressOne'): a(href='/mailing-lists/' + list.slug + '?sortBy=addressOne&from=' + query, class=sortBy == 'addressOne' ? 'active' : null, data-ajax="true") ADDRESS 1
@@ -33,7 +35,8 @@ block content
 					if contacts
 						for contact in contacts
 							tr
-								td: a(data-toggle="modal", data-target='#' + contact._id): img(src='../images/edit-icon.png')
+								if !user.services.MPDX.isConfigured
+									td: a(data-toggle="modal", data-target='#' + contact._id): img(src='../images/edit-icon.png')
 								td= contact.lastName
 								td= contact.envelopeLine
 								td= contact.addressOne
