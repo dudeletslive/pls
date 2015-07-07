@@ -105,32 +105,40 @@ exports = module.exports = function(req, res) {
 			mailingList.model.findOne()
 				.where('slug', locals.filters.list)
 				.exec(function(err, list) {
-					locals.list = list;
 
-					Contact.model.find().where('mailingList', list._id).exec(function(err, contacts) {
+					if (list) {
 
-						sortBy = req.query.sortBy != null ? req.query.sortBy : 'lastName';
-						from = req.query.from;
-						sortString = String(sortBy);
+						locals.list = list;
 
-						if (sortBy === from) {
-							contacts.sort(function (a, b) {
-								if(a[sortString] < b[sortString]) return 1;
-								if(a[sortString] > b[sortString]) return -1;
-								return 0;
-							});
-						} else {
-							contacts.sort(function (a, b) {
-								if(a[sortString] < b[sortString]) return -1;
-								if(a[sortString] > b[sortString]) return 1;
-								return 0;
-							});
-						}
-						
-						locals.contacts = contacts;
-						res.render('CRM/mailingList');
+						Contact.model.find().where('mailingList', list._id).exec(function(err, contacts) {
 
-					})
+							sortBy = req.query.sortBy != null ? req.query.sortBy : 'lastName';
+							from = req.query.from;
+							sortString = String(sortBy);
+
+							if (sortBy === from) {
+								contacts.sort(function (a, b) {
+									if(a[sortString] < b[sortString]) return 1;
+									if(a[sortString] > b[sortString]) return -1;
+									return 0;
+								});
+							} else {
+								contacts.sort(function (a, b) {
+									if(a[sortString] < b[sortString]) return -1;
+									if(a[sortString] > b[sortString]) return 1;
+									return 0;
+								});
+							}
+							
+							locals.contacts = contacts;
+							res.render('CRM/mailingList');
+
+						})
+
+					} else {
+						req.flash('error', 'We couldn\'t find that mailing list. If you believe this is an error, please <a href="/contact">contact us</a> and let us know.');
+						res.redirect('/mailing-lists');
+					}
 
 					
 				});
