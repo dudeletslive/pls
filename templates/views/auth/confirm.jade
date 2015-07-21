@@ -6,11 +6,12 @@ block content
 		div.jumbotron: .container
 			div.panel
 				form(method="post")#myAccount
+					-var states = ["AL","AK","AZ","AR","CA","CO","CT","DE","DC","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"]
 					input(type='hidden', name='action', value='confirm.details')
-					h1.lead Thanks for joining! Please confirm your details.
+					h1.lead Welcome to PLS! Please confirm your details.
 					+flash-messages(messages)
 					input(type='hidden', name='userID', value=authUser.profileId)
-					.form-group.row
+					.form-group
 						.col-xs-6
 							label(for='name.first') First Name
 							input(type='text' name='name.first' placeholder='First Name (required)' value=authUser.name.first).form-control
@@ -21,6 +22,84 @@ block content
 						label(for='email') Email Address
 						input(type='email' name='email' placeholder='Email (required)' value=authUser.email).form-control.form-control-labelled
 					.form-group.col-md-12
+						h3 Mailing Address
+					.form-group.clearfix.col-md-12
+						label Street Address
+						input(name='address[street1]', placeholder='5234 Ferrari Drive', class='form-control', required)
+					.form-group.state.clearfix.col-md-12
+						.col-md-5()
+							label City
+							input(name='address[suburb]', class='form-control')
+						.col-md-2()
+							label State
+							select(name='address[state]', placeholder='CO', class='form-control')
+								each state in states
+									option= state
+						.col-md-5
+							label Post Code
+							input(name='address[postcode]', placeholder='80918', class='form-control')
+					.form-group.clearfix.col-md-12
+						label Country
+						input(name='address[country]', class='form-control')
+					.form-group.col-md-12
+						label(for='CRUstaffAccount') CRU Staff Account or Ministry Chartfield
+						input(type='text', class='form-control', name='CRUstaffAccount', value=form.CRUstaffAccount ? form.CRUstaffAccount : null, required)
+					.form-group.col-md-12
+						label Use this logo for my mailing envelopes:
+						-var options = ["CRU", "Agape France", "Atheles In Action", "Bridges International", "Corporate", "CRU City", "CRU High School", "CRU Inner City", "CRU Military", "Destino", "Enfoque Mexico", "Epic Movement", "Faculty Commons", "Family Life", "GAIN", "Global Service Network", "ILAM", "IMPACT", "Jesus Film", "Keynote",  "Master Plan",  "Navigators",  "One Story",  "Pioneers", "Priority Associates", "Probe", "Student Venture", "I will email my ministry's logo to you" ]
+						select(name='mailingEnvelopeLogo', class='form-control', required)
+							for option in options
+								option(selected=option == form.mailingEnvelopeLogo ? 'selected' : false)= option
+					.form-group.col-md-12
+						label.clearfix Invoice Preferences
+						div
+							input(type='checkbox' id='invoicePreference' name='emailInvoice' value='true' checked=form.emailInvoice ? 'checked' : false)
+							|&nbsp; Email my invoice to me.
+						div
+							input(type='checkbox' id='invoicePreference' name='mailInvoice' value='true' checked=form.mailInvoice ? 'checked' : false, required)
+							|&nbsp; Mail my invoice to me.
+					.form-group.col-md-12
+							label Communication
+							div
+								input(type='checkbox' id='mailingList', name='emailReminders' value='true', checked=form.emailReminders ? 'checked' : false)
+								|&nbsp; Please add me to your MailChimp mailing list so I'll receive updated information and reminders.	
+					.form-group.col-md-12				
+						h3 I’ll Use My Own Return Address
+							div.small (Leave blank if you wish to use the PLS Return Address)
+					.form-group.clearfix.col-md-12
+						label Envelope Line
+						input(name='returnAddress[name]', placeholder='Mr. and Mrs. Smith', class='form-control')
+					.form-group.clearfix.col-md-12
+						label Address Line One
+						input(name='returnAddress[street1]', placeholder='5234 Ferrari Drive', class='form-control')
+					.form-group.clearfix.col-md-12
+						label Address Line Two
+						input(name='returnAddress[street2]', placeholder='Apartment 03-05', class='form-control')
+					.form-group.clearfix.col-md-12
+						label Address Line Three
+						input(name='returnAddress[number]', placeholder='', class='form-control', required)
+					.form-group.state.clearfix.col-md-12
+						.col-md-5
+							label City
+							input(name='returnAddress[suburb]', placeholder='Colorado Springs', class='form-control')
+						.col-md-2
+							label State
+							select(name='returnAddress[state]', placeholder='CO', class='form-control')
+								for state in states
+									option= state
+						.col-md-5
+							label Post Code
+							input(name='returnAddress[postcode]', placeholder='80918', class='form-control')
+					.form-group.clearfix.col-md-12
+						label Country
+						input(name='returnAddress[country]', placeholder='USA', class='form-control')
+					.form-group.clearfix.col-md-12
+						label I'll use the PLS return address, include the following line on my envelopes:
+						p(style='margin-top: 7px;') Your ministry update from: 
+						input(type='text', name='ministryUpdateFrom', class='form-control')
+					.form-group.col-md-12
+						small *If you already have a PLS account under the same email address as your Facebook, this will reset your PLS password.
+						br
 						section.spacer
 						button(type='submit').btn.btn-primary.btn-block That all checks out, let's go &rarr;
 		section.spacer

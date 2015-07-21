@@ -5,6 +5,7 @@ block content
 		div.title(style='position: relative;')
 			span.icon.home
 			h2 Mailing Lists
+				p= err
 			h4(style='position: absolute; right: 0; top: 0;')
 				a(href='/my-account') Edit My Account
 		div.col-md-12.line
@@ -17,11 +18,14 @@ block content
 								img(src='../images/list-name.png')
 								h2= list.prettyName
 								a.btn.btn-sm.btn-gray(href='/mailing-lists/' + list.slug) VIEW LIST
-								a.btn.btn-sm.btn-green(href='/mailing-lists/' + list.slug + '?contact=add') ADD CONTACT
-					li.box(data-toggle='modal', data-target='#newList')
-						.col-md-12
-							img(src='../images/circle-plus-big.png')
-							h2.title ADD NEW LIST
+								if !user.services.MPDX.isConfigured
+									a.btn.btn-sm.btn-green(href='/mailing-lists/' + list.slug + '?contact=add') ADD CONTACT
+
+					if !user.services.MPDX.isConfigured
+						li.box(data-toggle='modal', data-target='#newList')
+							.col-md-12
+								img(src='../images/circle-plus-big.png')
+								h2.title ADD NEW LIST
 				else
 					div.col-md-4
 						li.box(data-toggle='modal', data-target='#newList')

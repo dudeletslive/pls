@@ -19,6 +19,7 @@ exports = module.exports = function(req, res) {
 	if (req.query.contact === 'add') {
 		locals.addContact = true;
 	}
+
 	if (req.method === 'POST') {
 
 		if (req.body.contactID) {
@@ -50,7 +51,7 @@ exports = module.exports = function(req, res) {
 
 					updater.process(req.body, {
 						flashErrors: true,
-						fields: 'firstName, lastName, spouseFirstName, envelopeLine, addressOne, addressTwo, addressThree, city, state, postCode',
+						fields: 'greeting, firstName, lastName, spouseFirstName, envelopeLine, addressOne, addressTwo, addressThree, city, state, postCode, country',
 						errorMessage: 'There was a problem submitting your enquiry:'
 					}, function(err) {
 
@@ -76,13 +77,16 @@ exports = module.exports = function(req, res) {
 				mailingList: req.body.mailingListID,
 				firstName: req.body.firstName,
 				lastName: req.body.lastName,
-				ENV_LINE: req.body.ENV_LINE,
+				greeting: req.body.greeting,
+				spouseFirstName: req.body.spouseFirstName,
+				envelopeLine: req.body.envelopeLine,
 				addressOne: req.body.addressOne,
 				addressTwo: req.body.addressTwo,
 				addressThree: req.body.addressThree,
 				city: req.body.city,
 				state: req.body.state,
-				postCode: req.body.postCode
+				postCode: req.body.postCode,
+				country: req.body.country
 			};
 			
 			var ContactList = keystone.list('Contact').model,
@@ -94,45 +98,58 @@ exports = module.exports = function(req, res) {
 
 		}
 
+	} else {
+
+		view.on('init', function(next) {
+
+			mailingList.model.findOne()
+				.where('slug', locals.filters.list)
+				.exec(function(err, list) {
+
+					if (list) {
+
+						locals.list = list;
+
+						Contact.model.find().where('mailingList', list._id).exec(function(err, contacts) {
+
+							sortBy = req.query.sortBy != null ? req.query.sortBy : 'lastName';
+							from = req.query.from;
+							sortString = String(sortBy);
+
+							if (sortBy === from) {
+								contacts.sort(function (a, b) {
+									if(a[sortString] < b[sortString]) return 1;
+									if(a[sortString] > b[sortString]) return -1;
+									return 0;
+								});
+							} else {
+								contacts.sort(function (a, b) {
+									if(a[sortString] < b[sortString]) return -1;
+									if(a[sortString] > b[sortString]) return 1;
+									return 0;
+								});
+							}
+							
+							locals.contacts = contacts;
+							res.render('CRM/mailingList');
+
+						})
+
+					} else {
+						req.flash('error', 'We couldn\'t find that mailing list. If you believe this is an error, please <a href="/contact">contact us</a> and let us know.');
+						res.redirect('/mailing-lists');
+					}
+
+					
+				});
+
+		});
+
+		view.render('CRM/mailingList');
+
 	}
 
-	view.on('init', function(next) {
+	// // Render the view
+	
 
-		mailingList.model.findOne()
-			.where('slug', locals.filters.list)
-			.exec(function(err, list) {
-				locals.list = list;
-
-				Contact.model.find().where('mailingList', list._id).exec(function(err, contacts) {
-
-					sortBy = req.query.sortBy != null ? req.query.sortBy : 'lastName';
-					from = req.query.from;
-					sortString = String(sortBy);
-
-					if (sortBy === from) {
-						contacts.sort(function (a, b) {
-							if(a[sortString] < b[sortString]) return 1;
-							if(a[sortString] > b[sortString]) return -1;
-							return 0;
-						});
-					} else {
-						contacts.sort(function (a, b) {
-							if(a[sortString] < b[sortString]) return -1;
-							if(a[sortString] > b[sortString]) return 1;
-							return 0;
-						});
-					}
-					
-					locals.contacts = contacts;
-					res.render('CRM/mailingList');
-
-				})
-
-				
-			});
-
-	});
-
-	// Render the view
-	view.render('CRM/mailingList');
 };

@@ -8,7 +8,7 @@ var keystone = require('keystone'),
 
 var Enquiry = new keystone.List('Enquiry', {
 	nocreate: true,
-	noedit: true
+	// noedit: true
 });
 
 Enquiry.add({

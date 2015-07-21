@@ -166,14 +166,19 @@ exports = module.exports = function(req, res) {
 							last: locals.form['name.last']
 						},
 						email: locals.form.email,
-						password: Math.random().toString(36).slice(-8),
-						
+						password: Math.random().toString(36).slice(-8),						
 						state: 'enabled',
-						
 						userID: locals.form.userID,
-						
+						cruStaffOrMinistryChartfield: locals.form.CRUstaffAccount,
+						mailingEnvelopeLogo: locals.form.mailingEnvelopeLogo,
+						emailInvoice: locals.form.emailInvoice,
+						mailInvoice: locals.form.mailInvoice,
+						emailReminders: locals.form.emailReminders,
+						databaseMaintenance: locals.form.databaseMaintenance,
+						address: locals.form.address,
+						returnAddress: locals.form.returnAddress,
+						ministryUpdateFrom: locals.form.ministryUpdateFrom,
 						isVerified: true,
-						
 						services: {}
 					};
 					

@@ -1,14 +1,14 @@
 var keystone 	= require('keystone'),
-	async 		= require('async'),
-	request 	= require('request'),
-	_ 			= require('underscore'),
+	async 		  = require('async'),
+	request 	  = require('request'),
+	_ 			    = require('underscore'),
 	oauth2orize = require('oauth2orize'),
-	User 		= keystone.list('User'),
+	User 		    = keystone.list('User'),
 	mailingList	= keystone.list('Mailing Lists').model;
 
 exports = module.exports = function(req, res) {
 	
-	var view   = new keystone.View(req, res),
+	var view = new keystone.View(req, res),
 		locals = res.locals,
 		server = oauth2orize.createServer(),
 		token  = keystone.utils.randomString(48);
@@ -40,18 +40,44 @@ exports = module.exports = function(req, res) {
 			console.log('------------------------------------------------------------');
 		});
 
+		keystone.list('Mailing Lists').model.findOne({'userID': user._id, prettyName: 'MPDX List'}, function(err, list) {
+			if (list) {
+				// list.prettyName = 'MPDX List (Old)';
+				// list.listName = 'MPDX List (Old) - ' + user.name.first + ' ' + user.name.last;
+				list.remove(function(err) {
+					if (err) console.log(err);
+					console.log('List removed.');
+				});
+			}
+		});
+
 		var listData = {
-			userID: user._id,
-			uploadedBy: user._id,
-			listName: 'MPDX List - ' + user.name.first + ' ' + user.name.last,
-			prettyName: 'MPDX List'
-		};
+				userID: user._id,
+				uploadedBy: user._id,
+				listName: 'MPDX List - ' + user.name.first + ' ' + user.name.last,
+				prettyName: 'MPDX List'
+			};
 
 		var saveList = new mailingList(listData);
 
 		saveList.save(function(err, newList) {
 			console.log('New Mailing List', newList);
-		})
+		});
+
+		
+
+		// var listData = {
+		// 	userID: user._id,
+		// 	uploadedBy: user._id,
+		// 	listName: 'MPDX List - ' + user.name.first + ' ' + user.name.last,
+		// 	prettyName: 'MPDX List'
+		// };
+
+		// var saveList = new mailingList(listData);
+
+		// saveList.save(function(err, newList) {
+		// 	console.log('New Mailing List', newList);
+		// });
 
 	});
 

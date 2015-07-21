@@ -24,7 +24,33 @@ mailingList.add({
  * Relationships
  */
 
+mailingList.schema.post('save', function() {
+	this.sendNotificationEmail();
+});
 
+mailingList.schema.methods.sendNotificationEmail = function(callback) {
+	
+	var object = this;
+
+	console.log(object);
+	
+	keystone.list('User').model.find().where('isAdmin', true).exec(function(err, admins) {
+		
+		if (err) return callback(err);
+		
+		new keystone.Email('new-mailingList').send({
+			to: 'plservice@myletterservice.org',
+			from: {
+				name: 'Prayer Letter Service',
+				email: 'contact@myletterservice.com'
+			},
+			subject: 'A new Mailing List has been Uploaded',
+			enquiry: object
+		}, callback);
+		
+	});
+	
+}
 
 /**
  * Registration

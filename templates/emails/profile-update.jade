@@ -1,0 +1,11 @@
+extends /layouts/default
+
+block body-contents
+	p.text-larger A user has just updated their preferences on #{brand}:
+	br
+	|User: <strong>#{enquiry.name.full}</strong>
+	br
+	small Email: #{enquiry.email}
+	br
+	p &nbsp;
+	+button({ url: 'http://www.myletterservice.org/keystone/', label: 'Open Keystone' })

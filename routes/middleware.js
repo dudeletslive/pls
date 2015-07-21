@@ -76,8 +76,14 @@ exports.flashMessages = function(req, res, next) {
 exports.requireUser = function(req, res, next) {
 	
 	if (!req.user) {
-		var redirect = req.originalUrl,
-			redirect = redirect.replace('/','');
+		var redirect = req.originalUrl;
+
+		if(req.query.client_id) {
+			res.cookie('client_id', req.query.client_id)
+			res.cookie('redirect', req.query.redirect_uri)
+			res.cookie('response', req.query.response_type)
+			res.cookie('state', req.query.state)
+		}
 		req.flash('error', 'Please sign in to access this page.');
 		res.redirect('/sign-in?redirect=' + redirect);
 	} else {

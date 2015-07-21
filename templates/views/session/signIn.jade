@@ -15,20 +15,21 @@ block content
 						input(type='hidden', name=csrf_token_key, value=csrf_token_value)
 						.form-group.clearfix
 							.col-md-12
-								label(for="email") Email Address
+								label(for="email", style='width: 100%;') Email Address*
+									.pull-right(style='text-decoration: none;'): small(style='font-style: normal; text-decoration: none;') (*CASE SENSITIVE)
 								input(name="email", class="form-control", placeholder="janedoe@cru.org")
 						.form-group.clearfix
 							.col-md-12
-								label(for="password").block Password
+								label(for="password").block Password*
 									.pull-right: a(href="/forgot-password") Forgot Password?
 								input(name="password", class="form-control", placeholder="••••••", type="password")
 						.form-group.clearfix#formFooter
-							.col-md-6
-								span.fa-stack.fa-lg
+							.col-md-6: &nbsp;
+								//- span.fa-stack.fa-lg
 									i.fa.fa-square.fa-stack-2x
 									i.fa.fa-check.fa-stack-1x.fa-inverse
 								//- input(name="rememberMe", type="checkbox")
-								label(for="rememberMe") Remember Me
+								//- label(for="rememberMe") Remember Me
 							.col-md-6
 								button(type="submit").btn.btn-primary.pull-right Sign In
 						#socialConnect

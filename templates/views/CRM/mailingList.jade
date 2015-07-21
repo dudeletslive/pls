@@ -9,7 +9,8 @@ block content
 					a(href='../mailing-lists/') Contact Lists | &nbsp;
 					span= list.prettyName
 			div.nav.navbar-nav.navbar-right.col-md-4
-				a(data-toggle="modal",data-target="#newContact").btn.btn-md.btn-success ADD CONTACT
+				if !user.services.MPDX.isConfigured
+					a(data-toggle="modal",data-target="#newContact").btn.btn-md.btn-success ADD CONTACT
 				p
 					span#count=contacts.length
 					| &nbsp;
@@ -20,7 +21,8 @@ block content
 			table.table.table-bordered.table-striped.table-responsive#table-contact-list
 				thead
 					tr
-						th Edit
+						if !user.services.MPDX.isConfigured
+							th Edit
 						th(id='lastName'): a(href='/mailing-lists/' + list.slug + '?sortBy=lastName&from=' + query, class=sortBy == 'lastName' ? 'active' : null, data-ajax="true") LAST NAME
 						th(id='ENV_LINE'): a(href='/mailing-lists/' + list.slug + '?sortBy=envelopeLine&from=' + query, class=sortBy == 'envelopeLine' ? 'active' : null, data-ajax="true") ENVELOPE LINE
 						th(id='addressOne'): a(href='/mailing-lists/' + list.slug + '?sortBy=addressOne&from=' + query, class=sortBy == 'addressOne' ? 'active' : null, data-ajax="true") ADDRESS 1
@@ -33,7 +35,8 @@ block content
 					if contacts
 						for contact in contacts
 							tr
-								td: a(data-toggle="modal", data-target='#' + contact._id): img(src='../images/edit-icon.png')
+								if !user.services.MPDX.isConfigured
+									td: a(data-toggle="modal", data-target='#' + contact._id): img(src='../images/edit-icon.png')
 								td= contact.lastName
 								td= contact.envelopeLine
 								td= contact.addressOne
@@ -54,6 +57,10 @@ block content
 							input(type='hidden', name='action', value='newContact')
 							input(type='hidden', name='mailingListID', value=list._id)
 							.form-group.clearfix
+								.col-md-12
+									label(for="greeting") Greeting
+									input(name="greeting", id="greeting" class="form-control", placeholder="Mr.")
+							.form-group.clearfix
 								.col-md-6(style="padding-right: 0px;")
 									label(for="firstName") FIRST NAME
 									input(name="firstName", id="firstName" class="left form-control", placeholder="Jonathan")
@@ -62,8 +69,12 @@ block content
 									input(name="lastName", id="lastName" class="right form-control", placeholder="Bell")
 							.form-group.clearfix
 								.col-md-12
-									label(for="ENV_LINE") ENVELOPE LINE 
-									input(name="ENV_LINE", id="ENV_LINE" class="form-control", placeholder="Jonathan Bell")
+									label(for="spouseName") Spouse First Name 
+									input(name="spouseFirstName", id="spouseName" class="form-control", placeholder="Jane")
+							.form-group.clearfix
+								.col-md-12
+									label(for="envelopeLine") Envelope Line 
+									input(name="envelopeLine", id="envelopeLine" class="form-control", placeholder="Jonathan Bell")
 							.form-group.clearfix
 								.col-md-12
 									label(for="addressOne") ADDRESS 1
@@ -87,6 +98,10 @@ block content
 								.col-md-12
 									label(for="state") STATE
 									input(name="state", id="state", class="form-control", placeholder="")
+							.form-group.clearfix
+								.col-md-12
+									label(for="country") COUNTRY
+									input(name="country", id="country", class="form-control", placeholder="")
 							.form-group.clearfix#formFooter
 								.col-md-12
 									button(type="submit", id="updateContact").btn.btn-success.center SAVE
@@ -112,6 +127,10 @@ block content
 							form(method='post')#account
 								input(type='hidden', name='action', value='updateContact')
 								input(type='hidden', name='contactID', action='contactID', value=contact._id)
+								.form-group.clearfix
+									.col-md-12
+										label(for="greeting") Greeting
+										input(name="greeting", id="greeting" class="form-control", placeholder="Mr.", value=contact.greeting)
 								.form-group.clearfix
 									.col-md-6(style="padding-right: 0px;")
 										label(for="firstName") FIRST NAME
@@ -150,6 +169,10 @@ block content
 									.col-md-12
 										label(for="state") STATE
 										input(name="state", id="state", class="form-control", placeholder="", value=contact.state)
+								.form-group.clearfix
+									.col-md-12
+										label(for="country") COUNTRY
+										input(name="country", id="country", class="form-control", placeholder="", value=contact.country)
 								.form-group.clearfix#formFooter
 									.col-md-6
 										span.fa-stack.fa-lg.checkbox2(data-input='deleteContact', data-type='checkbox')

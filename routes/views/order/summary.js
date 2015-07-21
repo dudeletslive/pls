@@ -1,5 +1,6 @@
 var keystone = require('keystone'),
 	Enquiry = keystone.list('Prayer Letters'),
+	Lists = keystone.list('Mailing Lists'),
 	Two = keystone.list('Postcards'),
 	Three = keystone.list('Brochures'),
 	Four = keystone.list('Fund Appeals'),
@@ -21,10 +22,30 @@ exports = module.exports = function(req, res) {
 
 	req.session.formData = req.body;
 
-	console.log(req.body);
+	console.log(req.body.listChoice);
 	
 	if (locals.mailerType != 'brochures') {
-		view.query('list', keystone.list('Mailing Lists').model.findById(req.body.list).sort('sortOrder'));
+	    /* Goal 
+	     * ===================
+	     * Convert a list of ID's 
+	     * to a list of Names
+	     */
+	    // This console.log is undefined, this is the problem.
+	    // I need to be able to access the "listNames" array
+	    // And / or string on the frontend 
+	    var list = req.body.listChoice;
+	    console.log (list);
+	    if (list) {
+		    if (list.indexOf(',') >= 1) {
+		    	// Store Array Locally for Length Measurement
+		    	var listArray = list.split(',');
+		    	locals.list = listArray;
+		    } else {
+		    	// Find One & Get Name
+		    	view.query('list', keystone.list('Mailing Lists').model.findById(req.body.list).sort('sortOrder'));
+		    }
+		}
+
 		locals.form = req.body;
 	} else {
 		locals.form = req.body;
@@ -37,7 +58,7 @@ exports = module.exports = function(req, res) {
 		
 		updater.process(req.body, {
 			flashErrors: true,
-			fields: 'name, paperChoice, numberOfPages, sizeOfPaper, printerOption, envelopeChoice, postageOption, fileOne, fileTwo, fileThree, fileFour, mailingList, listChoice, specialInstructions, customReturnAddress, returnAddress, insertOne.isConfigured, insertTwo.isConfigured, insertThree.isConfigured, insertOne.insertType, insertTwo.insertType, insertThree.insertType, insertOne.paperChoice, insertOne.printerOption, insertTwo.paperChoice, insertTwo.printerOption, yourMinistryUpdateFrom',
+			fields: 'name, paperChoice, numberOfPages, sizeOfPaper, printerOption, envelopeChoice, postageOption, fileOne, fileTwo, fileThree, fileFour, mailingList, listChoice, specialInstructions, customReturnAddress, returnAddress, insertOne.isConfigured, insertTwo.isConfigured, insertThree.isConfigured, insertOne.insertType, insertTwo.insertType, insertThree.insertType, insertOne.paperChoice, insertOne.printerOption, insertTwo.paperChoice, insertTwo.printerOption, yourMinistryUpdateFrom, prayerLetterServiceReturnAddress',
 			errorMessage: 'There was a problem submitting your enquiry:'
 		}, function(err) {
 			if (err) {

@@ -15,25 +15,34 @@ exports.list = function(req, res) {
 
 	User.model.findOne({'services.MPDX.accessToken': req.headers.authorization}).exec(function (err, user) {
 
-		console.log('User: ', user);
+		if (err) {
 
-		List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
+			res.status(500).json({error: 'No user specified.'});
 
-			console.log('List: ', list);
+		} else {
 
-			Contact.model.find({'mailingList': list._id}).exec(function(err, contacts) {
+			List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
 
-				if (err) return res.apiError('database error', err);
+				if (!list) {
+					res.status(500).json({error: 'No list found.'});
+					return false;
+				}
 
-				console.log('Contacts: ', contacts);
-				
-				res.apiResponse({
-					contacts: contacts
+				Contact.model.find({'mailingList': list._id}).exec(function(err, contacts) {
+
+					if (err) return res.apiError('database error', err);
+
+					console.log('Contacts: ', contacts);
+					
+					res.apiResponse({
+						contacts: contacts
+					});
+
 				});
 
 			});
 
-		});
+		}
 
 	});
 
@@ -50,8 +59,6 @@ exports.create = function(req, res) {
 		// Find MPDX Mailing List
 		List.model.findOne({'prettyName': 'MPDX List', 'userID': user._id}).exec(function(err, list) {
 
-			console.log(req.body);
-
 			var id 		 = list._id,
 				contacts = req.body.contacts;
 
@@ -63,11 +70,11 @@ exports.create = function(req, res) {
 
 					var contactInfo = {
 						mailingList: id,
-						firstName: contacts[i].name,
-						addressOne: contacts[i].address['street'],
-						city: contacts[i].address['city'],
-						state: contacts[i].address['state'],
-						postCode: contacts[i].address['postal_code'],
+						firstName: contacts[i].firstName,
+						addressOne: contacts[i].addressOne['street'],
+						city: contacts[i].city,
+						state: contacts[i].state,
+						postCode: contacts[i].postCode,
 						contact_id: keystone.utils.randomString([24,32]),
 						external_id: contacts[i].external_id
 					};
@@ -120,7 +127,7 @@ exports.new = function(req, res) {
 							addressOne: contact.street,
 							city: contact.city,
 							state: contact.state,
-							postCode: contact.postal_code,
+							postCode: contact.postCode,
 							contact_id: keystone.utils.randomString([24,32]),
 							external_id: contact.external_id
 						};
@@ -149,7 +156,7 @@ exports.new = function(req, res) {
 				addressOne: contact.street,
 				city: contact.city,
 				state: contact.state,
-				postCode: contact.postal_code,
+				postCode: contact.postcode,
 				contact_id: keystone.utils.randomString([24,32]),
 				external_id: contact.external_id
 			});

@@ -32,35 +32,36 @@ User.add({
 	ministryUpdateFrom: { type: String, label: 'Your Ministry Update From:' },
 	databaseMaintenance: { type: String, label: 'To maintain my database I would like to:' },
 	mailingEnvelopeLogo: { type: String, label: 'Please include this logo on my mailing envelope:' },
+	noCRM: { type: Boolean, label: 'Opted out of CRM' },
 }, 'Permissions', {
 	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true}
 }, 'Services', {
 	services: {
 		linkedIn: {
-			isConfigured: { type: Boolean, label: 'LinkedIn has been authenticated', noedit: true },
+			isConfigured: { type: Boolean, label: 'LinkedIn has been authenticated', noedit: false },
 			
-			profileId: { type: String, label: 'Profile ID', dependsOn: deps.linkedIn, noedit: true },
+			profileId: { type: String, label: 'Profile ID', dependsOn: deps.linkedIn, noedit: false },
 			
-			username: { type: String, label: 'Username', dependsOn: deps.linkedIn, noedit: true },
-			avatar: { type: String, label: 'Image', dependsOn: deps.linkedIn, noedit: true },
+			username: { type: String, label: 'Username', dependsOn: deps.linkedIn, noedit: false },
+			avatar: { type: String, label: 'Image', dependsOn: deps.linkedIn, noedit: false },
 		},
 		facebook: {
-			isConfigured: { type: Boolean, label: 'Facebook has been authenticated', noedit: true },
+			isConfigured: { type: Boolean, label: 'Facebook has been authenticated', noedit: false },
 			
-			profileId: { type: String, label: 'Profile ID', dependsOn: deps.facebook, noedit: true },
+			profileId: { type: String, label: 'Profile ID', dependsOn: deps.facebook, noedit: false },
 			
-			username: { type: String, label: 'Username', dependsOn: deps.facebook, noedit: true },
-			avatar: { type: String, label: 'Image', dependsOn: deps.facebook, noedit: true },
+			username: { type: String, label: 'Username', dependsOn: deps.facebook, noedit: false },
+			avatar: { type: String, label: 'Image', dependsOn: deps.facebook, noedit: false },
 			
-			accessToken: { type: String, label: 'Access Token', dependsOn: deps.facebook, noedit: true },
-			refreshToken: { type: String, label: 'Refresh Token', dependsOn: deps.facebook, noedit: true }
+			accessToken: { type: String, label: 'Access Token', dependsOn: deps.facebook, noedit: false },
+			refreshToken: { type: String, label: 'Refresh Token', dependsOn: deps.facebook, noedit: false }
 		},
 		MPDX: {
 			isConfigured: { type: Boolean, label: 'MPDX has been configured', noedit: false },
 			code: { type: String, label: 'Hide this field', hidden: true },
 			clientID: { type: String, label: 'Hide this field', hidden: true },
 			clientSecret: { type: String, label: 'Hide this field', hidden: true },
-			accessToken: { type: String, label: 'Access Token', noedit: true, dependsOn: deps.mpdx }
+			accessToken: { type: String, label: 'Access Token', noedit: false, dependsOn: deps.mpdx }
 		}
 	}
 });
@@ -102,6 +103,38 @@ User.schema.methods.sendNotificationEmail = function(callback) {
 User.schema.virtual('canAccessKeystone').get(function() {
 	return this.isAdmin;
 });
+
+User.schema.post('save', function() {
+	if (!this.wasNew) {
+		this.sendNotificationEmail();
+	}
+});
+
+User.schema.methods.sendNotificationEmail = function(callback) {
+	
+	var object = this;
+
+	console.log(object);
+	
+	keystone.list('User').model.find().where('isAdmin', true).exec(function(err, admins) {
+		
+		if (err) return callback(err);
+		
+		new keystone.Email('profile-update').send({
+			to: 'plservice@myletterservice.org',
+			from: {
+				name: 'Prayer Letter Service',
+				email: 'contact@myletterservice.com'
+			},
+			subject: object.name.first + ' ' + object.name.last + ' has Updated Their Profile',
+			enquiry: object
+		}, callback);
+		
+	});
+	
+}
+
+/* Reset Password */
 
 User.schema.methods.resetPassword = function(callback) {
 	

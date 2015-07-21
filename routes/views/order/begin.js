@@ -13,7 +13,7 @@ exports = module.exports = function(req, res) {
 
 	// console.log(req.session);
 
-	req.flash('info', 'While we are smoothing out the ordering process, you may find it easiest to email your order to us. If you do upload an order, expect an email confirmation within the next business day. If you do not receive a confirmation email from us, please let us know. Thanks for your patience during this transition!')
+	// req.flash('info', 'While we are smoothing out the ordering process, you may find it easiest to email your order to us. If you do upload an order, expect an email confirmation within the next business day. If you do not receive a confirmation email from us, please let us know. Thanks for your patience during this transition!')
 	
 	// Render the view
 	view.render('order/begin');

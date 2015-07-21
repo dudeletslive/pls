@@ -95,7 +95,15 @@ block content
 		div.clearfix
 		.jumbotron.start-orden
 			.container#data
-				.data.show(data-status='show',data-action="#prayerLetters")
+				table(class='data show', data-status='show', data-action='#prayerLetters')
+					tr
+						td(colspan=1, class='col-md-11'): p The basic cost for a 1-sided, color letter includes: your choice of any of the Opaque, Astrobright, Astroparche or Royal Fiber colors of paper; a white mailing envelope; folding and inserting your letter, sealing the envelope and affixing a first class stamp.
+						td(colspan=1, class='col-md-1 text-center'): .content.pull-right
+							span.from FROM 
+							span $.97/
+								small LETTER
+							a(class='btn btn-success', href='/order', role='button') START ORDER
+				//- .data.show(data-status='show',data-action="#prayerLetters")
 					.col-md-6
 						p The basic cost for a 1-sided, color letter includes: your choice of any of the Opaque, Astrobright, Astroparche or Royal Fiber colors of paper; a white mailing envelope; folding and inserting your letter, sealing the envelope and affixing a first class stamp.
 					.col-md-6
@@ -105,17 +113,34 @@ block content
 								span $.97 /letter
 						.col-md-6
 							a.btn.btn-success(href='/order', role='button') START ORDER
-				.data.hide(data-status='hide',data-action="#postCards")
+				table(class='data hide', data-status='hide', data-action='#postCards')
+					tr
+						td(colspan=1, class='col-md-11'): p Most commonly, you’ll choose a color photo on one-side and black &amp; white text on the other.
+						td(colspan=1, class='col-md-1', class='text-center'): .content.pull-right
+							span.from FROM 
+							span $.65/
+								small CARD
+							a(class='btn btn-success', href='/order', role='button') START ORDER
+				//- .data.hide(data-status='hide',data-action="#postCards")
 					.col-md-6
 						p Most commonly, you’ll choose a color photo on one-side and black &amp; white text on the other.
 					.col-md-6
 						.col-md-6
 							p 
 								span.from FROM
-								span $.64/card
+								span $.65/card
 						.col-md-6
 							a.btn.btn-success(href='/order', role='button') START ORDER
-				.data.hide(data-status='hide',data-action="#brochures")
+				table(class='data hide', data-status='hide', data-action='#brochures')
+					tr
+						td(colspan=1, class='col-md-11'): p Most commonly, you’ll choose a two-sided, color brochure on glossy paper.
+						td(colspan=1, class='col-md-1', class='text-center'): .content.pull-right
+							span.from FROM 
+							span $.46/
+								small BROCHURE
+									i(style='font-size: 10px; line-height: 2px; margin-bottom: 10px; font-style: normal; display: block;') (Plus Cost Of Shipping)
+							a(class='btn btn-success', href='/order', role='button') START ORDER
+				//- .data.hide(data-status='hide',data-action="#brochures")
 					.col-md-6.col-sm-6.col-xs-12
 						p Most commonly, you’ll choose a two-sided, color brochure on glossy paper.
 					.col-md-6.col-sm-6.col-xs-12						
@@ -125,8 +150,16 @@ block content
 									span $.46/brochure 
 									| plus the cost of shipping
 							.col-md-6
-								a.btn.btn-success(href='/order', role='button') START ORDER				
-				.data.hide(data-status='hide',data-action="#fundAppeals")
+								a.btn.btn-success(href='/order', role='button') START ORDER
+				table(class='data hide', data-status='hide', data-action='#fundAppeals')
+					tr
+						td(colspan=1, class='col-md-11'): p If we mail the order for you the average cost for a fund appeal letter is based on a one-sided, color, mail-merged letter printed on Opaque paper, mailed in a matching envelope, including a response envelope and response slip.
+						td(colspan=1, class='col-md-1', class='text-center'): .content.pull-right
+							span.from FROM 
+							span $1.28/
+								small LETTER
+							a(class='btn btn-success', href='/order', role='button') START ORDER
+				//- .data.hide(data-status='hide',data-action="#fundAppeals")
 					.col-md-6.col-sm-6.col-xs-12
 						p If we mail the order for you the average cost for a fund appeal letter is based on a one-sided, color, mail-merged letter printed on Opaque paper, mailed in a matching envelope, including a response envelope and response slip.
 					.col-md-6.col-sm-6.col-xs-12
@@ -136,11 +169,25 @@ block content
 								span $1.28/letter
 						.col-md-6
 							a.btn.btn-success(href='/order', role='button') START ORDER
-				.data.hide(data-status='hide',data-action="#christmas")
+				table(class='data hide', data-status='hide', data-action='#christmas')
+					tr
+						td(colspan=1, class='col-md-5'): p Printing a one-side, color Christmas letter
+						td(colspan=1, class='col-md-5', class='text-center'): p
+							span.from FROM 
+							span $.97/
+								small LETTER
+						td(colspan=1, rowspan='2', class='col-md-2'): a(class='btn btn-success', href='/order', role='button') START ORDER
+					tr
+						td(colspan=1, class='col-md-5'): p Printing your signature in a card
+						td(colspan=1, class='col-md-5', class='text-center'): p
+							span.from FROM 
+							span $.88/
+								small CARD
+				//- .data.hide(data-status='hide',data-action="#christmas")
 					.col-md-6.col-sm-6.col-xs-12
-						.col-md-6
-							p: strong Printing a one-side, color Christmas letter
-							p: strong Printing your signature in a card
+						.col-md-12
+							p Printing a one-side, color Christmas letter
+							p Printing your signature in a card
 					.col-md-6.col-sm-6.col-xs-12
 						.col-md-6
 							p 
@@ -151,7 +198,21 @@ block content
 								span $.88/card
 						.col-md-6
 							a.btn.btn-success(href='/order', role='button') START ORDER
-				.data.hide(data-status='hide',data-action="#thankYouCards")
+				table(class='data hide', data-status='hide', data-action='#thankYouCards')
+					tr
+						td(colspan=1, class='col-md-5'): p The larger <i>Thank You</i> card
+						td(colspan=1, class='col-md-5', class='text-center'): p
+							span.from FROM 
+							span $1.07/
+								small CARD
+						td(colspan=1, rowspan='2', class='col-md-2'): a(class='btn btn-success', href='/order', role='button') START ORDER
+					tr
+						td(colspan=1, class='col-md-5'): p The smaller <i>Thank You</i> card
+						td(colspan=1, class='col-md-5', class='text-center'): p
+							span.from FROM 
+							span $.98/
+								small CARD
+				//- .data.hide(data-status='hide',data-action="#thankYouCards")
 					.col-md-6.col-sm-6.col-xs-12
 						.col-md-6
 							p: strong The larger Thank You card

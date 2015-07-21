@@ -1,300 +1,317 @@
 extends ../../layouts/default
 
 block content
-	.jumbotron#order: .container
-		h1 Let's Get Your Order <br> To The Presses!
-		p.small Use the form below to submit your order and we'll get to work.
-	div.tab-container: .container
-		ul.tabs.order#tabs
-			a(href="/order/process?mailer="+sessionType+"#letterDetails"): li(class=(tabID === 'letterDetails' ? 'active tab' : 'tab')): span Letter Details
-			a(href="/order/process?mailer="+sessionType+"#mailingList"): li(class=(tabID === 'mailingList' ? 'active tab' : 'tab')): span Mailing List
-			a(href="/order/process?mailer="+sessionType+"#returnAddress"): li(class=(tabID === 'returnAddress' ? 'active tab' : 'tab')): span Return Address
-			li(class=(tabID === 'summary' ? 'active tab' : 'tab')): span Summary
-			li(class=(tabID === 'confirmation' ? 'active tab' : 'tab')): span Confirmation
-	div.tab-content.order-process
-		div.tab-pane.fade.in.active#summary
-			.container: .jumbotron
-				.row
-					.col-md-10
-						h3 Confirm Your Order Summary
-							span *
-						table.table.borderless
-							tr
-								th FULL NAME
-								td= user.name.full
-							tr
-								th EMAIL ADDRESS
-								td= user.email
-							tr
-								-var d = new Date();
-								-var n = d.getMonth() + 1 + '/' + d.getDate() + '/' + d.getFullYear();
-								th DATE SUBMITTED
-								td= n
-							tr: td(colspan="2"): hr
-							tr
-								if sessionType == 'postcards'
-									th CARDSTOCK CHOICE
-									td= form.cardstockChoice ? form.cardstockChoice : 'Not Specified'
-								else
-									th Paper Choice
-									td= form.paperChoice ? form.paperChoice : 'Not Specified'
-							tr
-								if sessionType == 'brochures'
-									th Number of Brochures
-									td= form.numberOfPages ? form.numberOfPages : 'Not Specified'
-								else
-									th Number of Pages
-									td= form.numberOfPages
-							if form.paperSize
-								tr 
-									th Paper Size
-									td= form.paperSize
-							if form.printerOption
-								tr
-									th Printer Option
-									td= form.printerOption
-							if form.envelopeChoice
-								tr
-									th Envelope Choice
-									td= form.envelopeChoice
-							if sessionType != 'brochures'
-								if form.postageOption 
-									tr
-										th Postage Option
-										td= form.postageOption
-							if form.oneTime
-								tr: td(colspan="2"): hr
-								tr
-									th One Time Mailing List
-									tr True
-							if form.sendTo
-								tr 
-									th Ship To
-									td= form.sendTo
-							if sessionType == 'brochures' || sessionType == 'thankYou'
-								tr
-									th Shipping Address
-									td #{form.streetAddress}, #{form.city}, #{form.state} #{form.zipCode}, #{form.country}
-							if sessionType != 'brochures'
-								tr
-									th Merge Greetings
-									td= form.mergeGreeting ? form.mergeGreeting : 'Not Specified'
-							if form.insertOne != 'none'
-								tr
-									th  Insert One type
-									td= form.insertOne
-								tr
-									th Insert One Paper Choice
-									td= form.paperChoiceOne
-								tr
-									th Insert One Printer Option
-									td= form.printerChoiceOne
-							if form.insertTwo != 'none'
-								tr
-									th  Insert Two type
-									td= form.insertTwo
-								tr
-									th Insert Two Paper Choice
-									td= form.paperChoiceTwo
-								tr
-									th Insert Two Printer Option
-									td= form.printerChoiceTwo
-							if form.insertThree != 'none'
-								tr
-									th Third Insert
-									td= form.insertThree
-							if form.fileOne
-								tr: td(colspan="2"): hr
-								tr
-									th File One
-									td= form.fileOne
-							if form.filetwo
-								tr
-									th File Two
-									td= form.filetwo
-							if form.fileThree
-								tr
-									th File Three
-									td= form.fileThree
-							if form.fileFour
-								tr
-									th File Four
-									td= form.fileFour
-							if form.file
-								tr
-									th File
-									td= form.file
-							if form.multipleLists
-								tr: td(colspan="2"): hr
-								tr
-									th Multiple Lists
-									td= form.multipleLists
-							if form.noLogo
-								tr
-									th Do not include logo
-									td= form.noLogo
-							if form.addressService
-								tr
-									th Do <em>not</em> include "Address Service Requested"
-									td True
-							tr: td(colspan="2"): hr
-							tr
-								th Special Instructions
-								td= form.specialInstructions ? form.specialInstructions : 'None specified.'
-							if form.customform === 'false'
-								tr
-									th Return Address
-									td Your Ministry Update From #{form.yourMinistryUpdateFrom}
-							else if form.customform
-								tr
-									th Custom Return Address
-									td #{form.street1} #{form.city} #{form.state} #{form.zipCode} #{form.country}
-							if list
-								tr
-									th Mailing List
-									td= list.prettyName
-							if form
-								if form.listChoice
-									tr
-										th Mailing List
-										td= form.listChoice
-							if form
-								if form.mailingListFile
-									tr
-										th Mailing List
-										td= form.mailingListFile
-				.row
-					.col-md-12
-						.line-0.visible-lg-block
-				section.spacer
-				.row
-					.col-md-12
-						a(href="/order").btn.btn-success.btn-boder-green.pull-left Start Over
-						form(name='summary', method='post', action='/summary?action='+sessionType)
-							div.hide
-								.form-group
-									label Action
-									input(type='text', name='action', value=sessionType)
-								.form-group
-									label Name
-									input(type='text', name='name.first', value=user.name.first)
-									input(type='text', name='name.last', value=user.name.last)
-								.form-group
-									if sessionType == 'postcards'
-										label Postcard Choice
-										input(type='text', name='cardstock', value=form.cardstockChoice)
-									else 
-										label Paper Choice
-										input(type='text', name='paperChoice', value=form.paperChoice)
-								.form-group
-									if sessionType == 'brochures'
-										label Number of Brochures Needed
-										input(type='text', name='numberOfBrochuresNeeded', value=form.numberOfPages)
-									else
-										label Number Of Pages
-										input(type='text', name='numberOfPages', value=form.numberOfPages)
-								.form-group
-									label Paper Size
-									input(type='text', name='sizeOfPaper', value=form.paperSize)
-								.form-group
-									label Printer Option
-									input(type='text', name='printerOption', value=form.printerOption)
-								.form-group
-									label Envelope Choice
-									input(type='text', name='envelopeChoice', value=form.envelopeChoice)
-								.form-group
-									label Postage Option
-									input(type='text', name='postageOption', value=form.postageOption)
-								if form
-									.form-group
-										label One Time
-										input(type='text', name='oneTime', value=form.oneTime)
-								.form-group
-									label Send To
-									input(type='text', name='shipTo', value=form.sendTo)
-								if sessionType == 'brochures' || sessionType == 'thankYou'
-									.form-group
-										label Shipping Address
-										input(type='text', name='shipTheOrderTo.street1', value=form.streetAddress)
-										input(type='text', name='shipTheOrderTo.suburb', value=form.city)
-										input(type='text', name='shipTheOrderTo.postcode', value=form.zipCode)
-										input(type='text', name='shipTheOrderTo.country', value=form.country)
-								.form-group
-									label Merge Greetings
-									input(type='text', name='personalization', value=form.mergeGreeting)
-								.form-group
-									label Insert One
-									if form.insertOne != 'none'
-										input(type='checkbox', value='true', name='insertOne.isConfigured', checked)
-										input(type='text', name='insertOne.insertType', value=form.insertOne)
-										input(type='text', name='insertOne.paperChoice', value=form.paperChoiceOne)
-										input(type='text', name='insertOne.printerOption', value=form.printerChoiceOne)
-								.form-group
-									label Insert Two
-									if form.insertTwo != 'none'
-										input(type='checkbox', value='true', name='insertTwo.isConfigured', checked)
-										input(type='text', name='insertTwo.insertType', value=form.insertTwo)
-										input(type='text', name='insertTwo.paperChoice', value=form.paperChoiceTwo)
-										input(type='text', name='insertTwo.printerOption', value=form.printerChoiceTwo)
-								.form-group
-									label Insert Three
-									if form.insertThree != 'none'
-										input(type='checkbox', value='true', name='insertThree.isConfigured', checked)
-										input(type='text', name='insertThree.insertType', value=form.insertThree)
-								.form-group
-									label File
-									input(type='text', name='file', value=form.file)
-								.form-group
-									label File One
-									input(type='text', name='fileOne', value=form.fileOne)
-								.form-group
-									label File Two
-									input(type='text', name='fileTwo', value=form.filetwo)
-								.form-group
-									label File Three
-									input(type='text', name='fileThree', value=form.fileThree)
-								.form-group
-									label File Four
-									input(type='text', name='fileFour', value=form.fileFour)
-								.form-group
-									label Special Instructions
-									input(type='text', name='specialInstructions', value=form.specialInstructions)
-								if form
-									.form-group
-										label Return Address
-										input(type='checkbox', name='customform', value=form.customform, checked)
-										label Your Ministry Update From
-										input(type='text', name='yourMinistryUpdateFrom', value=form.yourMinistryUpdateFrom)
-										label Multiple Mailing Lists
-									.form-group
-										input(type='checkbox', name='multipleLists', value=form.multipleLists, checked)
-										input(type='checkbox', name='noLogo', value=form.noLogo, checked)
-									.form-group
-										if form.addressService
-											label Address Service Requested
-											input(type='checkbox', name='addressService', value='true', checked)
-									.form-group
-										label Return Address Custom
-										input(type='text', name='form.name', value=form.name)
-										input(type='text', name='form.street1', value=form.streetAddress)
-										input(type='text', name='form.street2', value=form.streetAddress2)
-										input(type='text', name='form.number', value=form.streetAddress3)
-										input(type='text', name='form.suburb', value=form.city)
-										input(type='text', name='form.postcode', value=form.zipCode)
-										input(type='text', name='form.country', value=form.country)
-								if form.list
-									.form-group
-										label Mailing List
-										input(type='text', name='mailingList', value=form.list)
-								else if form
-									if form.listChoice
-										.form-group
-											label Mailing List
-											input(type='text', name='listChoice', value=form.listChoice)
-									else if form.form
-										.form-group
-											label Mailing List
-											input(type='text', name='listChoice', value=form.mailingListFile)
-							button(type="submit").btn.btn-success.pull-right Confirm
+  .jumbotron#order: .container
+    h1 Let's Get Your Order <br> To The Presses!
+    p.small Use the form below to submit your order and we'll get to work.
+  div.tab-container: .container
+    ul.tabs.order#tabs
+      a(href="/order/process?mailer="+sessionType+"#letterDetails"): li(class=(tabID === 'letterDetails' ? 'active tab' : 'tab')): span Letter Details
+      a(href="/order/process?mailer="+sessionType+"#mailingList"): li(class=(tabID === 'mailingList' ? 'active tab' : 'tab')): span Mailing List
+      a(href="/order/process?mailer="+sessionType+"#returnAddress"): li(class=(tabID === 'returnAddress' ? 'active tab' : 'tab')): span Return Address
+      li(class=(tabID === 'summary' ? 'active tab' : 'tab')): span Summary
+      li(class=(tabID === 'confirmation' ? 'active tab' : 'tab')): span Confirmation
+  div.tab-content.order-process
+    div.tab-pane.fade.in.active#summary
+      .container: .jumbotron
+        .row
+          .col-md-10
+            h3 Confirm Your Order Summary
+              span *
+            table.table.borderless
+              tr
+                th FULL NAME
+                td= user.name.full
+              tr
+                th EMAIL ADDRESS
+                td= user.email
+              tr
+                -var d = new Date();
+                -var n = d.getMonth() + 1 + '/' + d.getDate() + '/' + d.getFullYear();
+                th DATE SUBMITTED
+                td= n
+              tr: td(colspan="2"): hr
+              tr
+                if sessionType == 'postcards'
+                  th CARDSTOCK CHOICE
+                  td= form.cardstockChoice ? form.cardstockChoice : 'Not Specified'
+                else
+                  th Paper Choice
+                  td= form.paperChoice ? form.paperChoice : 'Not Specified'
+              tr
+                if sessionType == 'brochures'
+                  th Number of Brochures
+                  td= form.numberOfPages ? form.numberOfPages : 'Not Specified'
+                else
+                  th Number of Pages
+                  td= form.numberOfPages
+              if form.paperSize
+                tr 
+                  th Paper Size
+                  td= form.paperSize
+              if form.printerOption
+                tr
+                  th Printer Option
+                  td= form.printerOption
+              if form.envelopeChoice
+                tr
+                  th Envelope Choice
+                  td= form.envelopeChoice
+              if sessionType != 'brochures'
+                if form.postageOption 
+                  tr
+                    th Postage Option
+                    td= form.postageOption
+              if form.oneTime
+                tr: td(colspan="2"): hr
+                tr
+                  th One Time Mailing List
+                  tr True
+              if form.sendTo
+                tr 
+                  th Ship To
+                  td= form.sendTo
+              if sessionType == 'brochures' || sessionType == 'thankYou'
+                tr
+                  th Shipping Address
+                  td #{form.streetAddress}, #{form.city}, #{form.state} #{form.zipCode}, #{form.country}
+              if sessionType != 'brochures'
+                tr
+                  th Merge Greetings
+                  td= form.mergeGreeting ? form.mergeGreeting : 'Not Specified'
+              if form.insertOne != 'none'
+                tr
+                  th  Insert One type
+                  td= form.insertOne
+                tr
+                  th Insert One Paper Choice
+                  td= form.paperChoiceOne
+                tr
+                  th Insert One Printer Option
+                  td= form.printerChoiceOne
+              if form.insertTwo != 'none'
+                tr
+                  th  Insert Two type
+                  td= form.insertTwo
+                tr
+                  th Insert Two Paper Choice
+                  td= form.paperChoiceTwo
+                tr
+                  th Insert Two Printer Option
+                  td= form.printerChoiceTwo
+              if form.insertThree != 'none'
+                tr
+                  th Third Insert
+                  td= form.insertThree
+              if form.fileOne
+                tr: td(colspan="2"): hr
+                tr
+                  th File One
+                  td= form.fileOne
+              if form.filetwo
+                tr
+                  th File Two
+                  td= form.filetwo
+              if form.fileThree
+                tr
+                  th File Three
+                  td= form.fileThree
+              if form.fileFour
+                tr
+                  th File Four
+                  td= form.fileFour
+              if form.file
+                tr
+                  th File
+                  td= form.file
+              if form.multipleLists
+                tr: td(colspan="2"): hr
+                tr
+                  th Multiple Lists
+                  td= form.multipleLists
+              if form.noLogo
+                tr
+                  th Do not include logo
+                  td= form.noLogo
+              if form.addressService
+                tr
+                  th Do <em>not</em> include "Address Service Requested"
+                  td True
+              tr: td(colspan="2"): hr
+              tr
+                th Special Instructions
+                td= form.specialInstructions ? form.specialInstructions : 'None specified.'
+              if form.customform === 'false'
+                tr
+                  th Return Address
+                  td Your Ministry Update From #{form.yourMinistryUpdateFrom}
+              else if form.customform
+                tr
+                  th Custom Return Address
+                  td #{form.street1} #{form.city} #{form.state} #{form.zipCode} #{form.country}
+              if form.mailingListFile
+                tr
+                  th Mailing List
+                  td= form.mailingListFile
+              else if list
+                tr
+                  th Mailing List
+                  if list.length >= 2
+                    td Use the #{list.length} lists I have selected online.
+                  else if list.prettyName
+                    td= list.prettyName
+        .row
+          .col-md-12
+            .line-0.visible-lg-block
+        section.spacer
+        .row
+          .col-md-12
+            a(href="/order").btn.btn-success.btn-boder-green.pull-left Start Over
+            form(name='summary', method='post', action='/summary?action='+sessionType)
+              div.hide
+                .form-group
+                  label Action
+                  input(type='text', name='action', value=sessionType)
+                .form-group
+                  label Name
+                  input(type='text', name='name.first', value=user.name.first)
+                  input(type='text', name='name.last', value=user.name.last)
+                .form-group
+                  if sessionType == 'postcards'
+                    label Postcard Choice
+                    input(type='text', name='cardstock', value=form.cardstockChoice)
+                  else 
+                    label Paper Choice
+                    input(type='text', name='paperChoice', value=form.paperChoice)
+                .form-group
+                  if sessionType == 'brochures'
+                    label Number of Brochures Needed
+                    input(type='text', name='numberOfBrochuresNeeded', value=form.numberOfPages)
+                  else
+                    label Number Of Pages
+                    input(type='text', name='numberOfPages', value=form.numberOfPages)
+                .form-group
+                  label Paper Size
+                  input(type='text', name='sizeOfPaper', value=form.paperSize)
+                .form-group
+                  label Printer Option
+                  input(type='text', name='printerOption', value=form.printerOption)
+                .form-group
+                  label Envelope Choice
+                  input(type='text', name='envelopeChoice', value=form.envelopeChoice)
+                .form-group
+                  label Postage Option
+                  input(type='text', name='postageOption', value=form.postageOption)
+                if form
+                  .form-group
+                    label One Time
+                    input(type='text', name='oneTime', value=form.oneTime)
+                .form-group
+                  label Send To
+                  input(type='text', name='shipTo', value=form.sendTo)
+                if sessionType == 'brochures' || sessionType == 'thankYou'
+                  .form-group
+                    label Shipping Address
+                    input(type='text', name='shipTheOrderTo.street1', value=form.streetAddress)
+                    input(type='text', name='shipTheOrderTo.suburb', value=form.city)
+                    input(type='text', name='shipTheOrderTo.postcode', value=form.zipCode)
+                    input(type='text', name='shipTheOrderTo.country', value=form.country)
+                .form-group
+                  label Merge Greetings
+                  input(type='text', name='personalization', value=form.mergeGreeting)
+                .form-group
+                  label Insert One
+                  if form.insertOne != 'none'
+                    input(type='checkbox', value='true', name='insertOne.isConfigured', checked)
+                    input(type='text', name='insertOne.insertType', value=form.insertOne)
+                    input(type='text', name='insertOne.paperChoice', value=form.paperChoiceOne)
+                    input(type='text', name='insertOne.printerOption', value=form.printerChoiceOne)
+                .form-group
+                  label Insert Two
+                  if form.insertTwo != 'none'
+                    input(type='checkbox', value='true', name='insertTwo.isConfigured', checked)
+                    input(type='text', name='insertTwo.insertType', value=form.insertTwo)
+                    input(type='text', name='insertTwo.paperChoice', value=form.paperChoiceTwo)
+                    input(type='text', name='insertTwo.printerOption', value=form.printerChoiceTwo)
+                .form-group
+                  label Insert Three
+                  if form.insertThree != 'none'
+                    input(type='checkbox', value='true', name='insertThree.isConfigured', checked)
+                    input(type='text', name='insertThree.insertType', value=form.insertThree)
+                .form-group
+                  label File
+                  input(type='text', name='file', value=form.file)
+                .form-group
+                  label File One
+                  input(type='text', name='fileOne', value=form.fileOne)
+                .form-group
+                  label File Two
+                  input(type='text', name='fileTwo', value=form.filetwo)
+                .form-group
+                  label File Three
+                  input(type='text', name='fileThree', value=form.fileThree)
+                .form-group
+                  label File Four
+                  input(type='text', name='fileFour', value=form.fileFour)
+                .form-group
+                  label Special Instructions
+                  input(type='text', name='specialInstructions', value=form.specialInstructions)
+                if form.customReturnAddress == 'true'
+                  .form-group
+                    label Return Address
+                    input(type='checkbox', name='customReturnAddress', value='true', checked)
+                    input(type='checkbox', name='prayerLetterServiceReturnAddress', value='false', checked)
+                    label Return Address Custom
+                    input(type='text', name='returnAddress.name', value=form.name)
+                    input(type='text', name='returnAddress.street1', value=form.streetAddress)
+                    input(type='text', name='returnAddress.state', value=form.state)
+                    input(type='text', name='returnAddress.street2', value=form.streetAddress2)
+                    input(type='text', name='returnAddress.number', value=form.streetAddress3)
+                    input(type='text', name='returnAddress.suburb', value=form.city)
+                    input(type='text', name='returnAddress.postcode', value=form.zipCode)
+                    input(type='text', name='returnAddress.country', value=form.country)
+                else if form.customReturnAddress == 'false'
+                  .form-group
+                    label Return Address
+                    input(type='checkbox', name='customReturnAddress', value='false', checked)
+                    input(type='checkbox', name='prayerLetterServiceReturnAddress', value='true', checked)
+                    label Your Ministry Update From
+                    input(type='text', name='yourMinistryUpdateFrom', value=form.yourMinistryUpdateFrom)
+                if form
+                  .form-group
+                    label Multiple Mailing Lists
+                  .form-group
+                    if form.multipleLists
+                      input(type='checkbox', name='multipleLists', value=form.multipleLists, checked)
+                    if form.noLogo
+                      input(type='checkbox', name='noLogo', value=form.noLogo, checked)
+                  .form-group
+                    if form.addressService == 'true'
+                      label Address Service Requested
+                      input(type='checkbox', name='addressService', value='true', checked)
+                    else
+                      label Address Service Requested
+                      input(type='checkbox', name='addressService', value='false')
+                  
+                if form.mailingListFile
+                  .form-group
+                    label Mailing List
+                    input(type='text', name='listChoice', value=form.mailingListFile)
+                else if form.list
+                  if form.list.split(',').length >= 2
+                    .form-group
+                      label Mailing List
+                      input(type='text', name='mailingList', value=form.list.split(','))
+                  else
+                    -console.log(form.list)
+                    .form-group
+                      label Mailing List
+                      input(type='text', name='mailingList', value=form.list)
+                else if form.listChoice
+                  .form-group
+                    label Mailing List
+                    input(type='text', name='listChoice', value=form.listChoice)
+              button(type="submit").btn.btn-success.pull-right Confirm
+
 block js
-	+fileUploads
+  +fileUploads

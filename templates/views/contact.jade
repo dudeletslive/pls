@@ -5,20 +5,19 @@ block content
 		if enquirySubmitted
 			h1 Thanks for getting in touch.
 			.icon-row
-				a(href="#"): i.fa.fa-phone
-				a(href="#"): i.fa.fa-linkedin
-				a(href="#"): i.fa.fa-facebook
-				a(href="#"): i.fa.fa-twitter
+				a(href="tel:8159627010"): i.fa.fa-phone
+				a(href="https://www.linkedin.com/company/the-prayer-letter-service", target='_blank'): i.fa.fa-linkedin
+				a(href="https://www.facebook.com/pages/The-Prayer-Letter-Service/561490403957191?fref=ts", target='_blank'): i.fa.fa-facebook
 			section.spacer
 		else
 			.row: .col-sm-8.col-md-10.col-sm-offset-2.col-md-offset-1
 				h1 Contact Us
 				p.small Thanks for stopping by. Whether you want to have more information about our <br> services, place and order or just say hi, this is where to start.
 				.icon-row
-					a(href="#"): i.fa.fa-phone
-					a(href="#"): i.fa.fa-linkedin
-					a(href="#"): i.fa.fa-facebook
-					a(href="#"): i.fa.fa-twitter
+					a(href="tel:8159627010"): i.fa.fa-phone
+					a(href="https://www.linkedin.com/company/the-prayer-letter-service", target='_blank'): i.fa.fa-linkedin
+					a(href="https://www.facebook.com/pages/The-Prayer-Letter-Service/561490403957191?fref=ts", target='_blank'): i.fa.fa-facebook
+					//- a(href="#"): i.fa.fa-twitter
 				form(method='post')
 					input(type='hidden', name='action', value='contact')
 					.col-md-6
@@ -34,7 +33,7 @@ block content
 					.col-md-6
 						.form-group(class=validationErrors.message ? 'has-error' : null)
 							label Message
-							textarea(name='message', placeholder='Leave us a message...' rows=16).form-control= formData.message
+							textarea(name='message', placeholder='Leave us a message...' rows=16).form-control
 						.form-actions
 							button(type='submit').btn.btn-primary.form-control Send Message Now
 				section.spacer
