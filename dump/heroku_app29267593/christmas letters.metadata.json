@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":1,"name":"_id_","key":{"_id":1},"ns":"heroku_app29267593.christmas letters"},{"v":1,"name":"returnAddress.geo_2dsphere","key":{"returnAddress.geo":"2dsphere"},"ns":"heroku_app29267593.christmas letters","background":true,"safe":null}]}
