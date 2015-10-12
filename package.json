@@ -14,7 +14,6 @@
     "csvtojson": "latest",
     "dotenv": "latest",
     "ejs": "latest",
-    "excel": "latest",
     "keystone": "latest",
     "node-xlsx": "latest",
     "oauth2orize": "latest",

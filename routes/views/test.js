@@ -1,9 +1,5 @@
 var keystone = require('keystone'),
 	Enquiry = keystone.list('Enquiry'),
-	Converter = require("csvtojson").core.Converter,
-	node_xj = require("xls-to-json"),
-	cv2json = require('convert-json'),
-	xlsx = require('node-xlsx'),
 	fs = require("fs");
 
 exports = module.exports = function(req, res) {
