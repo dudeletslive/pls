@@ -46,7 +46,7 @@
     "time-grunt": "~0.3.1"
   },
   "engines": {
-    "node": "latest",
+    "node": "0.10.36",
     "npm": "latest"
   },
   "scripts": {
