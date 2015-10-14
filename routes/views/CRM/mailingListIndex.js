@@ -42,8 +42,6 @@ exports = module.exports = function(req, res) {
 		var fileName = req.files.xlsFile.name;
 		var ext = fileName.split('.')[1];
 
-		console.log(fileName);
-
 		locals.fileType = ext;
 
 		// // If the file is not a CSV, run this.
@@ -86,7 +84,6 @@ exports = module.exports = function(req, res) {
 				var List = keystone.list('Mailing Lists').model,
 						newList = new List(mailingList);
 
-
 				newList.save(function(err, model) {
 					var id = model._id;
 					// When you create the mailing list, go through and create contacts from the JSON Array
@@ -99,7 +96,7 @@ exports = module.exports = function(req, res) {
 						var i = 0;
 						var stats = JSON.stringify(stats);
 						var list = JSON.stringify(json);
-						// console.log('============= STATS =============');
+						console.log('============= STATS =============');
 						console.log(stats);
 						if(error) {
 							console.log(error)
@@ -171,7 +168,6 @@ exports = module.exports = function(req, res) {
 		keystone.list('Mailing Lists').model.find().where('uploadedBy', req.user._id).exec(function(err, lists) {
 			if (lists <= 0 && req.session.uploadMyOwn != true && req.user.noCRM != true) {
 				req.session.uploadMyOwn = true;
-				console.log(req.session.uploadMyOwn);
 				view.render('CRM/noLists');
 			} else {
 				view.render('CRM/mailingListIndex');

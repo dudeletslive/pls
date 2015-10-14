@@ -8,7 +8,7 @@
     "basic-auth": "latest",
     "convert-json": "latest",
     "cookie-session": "latest",
-    "csv": "latest",
+    "csv": "~0.3.0",
     "csv-json": "latest",
     "csv-to-json": "latest",
     "csvtojson": "latest",
