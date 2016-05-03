@@ -29,6 +29,7 @@
     "passport-linkedin-oauth2": "latest",
     "passport-twitter": "latest",
     "request": "latest",
+    "sparkpost": "^1.3.3",
     "string": "latest",
     "underscore": "latest",
     "xls-to-json": "latest"
