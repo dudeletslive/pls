@@ -75,7 +75,7 @@ Enquiry.schema.methods.sendNotificationEmail = function() {
       transmissionBody: {
         content: {
           from: "contact@mail.myletterservice.org",
-          subject: $enquiry.name + " submitted a new order for Thank You letters"
+          subject: $enquiry.name + " submitted a new order for Thank You letters",
           html: res.html
         },
         recipients: [{address: process.env.ALERT_EMAIL}]
