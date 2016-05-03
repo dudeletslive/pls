@@ -1,5 +1,11 @@
 var keystone = require('keystone'),
-	Types = keystone.Field.Types;
+		Types = keystone.Field.Types,
+	  sparkpost = require('sparkpost'),
+	  client = new sparkpost(process.env.SPARKPOST_SECRET_KEY),
+    EmailTemplate = require('email-templates').EmailTemplate,
+    path = require('path');
+
+var html = path.resolve(__dirname, '../..', 'templates', 'emails', 'email-reset');
 
 /**
  * Enquiry Model
@@ -53,26 +59,31 @@ Enquiry.schema.post('save', function() {
 	}
 });
 
-Enquiry.schema.methods.sendNotificationEmail = function(callback) {
-	
-	var object = this;
-	
-	keystone.list('User').model.find().where('isAdmin', true).exec(function(err, admins) {
-		
-		if (err) return callback(err);
-		
-		new keystone.Email('enquiry-notification').send({
-			to: 'plservice@myletterservice.org',
-			from: {
-				name: 'Prayer Letter Service',
-				email: 'contact@prayer-letter-service.com'
-			},
-			subject: 'New Order Processed at Prayer Letter Service',
-			enquiry: object
-		}, callback);
-		
-	});
-	
+Enquiry.schema.methods.sendNotificationEmail = function() {
+
+  var $enquiry = this;
+
+  var template = new EmailTemplate(html),
+    data = {
+      name: $enquiry.name.first,
+      message: "<p class='text-larger'>"+$enquiry.name.first+" just submitted a new order.</p><p><b>Name:</b> "+$enquiry.name.first+"</p><p><b>Sent:</b> "+$enquiry.submittedOn+"</p><p><a href='http://www.myletterservice.org/keystone/brochures/'"+$enquiry._id+">Open in Keystone</p>"
+    }
+
+  template.render(data, function(err, res) {
+
+    client.transmissions.send({
+      transmissionBody: {
+        content: {
+          from: "contact@mail.myletterservice.org",
+          subject: $enquiry.name + " submitted a new order for Thank You letters"
+          html: res.html
+        },
+        recipients: [{address: process.env.ALERT_EMAIL}]
+      }
+    }, function(err, res) {});
+
+  });
+
 }
 
 Enquiry.defaultSort = '-submittedOn';

@@ -1,5 +1,11 @@
 var keystone = require('keystone'),
-	Types = keystone.Field.Types;
+		Types = keystone.Field.Types,
+	  sparkpost = require('sparkpost'),
+	  client = new sparkpost(process.env.SPARKPOST_SECRET_KEY),
+	  EmailTemplate = require('email-templates').EmailTemplate,
+	  path = require('path');
+
+var html = path.resolve(__dirname, '..', 'templates', 'emails', 'email-reset');
 
 /**
  * User Model
@@ -66,99 +72,84 @@ User.add({
 	}
 });
 
+// Provide access to Keystone
+User.schema.virtual('canAccessKeystone').get(function() {
+	return this.isAdmin;
+});
+
 User.schema.pre('save', function(next) {
 	this.wasNew = this.isNew;
 	next();
 })
 
 User.schema.post('save', function() {
-	if (this.wasNew) {
-		this.sendNotificationEmail();
-	}
-});
-
-User.schema.methods.sendNotificationEmail = function(callback) {
-	
-	var object = this;
-	
-	keystone.list('User').model.find().where('isAdmin', true).exec(function(err, admins) {
-		
-		if (err) return callback(err);
-		
-		new keystone.Email('new-user').send({
-			to: 'plservice@myletterservice.org',
-			from: {
-				name: 'Prayer Letter Service',
-				email: 'contact@prayer-letter-service.com'
-			},
-			subject: 'New User Registered at Prayer Letter Service',
-			enquiry: object
-		}, callback);
-		
-	});
-	
-}
-
-// Provide access to Keystone
-User.schema.virtual('canAccessKeystone').get(function() {
-	return this.isAdmin;
-});
-
-User.schema.post('save', function() {
+	// if (!this.resetPasswordKey) {
 	if (!this.wasNew) {
 		this.sendNotificationEmail();
 	}
 });
 
-User.schema.methods.sendNotificationEmail = function(callback) {
+User.schema.methods.sendNotificationEmail = function() {
 	
-	var object = this;
+	var $user = this;
+	
+	var template = new EmailTemplate(html),
+			data = {
+				name: $user.name.first,
+				message: "<p class='text-larger'>"+$user.name.first+" has just updated their account preferences.</p><p><b>Name:</b> "+$user.name.first+"</p><p><b>Email:</b> "+$user.email+"</p><p><a href='http://www.myletterservice.org/keystone/users/"+$user._id+"'>Open in Keystone</p>"
+			}
 
-	console.log(object);
-	
-	keystone.list('User').model.find().where('isAdmin', true).exec(function(err, admins) {
-		
-		if (err) return callback(err);
-		
-		new keystone.Email('profile-update').send({
-			to: 'plservice@myletterservice.org',
-			from: {
-				name: 'Prayer Letter Service',
-				email: 'contact@myletterservice.com'
-			},
-			subject: object.name.first + ' ' + object.name.last + ' has Updated Their Profile',
-			enquiry: object
-		}, callback);
-		
+	template.render(data, function(err, res) {
+
+		client.transmissions.send({
+			transmissionBody: {
+				content: {
+					from: "contact@mail.myletterservice.org",
+					subject: $user.name.first + " " + $user.name.last + " updated their profile.",
+					html: res.html
+				},
+				// recipients: [{address: "plservice@myletterservice.org"}]
+				recipients: [{address: "daniel@theoryandpractice.co"}]
+			}
+		}, function(err, res) {});
+
 	});
-	
+
 }
 
 /* Reset Password */
 
-User.schema.methods.resetPassword = function(callback) {
-	
-	var user = this;
+User.schema.methods.resetPassword = function(cb) {
 
-	user.resetPasswordKey = keystone.utils.randomString([16,24]);
+	var $user = this;
+
+	$user.resetPasswordKey = keystone.utils.randomString([16,24]);
 	
-	user.save(function(err) {
+	$user.save(function(err) {
 		
-		if (err) return callback(err);
-		
-		new keystone.Email('forgotten-password').send({
-			user: user,
-			link: '/reset-password/' + user.resetPasswordKey,
-			subject: 'Reset your password',
-			to: user.email,
-			from: {
-				name: 'My Letter Service',
-				email: 'contact@myletterservice.org'
-			}
-		}, callback);
-		
+		if (err) return cb(err);
+
+		var template = new EmailTemplate(html),
+				data = {
+					name: $user.name.first,
+					message: "<p>You recently requested a link to reset your password.</p><p>Please set a new password by following the link below:</p><p><a href='http://www.myletterservice.org/reset-password/"+$user.resetPasswordKey+"'>www.myletterservice.org/reset-password/"+$user.resetPasswordKey+"</a></p>"
+				}
+
+		template.render(data, function(err, res) {
+			client.transmissions.send({
+				transmissionBody: {
+					content: {
+						from: "contact@mail.myletterservice.org",
+						subject: "Password Reset Request",
+						html: res.html
+					},
+					recipients: [{address: $user.email}]
+				}
+			}, function(err, res) {});
+		});
+
 	});
-	
+
 }
 
 /**

@@ -16,10 +16,8 @@ exports = module.exports = function(req, res) {
 	view.on('post', { action: 'contact' }, function(next) {
 		
 		var newEnquiry = new Enquiry.model(),
-			updater = newEnquiry.getUpdateHandler(req);
+			  updater = newEnquiry.getUpdateHandler(req);
 
-		console.log(req.body.message);
-		
 		updater.process(req.body, {
 			flashErrors: true,
 			fields: 'name, email, phone, message',

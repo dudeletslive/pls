@@ -31,7 +31,9 @@ var _ = require('underscore'),
   LinkedInStrategy = require('passport-linkedin').Strategy,
   express = require('keystone/node_modules/express'),
   oauth2orize = require('oauth2orize'),
-  session     = require('cookie-session');
+  session     = require('cookie-session'),
+  sparkpost = require('sparkpost'),
+  client = new sparkpost(process.env.SPARKPOST_SECRET_KEY);
 
 // Common Middleware
 keystone.pre('routes', middleware.initLocals);

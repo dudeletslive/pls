@@ -1,6 +1,14 @@
-var keystone = require('underscore'),
-	keystone = require('keystone'),
-	Types = keystone.Field.Types;
+var keystone = require('keystone'),
+    Types = keystone.Field.Types,
+    sparkpost = require('sparkpost'),
+    client = new sparkpost(process.env.SPARKPOST_SECRET_KEY),
+    EmailTemplate = require('email-templates').EmailTemplate,
+    path = require('path');
+
+var ObjectID = require('mongodb').ObjectId;
+
+
+var html = path.resolve(__dirname, '..', 'templates', 'emails', 'email-reset');
 
 /**
  * Mailing Lists
@@ -8,49 +16,64 @@ var keystone = require('underscore'),
  */
 
 var mailingList = new keystone.List('Mailing Lists', {
-	autokey: { path: 'slug', from: 'listName', unique: true },
-	map: { name: 'listName', noedit: true }
+  autokey: { path: 'slug', from: 'listName', unique: true },
+  map: { name: 'listName', noedit: true }
 });
 
 mailingList.add({
-	userID: { type: String, hidden: true },
-	listName: { type: String, hidden: true },
-	uploadedBy: { type: Types.Relationship, ref: 'User', many: true },
-	prettyName: { type: String, label: 'List Name' },
-	contacts: { type: Types.Relationship, ref: 'Contact', many: true }
+  userID: { type: String, hidden: true },
+  listName: { type: String, hidden: true },
+  uploadedBy: { type: Types.Relationship, ref: 'User', many: true },
+  prettyName: { type: String, label: 'List Name' },
+  contacts: { type: Types.Relationship, ref: 'Contact', many: true }
 });
 
 /**
  * Relationships
  */
 
+mailingList.schema.pre('save', function(next) {
+  this.wasNew = this.isNew;
+  next();
+})
+
 mailingList.schema.post('save', function() {
-	this.sendNotificationEmail();
+  if (this.wasNew) {
+    this.sendNotificationEmail();
+  }
 });
 
-mailingList.schema.methods.sendNotificationEmail = function(callback) {
-	
-	var object = this;
+mailingList.schema.methods.sendNotificationEmail = function() {
 
-	console.log(object);
-	
-	keystone.list('User').model.find().where('isAdmin', true).exec(function(err, admins) {
-		
-		if (err) return callback(err);
-		
-		new keystone.Email('new-mailingList').send({
-			to: 'plservice@myletterservice.org',
-			from: {
-				name: 'Prayer Letter Service',
-				email: 'contact@myletterservice.com'
-			},
-			subject: 'A new Mailing List has been Uploaded',
-			enquiry: object
-		}, callback);
-		
-	});
-	
+  var $list = this;
+
+  keystone.list('User').model.findOne({_id: new ObjectID($list.userID)}).exec(function(err, user) {
+
+    var template = new EmailTemplate(html),
+        data = {
+          name: user.name.first,
+          message: "<p class='text-larger'>A new mailing list was just uploaded.</p><p><a href='http://www.myletterservice.org/keystone/mailing-lists/"+$list._id+"'>Open in Keystone</p>"
+        }
+
+    template.render(data, function(err, res) {
+
+      client.transmissions.send({
+        transmissionBody: {
+          content: {
+            from: "contact@mail.myletterservice.org",
+            subject: user.name.first + " just uploaded a new mailing list",
+            html: res.html
+          },
+          recipients: [{address: "daniel@theoryandpractice.co"}]
+        }
+      }, function(err, res) {});
+
+    });
+
+  });
+ 
 }
+
 
 /**
  * Registration

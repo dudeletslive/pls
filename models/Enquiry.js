@@ -1,5 +1,11 @@
 var keystone = require('keystone'),
-	Types = keystone.Field.Types;
+		Types = keystone.Field.Types,
+	  sparkpost = require('sparkpost'),
+	  client = new sparkpost(process.env.SPARKPOST_SECRET_KEY),
+	  EmailTemplate = require('email-templates').EmailTemplate,
+	  path = require('path');
+
+var html = path.resolve(__dirname, '..', 'templates', 'emails', 'email-reset');
 
 /**
  * Enquiry Model
@@ -7,8 +13,7 @@ var keystone = require('keystone'),
  */
 
 var Enquiry = new keystone.List('Enquiry', {
-	nocreate: true,
-	// noedit: true
+	nocreate: true
 });
 
 Enquiry.add({
@@ -30,27 +35,32 @@ Enquiry.schema.post('save', function() {
 	}
 });
 
-Enquiry.schema.methods.sendNotificationEmail = function(callback) {
-	
-	var enqiury = this;
-	
-	keystone.list('User').model.find().where('isAdmin', true).exec(function(err, admins) {
-		
-		if (err) return callback(err);
-		
-		new keystone.Email('enquiry-notification').send({
-			// to: admins,
-			to: 'plservice@myletterservice.org',
-			from: {
-				name: 'Prayer Letter Service',
-				email: 'contact@prayer-letter-service.com'
-			},
-			subject: 'New Enquiry for Prayer Letter Service',
-			enquiry: enqiury
-		}, callback);
-		
-	});
-	
+Enquiry.schema.methods.sendNotificationEmail = function() {
+
+	var $enquiry = this;
+
+  var template = new EmailTemplate(html),
+    data = {
+      name: $enquiry.name.first,
+      message: "<p class='text-larger'>"+$enquiry.name.first+" just contacted you.</p><p><b>Name:</b> "+$enquiry.name.first+"</p><p><b>Email:</b> "+$enquiry.email+"</p><p><a href='http://www.myletterservice.org/keystone/enquiries/'"+$enquiry._id+">Open in Keystone</p>"
+    }
+
+  template.render(data, function(err, res) {
+
+    client.transmissions.send({
+      transmissionBody: {
+        content: {
+          from: "contact@mail.myletterservice.org",
+          subject: $enquiry.name + " says hi!",
+          html: res.html
+        },
+        // recipients: [{address: "plservice@myletterservice.org"}]
+        recipients: [{address: "daniel@theoryandpractice.co"}]
+      }
+    }, function(err, res) {});
+
+  });
+
 }
 
 Enquiry.defaultSort = '-createdAt';
