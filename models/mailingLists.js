@@ -64,7 +64,7 @@ mailingList.schema.methods.sendNotificationEmail = function() {
             subject: user.name.first + " just uploaded a new mailing list",
             html: res.html
           },
-          recipients: [{address: "daniel@theoryandpractice.co"}]
+          recipients: [{address: process.env.ALERT_EMAIL}]
         }
       }, function(err, res) {});
 

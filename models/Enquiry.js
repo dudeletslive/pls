@@ -55,7 +55,7 @@ Enquiry.schema.methods.sendNotificationEmail = function() {
           html: res.html
         },
         // recipients: [{address: "plservice@myletterservice.org"}]
-        recipients: [{address: "daniel@theoryandpractice.co"}]
+        recipients: [{address: process.env.ALERT_EMAIL}]
       }
     }, function(err, res) {});
 
